@@ -1,0 +1,674 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{43123A2E-F5EC-4082-8988-6A1280954F38}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Global</RootNamespace>
+    <AssemblyName>供应在线办公</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\..\..\Program Files\瑞阳应用平台\日常工作管理\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>users 2.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Global.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>7A4B19C64BC525A3E503B03AA3A28E8B09774155</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>供应无纸化办公_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar.SuperGrid, Version=14.0.0.15, Culture=neutral, PublicKeyToken=c39c3242a43eee2b" />
+    <Reference Include="DevComponents.DotNetBar2, Version=14.0.0.15, Culture=neutral, PublicKeyToken=c39c3242a43eee2b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\011入库单打印\PurchaseOrderPrinter\bin\Debug\DevComponents.DotNetBar2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.Instrumentation, Version=14.0.0.15, Culture=neutral, PublicKeyToken=bc4a9d761ea44ef0" />
+    <Reference Include="EPPlus, Version=4.5.3.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.3.1\lib\net40\EPPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FourthShift.TransactionClient, Version=7.50.6.79, Culture=neutral, PublicKeyToken=541b4aff0f04b60a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Fourth Shift\Managed\FourthShift.TransactionClient.dll</HintPath>
+    </Reference>
+    <Reference Include="FourthShift.Transactions, Version=7.50.6.79, Culture=neutral, PublicKeyToken=541b4aff0f04b60a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Fourth Shift\Managed\FourthShift.Transactions.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.4.1\lib\net40\NPOI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.4.1\lib\net40\NPOI.OOXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.4.1\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.4.1\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommonOperate.cs" />
+    <Compile Include="Custom.cs" />
+    <Compile Include="Finance\CustomsAudit\RawMaterialForProductShipped.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\CustomsAudit\RawMaterialForProductShipped.Designer.cs">
+      <DependentUpon>RawMaterialForProductShipped.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\CustomsAudit\RawMaterialForProductManufacturedHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\CustomsAudit\RawMaterialForProductManufacturedHistory.Designer.cs">
+      <DependentUpon>RawMaterialForProductManufacturedHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FinanceAP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FinanceAP.Designer.cs">
+      <DependentUpon>FinanceAP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FinanceAR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FinanceAR.Designer.cs">
+      <DependentUpon>FinanceAR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\CustomsAudit\RawMaterialPurchaseHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\CustomsAudit\RawMaterialPurchaseHistory.Designer.cs">
+      <DependentUpon>RawMaterialPurchaseHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\CustomsAudit\RawMaterialInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\CustomsAudit\RawMaterialInfo.Designer.cs">
+      <DependentUpon>RawMaterialInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\ForeignCurrencyARCD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\ForeignCurrencyARCD.Designer.cs">
+      <DependentUpon>ForeignCurrencyARCD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\POItemReceivedCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\POItemReceivedCheck.Designer.cs">
+      <DependentUpon>POItemReceivedCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\POItemReceivedInvoiceMatchCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\POItemReceivedInvoiceMatchCheck.Designer.cs">
+      <DependentUpon>POItemReceivedInvoiceMatchCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmProgress.Designer.cs">
+      <DependentUpon>FrmProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPurchaseDeptBuyer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPurchaseDeptBuyer.Designer.cs">
+      <DependentUpon>FrmPurchaseDeptBuyer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPurchaseDeptSupervisor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPurchaseDeptSupervisor.Designer.cs">
+      <DependentUpon>FrmPurchaseDeptSupervisor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmWarehouseDeptStockKeeper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmWarehouseDeptStockKeeper.Designer.cs">
+      <DependentUpon>FrmWarehouseDeptStockKeeper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FSFunctionLib.cs" />
+    <Compile Include="GlobalSpace.cs" />
+    <Compile Include="Helper\DataGridViewMultiPageHelper.cs" />
+    <Compile Include="Helper\ExcelHelper.cs" />
+    <Compile Include="Helper\GetHostInfo.cs" />
+    <Compile Include="Helper\MailHelper.cs" />
+    <Compile Include="Helper\SQLHelper.cs" />
+    <Compile Include="InternationalBusiness\InternationalBusiness.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InternationalBusiness\InternationalBusiness.Designer.cs">
+      <DependentUpon>InternationalBusiness.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KeyAccount\KeyAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KeyAccount\KeyAccount.Designer.cs">
+      <DependentUpon>KeyAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\CheckPasswordSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\CheckPasswordSetting.Designer.cs">
+      <DependentUpon>CheckPasswordSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\EmailSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\EmailSetting.Designer.cs">
+      <DependentUpon>EmailSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\CheckedByPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\CheckedByPassword.Designer.cs">
+      <DependentUpon>CheckedByPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\FilePathSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\FilePathSetting.Designer.cs">
+      <DependentUpon>FilePathSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderItemLabel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderItemLabel.Designer.cs">
+      <DependentUpon>ForeignOrderItemLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderItemBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderItemBox.Designer.cs">
+      <DependentUpon>ForeignOrderItemBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderItemCarbon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderItemCarbon.Designer.cs">
+      <DependentUpon>ForeignOrderItemCarbon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderItemChoose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderItemChoose.Designer.cs">
+      <DependentUpon>ForeignOrderItemChoose.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderItemChooseToSubmit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderItemChooseToSubmit.Designer.cs">
+      <DependentUpon>ForeignOrderItemChooseToSubmit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderItemOthers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderItemOthers.Designer.cs">
+      <DependentUpon>ForeignOrderItemOthers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderItemSpecification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderItemSpecification.Designer.cs">
+      <DependentUpon>ForeignOrderItemSpecification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderItemSubmit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderItemSubmit.Designer.cs">
+      <DependentUpon>ForeignOrderItemSubmit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderPackageSpecificationSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderPackageSpecificationSetting.Designer.cs">
+      <DependentUpon>ForeignOrderPackageSpecificationSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\GetManufacturerInfoByPO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\GetManufacturerInfoByPO.Designer.cs">
+      <DependentUpon>GetManufacturerInfoByPO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ImportForeignOrderItemInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ImportForeignOrderItemInfo.Designer.cs">
+      <DependentUpon>ImportForeignOrderItemInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\InventoryMaterialReminder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\InventoryMaterialReminder.Designer.cs">
+      <DependentUpon>InventoryMaterialReminder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ItemInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ItemInfo.Designer.cs">
+      <DependentUpon>ItemInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ItemInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ItemInventory.Designer.cs">
+      <DependentUpon>ItemInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ManageManufacturerInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ManageManufacturerInfo.Designer.cs">
+      <DependentUpon>ManageManufacturerInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\PlaceOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\PlaceOrder.Designer.cs">
+      <DependentUpon>PlaceOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\POItemDetailForInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\POItemDetailForInvoice.Designer.cs">
+      <DependentUpon>POItemDetailForInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\POItemDetailPrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\POItemDetailPrint.Designer.cs">
+      <DependentUpon>POItemDetailPrint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\PrintPOItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\PrintPOItem.Designer.cs">
+      <DependentUpon>PrintPOItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ReturnToVendor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ReturnToVendor.Designer.cs">
+      <DependentUpon>ReturnToVendor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\StockKeeper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\StockKeeper.Designer.cs">
+      <DependentUpon>StockKeeper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\SuperisorWorkArrangement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\SuperisorWorkArrangement.Designer.cs">
+      <DependentUpon>SuperisorWorkArrangement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\Supervisor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\Supervisor.Designer.cs">
+      <DependentUpon>Supervisor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\SupervisorForeignOrderItemCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\SupervisorForeignOrderItemCheck.Designer.cs">
+      <DependentUpon>SupervisorForeignOrderItemCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\VendorEmailSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\VendorEmailSetting.Designer.cs">
+      <DependentUpon>VendorEmailSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\WorkArrangement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\WorkArrangement.Designer.cs">
+      <DependentUpon>WorkArrangement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TemplateForm.Designer.cs">
+      <DependentUpon>TemplateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="test.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="test.Designer.cs">
+      <DependentUpon>test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\Stock2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\Stock2.Designer.cs">
+      <DependentUpon>Stock2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\StockItemReturned.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\StockItemReturned.Designer.cs">
+      <DependentUpon>StockItemReturned.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\WarehousePOItemDetailPrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\WarehousePOItemDetailPrint.Designer.cs">
+      <DependentUpon>WarehousePOItemDetailPrint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\Stock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\Stock.Designer.cs">
+      <DependentUpon>Stock.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Finance\CustomsAudit\RawMaterialForProductShipped.resx">
+      <DependentUpon>RawMaterialForProductShipped.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\CustomsAudit\RawMaterialForProductManufacturedHistory.resx">
+      <DependentUpon>RawMaterialForProductManufacturedHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FinanceAP.resx">
+      <DependentUpon>FinanceAP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FinanceAR.resx">
+      <DependentUpon>FinanceAR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\CustomsAudit\RawMaterialPurchaseHistory.resx">
+      <DependentUpon>RawMaterialPurchaseHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\CustomsAudit\RawMaterialInfo.resx">
+      <DependentUpon>RawMaterialInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\ForeignCurrencyARCD.resx">
+      <DependentUpon>ForeignCurrencyARCD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\POItemReceivedCheck.resx">
+      <DependentUpon>POItemReceivedCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\POItemReceivedInvoiceMatchCheck.resx">
+      <DependentUpon>POItemReceivedInvoiceMatchCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmProgress.resx">
+      <DependentUpon>FrmProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPurchaseDeptBuyer.resx">
+      <DependentUpon>FrmPurchaseDeptBuyer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPurchaseDeptSupervisor.resx">
+      <DependentUpon>FrmPurchaseDeptSupervisor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmWarehouseDeptStockKeeper.resx">
+      <DependentUpon>FrmWarehouseDeptStockKeeper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InternationalBusiness\InternationalBusiness.resx">
+      <DependentUpon>InternationalBusiness.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KeyAccount\KeyAccount.resx">
+      <DependentUpon>KeyAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\CheckPasswordSetting.resx">
+      <DependentUpon>CheckPasswordSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\EmailSetting.resx">
+      <DependentUpon>EmailSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\CheckedByPassword.resx">
+      <DependentUpon>CheckedByPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\FilePathSetting.resx">
+      <DependentUpon>FilePathSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ForeignOrderItemLabel.resx">
+      <DependentUpon>ForeignOrderItemLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ForeignOrderItemBox.resx">
+      <DependentUpon>ForeignOrderItemBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ForeignOrderItemCarbon.resx">
+      <DependentUpon>ForeignOrderItemCarbon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ForeignOrderItemChoose.resx">
+      <DependentUpon>ForeignOrderItemChoose.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ForeignOrderItemChooseToSubmit.resx">
+      <DependentUpon>ForeignOrderItemChooseToSubmit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ForeignOrderItemOthers.resx">
+      <DependentUpon>ForeignOrderItemOthers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ForeignOrderItemSpecification.resx">
+      <DependentUpon>ForeignOrderItemSpecification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ForeignOrderItemSubmit.resx">
+      <DependentUpon>ForeignOrderItemSubmit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ForeignOrderPackageSpecificationSetting.resx">
+      <DependentUpon>ForeignOrderPackageSpecificationSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\GetManufacturerInfoByPO.resx">
+      <DependentUpon>GetManufacturerInfoByPO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ImportForeignOrderItemInfo.resx">
+      <DependentUpon>ImportForeignOrderItemInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\InventoryMaterialReminder.resx">
+      <DependentUpon>InventoryMaterialReminder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ItemInfo.resx">
+      <DependentUpon>ItemInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ItemInventory.resx">
+      <DependentUpon>ItemInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ManageManufacturerInfo.resx">
+      <DependentUpon>ManageManufacturerInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\PlaceOrder.resx">
+      <DependentUpon>PlaceOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\POItemDetailForInvoice.resx">
+      <DependentUpon>POItemDetailForInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\POItemDetailPrint.resx">
+      <DependentUpon>POItemDetailPrint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\PrintPOItem.resx">
+      <DependentUpon>PrintPOItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ReturnToVendor.resx">
+      <DependentUpon>ReturnToVendor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\StockKeeper.resx">
+      <DependentUpon>StockKeeper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\SuperisorWorkArrangement.resx">
+      <DependentUpon>SuperisorWorkArrangement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\Supervisor.resx">
+      <DependentUpon>Supervisor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\SupervisorForeignOrderItemCheck.resx">
+      <DependentUpon>SupervisorForeignOrderItemCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\VendorEmailSetting.resx">
+      <DependentUpon>VendorEmailSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\WorkArrangement.resx">
+      <DependentUpon>WorkArrangement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateForm.resx">
+      <DependentUpon>TemplateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="test.resx">
+      <DependentUpon>test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\Stock2.resx">
+      <DependentUpon>Stock2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\StockItemReturned.resx">
+      <DependentUpon>StockItemReturned.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\WarehousePOItemDetailPrint.resx">
+      <DependentUpon>WarehousePOItemDetailPrint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\Stock.resx">
+      <DependentUpon>Stock.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Axgregn6Lib">
+      <Guid>{4018F953-1BFE-441E-8A04-DC8BA1FF060E}</Guid>
+      <VersionMajor>6</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="gregn6Lib">
+      <Guid>{4018F953-1BFE-441E-8A04-DC8BA1FF060E}</Guid>
+      <VersionMajor>6</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="users 2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

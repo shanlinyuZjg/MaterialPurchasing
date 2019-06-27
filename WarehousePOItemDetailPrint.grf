@@ -1,0 +1,596 @@
+﻿Object Report
+	Version='6.0.0.5'
+	Object Font
+		Name='宋体'
+		Size=105000,0
+		Weight=400
+		Charset=134
+	End
+	QuerySQL='SELECT\r\n	                            T6.ItemNumber AS 物料代码,\r\n	                            T6.ItemDescription AS 物料描述,\r\n	                            T6.ItemUM AS 单位,\r\n	                            T5.ItemUnitCost AS 单价,\r\n	                            T3.LineItemOrderedQuantity AS 订购数量,\r\n	                            T3.POLineNumberString AS 行号,\r\n	                            T3.ReceiptQuantity AS 入库数量,\r\n	                            T3.RequiredDate AS 需求日期,\r\n	                            T4.InspectionLeadTimeDays AS 检验期\r\n                            FROM\r\n	                            _NoLock_FS_POHeader T1,\r\n	                            _NoLock_FS_POLine T3,\r\n	                            _NoLock_FS_Item T4,\r\n	                            _NoLock_FS_POLineData T5,\r\n	                            _NoLock_FS_Item T6\r\n                            WHERE\r\n	                            T1.POHeaderKey = T3.POHeaderKey\r\n                            AND T6.ItemKey = T3.ItemKey\r\n                            AND T3.ItemKey = T4.ItemKey\r\n                            AND T5.POLineKey = T3.POLineKey\r\n                            AND T1.PONumber ='PA-070817-003' ORDER BY T3.POLineNumberString ASC'
+	SkipQuery=T
+	Object Printer
+		Height=29.7
+		Oriention=Landscape
+		LeftMargin=1
+		TopMargin=0.7
+		RightMargin=1
+		BottomMargin=0.7
+	End
+	Object DetailGrid
+		Object Recordset
+			Items Field
+				Item
+					Name='采购单号'
+				End
+			End
+		End
+		Items Column
+			Item
+				Name='Column1'
+				Width=27.7019
+			End
+		End
+		Object ColumnContent
+			Height=2.19604
+			Items ColumnContentCell
+				Item
+					Column='Column1'
+					FreeCell=T
+					CanGrow=T
+					Items Control
+						Item
+							Type=SubReport
+							Name='subReportPODetail'
+							ForeColor=White
+							Width=27.596
+							Height=2.01083
+							Object Border
+								ShadowWidth=0
+								ShadowColor=White
+								Object Pen
+									Width=0
+									Color=White
+									Style=Dot
+								End
+								Object InnerPen
+									Width=0
+									Color=White
+								End
+							End
+Object Report
+	Version='6.0.0.5'
+	Object Font
+		Name='宋体'
+		Size=105000,0
+		Weight=400
+		Charset=134
+	End
+	SkipQuery=T
+	Object Printer
+		Height=29.7
+		Oriention=Landscape
+		LeftMargin=1
+		RightMargin=1
+	End
+	Object DetailGrid
+		Object Recordset
+			Items Field
+				Item
+					Name='行号'
+				End
+				Item
+					Name='物料代码'
+				End
+				Item
+					Name='物料描述'
+				End
+				Item
+					Name='单位'
+				End
+				Item
+					Name='订货量'
+				End
+				Item
+					Name='入库量'
+				End
+				Item
+					Name='生产商批号'
+				End
+				Item
+					Name='公司批号'
+				End
+				Item
+					Name='生产商代码'
+				End
+				Item
+					Name='生产商名称'
+				End
+				Item
+					Name='外贸单号'
+				End
+				Item
+					Name='采购单号'
+				End
+				Item
+					Name='供应商名称'
+				End
+				Item
+					Name='供应商代码'
+				End
+				Item
+					Name='采购员'
+				End
+			End
+		End
+		Items Column
+			Item
+				Name='行号'
+				Width=1.16417
+			End
+			Item
+				Name='物料代码'
+				Width=1.79917
+			End
+			Item
+				Name='物料描述'
+				Width=6.61458
+			End
+			Item
+				Name='单位'
+				Width=1.11125
+			End
+			Item
+				Name='订货量'
+				Width=1.48167
+			End
+			Item
+				Name='入库量'
+				Width=1.5875
+			End
+			Item
+				Name='生产商批号'
+				Width=2.32833
+			End
+			Item
+				Name='公司批号'
+				Width=2.43417
+			End
+			Item
+				Name='生产商代码'
+				Width=1.64042
+			End
+			Item
+				Name='生产商名称'
+				Width=5.82083
+			End
+			Item
+				Name='外贸单号'
+				Width=1.79917
+			End
+		End
+		Object ColumnContent
+			Height=0.55
+			Items ColumnContentCell
+				Item
+					Column='行号'
+					TextAlign=MiddleCenter
+					DataField='行号'
+				End
+				Item
+					Column='物料代码'
+					TextAlign=MiddleCenter
+					DataField='物料代码'
+				End
+				Item
+					Column='物料描述'
+					TextAlign=MiddleCenter
+					DataField='物料描述'
+				End
+				Item
+					Column='单位'
+					TextAlign=MiddleCenter
+					DataField='单位'
+				End
+				Item
+					Column='订货量'
+					TextAlign=MiddleCenter
+					DataField='订货量'
+				End
+				Item
+					Column='入库量'
+					TextAlign=MiddleCenter
+					DataField='入库量'
+				End
+				Item
+					Column='生产商批号'
+					TextAlign=MiddleCenter
+					DataField='生产商批号'
+				End
+				Item
+					Column='公司批号'
+					TextAlign=MiddleCenter
+					DataField='公司批号'
+				End
+				Item
+					Column='生产商代码'
+					TextAlign=MiddleCenter
+					DataField='生产商代码'
+				End
+				Item
+					Column='生产商名称'
+					TextAlign=MiddleCenter
+					DataField='生产商名称'
+				End
+				Item
+					Column='外贸单号'
+					DataField='外贸单号'
+				End
+			End
+		End
+		Object ColumnTitle
+			Height=0.55
+			Items ColumnTitleCell
+				Item
+					GroupTitle=F
+					Column='行号'
+					Object Font
+						Name='宋体'
+						Size=105000,0
+						Bold=T
+						Charset=134
+					End
+					TextAlign=MiddleCenter
+					Text='行号'
+				End
+				Item
+					GroupTitle=F
+					Column='物料代码'
+					Object Font
+						Name='宋体'
+						Size=105000,0
+						Bold=T
+						Charset=134
+					End
+					TextAlign=MiddleCenter
+					Text='物料代码'
+				End
+				Item
+					GroupTitle=F
+					Column='物料描述'
+					Object Font
+						Name='宋体'
+						Size=105000,0
+						Bold=T
+						Charset=134
+					End
+					TextAlign=MiddleCenter
+					Text='物料描述'
+				End
+				Item
+					GroupTitle=F
+					Column='单位'
+					Object Font
+						Name='宋体'
+						Size=105000,0
+						Bold=T
+						Charset=134
+					End
+					TextAlign=MiddleCenter
+					Text='单位'
+				End
+				Item
+					GroupTitle=F
+					Column='订货量'
+					Object Font
+						Name='宋体'
+						Size=105000,0
+						Bold=T
+						Charset=134
+					End
+					TextAlign=MiddleCenter
+					Text='订货量'
+				End
+				Item
+					GroupTitle=F
+					Column='入库量'
+					Object Font
+						Name='宋体'
+						Size=105000,0
+						Bold=T
+						Charset=134
+					End
+					TextAlign=MiddleCenter
+					Text='入库量'
+				End
+				Item
+					GroupTitle=F
+					Column='生产商批号'
+					Object Font
+						Name='宋体'
+						Size=105000,0
+						Bold=T
+						Charset=134
+					End
+					TextAlign=MiddleCenter
+					Text='生产商批号'
+				End
+				Item
+					GroupTitle=F
+					Column='公司批号'
+					Object Font
+						Name='宋体'
+						Size=105000,0
+						Bold=T
+						Charset=134
+					End
+					TextAlign=MiddleCenter
+					Text='公司批号'
+				End
+				Item
+					GroupTitle=F
+					Column='生产商代码'
+					Object Font
+						Name='宋体'
+						Size=105000,0
+						Bold=T
+						Charset=134
+					End
+					TextAlign=MiddleCenter
+					Text='生产代码'
+				End
+				Item
+					GroupTitle=F
+					Column='生产商名称'
+					Object Font
+						Name='宋体'
+						Size=105000,0
+						Bold=T
+						Charset=134
+					End
+					TextAlign=MiddleCenter
+					Text='生产商名称'
+				End
+				Item
+					GroupTitle=F
+					Column='外贸单号'
+					Object Font
+						Name='宋体'
+						Size=105000,0
+						Bold=T
+						Charset=134
+					End
+					TextAlign=MiddleCenter
+					Text='外贸单号'
+				End
+			End
+		End
+	End
+	Items ReportHeader
+		Item
+			Name='ReportHeader1'
+			Height=1.00542
+			Items Control
+				Item
+					Type=MemoBox
+					Name='MemoBox11'
+					Left=8.89
+					Top=0.423333
+					Width=6.985
+					Height=0.370417
+					Object Font
+						Name='宋体'
+						Size=120000,0
+						Weight=400
+						Charset=134
+					End
+					Text='[#供应商名称#]'
+				End
+				Item
+					Type=MemoBox
+					Name='MemoBox10'
+					Left=2.64583
+					Top=0.423333
+					Width=3.36021
+					Height=0.423333
+					Object Font
+						Name='宋体'
+						Size=120000,0
+						Weight=400
+						Charset=134
+					End
+					Text='[#供应商代码#]'
+				End
+				Item
+					Type=MemoBox
+					Name='MemoBox9'
+					Left=18.4679
+					Top=0.423333
+					Width=3.33375
+					Height=0.449792
+					Object Font
+						Name='宋体'
+						Size=120000,0
+						Weight=400
+						Charset=134
+					End
+					Text='[#采购单号#]'
+				End
+				Item
+					Type=MemoBox
+					Name='MemoBox8'
+					Left=15.9015
+					Top=0.423333
+					Width=2.59292
+					Height=0.396875
+					Object Font
+						Name='宋体'
+						Size=120000,0
+						Bold=T
+						Charset=134
+					End
+					Text='采购订单号：'
+				End
+				Item
+					Type=MemoBox
+					Name='MemoBox5'
+					Left=6.08542
+					Top=0.423333
+					Width=2.64583
+					Height=0.370417
+					Object Font
+						Name='宋体'
+						Size=120000,0
+						Bold=T
+						Charset=134
+					End
+					Text='供应商名称：'
+				End
+				Item
+					Type=MemoBox
+					Name='MemoBox4'
+					Left=0.0264583
+					Top=0.423333
+					Width=2.56646
+					Height=0.423333
+					Object Font
+						Name='宋体'
+						Size=120000,0
+						Bold=T
+						Charset=134
+					End
+					Text='供应商代码：'
+				End
+				Item
+					Type=FieldBox
+					Name='FieldBox2'
+					Left=21.9869
+					Top=0.423333
+					Width=2.61938
+					Height=0.396875
+					DataField='采购员'
+				End
+			End
+		End
+	End
+End
+						End
+					End
+				End
+			End
+		End
+		Object ColumnTitle
+			Height=0
+			RepeatStyle=OnPage
+			Items ColumnTitleCell
+				Item
+					GroupTitle=F
+					Column='Column1'
+					FreeCell=T
+				End
+			End
+		End
+		Items Group
+			Item
+				Name='Group1'
+				Object GroupHeader
+					Height=0
+					PrintGridBorder=F
+				End
+				Object GroupFooter
+					Height=0
+				End
+			End
+		End
+	End
+	Items Parameter
+		Item
+			Name='库管员'
+		End
+	End
+	Items ReportHeader
+		Item
+			Name='ReportHeader1'
+			KeepTogether=F
+			Height=1.00542
+			Items Control
+				Item
+					Type=StaticBox
+					Name='MainTitleBox'
+					Center=Horizontal
+					Left=9.8425
+					Width=8.01688
+					Height=1.00542
+					Object Font
+						Name='宋体'
+						Size=157500,0
+						Bold=T
+						Charset=134
+					End
+					TextAlign=MiddleCenter
+					Text='物料入库请验单'
+				End
+			End
+		End
+		Item
+			Name='ReportHeader2'
+			Height=0
+		End
+	End
+	Items ReportFooter
+		Item
+			Name='ReportFooter1'
+			Height=1.00542
+			Items Control
+				Item
+					Type=MemoBox
+					Name='MemoBox18'
+					Anchor=[Top|Right]
+					Center=Horizontal
+					Left=7.67292
+					Top=0.211667
+					Width=12.3825
+					Height=0.582083
+					TextAlign=MiddleCenter
+					Text='第[#SystemVar(PageNumber)#]页 共[#SystemVar(PageCount)#]页'
+				End
+			End
+		End
+		Item
+			Name='ReportFooter2'
+			Height=1.00542
+			Items Control
+				Item
+					Type=MemoBox
+					Name='MemoBox3'
+					Top=0.211667
+					Width=8.20208
+					Height=0.582083
+					Object Font
+						Name='宋体'
+						Size=120000,0
+						Weight=400
+						Charset=134
+					End
+					Text='打印时间：[#SystemVar(CurrentDateTime):yyyy年MM月dd日 HH:mm:ss#]'
+				End
+				Item
+					Type=FieldBox
+					Name='FieldBox1'
+					Left=9.78958
+					Top=0.211667
+					Width=2.80458
+					Height=0.582083
+				End
+				Item
+					Type=MemoBox
+					Name='MemoBox19'
+					Left=10.3981
+					Top=0.211667
+					Width=2.59292
+					Height=0.582083
+					Text='[#{库管员}#]'
+				End
+			End
+		End
+	End
+End
