@@ -96,7 +96,7 @@ namespace Global
             }
             */
             #endregion
-            //tabTest = true;
+            tabTest = true;
             //Application.Run(new Purchase.ForeignOrderItemSubmit("P11", "沈传荣"));
             // Application.Run(new Finance.RawMaterialInfo());
             //        Application.Run(new Purchase.OldRecord("P11"));
