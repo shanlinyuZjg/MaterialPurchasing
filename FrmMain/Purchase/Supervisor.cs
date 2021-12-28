@@ -12,12 +12,15 @@ using Global.Helper;
 using DevComponents.DotNetBar.SuperGrid;
 using DevComponents.DotNetBar.SuperGrid.Style;
 using System.Data.OleDb;
+using NPOI.XSSF.UserModel;
+using NPOI.SS.UserModel;
+using System.IO;
 
 namespace Global.Purchase
 {
     public partial class Supervisor : Office2007Form
     {
-        string userID = "MBJ";
+        string userID = string.Empty;
         private Background _Background1 =
            new Background(Color.White, Color.FromArgb(238, 244, 251), 45);
 
@@ -36,6 +39,8 @@ namespace Global.Purchase
         /// <summary>
         /// 显示最近50个订单
         /// </summary>
+        /// 
+        /*
         private void BindCustomerData()
         {
             DataSet _DataSet = new DataSet();
@@ -43,7 +48,7 @@ namespace Global.Purchase
             using (OleDbConnection cn =
                 new OleDbConnection(GlobalSpace.oledbconnstrFSDB))
             {
-                string sqlSelectPO = @"Select  TOP 20 PONumber AS 采购单号,VendorNumber AS 供应商代码,VendorName AS 供应商名称,POCreatedDate AS 订单创建日期,Buyer AS 采购员  from PurchaseOrdersByCMF Where Supervisor = '"+userID+"' Order By POCreatedDate Desc";
+                string sqlSelectPO = @"Select Distinct TOP 20 PONumber AS 采购单号,VendorNumber AS 供应商代码,VendorName AS 供应商名称,POItemPlacedDate AS 订单创建日期,Buyer AS 采购员  from PurchaseOrderRecordByCMF Where Superior = '" + userID+ "' Order By POItemPlacedDate Desc";
                 string sqlSelectPODetail = @"SELECT TOP 1000 
                                                       (case POStatus when  '0' then '已准备'
                                                                  when  '1' then '已提交'
@@ -82,7 +87,7 @@ namespace Global.Purchase
                                                     FROM
 	                                                    PurchaseOrderRecordByCMF
                                                     WHERE
-	                                                    Superior = '" + userID+ "' Order By POItemPlacedDate Desc";
+	                                                    Superior = '" + userID+ "' And IsPurePO = 0 Order By POItemPlacedDate Desc";
 
                 new OleDbDataAdapter(sqlSelectPO, cn).Fill(_DataSet, "Orders");
                 new OleDbDataAdapter(sqlSelectPODetail, cn).Fill(_DataSet, "Order Details");
@@ -173,7 +178,7 @@ namespace Global.Purchase
             }
 
         }
-
+        */
         private void btnInvalidateCurrentPassword_Click(object sender, EventArgs e)
         {
             string sqlCheck = @"Select Id from PurchaseDepartmentCheckPasswordByCMF Where Supervisor ='" + userID + "' And IsValid = 0";
@@ -203,7 +208,7 @@ namespace Global.Purchase
             MessageBoxEx.EnableGlass = false;
             GetUncheckedPO();
             //dgvAllPO.DataSource = GetAllPO();
-            BindCustomerData();
+    //        BindCustomerData();
         }
         //查询所有采购订单信息
         private DataTable GetAllPO()
@@ -242,14 +247,45 @@ namespace Global.Purchase
         //查询未审核订单
         private void GetUncheckedPO()
         {
-            string sqlSelect = @"Select Distinct PONumber as 采购单号,VendorNumber as 供应商码 ,VendorName as 供应商名称  From PurchaseOrderRecordByCMF Where Superior='"+userID+"' And POStatus=1";
-            CommonOperate.DataGridViewShow(sqlSelect, GlobalSpace.FSDBConnstr, dgvPO);
+            string sqlSelect = @"Select Distinct PONumber as 采购单号,Buyer,VendorNumber as 供应商码 ,VendorName as 供应商名称  From PurchaseOrderRecordByCMF Where Superior='"+userID+ "' And POStatus=1  ORDER BY PONumber ASC";
+            //CommonOperate.DataGridViewShow(sqlSelect, GlobalSpace.FSDBConnstr, dgvPO);
+            dgvPO.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
+            dgvPO.Columns["Buyer"].Visible = false;
         }
 
-        
+        private void ShowOrderByFONumber(string foNumber,string uid, DataGridView dgv)
+        {
+            string sqlSelect = @"SELECT
+                                                T1.Guid,
+                                                T1.ForeignNumber AS 外贸单号,
+	                                        	T1.ItemNumber AS 物料代码,
+	                                            T1.ItemDescription AS 物料描述,
+	                                            T1.LineUM AS 单位,
+	                                            T1.LineType AS 类型,
+	                                            T1.LineStatus AS 状态,
+	                                            T1.UnitPrice AS 单价,
+	                                            T1.POItemQuantity AS 订购数量,
+	                                            T1.DemandDeliveryDate AS 需求日期                                            
+                                        FROM
+	                                        PurchaseOrderRecordByCMF T1
+                                        WHERE
+	                                        T1.ForeignNumber Like '%" + foNumber + "%' And T1.POStatus = 1 And T1.Superior='" + uid + "'";
+            DataTable dtTemp = null;
+            try
+            {
+                dtTemp = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
+            }
+            catch (Exception ex)
+            {
+                MessageBoxEx.Show("发生异常：" + ex.Message);
+            }
+            dgv.DataSource = dtTemp;
+            dgv.Columns["Guid"].Visible = false;
+        }
         private void ShowOrder(string uid,string ponumber,DataGridView dgv)
         {
             string sqlSelect = @"SELECT
+                                                T1.Guid,
 	                                        	T1.ItemNumber AS 物料代码,
 	                                            T1.ItemDescription AS 物料描述,
 	                                            T1.LineUM AS 单位,
@@ -273,6 +309,7 @@ namespace Global.Purchase
                 MessageBoxEx.Show("发生异常：" + ex.Message);
             }
             dgv.DataSource = dtTemp;
+            dgv.Columns["Guid"].Visible = false;
         }
         
         private void btnSendEMails_Click(object sender, EventArgs e)
@@ -346,36 +383,8 @@ namespace Global.Purchase
                 MessageBoxEx.Show("当前没有可用的审核密码，请设置！", "提示");
             }
         }
-
-        private void btnSetEmail_Click(object sender, EventArgs e)
-        {         
-            if(tbEmailAccount.Text.Trim() =="" || tbEmailPassword.Text.Trim()=="")
-            {
-                MessageBoxEx.Show("邮箱账号或密码不能为空！", "提示");
-            }
-            else
-            {
-                string email = tbEmailAccount.Text.Trim() + "@reyoung.com";
-                byte[] bytes = Encoding.UTF8.GetBytes(tbEmailPassword.Text.Trim());
-                string password = Convert.ToBase64String(bytes);
-                string sqlUpdate = @"Update PurchaseDepartmentRBACByCMF  Set Email='"+email+"',Password='"+password+"' Where UserID='"+ userID + "'";
-                if(SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate) )
-                {
-                    MessageBoxEx.Show("设置成功！", "提示");
-                }
-                else
-                {
-                    MessageBoxEx.Show("设置失败！请联系管理员61075！", "提示");
-                }               
-            }
-              
-              
-            /*  解密
-              byte[] debytes = Convert.FromBase64String(password);
-              string depwd = Encoding.UTF8.GetString(debytes);
-            */
-        }
-
+        
+    
         private void dgvPO_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             dgvPO_CellDoubleClick(sender, e);
@@ -383,11 +392,7 @@ namespace Global.Purchase
 
         private void dgvPO_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex < 0)
-            {
-                MessageBoxEx.Show("请双击有效的区域！", "提示");
-            }
-            else
+            if(e.RowIndex >= 0)
             {
                 ShowOrder(userID, dgvPO.Rows[e.RowIndex].Cells["采购单号"].Value.ToString(), dgvPOItemDetail);
             }
@@ -419,25 +424,30 @@ namespace Global.Purchase
                 }
             }
         }
-
+        
         private void btnCheckPass_Click(object sender, EventArgs e)
         {
             List<string> sqlPOList = new List<string>();
+            Dictionary<string, string> userEmail = new Dictionary<string, string>();
             foreach (DataGridViewRow dgvr in dgvPO.Rows)
             {             
                 //订单状态已选中同时为领导已审核状态
-                if (Convert.ToBoolean(dgvr.Cells["POCheckChoose"].Value) == true )
+                if (Convert.ToBoolean(dgvr.Cells["POCheckChoose"].Value))
                 {
-                    string sqlUpdatePOItem = @"Update PurchaseOrderRecordByCMF Set POStatus = 2, CheckedWay = 'ManualChecked'  Where PONumber='"+ dgvr.Cells["采购单号"].Value.ToString() + "'";
-                    string sqlUpdatePO = @"Update PurchaseOrdersByCMF Set POStatus = 2 Where PONumber='" + dgvr.Cells["采购单号"].Value.ToString() + "'";
-                    if(SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdatePO) )
+                    string sqlUpdatePOItem = @"Update PurchaseOrderRecordByCMF Set POStatus = 2, CheckedWay = 'ManualChecked'  Where PONumber='"+ dgvr.Cells["采购单号"].Value.ToString() + "' And IsPurePO = 0 And POStatus = 1";
+
+                    string buyerID = dgvr.Cells["Buyer"].Value.ToString();
+                    string sqlSelect = @"Select Name,Email From PurchaseDepartmentRBACByCMF Where UserID = '" + buyerID + "'";
+                    DataTable dtEmail = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
+                    if(dtEmail.Rows.Count > 0)
                     {
-                        CommonOperate.EmptyDataGridView(dgvPOItemDetail);
-                    }
-                    else
-                    {
-                        MessageBoxEx.Show("更新订单状态时出错，请联系管理员！", "提示");
-                    }
+                        string email = dtEmail.Rows[0]["Email"].ToString();
+                        string name = dtEmail.Rows[0]["Name"].ToString();
+                        if(!userEmail.ContainsKey(name))
+                        {
+                            userEmail.Add(name, email);
+                        }
+                    }                  
                     sqlPOList.Add(sqlUpdatePOItem);
                 }
             }
@@ -449,6 +459,54 @@ namespace Global.Purchase
                 {
                     MessageBoxEx.Show("审核成功", "提示");
                     GetUncheckedPO();
+                   
+                    foreach(var v in userEmail)
+                    {
+                        string sqlSelectUserInfo = @"Select Email,Password,Name From PurchaseDepartmentRBACByCMF Where UserID='" + userID + "'";
+                        DataTable dtUserInfo = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelectUserInfo);
+                        string toName =v.Key;
+                        string toEmail = v.Value;
+
+                        if (dtUserInfo.Rows.Count > 0)
+                        {
+                            if (dtUserInfo.Rows[0]["Email"] != DBNull.Value && dtUserInfo.Rows[0]["Email"].ToString() != "")
+                            {
+                                List<string> smtpList = CommonOperate.GetSMTPServerInfo();
+                                if (smtpList.Count > 0)
+                                {
+                                    Email email = new Email();
+                                    email.fromEmail = dtUserInfo.Rows[0]["Email"].ToString();
+                                    email.fromPerson = dtUserInfo.Rows[0]["Name"].ToString();
+                                    email.toEmail = toEmail;
+                                    email.toPerson = toName;
+                                    email.encoding = "UTF-8";
+                                    email.smtpServer = smtpList[0];
+                                    email.userName = dtUserInfo.Rows[0]["Email"].ToString();
+                                    email.passWord = CommonOperate.Base64Decrypt(dtUserInfo.Rows[0]["Password"].ToString());
+                                    email.emailTitle = "采购订单审核完成提醒";
+                                    email.emailContent = toName + "：" + "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "您好!<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;采购订单申请已审批，请及时处理！";
+
+                                    if (MailHelper.SendReminderEmail(email))
+                                    {
+                                        MessageBoxEx.Show("邮件发送成功！", "提示");
+                                    }
+                                    else
+                                    {
+                                        MessageBoxEx.Show("邮件发送失败！", "提示");
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBoxEx.Show("未设置SMTP服务器IP地址和端口，请联系管理员！", "提示");
+                                }
+                            }
+                            else
+                            {
+                                MessageBoxEx.Show("邮箱未设置！", "提示");
+                            }
+                        }
+                    }
+
                 }
                 else
                 {
@@ -460,29 +518,48 @@ namespace Global.Purchase
                 MessageBoxEx.Show("没有选中的订单！", "提示");
             }
         }
-
+        /*
         private void btnSearchItem_Click(object sender, EventArgs e)
         {
-            /*
-            if(CommonOperate.IsNumberOrString(tbSearchItem.Text.Trim()))
-            {
-                MessageBoxEx.Show("正常的物料代码", "提示");
-            }
-            else
-            {
-                MessageBoxEx.Show("中文字符！", "提示");
-            }*/
+            string sqlCriteriaType = string.Empty;
+            string sqlCriteriaDate = string.Empty;
+            string sqlCriteriaOrder = "  Order By POItemPlacedDate Desc";
+
             string strText = tbSearchItem.Text.Trim();
             string sqlSelectPONumber = string.Empty;
             if (CommonOperate.IsNumberOrString(tbSearchItem.Text.Trim()))
             {
-                sqlSelectPONumber = @"SELECT TOP 20  PONumber FROM PurchaseOrderRecordByCMF  WHERE  Superior = '" + userID + "' And ItemNumber='"+strText+"'  Order By POItemPlacedDate Desc";
+                sqlSelectPONumber = @"SELECT TOP 200  PONumber FROM PurchaseOrderRecordByCMF  WHERE  Superior = '" + userID + "' And ItemNumber='" + strText + "' And IsPurePO = 0 " + sqlCriteriaOrder;
             }
             else
             {
-                sqlSelectPONumber = @"SELECT TOP 20  PONumber FROM PurchaseOrderRecordByCMF  WHERE Superior = '" + userID + "' And ItemDescription like '%"+strText+"%' Order By POItemPlacedDate Desc";
+                sqlSelectPONumber = @"SELECT TOP 200  PONumber FROM PurchaseOrderRecordByCMF  WHERE Superior = '" + userID + "' And ItemDescription like '%"+strText+ "%'   And IsPurePO = 0  "+ sqlCriteriaOrder;
             }
-            string sqlSelectPO = @"Select   PONumber AS 采购单号,VendorNumber AS 供应商代码,VendorName AS 供应商名称,POCreatedDate AS 订单创建日期,Buyer AS 采购员  from PurchaseOrdersByCMF Where Supervisor = '" + userID + "' And PONumber In ("+sqlSelectPONumber+") Order By POCreatedDate Desc";
+
+            if(rbtnDomestic.Checked)
+            {
+                sqlCriteriaType = " ForeignNumber = ''";
+            }
+            else if(rbtnForeign.Checked)
+            {
+                sqlCriteriaType = "ForeignNumber <> ''";
+            }
+            else
+            {
+                sqlCriteriaType = " 1=1 ";
+            }
+
+            if(rbtnDate.Checked)
+            {
+                sqlCriteriaDate = " (POItemPlacedDate >='"+dtpStartDate.Value.ToString("yyyy-MM-dd")+"' And POItemPlacedDate <='"+dtpEndDate.Value.ToString("yyyy-MM-dd") + "')";
+            }
+            else
+            {
+                sqlCriteriaDate = " 1=1 ";
+            }
+
+
+            string sqlSelectPO = @"Select   PONumber AS 采购单号,VendorNumber AS 供应商代码,VendorName AS 供应商名称,POItemPlacedDate AS 订单创建日期,Buyer AS 采购员  from PurchaseOrderRecordByCMF Where Superior = '" + userID + "' And PONumber In ("+sqlSelectPONumber+ ")  And IsPurePO = 1  "+" And "+sqlCriteriaType+"  And  "+sqlCriteriaDate+sqlCriteriaOrder;
             string sqlSelectPODetail = @"SELECT  
                                                       (case POStatus when  '0' then '已准备'
                                                                  when  '1' then '已提交'
@@ -521,9 +598,138 @@ namespace Global.Purchase
                                                     FROM
 	                                                    PurchaseOrderRecordByCMF
                                                     WHERE
-	                                                    Superior = '" + userID + "' And PONumber In ("+sqlSelectPONumber+") Order By POItemPlacedDate Desc";
+	                                                    Superior = '" + userID + "' And PONumber In ("+sqlSelectPONumber+ ") And IsPurePO = 0    " + " And " + sqlCriteriaType + "  And  " + sqlCriteriaDate + sqlCriteriaOrder;
            
             BindCustomerData(sqlSelectPO, sqlSelectPODetail);
         }
+
+        private void tbSearchItem_TextChanged(object sender, EventArgs e)
+        {
+            tbSearchItem.Text = tbSearchItem.Text.ToUpper();
+            tbSearchItem.SelectionStart = tbSearchItem.TextLength;
+        }
+
+        private void tbSearchItem_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar ==(char)13)
+            {
+                if(tbSearchItem.Text !="")
+                {
+                    btnSearchItem_Click(sender, e);
+                }
+            }
+        }
+        */
+        private void superTabControlPanel3_Click(object sender, EventArgs e)
+        {
+
+        }
+        
+        private void rbtnDate_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+        /*
+private void btnExportToExcel_Click(object sender, EventArgs e)
+{
+   DataSet ds = (DataSet)superGridControl1.PrimaryGrid.DataSource;
+   DataTable dt = ds.Tables["Order Details"];
+
+   string filePath = tbExportFilePath.Text;
+   string sheetname = "Sheet1";
+
+   XSSFWorkbook workbook = new XSSFWorkbook();
+   ISheet sheet = workbook.CreateSheet(sheetname);
+   IRow rowHead = sheet.CreateRow(0);
+   ICell cell;
+
+   //填写表头
+   for (int i = 0; i < dt.Columns.Count; i++)
+   {
+       cell = rowHead.CreateCell(i, CellType.String);
+       cell.SetCellValue(dt.Columns[i].Caption);
+       //    cell.CellStyle = cellstyle;
+   }
+   //填写内容
+   for (int i = 0; i < dt.Rows.Count; i++)
+   {
+       IRow row = sheet.CreateRow(i + 1);
+
+       for (int j = 0; j < dt.Columns.Count; j++)
+       {
+           cell = row.CreateCell(j, CellType.String);
+           //       cell.CellStyle = cellstyle2;
+           if (j == 2 || j > 4)
+           {
+               if (dt.Rows[i][j] == DBNull.Value || dt.Rows[i][j].ToString() == "")
+               {
+                   cell.SetCellValue("");
+               }
+               else
+               {
+                   cell.SetCellValue(Convert.ToDouble(dt.Rows[i][j]));
+               }
+
+           }
+           else
+           {
+               cell.SetCellValue(dt.Rows[i][j].ToString());
+           }
+       }
+
+
+   }
+   for (int j = 0; j < dt.Columns.Count; j++)
+   {
+       sheet.AutoSizeColumn(j);
+   }
+
+   if (!File.Exists(filePath))
+   {
+       try
+       {
+           using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+           {
+               workbook.Write(fs);
+               fs.Close();
+           }
+           Custom.MsgEx("导出数据成功！");
+       }
+       catch (Exception)
+       {
+           throw;
+       }
+   }
+   else
+   {
+       if (MessageBoxEx.Show("当前同名文件已存在，是否覆盖该文件？", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
+       {
+           try
+           {
+               using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+               {
+                   workbook.Write(fs);
+                   fs.Close();
+               }
+
+
+               Custom.MsgEx("导出数据成功！" + filePath);
+           }
+           catch (Exception)
+           {
+               throw;
+           }
+       }
+       else
+       {
+           return;
+       }
+
+   }
+
+}
+*/
     }
 }

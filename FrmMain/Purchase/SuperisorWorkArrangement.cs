@@ -61,7 +61,7 @@ namespace Global.Purchase
             DataTable dtTemp = null;
             string sqlStatus = " And Status = "+status+"";
             string sqlOrder = " Order by OperateDateTime  Desc";
-            string sqlSelect = @"Select BuyerID as 执行者,TaskSubject as 任务主题,TaskDetail as 任务详情,StartDate as 开始日期,FinishDate as 截止日期,Status as 状态,Comment as 备注 From PurchaseDepartmentTaskArrangementByCMF  Where SupervisorID='" + userid + "'"; 
+            string sqlSelect = @"Select BuyerName as 执行者,TaskSubject as 任务主题,TaskDetail as 任务详情,StartDate as 开始日期,FinishDate as 截止日期,(case when Status = 1 then '完成' else '未完成'  end)as 状态,Comment as 备注 From PurchaseDepartmentTaskArrangementByCMF  Where SupervisorID='" + userid + "'"; 
             switch(status)
             {
                 case 0:

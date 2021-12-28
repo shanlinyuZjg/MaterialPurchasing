@@ -141,7 +141,7 @@
             this.groupBox4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.groupBox4.Location = new System.Drawing.Point(3, 31);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(440, 93);
+            this.groupBox4.Size = new System.Drawing.Size(440, 87);
             this.groupBox4.TabIndex = 8;
             this.groupBox4.TabStop = false;
             // 
@@ -252,10 +252,10 @@
             this.dgvLabel.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(211)))), ((int)(((byte)(255)))));
             this.dgvLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvLabel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLabel.Location = new System.Drawing.Point(6, 163);
+            this.dgvLabel.Location = new System.Drawing.Point(6, 124);
             this.dgvLabel.Name = "dgvLabel";
             this.dgvLabel.RowTemplate.Height = 23;
-            this.dgvLabel.Size = new System.Drawing.Size(854, 196);
+            this.dgvLabel.Size = new System.Drawing.Size(854, 235);
             this.dgvLabel.TabIndex = 3;
             // 
             // tbLabelLength

@@ -140,7 +140,7 @@
             // 
             this.tbCarbonRequirements.Border.Class = "TextBoxBorder";
             this.tbCarbonRequirements.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbCarbonRequirements.Location = new System.Drawing.Point(411, 34);
+            this.tbCarbonRequirements.Location = new System.Drawing.Point(527, 10);
             this.tbCarbonRequirements.Name = "tbCarbonRequirements";
             this.tbCarbonRequirements.PreventEnterBeep = true;
             this.tbCarbonRequirements.Size = new System.Drawing.Size(299, 23);
@@ -406,7 +406,7 @@
             // 
             // 
             this.labelX59.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX59.Location = new System.Drawing.Point(349, 36);
+            this.labelX59.Location = new System.Drawing.Point(465, 12);
             this.labelX59.Name = "labelX59";
             this.labelX59.Size = new System.Drawing.Size(68, 23);
             this.labelX59.TabIndex = 0;

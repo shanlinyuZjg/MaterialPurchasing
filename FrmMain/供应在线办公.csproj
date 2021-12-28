@@ -42,7 +42,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\..\..\Program Files\瑞阳应用平台\日常工作管理\</OutputPath>
+    <OutputPath>D:\Program Files\瑞阳应用平台\日常工作管理\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -105,6 +105,22 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="Spire.Common, Version=2.2.12.61040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.XLS.9.2.1\lib\net40\Spire.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Spire.License, Version=1.3.7.40, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.XLS.9.2.1\lib\net40\Spire.License.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Spire.Pdf, Version=5.2.8.19040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.XLS.9.2.1\lib\net40\Spire.Pdf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Spire.XLS, Version=9.2.12.61040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.XLS.9.2.1\lib\net40\Spire.XLS.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -119,61 +135,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Audit\InvoiceAudit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Audit\InvoiceAudit.Designer.cs">
+      <DependentUpon>InvoiceAudit.cs</DependentUpon>
+    </Compile>
     <Compile Include="CommonOperate.cs" />
     <Compile Include="Custom.cs" />
-    <Compile Include="Finance\CustomsAudit\RawMaterialForProductShipped.cs">
+    <Compile Include="Finance\InvoiceVerify.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Finance\CustomsAudit\RawMaterialForProductShipped.Designer.cs">
-      <DependentUpon>RawMaterialForProductShipped.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Finance\CustomsAudit\RawMaterialForProductManufacturedHistory.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Finance\CustomsAudit\RawMaterialForProductManufacturedHistory.Designer.cs">
-      <DependentUpon>RawMaterialForProductManufacturedHistory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Finance\FinanceAP.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Finance\FinanceAP.Designer.cs">
-      <DependentUpon>FinanceAP.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Finance\FinanceAR.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Finance\FinanceAR.Designer.cs">
-      <DependentUpon>FinanceAR.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Finance\CustomsAudit\RawMaterialPurchaseHistory.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Finance\CustomsAudit\RawMaterialPurchaseHistory.Designer.cs">
-      <DependentUpon>RawMaterialPurchaseHistory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Finance\CustomsAudit\RawMaterialInfo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Finance\CustomsAudit\RawMaterialInfo.Designer.cs">
-      <DependentUpon>RawMaterialInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Finance\ForeignCurrencyARCD.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Finance\ForeignCurrencyARCD.Designer.cs">
-      <DependentUpon>ForeignCurrencyARCD.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Finance\POItemReceivedCheck.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Finance\POItemReceivedCheck.Designer.cs">
-      <DependentUpon>POItemReceivedCheck.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Finance\POItemReceivedInvoiceMatchCheck.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Finance\POItemReceivedInvoiceMatchCheck.Designer.cs">
-      <DependentUpon>POItemReceivedInvoiceMatchCheck.cs</DependentUpon>
+    <Compile Include="Finance\InvoiceVerify.Designer.cs">
+      <DependentUpon>InvoiceVerify.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmProgress.cs">
       <SubType>Form</SubType>
@@ -186,6 +160,36 @@
     </Compile>
     <Compile Include="FrmPurchaseDeptBuyer.Designer.cs">
       <DependentUpon>FrmPurchaseDeptBuyer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmStockUserManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmStockUserManage.Designer.cs">
+      <DependentUpon>FrmStockUserManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmStockFileManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmStockFileManager.Designer.cs">
+      <DependentUpon>FrmStockFileManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPurchaseDeptInvoiceFinance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPurchaseDeptInvoiceFinance.Designer.cs">
+      <DependentUpon>FrmPurchaseDeptInvoiceFinance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPurchaseDeptInvoiceAudit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPurchaseDeptInvoiceAudit.Designer.cs">
+      <DependentUpon>FrmPurchaseDeptInvoiceAudit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPurchaseDeptInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPurchaseDeptInvoice.Designer.cs">
+      <DependentUpon>FrmPurchaseDeptInvoice.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmPurchaseDeptSupervisor.cs">
       <SubType>Form</SubType>
@@ -206,17 +210,11 @@
     <Compile Include="Helper\GetHostInfo.cs" />
     <Compile Include="Helper\MailHelper.cs" />
     <Compile Include="Helper\SQLHelper.cs" />
-    <Compile Include="InternationalBusiness\InternationalBusiness.cs">
+    <Compile Include="PrintReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InternationalBusiness\InternationalBusiness.Designer.cs">
-      <DependentUpon>InternationalBusiness.cs</DependentUpon>
-    </Compile>
-    <Compile Include="KeyAccount\KeyAccount.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="KeyAccount\KeyAccount.Designer.cs">
-      <DependentUpon>KeyAccount.cs</DependentUpon>
+    <Compile Include="PrintReport.Designer.cs">
+      <DependentUpon>PrintReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -225,11 +223,65 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Purchase\AssistantItems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\AssistantItems.Designer.cs">
+      <DependentUpon>AssistantItems.cs</DependentUpon>
+    </Compile>
     <Compile Include="Purchase\CheckPasswordSetting.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Purchase\CheckPasswordSetting.Designer.cs">
       <DependentUpon>CheckPasswordSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ChooseVendorEmail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ChooseVendorEmail.Designer.cs">
+      <DependentUpon>ChooseVendorEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\Cusotoms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\Cusotoms.Designer.cs">
+      <DependentUpon>Cusotoms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\DeptItemRequirement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\DeptItemRequirement.Designer.cs">
+      <DependentUpon>DeptItemRequirement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\DeptItemRequirementPlaceOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\DeptItemRequirementPlaceOrder.Designer.cs">
+      <DependentUpon>DeptItemRequirementPlaceOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\DomesticItemPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\DomesticItemPrice.Designer.cs">
+      <DependentUpon>DomesticItemPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\DomesticProductItemPriceChoose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\DomesticProductItemPriceChoose.Designer.cs">
+      <DependentUpon>DomesticProductItemPriceChoose.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\DomesticProductItemWithoutComparePriceMaintain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\DomesticProductItemWithoutComparePriceMaintain.Designer.cs">
+      <DependentUpon>DomesticProductItemWithoutComparePriceMaintain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\DomesticProductItemWithoutReview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\DomesticProductItemWithoutReview.Designer.cs">
+      <DependentUpon>DomesticProductItemWithoutReview.cs</DependentUpon>
     </Compile>
     <Compile Include="Purchase\EmailSetting.cs">
       <SubType>Form</SubType>
@@ -248,6 +300,12 @@
     </Compile>
     <Compile Include="Purchase\FilePathSetting.Designer.cs">
       <DependentUpon>FilePathSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderItemAutomaticPlaceOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderItemAutomaticPlaceOrder.Designer.cs">
+      <DependentUpon>ForeignOrderItemAutomaticPlaceOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="Purchase\ForeignOrderItemLabel.cs">
       <SubType>Form</SubType>
@@ -279,6 +337,12 @@
     <Compile Include="Purchase\ForeignOrderItemChooseToSubmit.Designer.cs">
       <DependentUpon>ForeignOrderItemChooseToSubmit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchase\ForeignOrderItemManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ForeignOrderItemManage.Designer.cs">
+      <DependentUpon>ForeignOrderItemManage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Purchase\ForeignOrderItemOthers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -303,11 +367,23 @@
     <Compile Include="Purchase\ForeignOrderPackageSpecificationSetting.Designer.cs">
       <DependentUpon>ForeignOrderPackageSpecificationSetting.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchase\FOSpecialItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\FOSpecialItem.Designer.cs">
+      <DependentUpon>FOSpecialItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Purchase\GetManufacturerInfoByPO.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Purchase\GetManufacturerInfoByPO.Designer.cs">
       <DependentUpon>GetManufacturerInfoByPO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ImportDemesticProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ImportDemesticProduct.Designer.cs">
+      <DependentUpon>ImportDemesticProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Purchase\ImportForeignOrderItemInfo.cs">
       <SubType>Form</SubType>
@@ -321,6 +397,12 @@
     <Compile Include="Purchase\InventoryMaterialReminder.Designer.cs">
       <DependentUpon>InventoryMaterialReminder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchase\InvoiceFinisdedcs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\InvoiceFinisdedcs.Designer.cs">
+      <DependentUpon>InvoiceFinisdedcs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Purchase\ItemInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -333,11 +415,29 @@
     <Compile Include="Purchase\ItemInventory.Designer.cs">
       <DependentUpon>ItemInventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchase\ManageInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ManageInvoice.Designer.cs">
+      <DependentUpon>ManageInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\ManageItemPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\ManageItemPrice.Designer.cs">
+      <DependentUpon>ManageItemPrice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Purchase\ManageManufacturerInfo.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Purchase\ManageManufacturerInfo.Designer.cs">
       <DependentUpon>ManageManufacturerInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\OldRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\OldRecord.Designer.cs">
+      <DependentUpon>OldRecord.cs</DependentUpon>
     </Compile>
     <Compile Include="Purchase\PlaceOrder.cs">
       <SubType>Form</SubType>
@@ -345,23 +445,77 @@
     <Compile Include="Purchase\PlaceOrder.Designer.cs">
       <DependentUpon>PlaceOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchase\POConfirmByInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\POConfirmByInvoice.Designer.cs">
+      <DependentUpon>POConfirmByInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\POInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\POInvoice.Designer.cs">
+      <DependentUpon>POInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\POInvoiceSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\POInvoiceSearch.Designer.cs">
+      <DependentUpon>POInvoiceSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\POItemConfirmAPIS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\POItemConfirmAPIS.Designer.cs">
+      <DependentUpon>POItemConfirmAPIS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\POItemConfirmPackage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\POItemConfirmPackage.Designer.cs">
+      <DependentUpon>POItemConfirmPackage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\POItemConfirmerMaintain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\POItemConfirmerMaintain.Designer.cs">
+      <DependentUpon>POItemConfirmerMaintain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\POItemDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\POItemDetail.Designer.cs">
+      <DependentUpon>POItemDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Purchase\POItemDetailForInvoice.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Purchase\POItemDetailForInvoice.Designer.cs">
       <DependentUpon>POItemDetailForInvoice.cs</DependentUpon>
     </Compile>
-    <Compile Include="Purchase\POItemDetailPrint.cs">
+    <Compile Include="Purchase\POProgress.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Purchase\POItemDetailPrint.Designer.cs">
-      <DependentUpon>POItemDetailPrint.cs</DependentUpon>
+    <Compile Include="Purchase\POProgress.Designer.cs">
+      <DependentUpon>POProgress.cs</DependentUpon>
     </Compile>
-    <Compile Include="Purchase\PrintPOItem.cs">
+    <Compile Include="Purchase\PrintTest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Purchase\PrintPOItem.Designer.cs">
-      <DependentUpon>PrintPOItem.cs</DependentUpon>
+    <Compile Include="Purchase\PrintTest.Designer.cs">
+      <DependentUpon>PrintTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\PrintInvoiceItemDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\PrintInvoiceItemDetail.Designer.cs">
+      <DependentUpon>PrintInvoiceItemDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\PurchaseVials.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\PurchaseVials.Designer.cs">
+      <DependentUpon>PurchaseVials.cs</DependentUpon>
     </Compile>
     <Compile Include="Purchase\ReturnToVendor.cs">
       <SubType>Form</SubType>
@@ -393,6 +547,12 @@
     <Compile Include="Purchase\SupervisorForeignOrderItemCheck.Designer.cs">
       <DependentUpon>SupervisorForeignOrderItemCheck.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchase\SupervisorProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\SupervisorProgress.Designer.cs">
+      <DependentUpon>SupervisorProgress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Purchase\VendorEmailSetting.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -405,23 +565,107 @@
     <Compile Include="Purchase\WorkArrangement.Designer.cs">
       <DependentUpon>WorkArrangement.cs</DependentUpon>
     </Compile>
-    <Compile Include="TemplateForm.cs">
+    <Compile Include="Warehouse\BatchPORVX.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TemplateForm.Designer.cs">
-      <DependentUpon>TemplateForm.cs</DependentUpon>
+    <Compile Include="Warehouse\BatchPORVX.Designer.cs">
+      <DependentUpon>BatchPORVX.cs</DependentUpon>
     </Compile>
-    <Compile Include="test.cs">
+    <Compile Include="Warehouse\EBatchRecordConfirm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="test.Designer.cs">
-      <DependentUpon>test.cs</DependentUpon>
+    <Compile Include="Warehouse\EBatchRecordConfirm.Designer.cs">
+      <DependentUpon>EBatchRecordConfirm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Warehouse\Stock2.cs">
+    <Compile Include="Warehouse\FDAPackage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Warehouse\Stock2.Designer.cs">
-      <DependentUpon>Stock2.cs</DependentUpon>
+    <Compile Include="Warehouse\FDAPackage.Designer.cs">
+      <DependentUpon>FDAPackage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\BatchPrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\BatchPrint.Designer.cs">
+      <DependentUpon>BatchPrint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\FileEditionManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\FileEditionManage.Designer.cs">
+      <DependentUpon>FileEditionManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\InputBox.Designer.cs">
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\ItemIMTR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\ItemIMTR.Designer.cs">
+      <DependentUpon>ItemIMTR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\ItemIMTRByOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\ItemIMTRByOrder.Designer.cs">
+      <DependentUpon>ItemIMTRByOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\LabelPrinter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\LabelPrinter.Designer.cs">
+      <DependentUpon>LabelPrinter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\ManageBatchRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\ManageBatchRecord.Designer.cs">
+      <DependentUpon>ManageBatchRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\ManageBatchRecordUpdateHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\ManageBatchRecordUpdateHistory.Designer.cs">
+      <DependentUpon>ManageBatchRecordUpdateHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\ManageProductName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\ManageProductName.Designer.cs">
+      <DependentUpon>ManageProductName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\OccupyFileNumber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\OccupyFileNumber.Designer.cs">
+      <DependentUpon>OccupyFileNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\PrintPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\PrintPreview.Designer.cs">
+      <DependentUpon>PrintPreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\PrintBatchRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\PrintBatchRecord.Designer.cs">
+      <DependentUpon>PrintBatchRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\PrintPO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\PrintPO.Designer.cs">
+      <DependentUpon>PrintPO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\SpecialItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\SpecialItem.Designer.cs">
+      <DependentUpon>SpecialItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Warehouse\StockItemReturned.cs">
       <SubType>Form</SubType>
@@ -429,44 +673,29 @@
     <Compile Include="Warehouse\StockItemReturned.Designer.cs">
       <DependentUpon>StockItemReturned.cs</DependentUpon>
     </Compile>
-    <Compile Include="Warehouse\WarehousePOItemDetailPrint.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Warehouse\WarehousePOItemDetailPrint.Designer.cs">
-      <DependentUpon>WarehousePOItemDetailPrint.cs</DependentUpon>
-    </Compile>
     <Compile Include="Warehouse\Stock.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Warehouse\Stock.Designer.cs">
       <DependentUpon>Stock.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Finance\CustomsAudit\RawMaterialForProductShipped.resx">
-      <DependentUpon>RawMaterialForProductShipped.cs</DependentUpon>
+    <Compile Include="Warehouse\test.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\test.Designer.cs">
+      <DependentUpon>test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\UserManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\UserManage.Designer.cs">
+      <DependentUpon>UserManage.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Audit\InvoiceAudit.resx">
+      <DependentUpon>InvoiceAudit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Finance\CustomsAudit\RawMaterialForProductManufacturedHistory.resx">
-      <DependentUpon>RawMaterialForProductManufacturedHistory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Finance\FinanceAP.resx">
-      <DependentUpon>FinanceAP.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Finance\FinanceAR.resx">
-      <DependentUpon>FinanceAR.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Finance\CustomsAudit\RawMaterialPurchaseHistory.resx">
-      <DependentUpon>RawMaterialPurchaseHistory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Finance\CustomsAudit\RawMaterialInfo.resx">
-      <DependentUpon>RawMaterialInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Finance\ForeignCurrencyARCD.resx">
-      <DependentUpon>ForeignCurrencyARCD.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Finance\POItemReceivedCheck.resx">
-      <DependentUpon>POItemReceivedCheck.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Finance\POItemReceivedInvoiceMatchCheck.resx">
-      <DependentUpon>POItemReceivedInvoiceMatchCheck.cs</DependentUpon>
+    <EmbeddedResource Include="Finance\InvoiceVerify.resx">
+      <DependentUpon>InvoiceVerify.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmProgress.resx">
       <DependentUpon>FrmProgress.cs</DependentUpon>
@@ -474,25 +703,64 @@
     <EmbeddedResource Include="FrmPurchaseDeptBuyer.resx">
       <DependentUpon>FrmPurchaseDeptBuyer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmStockUserManage.resx">
+      <DependentUpon>FrmStockUserManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmStockFileManager.resx">
+      <DependentUpon>FrmStockFileManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPurchaseDeptInvoiceFinance.resx">
+      <DependentUpon>FrmPurchaseDeptInvoiceFinance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPurchaseDeptInvoiceAudit.resx">
+      <DependentUpon>FrmPurchaseDeptInvoiceAudit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPurchaseDeptInvoice.resx">
+      <DependentUpon>FrmPurchaseDeptInvoice.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmPurchaseDeptSupervisor.resx">
       <DependentUpon>FrmPurchaseDeptSupervisor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmWarehouseDeptStockKeeper.resx">
       <DependentUpon>FrmWarehouseDeptStockKeeper.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InternationalBusiness\InternationalBusiness.resx">
-      <DependentUpon>InternationalBusiness.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="KeyAccount\KeyAccount.resx">
-      <DependentUpon>KeyAccount.cs</DependentUpon>
+    <EmbeddedResource Include="PrintReport.resx">
+      <DependentUpon>PrintReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\AssistantItems.resx">
+      <DependentUpon>AssistantItems.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Purchase\CheckPasswordSetting.resx">
       <DependentUpon>CheckPasswordSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ChooseVendorEmail.resx">
+      <DependentUpon>ChooseVendorEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\Cusotoms.resx">
+      <DependentUpon>Cusotoms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\DeptItemRequirement.resx">
+      <DependentUpon>DeptItemRequirement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\DeptItemRequirementPlaceOrder.resx">
+      <DependentUpon>DeptItemRequirementPlaceOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\DomesticItemPrice.resx">
+      <DependentUpon>DomesticItemPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\DomesticProductItemPriceChoose.resx">
+      <DependentUpon>DomesticProductItemPriceChoose.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\DomesticProductItemWithoutComparePriceMaintain.resx">
+      <DependentUpon>DomesticProductItemWithoutComparePriceMaintain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\DomesticProductItemWithoutReview.resx">
+      <DependentUpon>DomesticProductItemWithoutReview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\EmailSetting.resx">
       <DependentUpon>EmailSetting.cs</DependentUpon>
@@ -502,6 +770,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\FilePathSetting.resx">
       <DependentUpon>FilePathSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ForeignOrderItemAutomaticPlaceOrder.resx">
+      <DependentUpon>ForeignOrderItemAutomaticPlaceOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\ForeignOrderItemLabel.resx">
       <DependentUpon>ForeignOrderItemLabel.cs</DependentUpon>
@@ -518,6 +789,9 @@
     <EmbeddedResource Include="Purchase\ForeignOrderItemChooseToSubmit.resx">
       <DependentUpon>ForeignOrderItemChooseToSubmit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ForeignOrderItemManage.resx">
+      <DependentUpon>ForeignOrderItemManage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Purchase\ForeignOrderItemOthers.resx">
       <DependentUpon>ForeignOrderItemOthers.cs</DependentUpon>
     </EmbeddedResource>
@@ -530,8 +804,14 @@
     <EmbeddedResource Include="Purchase\ForeignOrderPackageSpecificationSetting.resx">
       <DependentUpon>ForeignOrderPackageSpecificationSetting.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\FOSpecialItem.resx">
+      <DependentUpon>FOSpecialItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Purchase\GetManufacturerInfoByPO.resx">
       <DependentUpon>GetManufacturerInfoByPO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ImportDemesticProduct.resx">
+      <DependentUpon>ImportDemesticProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\ImportForeignOrderItemInfo.resx">
       <DependentUpon>ImportForeignOrderItemInfo.cs</DependentUpon>
@@ -539,26 +819,65 @@
     <EmbeddedResource Include="Purchase\InventoryMaterialReminder.resx">
       <DependentUpon>InventoryMaterialReminder.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\InvoiceFinisdedcs.resx">
+      <DependentUpon>InvoiceFinisdedcs.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Purchase\ItemInfo.resx">
       <DependentUpon>ItemInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\ItemInventory.resx">
       <DependentUpon>ItemInventory.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ManageInvoice.resx">
+      <DependentUpon>ManageInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\ManageItemPrice.resx">
+      <DependentUpon>ManageItemPrice.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Purchase\ManageManufacturerInfo.resx">
       <DependentUpon>ManageManufacturerInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\OldRecord.resx">
+      <DependentUpon>OldRecord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\PlaceOrder.resx">
       <DependentUpon>PlaceOrder.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\POConfirmByInvoice.resx">
+      <DependentUpon>POConfirmByInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\POInvoice.resx">
+      <DependentUpon>POInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\POInvoiceSearch.resx">
+      <DependentUpon>POInvoiceSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\POItemConfirmAPIS.resx">
+      <DependentUpon>POItemConfirmAPIS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\POItemConfirmPackage.resx">
+      <DependentUpon>POItemConfirmPackage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\POItemConfirmerMaintain.resx">
+      <DependentUpon>POItemConfirmerMaintain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\POItemDetail.resx">
+      <DependentUpon>POItemDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Purchase\POItemDetailForInvoice.resx">
       <DependentUpon>POItemDetailForInvoice.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Purchase\POItemDetailPrint.resx">
-      <DependentUpon>POItemDetailPrint.cs</DependentUpon>
+    <EmbeddedResource Include="Purchase\POProgress.resx">
+      <DependentUpon>POProgress.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Purchase\PrintPOItem.resx">
-      <DependentUpon>PrintPOItem.cs</DependentUpon>
+    <EmbeddedResource Include="Purchase\PrintTest.resx">
+      <DependentUpon>PrintTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\PrintInvoiceItemDetail.resx">
+      <DependentUpon>PrintInvoiceItemDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\PurchaseVials.resx">
+      <DependentUpon>PurchaseVials.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\ReturnToVendor.resx">
       <DependentUpon>ReturnToVendor.cs</DependentUpon>
@@ -575,32 +894,79 @@
     <EmbeddedResource Include="Purchase\SupervisorForeignOrderItemCheck.resx">
       <DependentUpon>SupervisorForeignOrderItemCheck.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\SupervisorProgress.resx">
+      <DependentUpon>SupervisorProgress.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Purchase\VendorEmailSetting.resx">
       <DependentUpon>VendorEmailSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\WorkArrangement.resx">
       <DependentUpon>WorkArrangement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TemplateForm.resx">
-      <DependentUpon>TemplateForm.cs</DependentUpon>
+    <EmbeddedResource Include="Warehouse\BatchPORVX.resx">
+      <DependentUpon>BatchPORVX.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="test.resx">
-      <DependentUpon>test.cs</DependentUpon>
+    <EmbeddedResource Include="Warehouse\BatchPrint.resx">
+      <DependentUpon>BatchPrint.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Warehouse\Stock2.resx">
-      <DependentUpon>Stock2.cs</DependentUpon>
+    <EmbeddedResource Include="Warehouse\EBatchRecordConfirm.resx">
+      <DependentUpon>EBatchRecordConfirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\FDAPackage.resx">
+      <DependentUpon>FDAPackage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\FileEditionManage.resx">
+      <DependentUpon>FileEditionManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\InputBox.resx">
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\ItemIMTR.resx">
+      <DependentUpon>ItemIMTR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\ItemIMTRByOrder.resx">
+      <DependentUpon>ItemIMTRByOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\LabelPrinter.resx">
+      <DependentUpon>LabelPrinter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\ManageBatchRecord.resx">
+      <DependentUpon>ManageBatchRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\ManageBatchRecordUpdateHistory.resx">
+      <DependentUpon>ManageBatchRecordUpdateHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\ManageProductName.resx">
+      <DependentUpon>ManageProductName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\OccupyFileNumber.resx">
+      <DependentUpon>OccupyFileNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\PrintPreview.resx">
+      <DependentUpon>PrintPreview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\PrintBatchRecord.resx">
+      <DependentUpon>PrintBatchRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\PrintPO.resx">
+      <DependentUpon>PrintPO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\SpecialItem.resx">
+      <DependentUpon>SpecialItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\StockItemReturned.resx">
       <DependentUpon>StockItemReturned.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Warehouse\WarehousePOItemDetailPrint.resx">
-      <DependentUpon>WarehousePOItemDetailPrint.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\Stock.resx">
       <DependentUpon>Stock.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\test.resx">
+      <DependentUpon>test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\UserManage.resx">
+      <DependentUpon>UserManage.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -619,7 +985,7 @@
       <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
+      <Isolated>True</Isolated>
     </COMReference>
     <COMReference Include="gregn6Lib">
       <Guid>{4018F953-1BFE-441E-8A04-DC8BA1FF060E}</Guid>
@@ -627,7 +993,7 @@
       <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
+      <Isolated>True</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
     <COMReference Include="stdole">
@@ -641,6 +1007,12 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\autostart1.png" />
+    <None Include="Resources\kenolaba.png" />
+    <None Include="Resources\business.png" />
+    <None Include="Resources\Community Help.png" />
+    <None Include="Resources\openofficeorg-20-calc.png" />
+    <None Include="Resources\style.png" />
     <Content Include="users 2.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -660,9 +1032,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

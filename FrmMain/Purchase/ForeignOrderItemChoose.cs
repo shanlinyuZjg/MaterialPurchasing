@@ -43,7 +43,7 @@ namespace Global.Purchase
 
         private void GetForeignOrderItem(string vendorNumber,string foPONumber,string itemNumber,string id)
         {
-            string sqlSelect = @"Select ForeignOrderNumber AS 外贸单号,VendorNumber AS 供应商代码,ItemNumber AS 物料代码,ItemDescription AS 物料描述,ItemUM AS 单位,PurchasePrice AS 价格,Quantity AS 采购数量 From PurchaseDepartmentForeignOrderItemByCMF Where BuyerID='" + id + "' And ForeignOrderNumber='" + foPONumber + "' And IsValid = 1 And Status = 1 And VendorNumber = '"+vendorNumber+"'";
+            string sqlSelect = @"Select ForeignOrderNumber AS 外贸单号,VendorNumber AS 供应商代码,ItemNumber AS 物料代码,ItemDescription AS 物料描述,ItemUM AS 单位,PurchasePrice AS 价格,Quantity AS 采购数量 From PurchaseDepartmentForeignOrderItemByCMF Where BuyerID='" + id + "' And ForeignOrderNumber='" + foPONumber + "' And IsValid = 1 And Status = 1 And VendorNumber = '"+vendorNumber+"'  ";
             if(itemNumber !="")
             {
                 sqlSelect += " And ItemNumber ='" + itemNumber + "'";
@@ -86,6 +86,7 @@ namespace Global.Purchase
                 GlobalSpace.foItemInfoList.Add(dgvFOItem.Rows[e.RowIndex].Cells["单位"].Value.ToString());
                 GlobalSpace.foItemInfoList.Add(dgvFOItem.Rows[e.RowIndex].Cells["价格"].Value.ToString());
                 GlobalSpace.foItemInfoList.Add(dgvFOItem.Rows[e.RowIndex].Cells["采购数量"].Value.ToString());
+                GlobalSpace.foItemInfoList.Add(dgvFOItem.Rows[e.RowIndex].Cells["外贸单号"].Value.ToString());
                 this.Close();
             }
             else

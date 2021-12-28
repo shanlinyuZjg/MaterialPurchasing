@@ -62,6 +62,7 @@ namespace Global.Purchase
                     if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate) )
                     {
                         MessageBoxEx.Show("更新成功！", "提示");
+                        this.Close();
                     }
                     else
                     {
@@ -74,6 +75,7 @@ namespace Global.Purchase
                     if(SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlInsert) )
                     {
                         MessageBoxEx.Show("添加成功！", "提示");
+                        this.Close();
                     }
                     else
                     {

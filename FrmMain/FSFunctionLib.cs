@@ -10,6 +10,9 @@ namespace Global
 {
     public static class FSFunctionLib
     {
+        //定义简体中文和西欧文编码字符集
+        public static Encoding GB2312 = Encoding.GetEncoding("gb2312");
+        public static Encoding ISO88591 = Encoding.GetEncoding("iso-8859-1");
         public static FSTIClient fstiClient = null;
         public static bool FSConfigFileInitialize(string strConfigFilePath, string userid, string password)
         {
@@ -61,7 +64,7 @@ namespace Global
                 //以下代码测试用，后期删除
                 else
                 {
-                    MessageBox.Show("四班登陆成功！");
+         //           MessageBox.Show("四班登陆成功！");
                     return true;
                 }
             }
@@ -76,25 +79,18 @@ namespace Global
 
         public static void FSExit()
         {
-            //if(fstiClient.Status == TransactionStatus.fsSupportedAndDisabled)
-            //{
-
             if (fstiClient != null)
             {
-                MessageBox.Show("四班账户当前是在线状态，即将退出！");
+   //             MessageBox.Show("四班账户当前是在线状态，即将退出！");
                 fstiClient.Terminate();
                 fstiClient = null;
             }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("fstiException");
-            //}
         }
 
         public static void FSErrorMsg(string strMgs)
         {
             FSTIError error = fstiClient.TransactionError;
+         //   string str = GB2312.GetString(ISO88591.GetBytes(error.Description));
             MessageBox.Show(strMgs + ":" + error.Description);
         }
     }

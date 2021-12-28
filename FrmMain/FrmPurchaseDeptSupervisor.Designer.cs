@@ -37,12 +37,16 @@
             this.ribbonBar4 = new DevComponents.DotNetBar.RibbonBar();
             this.btniCheckPasswordSetting = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonPanel1 = new DevComponents.DotNetBar.RibbonPanel();
+            this.ribbonBar7 = new DevComponents.DotNetBar.RibbonBar();
+            this.btniDeptItemRequirement = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonBar6 = new DevComponents.DotNetBar.RibbonBar();
+            this.btniPOProgress = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBar3 = new DevComponents.DotNetBar.RibbonBar();
             this.btniWorkArrangement = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBar2 = new DevComponents.DotNetBar.RibbonBar();
-            this.btniCheckForeignOrder = new DevComponents.DotNetBar.ButtonItem();
+            this.btniForeignProductCheck = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBar1 = new DevComponents.DotNetBar.RibbonBar();
-            this.btniManagePO = new DevComponents.DotNetBar.ButtonItem();
+            this.btniDomesticProductCheck = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonTabItem1 = new DevComponents.DotNetBar.RibbonTabItem();
             this.ribbonTabItem2 = new DevComponents.DotNetBar.RibbonTabItem();
             this.styleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);
@@ -73,7 +77,7 @@
             this.ribbonControl1.Location = new System.Drawing.Point(5, 1);
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
-            this.ribbonControl1.Size = new System.Drawing.Size(1079, 121);
+            this.ribbonControl1.Size = new System.Drawing.Size(1079, 135);
             this.ribbonControl1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonControl1.SystemText.MaximizeRibbonText = "&Maximize the Ribbon";
             this.ribbonControl1.SystemText.MinimizeRibbonText = "Mi&nimize the Ribbon";
@@ -93,6 +97,7 @@
             this.ribbonControl1.TabGroupHeight = 14;
             this.ribbonControl1.TabIndex = 0;
             this.ribbonControl1.Text = "ribbonControl1";
+            this.ribbonControl1.Click += new System.EventHandler(this.ribbonControl1_Click);
             // 
             // ribbonPanel2
             // 
@@ -103,7 +108,7 @@
             this.ribbonPanel2.Location = new System.Drawing.Point(0, 56);
             this.ribbonPanel2.Name = "ribbonPanel2";
             this.ribbonPanel2.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanel2.Size = new System.Drawing.Size(1079, 62);
+            this.ribbonPanel2.Size = new System.Drawing.Size(1079, 76);
             // 
             // 
             // 
@@ -137,7 +142,7 @@
             this.btnEmailSetting});
             this.ribbonBar5.Location = new System.Drawing.Point(65, 0);
             this.ribbonBar5.Name = "ribbonBar5";
-            this.ribbonBar5.Size = new System.Drawing.Size(62, 59);
+            this.ribbonBar5.Size = new System.Drawing.Size(62, 73);
             this.ribbonBar5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBar5.TabIndex = 1;
             // 
@@ -176,7 +181,7 @@
             this.btniCheckPasswordSetting});
             this.ribbonBar4.Location = new System.Drawing.Point(3, 0);
             this.ribbonBar4.Name = "ribbonBar4";
-            this.ribbonBar4.Size = new System.Drawing.Size(62, 59);
+            this.ribbonBar4.Size = new System.Drawing.Size(62, 73);
             this.ribbonBar4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBar4.TabIndex = 0;
             // 
@@ -200,6 +205,8 @@
             // ribbonPanel1
             // 
             this.ribbonPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonPanel1.Controls.Add(this.ribbonBar7);
+            this.ribbonPanel1.Controls.Add(this.ribbonBar6);
             this.ribbonPanel1.Controls.Add(this.ribbonBar3);
             this.ribbonPanel1.Controls.Add(this.ribbonBar2);
             this.ribbonPanel1.Controls.Add(this.ribbonBar1);
@@ -207,7 +214,7 @@
             this.ribbonPanel1.Location = new System.Drawing.Point(0, 56);
             this.ribbonPanel1.Name = "ribbonPanel1";
             this.ribbonPanel1.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanel1.Size = new System.Drawing.Size(1079, 62);
+            this.ribbonPanel1.Size = new System.Drawing.Size(1079, 76);
             // 
             // 
             // 
@@ -221,6 +228,84 @@
             // 
             this.ribbonPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.ribbonPanel1.TabIndex = 1;
+            // 
+            // ribbonBar7
+            // 
+            this.ribbonBar7.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBar7.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBar7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBar7.ContainerControlProcessDialogKey = true;
+            this.ribbonBar7.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBar7.DragDropSupport = true;
+            this.ribbonBar7.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btniDeptItemRequirement});
+            this.ribbonBar7.Location = new System.Drawing.Point(251, 0);
+            this.ribbonBar7.Name = "ribbonBar7";
+            this.ribbonBar7.Size = new System.Drawing.Size(60, 73);
+            this.ribbonBar7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBar7.TabIndex = 4;
+            // 
+            // 
+            // 
+            this.ribbonBar7.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBar7.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // btniDeptItemRequirement
+            // 
+            this.btniDeptItemRequirement.Image = global::Global.Properties.Resources.openofficeorg_20_calc;
+            this.btniDeptItemRequirement.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btniDeptItemRequirement.Name = "btniDeptItemRequirement";
+            this.btniDeptItemRequirement.SubItemsExpandWidth = 14;
+            this.btniDeptItemRequirement.Text = "物料需求\r\n计划";
+            this.btniDeptItemRequirement.Click += new System.EventHandler(this.buttonItem1_Click);
+            // 
+            // ribbonBar6
+            // 
+            this.ribbonBar6.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBar6.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBar6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBar6.ContainerControlProcessDialogKey = true;
+            this.ribbonBar6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBar6.DragDropSupport = true;
+            this.ribbonBar6.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btniPOProgress});
+            this.ribbonBar6.Location = new System.Drawing.Point(189, 0);
+            this.ribbonBar6.Name = "ribbonBar6";
+            this.ribbonBar6.Size = new System.Drawing.Size(62, 73);
+            this.ribbonBar6.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBar6.TabIndex = 3;
+            // 
+            // 
+            // 
+            this.ribbonBar6.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBar6.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // btniPOProgress
+            // 
+            this.btniPOProgress.Image = global::Global.Properties.Resources.autostart1;
+            this.btniPOProgress.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btniPOProgress.Name = "btniPOProgress";
+            this.btniPOProgress.SubItemsExpandWidth = 14;
+            this.btniPOProgress.Text = "进度查询";
+            this.btniPOProgress.Click += new System.EventHandler(this.btniPOProgress_Click);
             // 
             // ribbonBar3
             // 
@@ -240,7 +325,7 @@
             this.btniWorkArrangement});
             this.ribbonBar3.Location = new System.Drawing.Point(127, 0);
             this.ribbonBar3.Name = "ribbonBar3";
-            this.ribbonBar3.Size = new System.Drawing.Size(62, 59);
+            this.ribbonBar3.Size = new System.Drawing.Size(62, 73);
             this.ribbonBar3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBar3.TabIndex = 2;
             // 
@@ -276,10 +361,10 @@
             this.ribbonBar2.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBar2.DragDropSupport = true;
             this.ribbonBar2.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btniCheckForeignOrder});
+            this.btniForeignProductCheck});
             this.ribbonBar2.Location = new System.Drawing.Point(65, 0);
             this.ribbonBar2.Name = "ribbonBar2";
-            this.ribbonBar2.Size = new System.Drawing.Size(62, 59);
+            this.ribbonBar2.Size = new System.Drawing.Size(62, 73);
             this.ribbonBar2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBar2.TabIndex = 1;
             // 
@@ -291,14 +376,14 @@
             // 
             this.ribbonBar2.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
-            // btniCheckForeignOrder
+            // btniForeignProductCheck
             // 
-            this.btniCheckForeignOrder.Image = ((System.Drawing.Image)(resources.GetObject("btniCheckForeignOrder.Image")));
-            this.btniCheckForeignOrder.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btniCheckForeignOrder.Name = "btniCheckForeignOrder";
-            this.btniCheckForeignOrder.SubItemsExpandWidth = 14;
-            this.btniCheckForeignOrder.Text = "外贸物料";
-            this.btniCheckForeignOrder.Click += new System.EventHandler(this.btniCheckForeignOrder_Click);
+            this.btniForeignProductCheck.Image = ((System.Drawing.Image)(resources.GetObject("btniForeignProductCheck.Image")));
+            this.btniForeignProductCheck.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btniForeignProductCheck.Name = "btniForeignProductCheck";
+            this.btniForeignProductCheck.SubItemsExpandWidth = 14;
+            this.btniForeignProductCheck.Text = "外包审核";
+            this.btniForeignProductCheck.Click += new System.EventHandler(this.btniCheckForeignOrder_Click);
             // 
             // ribbonBar1
             // 
@@ -315,10 +400,10 @@
             this.ribbonBar1.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBar1.DragDropSupport = true;
             this.ribbonBar1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btniManagePO});
+            this.btniDomesticProductCheck});
             this.ribbonBar1.Location = new System.Drawing.Point(3, 0);
             this.ribbonBar1.Name = "ribbonBar1";
-            this.ribbonBar1.Size = new System.Drawing.Size(62, 59);
+            this.ribbonBar1.Size = new System.Drawing.Size(62, 73);
             this.ribbonBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBar1.TabIndex = 0;
             // 
@@ -330,14 +415,14 @@
             // 
             this.ribbonBar1.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
-            // btniManagePO
+            // btniDomesticProductCheck
             // 
-            this.btniManagePO.Image = ((System.Drawing.Image)(resources.GetObject("btniManagePO.Image")));
-            this.btniManagePO.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btniManagePO.Name = "btniManagePO";
-            this.btniManagePO.SubItemsExpandWidth = 14;
-            this.btniManagePO.Text = "订单管理";
-            this.btniManagePO.Click += new System.EventHandler(this.btniManagePO_Click);
+            this.btniDomesticProductCheck.Image = ((System.Drawing.Image)(resources.GetObject("btniDomesticProductCheck.Image")));
+            this.btniDomesticProductCheck.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btniDomesticProductCheck.Name = "btniDomesticProductCheck";
+            this.btniDomesticProductCheck.SubItemsExpandWidth = 14;
+            this.btniDomesticProductCheck.Text = "内包审核";
+            this.btniDomesticProductCheck.Click += new System.EventHandler(this.btniManagePO_Click);
             // 
             // ribbonTabItem1
             // 
@@ -383,11 +468,11 @@
             this.tabCtrlForm.CloseButtonPosition = DevComponents.DotNetBar.eTabCloseButtonPosition.Right;
             this.tabCtrlForm.CloseButtonVisible = true;
             this.tabCtrlForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabCtrlForm.Location = new System.Drawing.Point(5, 122);
+            this.tabCtrlForm.Location = new System.Drawing.Point(5, 136);
             this.tabCtrlForm.Name = "tabCtrlForm";
             this.tabCtrlForm.SelectedTabFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
             this.tabCtrlForm.SelectedTabIndex = -1;
-            this.tabCtrlForm.Size = new System.Drawing.Size(1079, 524);
+            this.tabCtrlForm.Size = new System.Drawing.Size(1079, 510);
             this.tabCtrlForm.TabIndex = 4;
             this.tabCtrlForm.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabCtrlForm.Text = "tabControl1";
@@ -402,7 +487,7 @@
             this.Controls.Add(this.ribbonControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmPurchaseDeptSupervisor";
-            this.Text = "瑞阳制药有限公司供应处无纸化办公系统";
+            this.Text = "瑞阳制药股份有限公司供应处无纸化办公系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmPurchaseDeptSupervisor_FormClosing);
             this.Load += new System.EventHandler(this.FrmPurchaseDeptSupervisor_Load);
@@ -428,8 +513,8 @@
         private DevComponents.DotNetBar.RibbonTabItem ribbonTabItem2;
         private DevComponents.DotNetBar.StyleManager styleManager1;
         private DevComponents.DotNetBar.RibbonBar ribbonBar2;
-        private DevComponents.DotNetBar.ButtonItem btniCheckForeignOrder;
-        private DevComponents.DotNetBar.ButtonItem btniManagePO;
+        private DevComponents.DotNetBar.ButtonItem btniForeignProductCheck;
+        private DevComponents.DotNetBar.ButtonItem btniDomesticProductCheck;
         private DevComponents.DotNetBar.RibbonBar ribbonBar3;
         private DevComponents.DotNetBar.ButtonItem btniWorkArrangement;
         private DevComponents.DotNetBar.RibbonBar ribbonBar4;
@@ -439,5 +524,9 @@
         private DevComponents.DotNetBar.TabControl tabCtrlForm;
         private DevComponents.DotNetBar.RibbonBar ribbonBar5;
         private DevComponents.DotNetBar.ButtonItem btnEmailSetting;
+        private DevComponents.DotNetBar.RibbonBar ribbonBar6;
+        private DevComponents.DotNetBar.ButtonItem btniPOProgress;
+        private DevComponents.DotNetBar.RibbonBar ribbonBar7;
+        private DevComponents.DotNetBar.ButtonItem btniDeptItemRequirement;
     }
 }

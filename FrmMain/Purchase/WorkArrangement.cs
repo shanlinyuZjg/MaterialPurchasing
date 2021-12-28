@@ -122,12 +122,17 @@ namespace Global.Purchase
         private void dgvTask_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             string strId = dgvTask.CurrentRow.Cells["Id"].Value.ToString();
-            string sqlSelect = @"Select TaskSubject,TaskDetail From PurchaseDepartmentTaskArrangementByCMF Where Id='" + strId + "' And BuyerID = '" + userID + "' And Status = 0";
+            string sqlSelect = @"Select TaskSubject,TaskDetail,Status From PurchaseDepartmentTaskArrangementByCMF Where Id='" + strId + "' And BuyerID = '" + userID + "'";
             DataTable dtTemp = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
             if (dtTemp.Rows.Count > 0)
             {
                 tbTaskSubject.Text = dtTemp.Rows[0]["TaskSubject"].ToString();
                 rtbTaskDetail.Text = dtTemp.Rows[0]["TaskDetail"].ToString();
+                if(dtTemp.Rows[0]["Status"].ToString() == "1")
+                {
+                    rtbFinishedTaskComment.Text = "已完成";
+                    btnSubmit.Enabled = false;
+                }
             }
         }
     }

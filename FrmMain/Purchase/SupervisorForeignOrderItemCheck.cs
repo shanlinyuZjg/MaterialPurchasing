@@ -14,8 +14,8 @@ namespace Global.Purchase
     public partial class SupervisorForeignOrderItemCheck  : Office2007Form
     {
         public string userID = string.Empty;
-        public string itemNumber = string.Empty;
-        public string poNumber = string.Empty;
+        public string ItemNumber = string.Empty;
+        public string FONumber = string.Empty;
         public SupervisorForeignOrderItemCheck()
         {
             InitializeComponent();
@@ -33,7 +33,14 @@ namespace Global.Purchase
 
         private void LoadUnHandledForeignOrderItem(string id)
         {
-            string sqlSelect = @"Select distinct BuyerID AS 采购员,ForeignOrderNumber AS 外贸单号,ItemNumber AS 物料代码 From PurchaseDepartmentForeignOrderItemByCMF Where SupervisorID='"+id+"' And IsValid = 0 And Status = 0";
+            string sqlSelect = @"SELECT DISTINCT
+	                                                ForeignOrderNumber AS 外贸单号,
+	                                                T2.Name AS 采购员
+                                                FROM
+	                                                PurchaseDepartmentForeignOrderItemByCMF T1
+                                                LEFT JOIN PurchaseDepartmentRBACByCMF T2 ON T1.BuyerID = T2.UserID
+                                                WHERE
+	                                                T1.SupervisorID = '"+id+"'  AND T1.IsValid = 0   AND T1.Status = 0";
             dgvForeginOrderAndItem.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
         }
         private void LoadHandledForeignOrderItem(string id)
@@ -41,10 +48,11 @@ namespace Global.Purchase
             string sqlSelect = @"Select distinct ForeignOrderNumber AS 外贸单号,ItemNumber AS 物料代码 From PurchaseDepartmentForeignOrderItemByCMF Where SupervisorID='" + id + "' And IsValid = 1 And Status = 1";
         //    dgvForeginOrderAndItem.DataSource = SQLHelper.GetDataTable(GlobalSpace.connstr, sqlSelect);
         }
-        private void LoadForeignOrderItemDetail(string id,string ponumber,string itemnumber)
+        private void LoadForeignOrderItemDetail(string id,string  foNumber)
         {
-            string sqlSelect = @"Select ItemNumber AS 物料代码,ItemDescription AS 物料描述,ItemUM AS 单位,VendorNumber AS 供应商码,VendorName AS 名称,PurchasePrice AS 价格,Quantity AS 采购数量,SpecificationDescription As 说明 From PurchaseDepartmentForeignOrderItemByCMF Where SupervisorID='" + id + "' And ForeignOrderNumber='"+ponumber+"' And ItemNumber ='"+itemnumber+"'  And IsValid = 0 And Status = 0";
+            string sqlSelect = @"Select ItemNumber AS 物料代码,ItemDescription AS 物料描述,ItemUM AS 单位,VendorNumber AS 供应商码,VendorName AS 名称,PurchasePrice AS 价格,Quantity AS 采购数量,SpecificationDescription As 说明,Id From PurchaseDepartmentForeignOrderItemByCMF Where SupervisorID='" + id + "' And ForeignOrderNumber  Like '%"+ foNumber + "%'   And IsValid = 0 And Status = 0";
             dgvForeignOrderDetail.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
+            dgvForeignOrderDetail.Columns["Id"].Visible = false;
         }
 
         private void dgvForeginOrderAndItem_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -55,9 +63,8 @@ namespace Global.Purchase
             }
             else
             {
-                poNumber = dgvForeginOrderAndItem.Rows[e.RowIndex].Cells["外贸单号"].Value.ToString();
-                itemNumber = dgvForeginOrderAndItem.Rows[e.RowIndex].Cells["物料代码"].Value.ToString();
-                LoadForeignOrderItemDetail(userID, poNumber, itemNumber);
+                FONumber = dgvForeginOrderAndItem.Rows[e.RowIndex].Cells["外贸单号"].Value.ToString();
+                LoadForeignOrderItemDetail(userID, FONumber);
             }
         }
 
@@ -68,60 +75,28 @@ namespace Global.Purchase
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            string sqlStart = @"Update PurchaseDepartmentForeignOrderItemByCMF";
-            string sqlSetAdopted = "Set Status = 1,IsValid = 1";
-            string sqlSetNotAdopted = "Set Status = 1,IsValid = 0 ";
-            string sqlFinish = @"Where ForeignOrderNumber = '"+poNumber+"' And ItemNumber='"+itemNumber+"'";
+            List<string> sqlList = new List<string>();
             string sqlUpdate = string.Empty;
-            int i = 0, j = 0,k= 0;
-            string sqlExtra = string.Empty;
-            string dt = DateTime.Now.ToString();
+
             if (dgvForeignOrderDetail.Rows.Count > 0)
             {
                 foreach (DataGridViewRow dgvr in dgvForeignOrderDetail.Rows)
                 {
                     if (Convert.ToBoolean(dgvr.Cells["Choose"].Value) == true)
                     {
-                        k += 1;
+                        sqlUpdate = @"Update PurchaseDepartmentForeignOrderItemByCMF Set Status = 1,IsValid = 1,OperateDateTime2 = '"+DateTime.Now.ToString()+"'  Where Id = " + dgvr.Cells["Id"].Value.ToString();
+                        sqlList.Add(sqlUpdate);
                     }
-                }
-                if(k > 1)
-                {
-                    MessageBoxEx.Show("选中的记录数量超过1条！", "提示");
-                    return;
-                }
-                else if( k == 0)
-                {
-                    MessageBoxEx.Show("没有选中的记录！", "提示");
-                    return;
-                }
-                else
-                {
-                    foreach (DataGridViewRow dgvr in dgvForeignOrderDetail.Rows)
+                    else
                     {
-                        sqlUpdate = "";
-                        sqlExtra = dgvr.Cells["供应商码"].Value.ToString();
-                        if (Convert.ToBoolean(dgvr.Cells["Choose"].Value) == true)
-                        {
-                            sqlUpdate = sqlStart + " " + sqlSetAdopted + ",OperateDateTime2 = '" + dt + "'" + sqlFinish + " And VendorNumber='" + sqlExtra + "'";
-                            if (!SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
-                            {
-                                i++;
-                            }
-                        }
-                        else
-                        {
-                            sqlUpdate = sqlStart + " " + sqlSetNotAdopted + ",OperateDateTime2 = '" + dt + "'" + sqlFinish + " And VendorNumber='" + sqlExtra + "'";
-                            if (!SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate) )
-                            {
-                                j++;
-                            }
-                        }
+                        sqlUpdate = @"Update PurchaseDepartmentForeignOrderItemByCMF Set Status = 1,IsValid = 0,OperateDateTime2 = '" + DateTime.Now.ToString() + "' Where Id = " + dgvr.Cells["Id"].Value.ToString();
+                        //2021-11-19  修复领导提交BUG
+                        //sqlUpdate = @"Update PurchaseDepartmentForeignOrderItemByCMF Set Status = 1,IsValid = 0,OperateDateTime2 = '" + DateTime.Now.ToString() + "'  Where ForeignOrderNumber = '" + FONumber + "' And ItemNumber='" + dgvr.Cells["物料代码"].Value.ToString() + "' And  VendorNumber = '" + dgvr.Cells["供应商码"].Value.ToString() + "'";  
+                        sqlList.Add(sqlUpdate);
                     }
-                }
-                
+                }               
             }
-            if( i > 0 || j > 0)
+            if(!SQLHelper.BatchExecuteNonQuery(GlobalSpace.FSDBConnstr,sqlList))
             {
                 MessageBoxEx.Show("选择的记录保存失败，请联系管理员！", "提示");
                 LoadUnHandledForeignOrderItem(userID);
@@ -138,6 +113,14 @@ namespace Global.Purchase
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadUnHandledForeignOrderItem(userID);
+        }
+
+        private void btnMakeAllChecked_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow dgvr in dgvForeignOrderDetail.Rows)
+            {
+                dgvr.Cells["Choose"].Value = true;
+            }
         }
     }
 }

@@ -28,19 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.tbFilePath = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnShow = new DevComponents.DotNetBar.ButtonX();
             this.btnChooseFile = new DevComponents.DotNetBar.ButtonX();
             this.dgvDetail = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbtnOthers = new System.Windows.Forms.RadioButton();
+            this.rbtnCarbon = new System.Windows.Forms.RadioButton();
             this.rbtnSpecification = new System.Windows.Forms.RadioButton();
             this.rbtnLabel = new System.Windows.Forms.RadioButton();
             this.rbtnBox = new System.Windows.Forms.RadioButton();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.btnImport = new DevComponents.DotNetBar.ButtonX();
-            this.rbtnCarbon = new System.Windows.Forms.RadioButton();
             this.cbbSheet = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetail)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -75,7 +76,7 @@
             // 
             this.btnShow.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnShow.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnShow.Location = new System.Drawing.Point(451, 51);
+            this.btnShow.Location = new System.Drawing.Point(531, 51);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(75, 23);
             this.btnShow.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -87,7 +88,7 @@
             // 
             this.btnChooseFile.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnChooseFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnChooseFile.Location = new System.Drawing.Point(451, 13);
+            this.btnChooseFile.Location = new System.Drawing.Point(531, 13);
             this.btnChooseFile.Name = "btnChooseFile";
             this.btnChooseFile.Size = new System.Drawing.Size(75, 23);
             this.btnChooseFile.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -101,14 +102,14 @@
             this.dgvDetail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvDetail.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvDetail.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDetail.Location = new System.Drawing.Point(2, 115);
             this.dgvDetail.Name = "dgvDetail";
@@ -118,16 +119,37 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.rbtnOthers);
             this.groupBox1.Controls.Add(this.rbtnCarbon);
             this.groupBox1.Controls.Add(this.rbtnSpecification);
             this.groupBox1.Controls.Add(this.rbtnLabel);
             this.groupBox1.Controls.Add(this.rbtnBox);
             this.groupBox1.Location = new System.Drawing.Point(2, 70);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(421, 39);
+            this.groupBox1.Size = new System.Drawing.Size(458, 39);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "包材类型选择";
+            // 
+            // rbtnOthers
+            // 
+            this.rbtnOthers.AutoSize = true;
+            this.rbtnOthers.Location = new System.Drawing.Point(374, 16);
+            this.rbtnOthers.Name = "rbtnOthers";
+            this.rbtnOthers.Size = new System.Drawing.Size(71, 16);
+            this.rbtnOthers.TabIndex = 4;
+            this.rbtnOthers.Text = "其他包材";
+            this.rbtnOthers.UseVisualStyleBackColor = true;
+            // 
+            // rbtnCarbon
+            // 
+            this.rbtnCarbon.AutoSize = true;
+            this.rbtnCarbon.Location = new System.Drawing.Point(293, 16);
+            this.rbtnCarbon.Name = "rbtnCarbon";
+            this.rbtnCarbon.Size = new System.Drawing.Size(47, 16);
+            this.rbtnCarbon.TabIndex = 4;
+            this.rbtnCarbon.Text = "纸箱";
+            this.rbtnCarbon.UseVisualStyleBackColor = true;
             // 
             // rbtnSpecification
             // 
@@ -170,15 +192,15 @@
             this.labelX3.ForeColor = System.Drawing.Color.Red;
             this.labelX3.Location = new System.Drawing.Point(2, 41);
             this.labelX3.Name = "labelX3";
-            this.labelX3.Size = new System.Drawing.Size(229, 23);
+            this.labelX3.Size = new System.Drawing.Size(498, 23);
             this.labelX3.TabIndex = 20;
-            this.labelX3.Text = "必须按照Excel模板格式进行信息导入";
+            this.labelX3.Text = "必须按照Excel模板格式进行信息导入，Exce每一行记录不能有空的单元格，没有则填写0";
             // 
             // btnImport
             // 
             this.btnImport.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnImport.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnImport.Location = new System.Drawing.Point(451, 86);
+            this.btnImport.Location = new System.Drawing.Point(531, 86);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(75, 23);
             this.btnImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -186,20 +208,10 @@
             this.btnImport.Text = "导入";
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
-            // rbtnCarbon
-            // 
-            this.rbtnCarbon.AutoSize = true;
-            this.rbtnCarbon.Location = new System.Drawing.Point(293, 16);
-            this.rbtnCarbon.Name = "rbtnCarbon";
-            this.rbtnCarbon.Size = new System.Drawing.Size(47, 16);
-            this.rbtnCarbon.TabIndex = 4;
-            this.rbtnCarbon.Text = "纸箱";
-            this.rbtnCarbon.UseVisualStyleBackColor = true;
-            // 
             // cbbSheet
             // 
             this.cbbSheet.FormattingEnabled = true;
-            this.cbbSheet.Location = new System.Drawing.Point(251, 41);
+            this.cbbSheet.Location = new System.Drawing.Point(432, 12);
             this.cbbSheet.Name = "cbbSheet";
             this.cbbSheet.Size = new System.Drawing.Size(28, 20);
             this.cbbSheet.TabIndex = 22;
@@ -245,5 +257,6 @@
         private DevComponents.DotNetBar.ButtonX btnImport;
         private System.Windows.Forms.RadioButton rbtnCarbon;
         private System.Windows.Forms.ComboBox cbbSheet;
+        private System.Windows.Forms.RadioButton rbtnOthers;
     }
 }

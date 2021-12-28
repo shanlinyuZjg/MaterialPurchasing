@@ -42,7 +42,7 @@ namespace Global.Purchase
         //查询纸箱供应商信息
         private DataTable GetCarbonVendorInfo()
         {
-            string sqlSelect = @"Select CarbonPrice AS 纸箱价格,CellPrice AS 格挡价格,VendorNumber AS 供应商码,VendorName AS 供应商名 From PurchaseDepartmentForeignOrderPackageCarbonByCMF";
+            string sqlSelect = @"Select CarbonPrice AS 纸箱价格,CellPrice AS 格挡价格,PaperPrice AS 垫板价格,VendorNumber AS 供应商码,VendorName AS 供应商名 From PurchaseDepartmentForeignOrderPackageCarbonByCMF";
             return SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
         }
 
@@ -129,7 +129,7 @@ namespace Global.Purchase
         }
         private double GetSingePaperboardArea(int paperboardQuantityPerCarbon, double length, double width, double height)
         {
-            return ((length - 10) * (width - 10) * 2) / 1000000 * paperboardQuantityPerCarbon;
+            return ((length - 10) * (width - 10)) / 1000000 * paperboardQuantityPerCarbon;
         }
         private double GetSingleCarbonCellArea(int rowQuantity, int ColumnQuantity, double length, double width, double height)
         {
@@ -260,6 +260,7 @@ namespace Global.Purchase
                         carbon.PaperArea = paperArea;
                         carbon.CellArea = cellArea;
                         carbon.CarbonUnitAreaPrice = Convert.ToDouble(dgvCarbon.SelectedRows[i].Cells["纸箱价格"].Value);
+                        carbon.PaperUnitAreaPrice = Convert.ToDouble(dgvCarbon.SelectedRows[i].Cells["垫板价格"].Value);
                         carbon.CellUnitAreaPrice = Convert.ToDouble(dgvCarbon.SelectedRows[i].Cells["格挡价格"].Value);
                         carbon.CarbonRequirements = tbCarbonRequirements.Text;
                         carbon.VendorNumber = dgvCarbon.SelectedRows[i].Cells["供应商码"].Value.ToString();

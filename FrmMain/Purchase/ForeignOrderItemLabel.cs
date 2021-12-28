@@ -18,7 +18,7 @@ namespace Global.Purchase
         double Quantity = 0;
         string sqlLabelLengthCriterion = string.Empty;
         string sqlLabelWidthCriterion = string.Empty;
-        string sqlLabelSelect = @"Select Length as 长度,Width as 宽度,Price as 普通签价格,CommonHugeQuantityPrice AS 普通签超过基准数量价格,CoveredPrice AS 覆膜签价格,CoveredHugeQuantityPrice AS 覆膜签超过基准数量价格,TransparentPrice 透明签价格,ScrapPrice AS 易撕签价格,VendorNumber AS 供应商码 ,VendorName AS 供应商名  From PurchaseDepartmentForeignOrderPackageLabelSizeByCMF ";
+        string sqlLabelSelect = @"Select  VendorNumber AS 供应商码 ,VendorName AS 供应商名,Length as 长度,Width as 宽度,CommonPIPrice as 普通签有尺寸价格,CommonAreaPriceAboveBaseQuantityPriceWithSize AS 普通签有尺寸超过基准数量面积价格,CoveredPIPrice AS 覆膜签有尺寸价格,TransparentAreaPrice 透明签面积价格,ScrappedAreaPrice AS 易撕签面积价格  From PurchaseDepartmentForeignOrderPackageLabelSizeByCMF ";
 
         public ForeignOrderItemLabel(double quantity)
         {
@@ -78,71 +78,34 @@ namespace Global.Purchase
 
                         if (rbtnLabelCommon.Checked == true)
                         {
-                            if (Quantity >= baseQuantity)
+                            if(Convert.ToDouble(tbOrderQuantity.Text.Trim()) >= Convert.ToDouble(tbBaseQuantity.Text.Trim()))
                             {
-                                if (dgvLabel.SelectedRows[i].Cells["普通签超过基准数量价格"].Value == null || dgvLabel.SelectedRows[i].Cells["普通签超过基准数量价格"].Value.ToString() == "")
-                                {
-                                    Custom.MsgEx("第" + (i + 1).ToString() + "行普通签超过基准数量价格不能为空！");
-                                    return;
-                                }
-                                labelUnitPrice = Math.Round(Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["普通签超过基准数量价格"].Value) * Convert.ToDouble(tbLabelMannualArea.Text.Trim()), 3);
+                                labelUnitPrice = Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["普通签无尺寸超过基准数量面积价格"].Value) * Convert.ToDouble(tbLabelMannualArea.Text.Trim());
+                                labelRequirements = "普通标签";
                             }
                             else
                             {
-                                if(dgvLabel.SelectedRows[i].Cells["普通签价格"].Value == null || dgvLabel.SelectedRows[i].Cells["普通签价格"].Value.ToString() == "")
-                                {
-                                    Custom.MsgEx("第" + (i + 1).ToString() + "行普通签价格不能为空！");
-                                    return;
-                                }
-                                labelUnitPrice = Convert.ToDouble(Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["普通签价格"].Value));
+                                labelUnitPrice = Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["普通签无尺寸面积价格"].Value) * Convert.ToDouble(tbLabelMannualArea.Text.Trim());
+                                labelRequirements = "普通标签";
                             }
-                            labelRequirements = "普通标签";
+
                         }
                         if (rbtnLabelCovered.Checked == true)
                         {
-                            if (Quantity >= baseQuantity)
-                            {
-                                if (dgvLabel.SelectedRows[i].Cells["覆膜签超过基准数量价格"].Value == null || dgvLabel.SelectedRows[i].Cells["覆膜签超过基准数量价格"].Value.ToString() == "")
-                                {
-                                    Custom.MsgEx("第" + (i + 1).ToString() + "行覆膜签超过基准价格不能为空！");
-                                    return;
-                                }
-                                double totalAmount = Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["覆膜签超过基准数量价格"].Value) * Convert.ToDouble(tbLabelMannualArea.Text.Trim()) * Quantity;
-                                labelUnitPrice = Math.Round(totalAmount / Quantity, 3);
-                            }
-                            else
-                            {
-                                if (dgvLabel.SelectedRows[i].Cells["覆膜签价格"].Value == null || dgvLabel.SelectedRows[i].Cells["覆膜签价格"].Value.ToString() == "")
-                                {
-                                    Custom.MsgEx("第" + (i + 1).ToString() + "行覆膜签价格不能为空！");
-                                    return;
-                                }
-                                labelUnitPrice = Convert.ToDouble(Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["覆膜签价格"].Value));
-                            }
+                            labelUnitPrice = Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["覆膜签无尺寸面积价格"].Value) * Convert.ToDouble(tbLabelMannualArea.Text.Trim());
                             labelRequirements = "覆膜标签";
                         }
                         if (rbtnLabelTransparent.Checked == true)
-                        {
-                            if (dgvLabel.SelectedRows[i].Cells["透明签价格"].Value == null || dgvLabel.SelectedRows[i].Cells["透明签价格"].Value.ToString() == "")
-                            {
-                                Custom.MsgEx("第" + (i + 1).ToString() + "行透明签价格不能为空！");
-                                return;
-                            }
-                            double totalAmount = Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["透明签价格"].Value) * Convert.ToDouble(tbLabelMannualArea.Text.Trim()) * Quantity;
-                            labelUnitPrice = Math.Round(totalAmount / Quantity, 3);
+                        {                      
+                            labelUnitPrice = Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["透明签面积价格"].Value) * Convert.ToDouble(tbLabelMannualArea.Text.Trim());
                             labelRequirements = "透明标签";
                         }
                         if (rbtnLabelScrap.Checked == true)
-                        {
-                            if (dgvLabel.SelectedRows[i].Cells["易撕签价格"].Value == null || dgvLabel.SelectedRows[i].Cells["易撕签价格"].Value.ToString() == "")
-                            {
-                                Custom.MsgEx("第" + (i + 1).ToString() + "行透明签价格不能为空！");
-                                return;
-                            }
-                            double totalAmount = Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["易撕签价格价格"].Value) * Convert.ToDouble(tbLabelMannualArea.Text.Trim()) * Quantity;
-                            labelUnitPrice = Math.Round(totalAmount / Quantity, 3);
+                        {                        
+                            labelUnitPrice = Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["易撕签面积价格"].Value) * Convert.ToDouble(tbLabelMannualArea.Text.Trim());
                             labelRequirements = "易撕标签";
                         }
+
                         label.Price = labelUnitPrice;
                         label.LabelRequirements = labelRequirements;
                         GlobalSpace.labelList.Add(label);
@@ -193,14 +156,7 @@ namespace Global.Purchase
 
                 if (rbtnLabelCovered.Checked == true)
                 {
-                    if (Quantity >= baseQuantity)
-                    {
-                        k = 3;
-                    }
-                    else
-                    {
-                        k = 4;
-                    }
+                    k = 3;
                     requirements = "覆膜标签";
                 }
 
@@ -222,22 +178,19 @@ namespace Global.Purchase
                             switch (k)
                             {
                                 case 1:
-                                    labelPrice = Convert.ToDouble(tbLabelMannualArea.Text.Trim()) * Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["普通签超过基准数量价格"].Value);
+                                    labelPrice = Convert.ToDouble(tbLabelMannualArea.Text.Trim()) * Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["普通签有尺寸超过基准数量面积价格"].Value);
                                     break;
                                 case 2:
-                                    labelPrice = Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["普通签价格"].Value);
+                                    labelPrice = Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["普通签有尺寸价格"].Value);
                                     break;
                                 case 3:
-                                    labelPrice = Convert.ToDouble(tbLabelMannualArea.Text.Trim()) * Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["覆膜签超过基准数量价格"].Value);
-                                    break;
-                                case 4:
-                                    labelPrice = Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["覆膜签价格"].Value);
+                                    labelPrice = Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["覆膜签有尺寸价格"].Value);
                                     break;
                                 case 5:
-                                    labelPrice = Convert.ToDouble(tbLabelMannualArea.Text.Trim()) * Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["透明签价格"].Value);
+                                    labelPrice = Convert.ToDouble(tbLabelMannualArea.Text.Trim()) * Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["透明签面积价格"].Value);
                                 break;
                                 case 6:
-                                    labelPrice = Convert.ToDouble(tbLabelMannualArea.Text.Trim()) * Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["易撕签价格"].Value);
+                                    labelPrice = Convert.ToDouble(tbLabelMannualArea.Text.Trim()) * Convert.ToDouble(dgvLabel.SelectedRows[i].Cells["易撕签面积价格"].Value);
                                 break;
                         }
                             Label label = new Label();
@@ -282,7 +235,7 @@ namespace Global.Purchase
         {
             if (cbLabelMannual.Checked == true)
             {
-                string sqlSelect = @"Select Distinct VendorNumber AS 供应商码,VendorName AS 供应商名,'' AS 普通签价格,''AS 普通签超过基准数量价格,'' AS 覆膜签价格,'' AS 覆膜签超过基准数量价格,'' AS 透明签价格,'' AS 易撕签价格 From PurchaseDepartmentForeignOrderPackageLabelSizeByCMF";
+                string sqlSelect = @"Select Distinct VendorNumber AS 供应商码,VendorName AS 供应商名,CommonAreaPriceBelowBaseQuantityPriceWithoutSize AS 普通签无尺寸面积价格,CommonAreaPriceAboveBaseQuantityPriceWithoutSize AS 普通签无尺寸超过基准数量面积价格,CoveredAreaPrice AS 覆膜签无尺寸面积价格,TransparentAreaPrice AS 透明签面积价格,ScrappedAreaPrice AS 易撕签面积价格 From PurchaseDepartmentForeignOrderPackageLabelSizeByCMF";
                 dgvLabel.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
             }
             else

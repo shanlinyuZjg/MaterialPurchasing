@@ -41,6 +41,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\Fourth Shift\Managed\FourthShift.Transactions.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -54,7 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommonOperate.cs" />
+    <Compile Include="Client1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Client1.Designer.cs">
+      <DependentUpon>Client1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,12 +70,54 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="FSFunctionLib.cs" />
+    <Compile Include="GLJETest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GLJETest.Designer.cs">
+      <DependentUpon>GLJETest.cs</DependentUpon>
+    </Compile>
     <Compile Include="GlobalSpace.cs" />
+    <Compile Include="GridReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GridReport.Designer.cs">
+      <DependentUpon>GridReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PostFormData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PostFormData.Designer.cs">
+      <DependentUpon>PostFormData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLHelper.cs" />
+    <Compile Include="SQLServerAlwaysOn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SQLServerAlwaysOn.Designer.cs">
+      <DependentUpon>SQLServerAlwaysOn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="物料计算.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="物料计算.Designer.cs">
+      <DependentUpon>物料计算.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Client1.resx">
+      <DependentUpon>Client1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GLJETest.resx">
+      <DependentUpon>GLJETest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GridReport.resx">
+      <DependentUpon>GridReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PostFormData.resx">
+      <DependentUpon>PostFormData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -78,6 +128,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SQLServerAlwaysOn.resx">
+      <DependentUpon>SQLServerAlwaysOn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="物料计算.resx">
+      <DependentUpon>物料计算.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -134,11 +134,7 @@ namespace Global.Warehouse
                 if (Convert.ToBoolean(dgvr.Cells[0].Value) == true && Convert.ToInt32(dgvr.Cells["退回数量"].Value) != 0)
                 {
                     try
-                    {/*
-                        lineNumber = dgvr.Cells["行号"].Value.ToString();
-                        itemNumber = dgvr.Cells["物料代码"].Value.ToString();
-                        porvQuantity = Convert.ToDouble(dgvr.Cells["退回数量"].Value);
-                        poNumber = dgvr.Cells["采购单号"].Value.ToString(); */
+                    {
                         lineId = dgvr.Cells["Id"].Value.ToString();
                         string strUpdatePOItem = @"Update PurchaseOrderItemReturnedByCMF Set Status = 1,OperateFSDateTime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "',Operator='"+userID+"' Where Id = '" + lineId + "'";
 

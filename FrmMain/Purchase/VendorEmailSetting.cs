@@ -53,9 +53,38 @@ namespace Global.Purchase
         {
             if(IsExist(tbVendorNumber.Text.Trim()))
             {
-                MessageBoxEx.Show("该供应商邮箱已存在！", "提示");
+                MessageBoxEx.Show("请注意：该供应商邮箱已存在！", "提示");
                 string sqlSelect = @"Select VendorNumber AS 供应商码,VendorName AS 名称,Email AS 邮箱 From PurchaseDepartmentVendorEmailByCMF Where VendorNumber='"+tbVendorNumber.Text.Trim()+"'";
                 dgvVendorEmail.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
+
+                if (tbVendorNumber.Text != "" && tbVendorName.Text != "" && tbEmail.Text != "")
+                {
+                    string sqlInsert = @"Insert Into PurchaseDepartmentVendorEmailByCMF (VendorNumber,VendorName,Email) Values(@VendorNumber,@VendorName,@Email)";
+                    SqlParameter[] sqlparams =
+                    {
+                        new SqlParameter("@VendorNumber",tbVendorNumber.Text.Trim()),
+                        new SqlParameter("@VendorName",tbVendorName.Text.Trim()),
+                        new SqlParameter("@Email",tbEmail.Text.Trim())
+                    };
+                    if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlInsert, sqlparams))
+                    {
+                        MessageBoxEx.Show("增加成功！", "提示");
+                        tbVendorName.Text = "";
+                        tbVendorNumber.Text = "";
+                        tbEmail.Text = "";
+                        LoadVendorEmail();
+                    }
+                    else
+                    {
+                        MessageBoxEx.Show("增加失败！", "提示");
+                    }
+                }
+                else
+                {
+                    MessageBoxEx.Show("供应商代码，名称和邮箱均不能为空！", "提示");
+                }
+
+
             }
             else
             {
@@ -64,10 +93,10 @@ namespace Global.Purchase
                     string sqlInsert = @"Insert Into PurchaseDepartmentVendorEmailByCMF (VendorNumber,VendorName,Email) Values(@VendorNumber,@VendorName,@Email)";
                     SqlParameter[] sqlparams =
                     {
-                    new SqlParameter("@VendorNumber",tbVendorNumber.Text.Trim()),
-                    new SqlParameter("@VendorName",tbVendorName.Text.Trim()),
-                    new SqlParameter("@Email",tbEmail.Text.Trim())
-                };
+                        new SqlParameter("@VendorNumber",tbVendorNumber.Text.Trim()),
+                        new SqlParameter("@VendorName",tbVendorName.Text.Trim()),
+                        new SqlParameter("@Email",tbEmail.Text.Trim())
+                    };
                     if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlInsert, sqlparams) )
                     {
                         MessageBoxEx.Show("增加成功！", "提示");
@@ -156,6 +185,7 @@ namespace Global.Purchase
                     {
                         tbVendorName.Text = vendorname;
                         tbEmail.Focus();
+                        btnSearch_Click(sender, e);
                     }
                 }
                 else

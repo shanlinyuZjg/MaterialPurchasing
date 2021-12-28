@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvManufacturerInfo = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rbtnVendorNumberExist = new System.Windows.Forms.RadioButton();
+            this.rbtnAutomaticGenerateMNumber = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
             this.tbManufacturerNumber = new System.Windows.Forms.TextBox();
             this.tbManufacturerName = new System.Windows.Forms.TextBox();
@@ -43,11 +45,10 @@
             this.tbVendorNumber = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tbVendorName = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.tbItemNumber = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAdd = new DevComponents.DotNetBar.ButtonX();
-            this.btnUpdate = new DevComponents.DotNetBar.ButtonX();
+            this.btnDelete = new DevComponents.DotNetBar.ButtonX();
             this.btnSearch = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.dgvManufacturerInfo)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -57,57 +58,81 @@
             // dgvManufacturerInfo
             // 
             this.dgvManufacturerInfo.AllowUserToAddRows = false;
-            this.dgvManufacturerInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dgvManufacturerInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvManufacturerInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvManufacturerInfo.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvManufacturerInfo.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvManufacturerInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvManufacturerInfo.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvManufacturerInfo.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvManufacturerInfo.EnableHeadersVisualStyles = false;
-            this.dgvManufacturerInfo.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.dgvManufacturerInfo.Location = new System.Drawing.Point(14, 131);
+            this.dgvManufacturerInfo.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvManufacturerInfo.Location = new System.Drawing.Point(14, 143);
+            this.dgvManufacturerInfo.MultiSelect = false;
             this.dgvManufacturerInfo.Name = "dgvManufacturerInfo";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvManufacturerInfo.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvManufacturerInfo.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvManufacturerInfo.RowTemplate.Height = 23;
             this.dgvManufacturerInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvManufacturerInfo.Size = new System.Drawing.Size(872, 503);
+            this.dgvManufacturerInfo.Size = new System.Drawing.Size(986, 514);
             this.dgvManufacturerInfo.TabIndex = 30;
-            this.dgvManufacturerInfo.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvManufacturerInfo_CellContentDoubleClick);
-            this.dgvManufacturerInfo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvManufacturerInfo_CellDoubleClick);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.rbtnVendorNumberExist);
+            this.groupBox2.Controls.Add(this.rbtnAutomaticGenerateMNumber);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.tbManufacturerNumber);
             this.groupBox2.Controls.Add(this.tbManufacturerName);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox2.Location = new System.Drawing.Point(491, 54);
+            this.groupBox2.Location = new System.Drawing.Point(474, 46);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(401, 72);
+            this.groupBox2.Size = new System.Drawing.Size(441, 80);
             this.groupBox2.TabIndex = 29;
             this.groupBox2.TabStop = false;
+            // 
+            // rbtnVendorNumberExist
+            // 
+            this.rbtnVendorNumberExist.AutoSize = true;
+            this.rbtnVendorNumberExist.Location = new System.Drawing.Point(316, 20);
+            this.rbtnVendorNumberExist.Name = "rbtnVendorNumberExist";
+            this.rbtnVendorNumberExist.Size = new System.Drawing.Size(109, 18);
+            this.rbtnVendorNumberExist.TabIndex = 15;
+            this.rbtnVendorNumberExist.Text = "已有供应商码";
+            this.rbtnVendorNumberExist.UseVisualStyleBackColor = true;
+            // 
+            // rbtnAutomaticGenerateMNumber
+            // 
+            this.rbtnAutomaticGenerateMNumber.AutoSize = true;
+            this.rbtnAutomaticGenerateMNumber.Checked = true;
+            this.rbtnAutomaticGenerateMNumber.Location = new System.Drawing.Point(201, 20);
+            this.rbtnAutomaticGenerateMNumber.Name = "rbtnAutomaticGenerateMNumber";
+            this.rbtnAutomaticGenerateMNumber.Size = new System.Drawing.Size(109, 18);
+            this.rbtnAutomaticGenerateMNumber.TabIndex = 15;
+            this.rbtnAutomaticGenerateMNumber.TabStop = true;
+            this.rbtnAutomaticGenerateMNumber.Text = "自动生成编码";
+            this.rbtnAutomaticGenerateMNumber.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -149,9 +174,9 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.tbVendorName);
             this.groupBox1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox1.Location = new System.Drawing.Point(14, 54);
+            this.groupBox1.Location = new System.Drawing.Point(14, 46);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(453, 72);
+            this.groupBox1.Size = new System.Drawing.Size(453, 80);
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
             // 
@@ -200,18 +225,6 @@
             this.tbVendorName.Size = new System.Drawing.Size(366, 23);
             this.tbVendorName.TabIndex = 15;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(212, 9);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(483, 42);
-            this.label6.TabIndex = 25;
-            this.label6.Text = "注意：只有供应商和生产商不是同一家公司时，方可进行生产商信息的录入。\r\n查询、修改和删除时，需要输入物料编码后按回车键或点击查询按钮，列表中\r\n显示所有信息，双击" +
-    "选择后再进行修改或删除。";
-            // 
             // tbItemNumber
             // 
             this.tbItemNumber.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -226,7 +239,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(20, 20);
+            this.label1.Location = new System.Drawing.Point(19, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 14);
             this.label1.TabIndex = 26;
@@ -236,33 +249,33 @@
             // 
             this.btnAdd.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnAdd.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnAdd.Location = new System.Drawing.Point(701, 50);
+            this.btnAdd.Location = new System.Drawing.Point(932, 60);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(85, 26);
+            this.btnAdd.Size = new System.Drawing.Size(68, 26);
             this.btnAdd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAdd.TabIndex = 31;
             this.btnAdd.Text = "增加";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // btnUpdate
+            // btnDelete
             // 
-            this.btnUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnUpdate.Location = new System.Drawing.Point(801, 50);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(85, 26);
-            this.btnUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnUpdate.TabIndex = 31;
-            this.btnUpdate.Text = "修改";
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.btnDelete.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnDelete.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnDelete.Location = new System.Drawing.Point(932, 98);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(68, 26);
+            this.btnDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDelete.TabIndex = 31;
+            this.btnDelete.Text = "删除";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnSearch
             // 
             this.btnSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSearch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSearch.Location = new System.Drawing.Point(701, 14);
+            this.btnSearch.Location = new System.Drawing.Point(228, 17);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(85, 26);
+            this.btnSearch.Size = new System.Drawing.Size(58, 23);
             this.btnSearch.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSearch.TabIndex = 31;
             this.btnSearch.Text = "查询";
@@ -272,19 +285,19 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1025, 654);
-            this.Controls.Add(this.btnUpdate);
+            this.ClientSize = new System.Drawing.Size(1003, 669);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.dgvManufacturerInfo);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.tbItemNumber);
             this.Controls.Add(this.label1);
             this.DoubleBuffered = true;
             this.Name = "ManageManufacturerInfo";
             this.Text = "ManageManufacturerInfo";
+            this.Load += new System.EventHandler(this.ManageManufacturerInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvManufacturerInfo)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -309,11 +322,12 @@
         private System.Windows.Forms.TextBox tbVendorNumber;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbVendorName;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbItemNumber;
         private System.Windows.Forms.Label label1;
         private DevComponents.DotNetBar.ButtonX btnAdd;
-        private DevComponents.DotNetBar.ButtonX btnUpdate;
+        private DevComponents.DotNetBar.ButtonX btnDelete;
         private DevComponents.DotNetBar.ButtonX btnSearch;
+        private System.Windows.Forms.RadioButton rbtnVendorNumberExist;
+        private System.Windows.Forms.RadioButton rbtnAutomaticGenerateMNumber;
     }
 }

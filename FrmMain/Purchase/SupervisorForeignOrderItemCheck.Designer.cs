@@ -33,6 +33,7 @@
             this.Choose = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btnSubmit = new DevComponents.DotNetBar.ButtonX();
             this.btnRefresh = new DevComponents.DotNetBar.ButtonX();
+            this.btnMakeAllChecked = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.dgvForeginOrderAndItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvForeignOrderDetail)).BeginInit();
             this.SuspendLayout();
@@ -83,9 +84,9 @@
             // 
             this.btnSubmit.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSubmit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSubmit.Location = new System.Drawing.Point(304, 27);
+            this.btnSubmit.Location = new System.Drawing.Point(382, 27);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(75, 23);
+            this.btnSubmit.Size = new System.Drawing.Size(57, 23);
             this.btnSubmit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSubmit.TabIndex = 4;
             this.btnSubmit.Text = "提交";
@@ -95,13 +96,25 @@
             // 
             this.btnRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnRefresh.Location = new System.Drawing.Point(185, 27);
+            this.btnRefresh.Location = new System.Drawing.Point(2, 27);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnRefresh.Size = new System.Drawing.Size(68, 23);
             this.btnRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnRefresh.TabIndex = 4;
             this.btnRefresh.Text = "实时刷新";
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // btnMakeAllChecked
+            // 
+            this.btnMakeAllChecked.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnMakeAllChecked.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnMakeAllChecked.Location = new System.Drawing.Point(304, 27);
+            this.btnMakeAllChecked.Name = "btnMakeAllChecked";
+            this.btnMakeAllChecked.Size = new System.Drawing.Size(57, 23);
+            this.btnMakeAllChecked.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnMakeAllChecked.TabIndex = 4;
+            this.btnMakeAllChecked.Text = "全选";
+            this.btnMakeAllChecked.Click += new System.EventHandler(this.btnMakeAllChecked_Click);
             // 
             // SupervisorForeignOrderItemCheck
             // 
@@ -109,6 +122,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1004, 592);
             this.Controls.Add(this.btnRefresh);
+            this.Controls.Add(this.btnMakeAllChecked);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.dgvForeignOrderDetail);
             this.Controls.Add(this.dgvForeginOrderAndItem);
@@ -130,5 +144,6 @@
         private DevComponents.DotNetBar.ButtonX btnSubmit;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Choose;
         private DevComponents.DotNetBar.ButtonX btnRefresh;
+        private DevComponents.DotNetBar.ButtonX btnMakeAllChecked;
     }
 }

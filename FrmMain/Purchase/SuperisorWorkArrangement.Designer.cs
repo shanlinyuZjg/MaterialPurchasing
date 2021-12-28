@@ -35,6 +35,9 @@
             this.dgvAllTask = new System.Windows.Forms.DataGridView();
             this.superTabControl1 = new DevComponents.DotNetBar.SuperTabControl();
             this.superTabControlPanel2 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.btnUnfinished = new DevComponents.DotNetBar.ButtonX();
+            this.btnViewFinished = new DevComponents.DotNetBar.ButtonX();
+            this.btnViewAll = new DevComponents.DotNetBar.ButtonX();
             this.rtbTaskDetail = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
             this.cbbStaff = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.dtpFinishDate = new System.Windows.Forms.DateTimePicker();
@@ -43,9 +46,6 @@
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.superTabItem2 = new DevComponents.DotNetBar.SuperTabItem();
-            this.btnViewAll = new DevComponents.DotNetBar.ButtonX();
-            this.btnViewFinished = new DevComponents.DotNetBar.ButtonX();
-            this.btnUnfinished = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAllTask)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).BeginInit();
             this.superTabControl1.SuspendLayout();
@@ -104,11 +104,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvAllTask.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAllTask.Location = new System.Drawing.Point(8, 152);
+            this.dgvAllTask.Location = new System.Drawing.Point(8, 116);
             this.dgvAllTask.Name = "dgvAllTask";
             this.dgvAllTask.ReadOnly = true;
             this.dgvAllTask.RowTemplate.Height = 23;
-            this.dgvAllTask.Size = new System.Drawing.Size(1140, 457);
+            this.dgvAllTask.Size = new System.Drawing.Size(1140, 493);
             this.dgvAllTask.TabIndex = 4;
             // 
             // superTabControl1
@@ -168,6 +168,42 @@
             this.superTabControlPanel2.TabIndex = 0;
             this.superTabControlPanel2.TabItem = this.superTabItem2;
             // 
+            // btnUnfinished
+            // 
+            this.btnUnfinished.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnUnfinished.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnUnfinished.Location = new System.Drawing.Point(274, 87);
+            this.btnUnfinished.Name = "btnUnfinished";
+            this.btnUnfinished.Size = new System.Drawing.Size(75, 23);
+            this.btnUnfinished.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnUnfinished.TabIndex = 6;
+            this.btnUnfinished.Text = "查看未完成";
+            this.btnUnfinished.Click += new System.EventHandler(this.btnUnfinished_Click);
+            // 
+            // btnViewFinished
+            // 
+            this.btnViewFinished.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnViewFinished.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnViewFinished.Location = new System.Drawing.Point(152, 87);
+            this.btnViewFinished.Name = "btnViewFinished";
+            this.btnViewFinished.Size = new System.Drawing.Size(75, 23);
+            this.btnViewFinished.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnViewFinished.TabIndex = 6;
+            this.btnViewFinished.Text = "查看已完成";
+            this.btnViewFinished.Click += new System.EventHandler(this.btnViewFinished_Click);
+            // 
+            // btnViewAll
+            // 
+            this.btnViewAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnViewAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnViewAll.Location = new System.Drawing.Point(36, 87);
+            this.btnViewAll.Name = "btnViewAll";
+            this.btnViewAll.Size = new System.Drawing.Size(75, 23);
+            this.btnViewAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnViewAll.TabIndex = 6;
+            this.btnViewAll.Text = "查看所有";
+            this.btnViewAll.Click += new System.EventHandler(this.btnViewAll_Click);
+            // 
             // rtbTaskDetail
             // 
             // 
@@ -179,7 +215,7 @@
             this.rtbTaskDetail.Name = "rtbTaskDetail";
             this.rtbTaskDetail.Rtf = "{\\rtf1\\ansi\\ansicpg936\\deff0\\deflang1033\\deflangfe2052{\\fonttbl{\\f0\\fnil\\fcharset" +
     "134 \\\'cb\\\'ce\\\'cc\\\'e5;}}\r\n\\viewkind4\\uc1\\pard\\lang2052\\f0\\fs18\\par\r\n}\r\n";
-            this.rtbTaskDetail.Size = new System.Drawing.Size(494, 133);
+            this.rtbTaskDetail.Size = new System.Drawing.Size(494, 97);
             this.rtbTaskDetail.TabIndex = 5;
             // 
             // cbbStaff
@@ -259,42 +295,6 @@
             this.superTabItem2.GlobalItem = false;
             this.superTabItem2.Name = "superTabItem2";
             this.superTabItem2.Text = "工作安排";
-            // 
-            // btnViewAll
-            // 
-            this.btnViewAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnViewAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnViewAll.Location = new System.Drawing.Point(9, 118);
-            this.btnViewAll.Name = "btnViewAll";
-            this.btnViewAll.Size = new System.Drawing.Size(75, 23);
-            this.btnViewAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnViewAll.TabIndex = 6;
-            this.btnViewAll.Text = "查看所有";
-            this.btnViewAll.Click += new System.EventHandler(this.btnViewAll_Click);
-            // 
-            // btnViewFinished
-            // 
-            this.btnViewFinished.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnViewFinished.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnViewFinished.Location = new System.Drawing.Point(125, 118);
-            this.btnViewFinished.Name = "btnViewFinished";
-            this.btnViewFinished.Size = new System.Drawing.Size(75, 23);
-            this.btnViewFinished.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnViewFinished.TabIndex = 6;
-            this.btnViewFinished.Text = "查看已完成";
-            this.btnViewFinished.Click += new System.EventHandler(this.btnViewFinished_Click);
-            // 
-            // btnUnfinished
-            // 
-            this.btnUnfinished.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnUnfinished.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnUnfinished.Location = new System.Drawing.Point(247, 118);
-            this.btnUnfinished.Name = "btnUnfinished";
-            this.btnUnfinished.Size = new System.Drawing.Size(75, 23);
-            this.btnUnfinished.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnUnfinished.TabIndex = 6;
-            this.btnUnfinished.Text = "查看未完成";
-            this.btnUnfinished.Click += new System.EventHandler(this.btnUnfinished_Click);
             // 
             // SuperisorWorkArrangement
             // 

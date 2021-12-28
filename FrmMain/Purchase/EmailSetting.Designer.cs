@@ -188,6 +188,7 @@
             this.DoubleBuffered = true;
             this.Name = "EmailSetting";
             this.Text = "BuyerEmailSetting";
+            this.Load += new System.EventHandler(this.EmailSetting_Load);
             this.groupPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 

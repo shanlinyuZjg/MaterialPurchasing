@@ -39,7 +39,33 @@ namespace Global.Helper
             }
             return bSucceed;
         }
-
+        public static bool SendReminderEmail(Email email)
+        {
+            bool bSucceed = false;
+            MailMessage mmsg = new MailMessage();
+            try
+            {
+                mmsg.From = new MailAddress(email.fromEmail, email.fromPerson);
+                mmsg.To.Add(email.toEmail);
+                mmsg.Subject = email.emailTitle;
+                mmsg.Body = email.emailContent;
+                //IsBodyHtml为True，如果邮件内容中有需要换行等操作的，使用<br>来换行或者其他的标识符
+                mmsg.IsBodyHtml = true;         
+                mmsg.BodyEncoding = System.Text.Encoding.GetEncoding(email.encoding);
+                mmsg.Priority = MailPriority.High;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = email.smtpServer;
+                smtp.Credentials = new NetworkCredential(email.userName, email.passWord);
+                smtp.Send(mmsg);
+                mmsg.Dispose();
+                bSucceed = true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return bSucceed;
+        }
         public static void SendEmail(Email email,Dictionary<string,string> emailList)
         {
             string nameList = string.Empty;
@@ -100,7 +126,7 @@ namespace Global.Helper
            
             SmtpClient client = new SmtpClient("192.168.8.3", 25);
             client.Credentials = CredentialCache.DefaultNetworkCredentials;
-            client.Credentials = new NetworkCredential("changmingfu@reyoung.com", "hacker521r!");
+            client.Credentials = new NetworkCredential("changmingfu@reyoung.com", "xxxxyyyzzz123!");
 
             msg1.Subject = "ERROR";
             msg1.Body = "来源：XXXX ";

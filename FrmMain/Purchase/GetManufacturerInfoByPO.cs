@@ -21,31 +21,7 @@ namespace Global.Purchase
             InitializeComponent();
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            if (tbPO.Text != "")
-            {
-                tbMN.Text = "";
-                tbMO.Text = "";
-                string sql = @"Select ManufacturerNumber,ManufacturerName From PurchaseOrderRecordByCMF Where PONumber=@PONumber";
-                SqlParameter[] sqlparam = { new SqlParameter("@PONumber", tbPO.Text) };
-
-                DataTable dtTemp = SQLHelper.GetDataSet(GlobalSpace.FSDBConnstr, sql, sqlparam).Tables[0];
-                if (dtTemp.Rows.Count > 0)
-                {
-                    tbMN.Text = dtTemp.Rows[0]["ManufacturerName"].ToString();
-                    tbMO.Text = dtTemp.Rows[0]["ManufacturerNumber"].ToString();
-                }
-                else
-                {
-                    MessageBoxEx.Show("未查到相关记录！","提示");
-                }
-            }
-            else
-            {
-                MessageBoxEx.Show("订单号不能为空！","提示");
-            }
-        }
+      
 
         private void tbPO_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -53,21 +29,8 @@ namespace Global.Purchase
             {
                 if (tbPO.Text != "")
                 {
-                    tbMN.Text = "";
-                    tbMO.Text = "";
-                    string sql = @"Select ManufacturerNumber,ManufacturerName From PurchaseOrderRecordByCMF Where PONumber=@PONumber";
-                    SqlParameter[] sqlparam = { new SqlParameter("@PONumber", tbPO.Text) };
-
-                    DataTable dtTemp = SQLHelper.GetDataSet(GlobalSpace.FSDBConnstr, sql, sqlparam).Tables[0];
-                    if (dtTemp.Rows.Count > 0)
-                    {
-                        tbMN.Text = dtTemp.Rows[0]["ManufacturerName"].ToString();
-                        tbMO.Text = dtTemp.Rows[0]["ManufacturerNumber"].ToString();
-                    }
-                    else
-                    {
-                        MessageBoxEx.Show("未查到相关记录！", "提示");
-                    }
+                    string sql = @"Select LineNumber AS 行号,ItemNumber AS 物料代码,ItemDescription AS 物料描述,POItemQuantity AS 数量,UnitPrice AS 单价,VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS 生产商码,ManufacturerName AS 生产商名 From PurchaseOrderRecordByCMF Where PONumber='" + tbPO.Text + "' And IsPurePO = 0";
+                    dgv.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sql);
                 }
                 else
                 {

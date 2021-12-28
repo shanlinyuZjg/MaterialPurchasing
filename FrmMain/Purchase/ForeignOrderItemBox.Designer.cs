@@ -43,6 +43,8 @@
             this.labelX15 = new DevComponents.DotNetBar.LabelX();
             this.tbBoxWidth = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX16 = new DevComponents.DotNetBar.LabelX();
+            this.tbBoxRemark = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX28 = new DevComponents.DotNetBar.LabelX();
             this.groupPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBox)).BeginInit();
             this.SuspendLayout();
@@ -52,6 +54,8 @@
             this.groupPanel3.BackColor = System.Drawing.Color.Transparent;
             this.groupPanel3.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanel3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanel3.Controls.Add(this.tbBoxRemark);
+            this.groupPanel3.Controls.Add(this.labelX28);
             this.groupPanel3.Controls.Add(this.cbBoxMannual);
             this.groupPanel3.Controls.Add(this.btnBoxAddWithoutRecord);
             this.groupPanel3.Controls.Add(this.dgvBox);
@@ -282,6 +286,32 @@
             this.labelX16.TabIndex = 0;
             this.labelX16.Text = "材质";
             // 
+            // tbBoxRemark
+            // 
+            // 
+            // 
+            // 
+            this.tbBoxRemark.Border.Class = "TextBoxBorder";
+            this.tbBoxRemark.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbBoxRemark.Location = new System.Drawing.Point(582, 6);
+            this.tbBoxRemark.Name = "tbBoxRemark";
+            this.tbBoxRemark.PreventEnterBeep = true;
+            this.tbBoxRemark.Size = new System.Drawing.Size(234, 23);
+            this.tbBoxRemark.TabIndex = 13;
+            // 
+            // labelX28
+            // 
+            this.labelX28.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX28.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX28.Location = new System.Drawing.Point(540, 4);
+            this.labelX28.Name = "labelX28";
+            this.labelX28.Size = new System.Drawing.Size(35, 27);
+            this.labelX28.TabIndex = 12;
+            this.labelX28.Text = "备注";
+            // 
             // ForeignOrderItemBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -318,5 +348,7 @@
         private DevComponents.DotNetBar.Controls.TextBoxX tbBoxWidth;
         private DevComponents.DotNetBar.LabelX labelX16;
         private System.Windows.Forms.CheckBox cbBoxMannual;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbBoxRemark;
+        private DevComponents.DotNetBar.LabelX labelX28;
     }
 }

@@ -65,7 +65,21 @@ namespace Global.Helper
 
         }
         #endregion
+        public static object OleDBExecuteScalar(string connstr, string sql, params SqlParameter[] sp)
+        {
 
+            using (OleDbConnection conn = new OleDbConnection(connstr))
+            {
+                using (OleDbCommand cmd = new OleDbCommand(sql, conn))
+                {
+                    cmd.Parameters.AddRange(sp);
+                    conn.Open();
+                    return cmd.ExecuteScalar();
+                }
+            }
+            
+
+        }
         #region 创建SqlDataReader对象
         /// <summary>
         /// 创建SqlDataReader对象
@@ -146,6 +160,7 @@ namespace Global.Helper
         {
             DataSet ds = new DataSet();
             //此处也可以继续使用sqlcommand语句来进行，只不过sqldataadapter在生成对象时，直接使用new SqlDataAdapter(sql,connStr)即可。
+ //           MessageBox.Show(sql);
             using (SqlDataAdapter sda = new SqlDataAdapter(sql, connstr))
             {
                 sda.SelectCommand.Parameters.AddRange(sp);
@@ -281,5 +296,32 @@ namespace Global.Helper
                 dtSelect.AcceptChanges();
             }
         }
+        //快速批量更新
+        public static void BatchUpdate()
+        {
+
+        }
+        /// <summary>
+        ///  执行SQL语句，返回List对象
+        /// </summary>
+        /// <param name="connstr"></param>
+        /// <param name="sql"></param>
+        /// <param name="sp"></param>
+        /// <returns></returns>
+        public static List<string> GetList(string connstr, string sql, string strValue,params SqlParameter[] sp)
+        {
+            DataSet ds = new DataSet();
+            //此处也可以继续使用sqlcommand语句来进行，只不过sqldataadapter在生成对象时，直接使用new SqlDataAdapter(sql,connStr)即可。
+            //           MessageBox.Show(sql);
+            using (SqlDataAdapter sda = new SqlDataAdapter(sql, connstr))
+            {
+                sda.SelectCommand.Parameters.AddRange(sp);
+                sda.Fill(ds);
+            }
+
+            return ds.Tables[0].AsEnumerable().Select(r=>r.Field<string>(strValue)).ToList();
+        }
+
+
     }
 }

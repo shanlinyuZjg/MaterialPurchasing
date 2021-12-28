@@ -47,7 +47,7 @@ namespace Global.Purchase
             {
                 CommonOperate.EmptyDataGridView(dgvItemDetail);
             }
-            string strSql = @"select TOP 300
+            string strSql = @"select 
                               ItemNumber AS 物料代码,
                               ItemDescription AS 物料描述,
                               ItemUM AS 单位
@@ -64,6 +64,28 @@ namespace Global.Purchase
         {
             tbItemFuzzyName.Text = tbItemFuzzyName.Text.ToUpper();
             tbItemFuzzyName.SelectionStart = tbItemFuzzyName.Text.Length;
+        }
+
+        private void btnItemSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvItemDetail_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex >= 0)
+            {
+                ItemInfoForSearch.ItemNumber = dgvItemDetail.Rows[e.RowIndex].Cells["物料代码"].Value.ToString();
+                ItemInfoForSearch.ItemDescription = dgvItemDetail.Rows[e.RowIndex].Cells["物料描述"].Value.ToString();
+                ItemInfoForSearch.ItemUM = dgvItemDetail.Rows[e.RowIndex].Cells["单位"].Value.ToString();
+                this.Close();
+            }
+
+        }
+
+        private void dgvItemDetail_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dgvItemDetail_CellContentDoubleClick(sender, e);
         }
     }
 }

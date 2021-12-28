@@ -113,6 +113,11 @@ namespace Global.Purchase
 
         private void btnBoxSubmit_Click(object sender, EventArgs e)
         {
+            if(cbBoxMannual.Checked)
+            {
+                Custom.MsgEx("当前已选择手工，请点击\"无记录添加\"按钮！");
+                return;
+            }
             if (dgvBox.SelectedRows.Count > 0)
             {
                 for (int i = 0; i < dgvBox.SelectedRows.Count; i++)
