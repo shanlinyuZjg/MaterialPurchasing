@@ -5074,7 +5074,7 @@ namespace Global.Warehouse
 	                                            dbo.PurchaseOrderRecordHistoryByCMF  Where Status=2 and  FSOperateDate = '2020-12-02'  AND ItemReceiveType = 'P'";
                 dgvPOItemDetailView.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
             }
-
+        /*
             private void buttonX6_Click(object sender, EventArgs e)
             {
 
@@ -5152,7 +5152,7 @@ namespace Global.Warehouse
                     Custom.MsgEx("四班写入成功！");
                 }
             }
-
+        */
             private void buttonX7_Click(object sender, EventArgs e)
             {
                 string sqlSelect = @"SELECT
