@@ -2684,7 +2684,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                                                         when  '7' then '已开票' 
                                                         when  '66' then '多次到货' 
                                                  end     
-                                                ) as POStatus  
+                                                ) as POStatus  ,ManufacturerNumber,ManufacturerName 
                                         FROM
 	                                        PurchaseOrderRecordByCMF T1
                                         WHERE
@@ -2695,13 +2695,14 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
 
                 dtTemp = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, strSql);
                 DataRow drNew = dtTemp.NewRow();
-                drNew[0] = "合计";
+                drNew[1] = "合计";
                 /*如果还有其他列需要计算求和，可以进行遍历或者单独计算
                 for(int i = 1; i < dtTemp.Columns.Count; i++)
                 {
 
                 }*/
-                drNew[dtTemp.Columns.Count - 3] = dtTemp.Compute(string.Format("SUM({0})", dtTemp.Columns[dtTemp.Columns.Count - 3]), "true");
+                //drNew[dtTemp.Columns.Count - 5] = dtTemp.Compute(string.Format("SUM({0})", dtTemp.Columns[dtTemp.Columns.Count - 5]), "true");
+                drNew["ItemSum"] = dtTemp.Compute(string.Format("SUM({0})", dtTemp.Columns["ItemSum"]), "true");
                 dtTemp.Rows.Add(drNew);
             }
             else

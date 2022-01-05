@@ -9,7 +9,10 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using Global.Helper;
 using Global;
-
+using System.IO;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using NPOI.HSSF.UserModel;
 
 namespace Global.Purchase
 {
@@ -162,6 +165,94 @@ namespace Global.Purchase
         private void ManageItemPrice_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            if (dgv.Rows.Count == 0)
+            { MessageBox.Show("无数据！"); return; }
+
+            string filePath = getExcelpath();
+            if (filePath.IndexOf(":") < 0)
+            { return; }
+            TableToExcel(dgv, filePath);
+            MessageBox.Show("导出完成");
+        }
+        private static string getExcelpath()
+        {
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.DefaultExt = "xlsx";
+            saveDialog.Filter = "EXCEL表格|*.xlsx";
+            //saveDialog.FileName = "条形码";
+            saveDialog.ShowDialog();
+            return saveDialog.FileName;
+        }
+        public static void TableToExcel(DataGridView dt, string file)
+        {
+            //AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+            IWorkbook workbook;
+            string fileExt = Path.GetExtension(file).ToLower();
+            if (fileExt == ".xlsx")
+            { workbook = new XSSFWorkbook(); }
+            else if (fileExt == ".xls")
+            { workbook = new HSSFWorkbook(); }
+            else { workbook = null; }
+            if (workbook == null) { return; }
+            ISheet sheet = string.IsNullOrEmpty(dt.Name) ? workbook.CreateSheet("Sheet1") : workbook.CreateSheet(dt.Name);
+
+            //表头  
+            IRow row = sheet.CreateRow(0);
+            for (int i = 0; i < dt.Columns.Count; i++)
+            {
+                ICell cell = row.CreateCell(i);
+                cell.SetCellValue(dt.Columns[i].HeaderText);
+            }
+
+            //数据  
+            for (int i = 0, x = 0; i < dt.Rows.Count; i++, x++)
+            {
+
+                IRow row1 = sheet.CreateRow(x + 1);
+                for (int j = 0; j < dt.Columns.Count; j++)
+                {
+                    ICell cell = row1.CreateCell(j);
+                    if (j == 9)
+                    {
+                        cell.SetCellValue(dt.Rows[i].Cells[j].Value == null ? "" : Convert.ToDateTime(dt.Rows[i].Cells[j].Value.ToString()).ToString("MMddyy"));
+                    }
+                    else
+                    {
+                        cell.SetCellValue(dt.Rows[i].Cells[j].Value == null ? "" : dt.Rows[i].Cells[j].Value.ToString());
+                    }
+                }
+
+            }
+
+            //转为字节数组  
+            MemoryStream stream = new MemoryStream();//读写内存的对象
+            workbook.Write(stream);
+            var buf = stream.ToArray();//字节数组
+            //保存为Excel文件  
+            using (FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write))
+            {
+                fs.Write(buf, 0, buf.Length);
+                fs.Flush();//缓冲区在内存中有个临时区域  盆 两个水缸 //缓冲区装满才会自动提交
+            }
+        }
+
+        private void btnAll_Click(object sender, EventArgs e)
+        {
+            string sqlSelect = @"SELECT
+                                                Id,
+                                                ItemNumber AS 物料代码,
+                                                ItemDescription AS 物料描述,
+                                                VendorNumber AS 供应商码,
+                                                VendorName AS 供应商名,
+                                                PricePreTax AS 含税价格
+                                                FROM
+                                                dbo.PurchaseDepartmentDomesticProductItemPrice ";
+            dgv.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
+            dgv.Columns["Id"].Visible = false;
         }
     }
 }

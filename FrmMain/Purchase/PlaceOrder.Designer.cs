@@ -148,18 +148,6 @@
             this.btnSubmitPOToStockKeeper = new DevComponents.DotNetBar.ButtonX();
             this.btnSendVendorPOMail = new DevComponents.DotNetBar.ButtonX();
             this.dgvPO2 = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.LineNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemUM = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrderQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemSum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StockKeeper = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.POStatus2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DemandDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ForeignNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ActualDeliveryQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.superTabItem1 = new DevComponents.DotNetBar.SuperTabItem();
             this.superTabControlPanel3 = new DevComponents.DotNetBar.SuperTabControlPanel();
             this.btnConfirmPOItemGetInvoice = new DevComponents.DotNetBar.ButtonX();
@@ -188,6 +176,21 @@
             this.关闭改行物料ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除该订单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GUID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LineNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemUM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrderQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemSum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StockKeeper = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.POStatus2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DemandDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ForeignNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ManufacturerNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ManufacturerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ActualDeliveryQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelEx2.SuspendLayout();
             this.panelEx1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl2)).BeginInit();
@@ -1697,6 +1700,7 @@
             this.dgvPO2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvPO2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPO2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.GUID,
             this.LineNumber,
             this.ItemNumber,
             this.ItemDescription,
@@ -1708,6 +1712,8 @@
             this.POStatus2,
             this.DemandDate,
             this.ForeignNumber,
+            this.ManufacturerNumber,
+            this.ManufacturerName,
             this.ActualDeliveryQuantity});
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
@@ -1733,90 +1739,6 @@
             this.dgvPO2.Size = new System.Drawing.Size(1254, 294);
             this.dgvPO2.TabIndex = 0;
             this.dgvPO2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPO2_CellContentClick);
-            // 
-            // LineNumber
-            // 
-            this.LineNumber.DataPropertyName = "LineNumber";
-            this.LineNumber.HeaderText = "行号";
-            this.LineNumber.Name = "LineNumber";
-            this.LineNumber.Width = 54;
-            // 
-            // ItemNumber
-            // 
-            this.ItemNumber.DataPropertyName = "ItemNumber";
-            this.ItemNumber.HeaderText = "物料代码";
-            this.ItemNumber.Name = "ItemNumber";
-            this.ItemNumber.Width = 78;
-            // 
-            // ItemDescription
-            // 
-            this.ItemDescription.DataPropertyName = "ItemDescription";
-            this.ItemDescription.HeaderText = "物料描述";
-            this.ItemDescription.Name = "ItemDescription";
-            this.ItemDescription.Width = 78;
-            // 
-            // ItemUM
-            // 
-            this.ItemUM.DataPropertyName = "ItemUM";
-            this.ItemUM.HeaderText = "单位";
-            this.ItemUM.Name = "ItemUM";
-            this.ItemUM.Width = 54;
-            // 
-            // UnitPrice
-            // 
-            this.UnitPrice.DataPropertyName = "UnitPrice";
-            this.UnitPrice.HeaderText = "单价";
-            this.UnitPrice.Name = "UnitPrice";
-            this.UnitPrice.Width = 54;
-            // 
-            // OrderQuantity
-            // 
-            this.OrderQuantity.DataPropertyName = "OrderQuantity";
-            this.OrderQuantity.HeaderText = "订购数量";
-            this.OrderQuantity.Name = "OrderQuantity";
-            this.OrderQuantity.Width = 78;
-            // 
-            // ItemSum
-            // 
-            this.ItemSum.DataPropertyName = "ItemSum";
-            this.ItemSum.HeaderText = "合计";
-            this.ItemSum.Name = "ItemSum";
-            this.ItemSum.Width = 54;
-            // 
-            // StockKeeper
-            // 
-            this.StockKeeper.DataPropertyName = "StockKeeper";
-            this.StockKeeper.HeaderText = "库管员";
-            this.StockKeeper.Name = "StockKeeper";
-            this.StockKeeper.Width = 66;
-            // 
-            // POStatus2
-            // 
-            this.POStatus2.DataPropertyName = "POStatus";
-            this.POStatus2.HeaderText = "状态";
-            this.POStatus2.Name = "POStatus2";
-            this.POStatus2.Width = 54;
-            // 
-            // DemandDate
-            // 
-            this.DemandDate.DataPropertyName = "DemandDate";
-            this.DemandDate.HeaderText = "需求日期";
-            this.DemandDate.Name = "DemandDate";
-            this.DemandDate.Width = 78;
-            // 
-            // ForeignNumber
-            // 
-            this.ForeignNumber.DataPropertyName = "ForeignNumber";
-            this.ForeignNumber.HeaderText = "外贸单号";
-            this.ForeignNumber.Name = "ForeignNumber";
-            this.ForeignNumber.Width = 78;
-            // 
-            // ActualDeliveryQuantity
-            // 
-            this.ActualDeliveryQuantity.DataPropertyName = "ActualDeliveryQuantity";
-            this.ActualDeliveryQuantity.HeaderText = "到货数量";
-            this.ActualDeliveryQuantity.Name = "ActualDeliveryQuantity";
-            this.ActualDeliveryQuantity.Width = 78;
             // 
             // superTabItem1
             // 
@@ -2144,26 +2066,26 @@
             this.删除该行物料ToolStripMenuItem,
             this.关闭改行物料ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 70);
             // 
             // 修改该行物料ToolStripMenuItem
             // 
             this.修改该行物料ToolStripMenuItem.Name = "修改该行物料ToolStripMenuItem";
-            this.修改该行物料ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.修改该行物料ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.修改该行物料ToolStripMenuItem.Text = "修改该行物料";
             this.修改该行物料ToolStripMenuItem.Click += new System.EventHandler(this.修改该行物料ToolStripMenuItem_Click);
             // 
             // 删除该行物料ToolStripMenuItem
             // 
             this.删除该行物料ToolStripMenuItem.Name = "删除该行物料ToolStripMenuItem";
-            this.删除该行物料ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.删除该行物料ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.删除该行物料ToolStripMenuItem.Text = "删除该行物料";
             this.删除该行物料ToolStripMenuItem.Click += new System.EventHandler(this.删除该行物料ToolStripMenuItem_Click);
             // 
             // 关闭改行物料ToolStripMenuItem
             // 
             this.关闭改行物料ToolStripMenuItem.Name = "关闭改行物料ToolStripMenuItem";
-            this.关闭改行物料ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.关闭改行物料ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.关闭改行物料ToolStripMenuItem.Text = "关闭改行物料";
             this.关闭改行物料ToolStripMenuItem.Click += new System.EventHandler(this.关闭改行物料ToolStripMenuItem_Click);
             // 
@@ -2180,6 +2102,112 @@
             this.删除该订单ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.删除该订单ToolStripMenuItem.Text = "删除该订单";
             this.删除该订单ToolStripMenuItem.Click += new System.EventHandler(this.删除该订单ToolStripMenuItem_Click);
+            // 
+            // GUID
+            // 
+            this.GUID.DataPropertyName = "GUID";
+            this.GUID.HeaderText = "GUID";
+            this.GUID.Name = "GUID";
+            this.GUID.Visible = false;
+            this.GUID.Width = 54;
+            // 
+            // LineNumber
+            // 
+            this.LineNumber.DataPropertyName = "LineNumber";
+            this.LineNumber.HeaderText = "行号";
+            this.LineNumber.Name = "LineNumber";
+            this.LineNumber.Width = 54;
+            // 
+            // ItemNumber
+            // 
+            this.ItemNumber.DataPropertyName = "ItemNumber";
+            this.ItemNumber.HeaderText = "物料代码";
+            this.ItemNumber.Name = "ItemNumber";
+            this.ItemNumber.Width = 78;
+            // 
+            // ItemDescription
+            // 
+            this.ItemDescription.DataPropertyName = "ItemDescription";
+            this.ItemDescription.HeaderText = "物料描述";
+            this.ItemDescription.Name = "ItemDescription";
+            this.ItemDescription.Width = 78;
+            // 
+            // ItemUM
+            // 
+            this.ItemUM.DataPropertyName = "ItemUM";
+            this.ItemUM.HeaderText = "单位";
+            this.ItemUM.Name = "ItemUM";
+            this.ItemUM.Width = 54;
+            // 
+            // UnitPrice
+            // 
+            this.UnitPrice.DataPropertyName = "UnitPrice";
+            this.UnitPrice.HeaderText = "单价";
+            this.UnitPrice.Name = "UnitPrice";
+            this.UnitPrice.Width = 54;
+            // 
+            // OrderQuantity
+            // 
+            this.OrderQuantity.DataPropertyName = "OrderQuantity";
+            this.OrderQuantity.HeaderText = "订购数量";
+            this.OrderQuantity.Name = "OrderQuantity";
+            this.OrderQuantity.Width = 78;
+            // 
+            // ItemSum
+            // 
+            this.ItemSum.DataPropertyName = "ItemSum";
+            this.ItemSum.HeaderText = "合计";
+            this.ItemSum.Name = "ItemSum";
+            this.ItemSum.Width = 54;
+            // 
+            // StockKeeper
+            // 
+            this.StockKeeper.DataPropertyName = "StockKeeper";
+            this.StockKeeper.HeaderText = "库管员";
+            this.StockKeeper.Name = "StockKeeper";
+            this.StockKeeper.Width = 66;
+            // 
+            // POStatus2
+            // 
+            this.POStatus2.DataPropertyName = "POStatus";
+            this.POStatus2.HeaderText = "状态";
+            this.POStatus2.Name = "POStatus2";
+            this.POStatus2.Width = 54;
+            // 
+            // DemandDate
+            // 
+            this.DemandDate.DataPropertyName = "DemandDate";
+            this.DemandDate.HeaderText = "需求日期";
+            this.DemandDate.Name = "DemandDate";
+            this.DemandDate.Width = 78;
+            // 
+            // ForeignNumber
+            // 
+            this.ForeignNumber.DataPropertyName = "ForeignNumber";
+            this.ForeignNumber.HeaderText = "外贸单号";
+            this.ForeignNumber.Name = "ForeignNumber";
+            this.ForeignNumber.Width = 78;
+            // 
+            // ManufacturerNumber
+            // 
+            this.ManufacturerNumber.DataPropertyName = "ManufacturerNumber";
+            this.ManufacturerNumber.HeaderText = "生产商码";
+            this.ManufacturerNumber.Name = "ManufacturerNumber";
+            this.ManufacturerNumber.Width = 78;
+            // 
+            // ManufacturerName
+            // 
+            this.ManufacturerName.DataPropertyName = "ManufacturerName";
+            this.ManufacturerName.HeaderText = "生产商名";
+            this.ManufacturerName.Name = "ManufacturerName";
+            this.ManufacturerName.Width = 78;
+            // 
+            // ActualDeliveryQuantity
+            // 
+            this.ActualDeliveryQuantity.DataPropertyName = "ActualDeliveryQuantity";
+            this.ActualDeliveryQuantity.HeaderText = "到货数量";
+            this.ActualDeliveryQuantity.Name = "ActualDeliveryQuantity";
+            this.ActualDeliveryQuantity.Width = 78;
             // 
             // PlaceOrder
             // 
@@ -2334,18 +2362,6 @@
         private DevComponents.DotNetBar.ButtonX btnBatchImportInternal;
         private DevComponents.DotNetBar.ButtonX btnFO;
         private DevComponents.DotNetBar.Controls.DataGridViewCheckBoxXColumn dgvPOCheck;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LineNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ItemNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ItemDescription;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ItemUM;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UnitPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OrderQuantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ItemSum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn StockKeeper;
-        private System.Windows.Forms.DataGridViewTextBoxColumn POStatus2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DemandDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ForeignNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ActualDeliveryQuantity;
         private DevComponents.DotNetBar.LabelX lblFSItemPrice;
         private DevComponents.DotNetBar.LabelX lblPOPrefix;
         private DevComponents.DotNetBar.LabelX labelX27;
@@ -2367,5 +2383,20 @@
         private DevComponents.DotNetBar.LabelX labelX28;
         private DevComponents.DotNetBar.ButtonX btnInvoice;
         private DevComponents.DotNetBar.Controls.TextBoxX tbRequireDept;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GUID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LineNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemDescription;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemUM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UnitPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OrderQuantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemSum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StockKeeper;
+        private System.Windows.Forms.DataGridViewTextBoxColumn POStatus2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DemandDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ForeignNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ManufacturerNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ManufacturerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ActualDeliveryQuantity;
     }
 }
