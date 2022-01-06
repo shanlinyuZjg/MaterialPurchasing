@@ -977,6 +977,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\内包价格.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Axgregn6Lib">
