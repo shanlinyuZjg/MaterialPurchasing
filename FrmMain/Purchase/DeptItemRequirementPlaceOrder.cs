@@ -60,7 +60,7 @@ FROM
 
         private void DeptItemRequirementPlaceOrder_Load(object sender, EventArgs e)
         {
-            tbPOMiddle.Text = DateTime.Now.ToString("Mmddyy");
+            tbPOMiddle.Text = DateTime.Now.ToString("MMddyy");
             tbPOPostfix.GotFocus += new EventHandler(POPostFixGotFocus);
         }
         private void POPostFixGotFocus(object sender, EventArgs e)

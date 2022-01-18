@@ -1337,7 +1337,133 @@ namespace Global
             }
             return sus;
         }
+        public static bool PlaceOrderWithItemDetail(string poType, DataTable dtVendorL, DataTable dtItem, string buyerName, string buyerID, string supervisorID, int poStatus)
+        {
+            List<string> sqlList = new List<string>();
+            int sequenceNumber = 0;
+            int sequenceNumberFS = 0;
+            string latestPONumber = string.Empty;
+            string strSequenceNumber = string.Empty;
+            string strPOSequenceNumber = string.Empty;
+            string latestPONumberFS = string.Empty;
+            string strSequenceNumberFS = string.Empty;
+            string strPOSequenceNumberFS = string.Empty;
+            string dateNow = DateTime.Now.ToString("MMddyy");
+            DataTable dtVendor = dtVendorL.DefaultView.ToTable(true, "供应商码", "供应商名");
 
+            if (dtVendor.Rows.Count > 0)
+            {
+                string sqlSelectLatest = @"Select Distinct Id,PONumber From PurchaseOrderRecordByCMF Where POItemPlacedDate='" + DateTime.Now.ToString("yyyy-MM-dd") + "' And Left(PONumber,2) = '" + poType + "' And Buyer = '" + buyerID + "' And IsPurePO = 1  Order By Id DESC";
+                string sqlSelectFSPO = @" SELECT
+	                            T1.PONumber
+                            FROM
+	                            _NoLock_FS_POHeader T1
+                            WHERE                               
+                                T1.Buyer ='" + buyerID + "' AND T1.PONumber LIKE '%" + dateNow + "%'  ORDER BY T1.PONumber DESC";
+                DataTable dtLatest = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelectLatest);
+                DataTable dtLatestFS = SQLHelper.GetDataTable(GlobalSpace.FSDBMRConnstr, sqlSelectFSPO);
+                if (dtLatest.Rows.Count > 0)
+                {
+                    latestPONumber = dtLatest.Rows[0]["PONumber"].ToString();
+                    strSequenceNumber = latestPONumber.Substring(10);
+                    sequenceNumber = Convert.ToInt32(strSequenceNumber);
+                }
+
+                if (dtLatestFS.Rows.Count > 0)
+                {
+                    latestPONumberFS = dtLatestFS.Rows[0]["PONumber"].ToString();
+                    strSequenceNumberFS = latestPONumberFS.Substring(10);
+                    sequenceNumberFS = Convert.ToInt32(strSequenceNumberFS);
+                }
+
+                if (sequenceNumberFS > sequenceNumber)
+                {
+                    sequenceNumber = sequenceNumberFS;
+                }
+
+
+                for (int i = 0; i < dtVendor.Rows.Count; i++)
+                {
+                    sequenceNumber = sequenceNumber + 1;
+                    string tempPONumber = string.Empty;
+
+                    if (sequenceNumber.ToString().Length == 1)
+                    {
+                        strPOSequenceNumber = "00" + sequenceNumber.ToString();
+                    }
+                    else if (sequenceNumber.ToString().Length == 2)
+                    {
+                        strPOSequenceNumber = "0" + sequenceNumber.ToString();
+                    }
+                    else
+                    {
+                        strPOSequenceNumber = sequenceNumber.ToString();
+                    }
+
+                    tempPONumber = poType + "-" + DateTime.Now.ToString("MMddyy") + "-" + strPOSequenceNumber;
+
+
+                    string parentGuid = Guid.NewGuid().ToString("N");
+                    string sqlVendorInsert = @"Insert Into PurchaseOrderRecordByCMF (PONumber,VendorNumber,VendorName,ManufacturerNumber,ManufacturerName,Buyer,Superior,Guid,IsPurePO) Values ('" + tempPONumber + "','" + dtVendor.Rows[i]["供应商码"].ToString() + "','" + dtVendor.Rows[i]["供应商名"].ToString() + "','" + dtVendor.Rows[i]["供应商码"].ToString() + "','" + dtVendor.Rows[i]["供应商名"].ToString() + "','" + buyerID + "','" + supervisorID + "','" + parentGuid + "',1)";
+                    sqlList.Add(sqlVendorInsert);
+                    DataRow[] drs = dtItem.Select(" 供应商码 ='" + dtVendor.Rows[i]["供应商码"].ToString() + "'");
+
+                    foreach (DataRow dr in drs)
+                    {
+                        string itemKeeper = GetItemStockKeeper(dr["物料代码"].ToString().ToUpper());
+                        List<string> ItemInfoList = GetItemInfo(dr["物料代码"].ToString().ToUpper());
+                        string sqlPOItemInsert = string.Empty;
+                        //string demandDeliveryDate = "20" + dr["承诺到货"].ToString().Substring(4, 2) + "-" + dr["承诺到货"].ToString().Substring(0, 2) + "-" + dr["承诺到货"].ToString().Substring(2, 2);
+                        sqlPOItemInsert = @"INSERT INTO PurchaseOrderRecordByCMF (
+	                                            PONumber,
+	                                            VendorNumber,
+	                                            VendorName,
+	                                            ManufacturerNumber,
+	                                            ManufacturerName,
+	                                            ItemNumber,
+	                                            ItemDescription,
+	                                            LineUM,
+	                                            Buyer,
+                                                BuyerName,
+	                                            Superior,
+	                                            DemandDeliveryDate,	                                        
+	                                            POStatus,	                                         	                                         
+	                                            UnitPrice,
+                                                PricePreTax,
+	                                            LineType,
+	                                            LineStatus,
+                                                NeededDate,
+                                                PromisedDate,
+                                                POItemQuantity,
+                                                StockKeeper,
+                                                Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveType,LotNumberAssign,
+GSID
+                                            )
+                                            VALUES
+	                                            (
+	                                            '" + tempPONumber + "','" + dr["供应商码"].ToString() + "', '" + dr["供应商名"].ToString() + "', '" + dr["生产商码"].ToString() + "', '" + dr["生产商名"].ToString() + "', '" + dr["物料代码"].ToString().ToUpper() + "', '" + dr["物料描述"].ToString() + "','" + ItemInfoList[4] + "', '" + buyerID + "', '" + buyerName + "','" + supervisorID + "','" + Convert.ToDateTime(dr["需求日期"].ToString()).ToString("MMddyy") + "',1," + dr["税后价格"].ToString() + "," + dr["税前价格"].ToString() + ",'P',4, '" + Convert.ToDateTime(dr["需求日期"].ToString()).ToString("MMddyy") + "','" + Convert.ToDateTime(dr["需求日期"].ToString()).ToString("MMddyy") + "'," + dr["需求数量"].ToString() + ",'" + itemKeeper.Trim() + "','" + ItemInfoList[1] + "','" + ItemInfoList[2] + "','" + ItemInfoList[0] + "','" + Guid.NewGuid().ToString() + "',"+ dr["税率"].ToString() + ",'" + parentGuid + "','" + dr["确认员"].ToString() + "','" + PurchaseUser.ItemReceiveType + "','C','"+dr["提报序号"].ToString()+"')";
+                        sqlList.Add(sqlPOItemInsert);
+                    }
+                }
+            }
+            bool sus = true;
+            for (int m = 0; m < sqlList.Count; m++)
+            {
+                try
+                {
+                    if (!SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlList[m]))
+                    {
+                        sus = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    sus = false;
+                    throw ex;
+                }
+            }
+            return sus;
+        }
         //批量下达订单和添加物料到订单中
         public static bool PlaceForeignOrderWithItemDetail(string poType, DataTable dtVendorL, DataTable dtItem, string buyerName, string buyerID, string supervisorID, int poStatus)
         {

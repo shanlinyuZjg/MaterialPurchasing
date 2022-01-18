@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("供应无纸化办公")]
-[assembly: AssemblyDescription("2022-01-06 内包价格管理界面增加批量删除批量添加全部及导出功能")]
+[assembly: AssemblyDescription("2022-01-18 内销包材计划与供应对接")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("淄博鸿浩软件有限公司")]
 [assembly: AssemblyProduct("供应无纸化办公")]
@@ -33,4 +33,4 @@ using System.Runtime.InteropServices;
 // 方法是按如下所示使用“*”: :
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.5.48.0")]
+[assembly: AssemblyFileVersion("1.5.49.0")]

@@ -210,6 +210,12 @@
     <Compile Include="Helper\GetHostInfo.cs" />
     <Compile Include="Helper\MailHelper.cs" />
     <Compile Include="Helper\SQLHelper.cs" />
+    <Compile Include="MoMoDataGridViewX.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MoMoDataGridViewX.Designer.cs">
+      <DependentUpon>MoMoDataGridViewX.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrintReport.cs">
       <SubType>Form</SubType>
     </Compile>
