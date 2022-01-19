@@ -1142,6 +1142,20 @@ namespace Global
            
             if (SQLHelper.BatchExecuteNonQuery(GlobalSpace.FSDBConnstr,sqlUpdateList))
             {
+                #region 回写计划状态
+                try
+                {
+                    if (status == 4)
+                    {
+                        DataTable dt = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, "select distinct GSID  from PurchaseOrderRecordByCMF Where Guid in '" + string.Join("','", guidList) + "' and GSID !='0'");
+                        IEnumerable<String> lstr = dt.Rows.Cast<DataRow>().Select(r => r["GSID"].ToString());
+                        SQLHelper.ExecuteNonQuery(GlobalSpace.RYData, "update  [dbo].[SolidBuyList] set Flag=2  where ID in (" + string.Join(",", lstr).Replace("|",",") + ")");
+                    }
+                }
+                catch
+                {
+                }
+                #endregion
                 return true;
             }
             return false;
@@ -1437,11 +1451,11 @@ namespace Global
                                                 POItemQuantity,
                                                 StockKeeper,
                                                 Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveType,LotNumberAssign,
-GSID
+GSID,QualityCheckStandard,RequireDept,Comment1
                                             )
                                             VALUES
 	                                            (
-	                                            '" + tempPONumber + "','" + dr["供应商码"].ToString() + "', '" + dr["供应商名"].ToString() + "', '" + dr["生产商码"].ToString() + "', '" + dr["生产商名"].ToString() + "', '" + dr["物料代码"].ToString().ToUpper() + "', '" + dr["物料描述"].ToString() + "','" + ItemInfoList[4] + "', '" + buyerID + "', '" + buyerName + "','" + supervisorID + "','" + Convert.ToDateTime(dr["需求日期"].ToString()).ToString("MMddyy") + "',1," + dr["税后价格"].ToString() + "," + dr["税前价格"].ToString() + ",'P',4, '" + Convert.ToDateTime(dr["需求日期"].ToString()).ToString("MMddyy") + "','" + Convert.ToDateTime(dr["需求日期"].ToString()).ToString("MMddyy") + "'," + dr["需求数量"].ToString() + ",'" + itemKeeper.Trim() + "','" + ItemInfoList[1] + "','" + ItemInfoList[2] + "','" + ItemInfoList[0] + "','" + Guid.NewGuid().ToString() + "',"+ dr["税率"].ToString() + ",'" + parentGuid + "','" + dr["确认员"].ToString() + "','" + PurchaseUser.ItemReceiveType + "','C','"+dr["提报序号"].ToString()+"')";
+	                                            '" + tempPONumber + "','" + dr["供应商码"].ToString() + "', '" + dr["供应商名"].ToString() + "', '" + dr["生产商码"].ToString() + "', '" + dr["生产商名"].ToString() + "', '" + dr["物料代码"].ToString().ToUpper() + "', '" + dr["物料描述"].ToString() + "','" + ItemInfoList[4] + "', '" + buyerID + "', '" + buyerName + "','" + supervisorID + "','" + Convert.ToDateTime(dr["需求日期"].ToString()).ToString("MMddyy") + "',1," + dr["税后价格"].ToString() + "," + dr["税前价格"].ToString() + ",'P',4, '" + Convert.ToDateTime(dr["需求日期"].ToString()).ToString("MMddyy") + "','" + Convert.ToDateTime(dr["需求日期"].ToString()).ToString("MMddyy") + "'," + dr["需求数量"].ToString() + ",'" + itemKeeper.Trim() + "','" + ItemInfoList[1] + "','" + ItemInfoList[2] + "','" + ItemInfoList[0] + "','" + Guid.NewGuid().ToString() + "',"+ dr["税率"].ToString() + ",'" + parentGuid + "','" + dr["确认员"].ToString() + "','" + PurchaseUser.ItemReceiveType + "','C','"+dr["提报序号"].ToString()+ "','" + dr["检验标准"].ToString() + "','" + dr["需求车间"].ToString() + "','" + dr["备注"].ToString() + "')";
                         sqlList.Add(sqlPOItemInsert);
                     }
                 }

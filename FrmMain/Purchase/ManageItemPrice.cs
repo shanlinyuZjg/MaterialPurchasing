@@ -96,6 +96,7 @@ namespace Global.Purchase
             Custom.MsgEx("修改时只修改改行物料含税价格~！");
             if (dgv.SelectedRows.Count == 1)
             {
+                dgv.EndEdit();
                 string id = dgv.SelectedRows[0].Cells["Id"].Value.ToString();
                 double price = Convert.ToDouble(dgv.SelectedRows[0].Cells["含税价格"].Value);
                 string sqlUpdate = @"Update PurchaseDepartmentDomesticProductItemPrice Set PricePreTax =" + price + ", OperateDateTime='" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "',Operator='" + UserID + "' Where Id = " + Convert.ToInt32(id) + "";
@@ -490,6 +491,17 @@ namespace Global.Purchase
             tran.Dispose();
             con.Close();
             #endregion
+        }
+        bool Checkbl = true;
+        private void BtnAllSelect_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow dgvrow in dgv.Rows)
+            {
+                
+                   dgvrow.Cells["Check"].Value= Checkbl;
+                
+            }
+            Checkbl = !Checkbl;
         }
     }
 }

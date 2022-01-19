@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using Global;
 using Global.Helper;
+using Global.Properties;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -1128,7 +1129,233 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
             dgvItemRequirement.DataSource = SQLHelper.GetDataTable(GlobalSpace.RYData, sqlSelect);
             dgvItemRequirement.Columns["ID"].Visible = false;
         }
+
+        private void Btntuihui_Click(object sender, EventArgs e)
+        {
+            List<int> Lint = new List<int>();
+            String TbID = string.Empty;
+            for (int i = 0; i < dgvEdit.Rows.Count; i++)
+            {
+                if (Convert.ToBoolean(dgvEdit["选择", i].Value))
+                {
+                    Lint.Add(Convert.ToInt32(dgvEdit["ID", i].Value));
+                    if (TbID == string.Empty)
+                    {
+                        TbID += dgvEdit["提报序号", i].Value.ToString();
+                    }
+                    else
+                    {
+                        TbID +="|"+dgvEdit["提报序号", i].Value.ToString();
+                    }
+                }
+            }
+            for (int i = 0; i < dgvEdit.Rows.Count; i++)
+            {
+                if (!Convert.ToBoolean(dgvEdit["选择", i].Value)&& dgvEdit["State", i].Value.ToString()== "拆分")
+                {
+                    if (TbID.Split('|').Contains(dgvEdit["提报序号", i].Value.ToString()))
+                    {
+                        Lint.Add(Convert.ToInt32(dgvEdit["ID", i].Value));
+                    }
+                }
+            }
+            if (Lint.Count == 0)
+            { MessageBoxEx.Show("未选择任何行！");return; }
+            #region 事务处理
+            SqlConnection con = new SqlConnection(GlobalSpace.RYData);
+            con.Open();
+            SqlTransaction tran = con.BeginTransaction();//先实例SqlTransaction类，使用这个事务使用的是con 这个连接，使用BeginTransaction这个方法来开始执行这个事务
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.Transaction = tran;
+            try
+            {
+
+                cmd.CommandText = "update  [dbo].[SolidBuyList] set Flag=0 where ID in (" + TbID.Replace("|",",") + ")";
+                cmd.ExecuteNonQuery();
+                cmd.CommandText = "delete from  SolidBuyList_Handle where ID in("+string.Join(",",Lint)+")";
+                cmd.ExecuteNonQuery();
+
+                tran.Commit();
+                MessageBoxEx.Show("退回完成！");
+                GetRequireItem();
+                btnExtractRefresh_Click(sender, e);
+            }
+            catch (Exception ex)
+            {
+                tran.Rollback();
+                MessageBoxEx.Show("退回失败：" + ex.Message);
+            }
+            tran.Dispose();
+            con.Close();
+            #endregion
+        }
+
+        private void btnTemplateDownload_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveDialog = new SaveFileDialog();
+
+            saveDialog.DefaultExt = "";
+
+            saveDialog.Filter = "Excel文件|*.xlsx";
+
+            saveDialog.FileName = "内包价格模板";
+
+            if (saveDialog.ShowDialog() != DialogResult.OK)
+
+            {
+
+                return;
+
+            }
+
+
+            FileStream fs = new FileStream(saveDialog.FileName, FileMode.OpenOrCreate);
+
+            BinaryWriter bw = new BinaryWriter(fs);
+            byte[] data = Resources.内包价格;
+            bw.Write(data, 0, data.Length);
+            bw.Close();
+            fs.Close();
+
+            if (File.Exists(saveDialog.FileName))
+
+            {
+
+                System.Diagnostics.Process.Start(saveDialog.FileName); //打开文件
+
+            }
+        }
+
+        private void btnSelectExcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string file = "";
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Multiselect = true;//该值确定是否可以选择多个文件
+                dialog.Title = "请选择文件夹";
+                dialog.Filter = "Excel文件(*.xlsx)|*.xlsx|Excel文件(*.xls)|*.xls";
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    file = dialog.FileName;
+                }
+                else return;
+                DgvVendor.DataSource = null;
+                DgvVendor.DataSource = ExcelToTable(file);
+                //#region 设置列宽
+                //for (int i = 0; i < this.dgv.Columns.Count; i++)
+                //{
+                //    this.dgv.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                //    this.dgv.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                //}
+                //#endregion
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        public DataTable ExcelToTable(string file)
+        {
+            // AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+            if (file == "") return null;
+
+            DataTable dt = new DataTable();
+            IWorkbook workbook;
+            string fileExt = Path.GetExtension(file).ToLower();
+            string fileoutExt = Path.GetFileNameWithoutExtension(file).ToLower();
+
+            using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
+            {
+                //XSSFWorkbook 适用XLSX格式，HSSFWorkbook 适用XLS格式
+                if (fileExt == ".xlsx")//新版本excel2007
+                { workbook = new XSSFWorkbook(fs); }
+                else if (fileExt == ".xls")//早期版本excel2003
+                { workbook = new HSSFWorkbook(fs); }
+                else { workbook = null; }
+                if (workbook == null) { return null; }
+                ISheet sheet = workbook.GetSheetAt(0);//下标为零的工作簿
+                //创建表头      FirstRowNum:获取第一个有数据的行好(默认0)
+                IRow header = sheet.GetRow(sheet.FirstRowNum);//第一行是头部信息
+                List<int> columns = new List<int>();
+                for (int i = 0; i < header.LastCellNum; i++)//LastCellNum 获取列的条数
+                {
+                    object obj = GetValueType(header.GetCell(i));
+                    if (obj == null || obj.ToString() == string.Empty)
+                    {
+                        dt.Columns.Add(new DataColumn("Columns" + i.ToString()));//如果excel没有列头就自定义
+                    }
+                    else
+                        dt.Columns.Add(new DataColumn(obj.ToString()));//获取excel列头
+                    columns.Add(i);
+                }
+                //构建数据   sheet.FirstRowNum + 1 表示去掉列头信息
+                for (int i = sheet.FirstRowNum + 1; i <= sheet.LastRowNum; i++)//LastRowNum最后一条数据的行号
+                {
+                    DataRow dr = dt.NewRow();
+                    bool hasValue = false;//判断是否有值
+                    foreach (int j in columns)
+                    {
+                        //if (sheet.GetRow(i) == null) continue;//如果没数据
+                        dr[j] = GetValueType(sheet.GetRow(i).GetCell(j));
+                        if (dr[j] != null && dr[j].ToString() != string.Empty)//判断至少一列有值
+                        {
+                            hasValue = true;
+                        }
+                    }
+                    if (hasValue)
+                    {
+                        dt.Rows.Add(dr);
+                    }
+                }
+            }
+            return dt;
+        }
+        private static object GetValueType(ICell cell)
+        {
+
+            if (cell == null)
+                return null;
+            switch (cell.CellType)
+            {
+                case CellType.Boolean: //BOOLEAN:  
+                    return cell.BooleanCellValue;
+                case CellType.Formula: //BOOLEAN: 
+                    cell.SetCellType(CellType.String);
+                    return cell.StringCellValue;
+                case CellType.Numeric: //NUMERIC:  
+                    if (DateUtil.IsCellDateFormatted(cell))//判断是否日期
+                        return cell.DateCellValue.ToString("yyyy/MM/dd");
+                    else
+                        return cell.NumericCellValue;
+                case CellType.Error: //ERROR:  
+                    return cell.ErrorCellValue;
+                case CellType.String: //STRING:  
+                default:
+                    return cell.StringCellValue;
+
+            }
+        }
+
+        private void btnMatchLs_Click(object sender, EventArgs e)
+        {
+            if (DgvVendor.Rows.Count == 0) { MessageBoxEx.Show("临时表无数据！"); return; }
+                DataTable dtVendor = (DataTable)DgvVendor.DataSource;
+
+            for (int i = 0; i < dgvEdit.Rows.Count; i++)
+            {
+                if (Convert.ToBoolean(dgvEdit["选择", i].Value))
+                {
+                    DataRow[] drs = dtVendor.Select("物料代码='" + dgvEdit["物料代码", i].Value.ToString().Trim() + "'"); 
+                    if (drs.Length > 0)
+                    {
+                        dgvEdit["供应商码", i].Value = dgvEdit["生产商码", i].Value = drs[0]["供应商码"].ToString().Trim();
+                        dgvEdit["供应商名", i].Value = dgvEdit["生产商名", i].Value = drs[0]["供应商名"].ToString().Trim();
+                        dgvEdit["税前价格", i].Value = drs[0]["含税价格"].ToString().Trim();
+                    }
+                }
+            }
+        }
     }
-
-
 }

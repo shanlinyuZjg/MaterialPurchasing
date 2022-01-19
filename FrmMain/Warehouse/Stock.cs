@@ -978,7 +978,6 @@ namespace Global.Warehouse
             {
                 string strReturn = string.Empty;
                 string guid = dr["Guid"].ToString();
-                int gsID = Convert.ToInt32(dr["GSID"]);
 
                 //GUID STATUS=1 确认
                 if (SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, "Select *  From PurchaseOrderRecordHistoryByCMF Where Guid='" + guid + "' and Status = 1").Rows.Count != 1)
@@ -989,9 +988,7 @@ namespace Global.Warehouse
                     if (PORVA(dr, out strReturn))
                     {
                         //更新订单中物料状态为已入库
-                        
-
-                        string sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set Status = 2,FSOperateDateTime = '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "',FSOperateDate='" + DateTime.Now.ToString("yyyy-MM-dd") + "',FSOperator='"+StockUser.UserID+"' Where Guid='" + guid + "'";
+                        string sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set Status = 2,FSOperateDateTime = '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "',FSOperateDate='" + DateTime.Now.ToString("yyyy-MM-dd") + "',FSOperator='" + StockUser.UserID + "' Where Guid='" + guid + "'";
                         try
                         {
                             if (!SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
@@ -1011,18 +1008,16 @@ namespace Global.Warehouse
                         {
                             Custom.MsgEx(ex.Message);
                         }
-                        if(gsID != 0)
+                        try
                         {
-                            try
-                            {
-                                SendGSEmail(gsID);
-                            }
-                            catch (Exception ex2)
-                            {
-                                Custom.MsgEx(ex2.Message);
-                            }
+                            SendGSEmail(dr);
                         }
-                      
+                        catch (Exception ex2)
+                        {
+                            MessageBoxEx.Show("物料计划："+ex2.Message);
+                        }
+
+
                     }
                     else
                     {
@@ -1056,6 +1051,14 @@ namespace Global.Warehouse
                         catch (Exception ex)
                         {
                             Custom.MsgEx(ex.Message);
+                        }
+                        try
+                        {
+                            SendGSEmail(dr);
+                        }
+                        catch (Exception ex2)
+                        {
+                            MessageBoxEx.Show("物料计划：" + ex2.Message);
                         }
                     }
                     else
@@ -1091,6 +1094,14 @@ namespace Global.Warehouse
                         {
                             Custom.MsgEx(ex.Message);
                         }
+                        try
+                        {
+                            SendGSEmail(dr);
+                        }
+                        catch (Exception ex2)
+                        {
+                            MessageBoxEx.Show("物料计划：" + ex2.Message);
+                        }
                     }
                     else
                     {
@@ -1115,9 +1126,12 @@ namespace Global.Warehouse
         }
 
         //发送邮件测试
-        private void SendGSEmail(int id)
+        private void SendGSEmail(DataRow dr)
         {
-            string str = "SELECT WorkCenter,ItemDescription,ItemNumber FROM SolidBuyList WHERE ID="+id+"";
+            if (dr["GSID"].ToString() == "" || dr["GSID"].ToString() == "0") return;
+            SQLHelper.GetDataTable(GlobalSpace.RYData, "update SolidBuyList set ReceiveTime=GETDATE(),ReceiveQuantity=ReceiveQuantity+" + Convert.ToDecimal(dr["入库数量"].ToString().Trim()) +"  WHERE ID in (" + dr["GSID"].ToString().Replace(" | ",", ")+")");
+
+            string str = "SELECT WorkCenter,ItemDescription,ItemNumber,ItemUM FROM SolidBuyList WHERE ID in (" + dr["GSID"].ToString().Replace("|",",")+")";
             DataTable dt = SQLHelper.GetDataTable(GlobalSpace.RYData, str);
             if (dt.Rows.Count > 0)
             {
@@ -1141,7 +1155,7 @@ namespace Global.Warehouse
                 mmsg.Subject = "" + dt.Rows[0][1] + "采购物料到货通知";
                 mmsg.Body = "各位领导您好" + "" + "\n" +
                     "编码：" + dt.Rows[0][2] + "" + "\n" +
-                    "固水事业部采购" + dt.Rows[0][1] + "物料已确认到货，请注意查收!" + "" + "\n" +
+                    "固水事业部采购:" + dt.Rows[0][1] + ",物料本次到货"+ dr["入库数量"].ToString().Trim()+ dt.Rows[0]["ItemUM"].ToString().Trim() + "，请注意查收!" + "" + "\n" +
                     "此邮件为系统邮件，请勿回复!";
                 client.Send(mmsg);
                 mmsg.Dispose();
@@ -3839,41 +3853,56 @@ namespace Global.Warehouse
                 return SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
             }
 
-            private void btnManualFS_Click(object sender, EventArgs e)
-            {
-                List<string> sqlList = new List<string>();
+        private void btnManualFS_Click(object sender, EventArgs e)
+        {
+            List<string> sqlList = new List<string>();
 
-                foreach (DataGridViewRow dgvr in dgvPODetailFS.Rows)
+            foreach (DataGridViewRow dgvr in dgvPODetailFS.Rows)
+            {
+                if (Convert.ToBoolean(dgvr.Cells["Check2"].Value))
                 {
-                    if (Convert.ToBoolean(dgvr.Cells["Check2"].Value))
+                    if (dgvr.Cells["Status"].Value.ToString() == "1")
                     {
-                        if (dgvr.Cells["Status"].Value.ToString() == "1")
-                        {
                         string sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set Status = 2,FSOperateDateTime = '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "',FSOperateDate='" + DateTime.Now.ToString("yyyy-MM-dd") + "',FSOperator='" + StockUser.UserID + "|手工' Where Guid='" + dgvr.Cells["Guid"].Value.ToString() + "' and Status = 1";
                         //string sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set Status =2,FSOperateDateTime='"+DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+"'  Where Guid='" + dgvr.Cells["Guid"].Value.ToString() + "'";
-                            sqlList.Add(sqlUpdate);
+                        sqlList.Add(sqlUpdate);
+                    }
+                }
+            }
+
+            if (sqlList.Count == 0)
+            {
+                Custom.MsgEx("当前无选中行！");
+                return;
+            }
+
+            if (SQLHelper.BatchExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlList))
+            {
+                try
+                {
+                    foreach (DataGridViewRow dgvr in dgvPODetailFS.Rows)
+                    {
+                        if (Convert.ToBoolean(dgvr.Cells["Check2"].Value) && dgvr.Cells["Status"].Value.ToString() == "1")
+                        {
+                            //dtTemp.Rows.Add((dgvr.DataBoundItem as DataRowView).Row.ItemArray);
+                            SendGSEmail((dgvr.DataBoundItem as DataRowView).Row);
                         }
                     }
                 }
-
-                if (sqlList.Count == 0)
+                catch (Exception ex2)
                 {
-                    Custom.MsgEx("当前无选中行！");
-                    return;
+                    MessageBoxEx.Show("物料计划：" + ex2.Message);
                 }
-
-                if (SQLHelper.BatchExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlList))
-                {
-                    Custom.MsgEx("更新成功！");
-                    dgvPODetailFS.DataSource = GetReceivedRecordByStatus(1);
-                    dgvPODetailFS.Columns["Guid"].Visible = false;
-                    dgvPODetailFS.Columns["Status"].Visible = false;
-                }
-                else
-                {
-                    Custom.MsgEx("更新失败！");
-                }
+                Custom.MsgEx("更新成功！");
+                dgvPODetailFS.DataSource = GetReceivedRecordByStatus(1);
+                dgvPODetailFS.Columns["Guid"].Visible = false;
+                dgvPODetailFS.Columns["Status"].Visible = false;
             }
+            else
+            {
+                Custom.MsgEx("更新失败！");
+            }
+        }
 
             private void dgvVialsDetail_CellContentClick(object sender, DataGridViewCellEventArgs e)
             {
