@@ -265,6 +265,11 @@ namespace Global.Purchase
                         dgv.Rows[i].DefaultCellStyle.ForeColor = Color.Red;
                         bl = false;
                     }
+                    if (string.IsNullOrWhiteSpace(dgv["需求数量", i].Value.ToString())||Convert.ToDecimal(dgv["需求数量", i].Value.ToString())<=0)
+                    {
+                        dgv.Rows[i].DefaultCellStyle.ForeColor = Color.Red;
+                        bl = false;
+                    }
                 }
             }
             return bl;
@@ -388,7 +393,7 @@ namespace Global.Purchase
             #region
             if (!CheckCodeUnit(dgvItemRequirement))
             {
-                MessageBoxEx.Show("物料代码或单位不准确，已红色标示！");
+                MessageBoxEx.Show("物料代码或单位不准确或需求数量小于等于零，已红色标示！");
                 return;
             }
             #endregion
