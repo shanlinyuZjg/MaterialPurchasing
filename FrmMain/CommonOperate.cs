@@ -1147,13 +1147,20 @@ namespace Global
                 {
                     if (status == 4)
                     {
-                        DataTable dt = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, "select distinct GSID  from PurchaseOrderRecordByCMF Where Guid in '" + string.Join("','", guidList) + "' and GSID !='0'");
-                        IEnumerable<String> lstr = dt.Rows.Cast<DataRow>().Select(r => r["GSID"].ToString());
-                        SQLHelper.ExecuteNonQuery(GlobalSpace.RYData, "update  [dbo].[SolidBuyList] set Flag=2  where ID in (" + string.Join(",", lstr).Replace("|",",") + ")");
+                        DataTable dt = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, "select distinct GSID  from PurchaseOrderRecordByCMF Where Guid in ('" + string.Join("','", guidList) + "') and GSID !='0'");
+                        if (dt.Rows.Count >0)
+                        {
+                            IEnumerable<String> lstr = dt.Rows.Cast<DataRow>().Select(r => r["GSID"].ToString());
+                            if (lstr.Count() > 0)
+                            {
+                                SQLHelper.ExecuteNonQuery(GlobalSpace.RYData, "update  [dbo].[SolidBuyList] set Flag=2  where ID in (" + string.Join(",", lstr).Replace("|", ",") + ")");
+                            }
+                        }
                     }
                 }
-                catch
+                catch(Exception ex)
                 {
+                    MessageBoxEx.Show("回写物料需求计划状态失败，请联系软件服务处！"+ex.Message);
                 }
                 #endregion
                 return true;

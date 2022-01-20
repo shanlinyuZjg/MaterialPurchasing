@@ -1129,9 +1129,9 @@ namespace Global.Warehouse
         private void SendGSEmail(DataRow dr)
         {
             if (dr["GSID"].ToString() == "" || dr["GSID"].ToString() == "0") return;
-            SQLHelper.GetDataTable(GlobalSpace.RYData, "update SolidBuyList set ReceiveTime=GETDATE(),ReceiveQuantity=ReceiveQuantity+" + Convert.ToDecimal(dr["入库数量"].ToString().Trim()) +"  WHERE ID in (" + dr["GSID"].ToString().Replace(" | ",", ")+")");
+            SQLHelper.GetDataTable(GlobalSpace.RYData, "update SolidBuyList set ReceiveTime=GETDATE(),ReceiveQuantity=ReceiveQuantity+" + Convert.ToDecimal(dr["入库数量"].ToString().Trim()) +"  WHERE ID in (" + dr["GSID"].ToString().Replace("|",",")+")");
 
-            string str = "SELECT WorkCenter,ItemDescription,ItemNumber,ItemUM FROM SolidBuyList WHERE ID in (" + dr["GSID"].ToString().Replace("|",",")+")";
+            string str = "SELECT WorkCenter,ItemDescription,ItemNumber FROM SolidBuyList WHERE ID in (" + dr["GSID"].ToString().Replace("|",",")+")";
             DataTable dt = SQLHelper.GetDataTable(GlobalSpace.RYData, str);
             if (dt.Rows.Count > 0)
             {
@@ -1155,7 +1155,7 @@ namespace Global.Warehouse
                 mmsg.Subject = "" + dt.Rows[0][1] + "采购物料到货通知";
                 mmsg.Body = "各位领导您好" + "" + "\n" +
                     "编码：" + dt.Rows[0][2] + "" + "\n" +
-                    "固水事业部采购:" + dt.Rows[0][1] + ",物料本次到货"+ dr["入库数量"].ToString().Trim()+ dt.Rows[0]["ItemUM"].ToString().Trim() + "，请注意查收!" + "" + "\n" +
+                    "固水事业部采购:" + dt.Rows[0][1] + ",物料本次到货"+ dr["入库数量"].ToString().Trim()+ dr["单位"].ToString().Trim() + "，请注意查收!" + "" + "\n" +
                     "此邮件为系统邮件，请勿回复!";
                 client.Send(mmsg);
                 mmsg.Dispose();
