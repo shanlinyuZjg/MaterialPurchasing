@@ -1113,7 +1113,7 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
                                                     WHERE
 	                                                    Flag = 2 and " + StrWhere+" order by PlaceOrderTime, rtrim(ltrim(ItemNumber))";
             DgvHistory.DataSource = SQLHelper.GetDataTable(GlobalSpace.RYData, sqlSelect);
-            DgvHistory.Columns["ID"].Visible = false;
+            //DgvHistory.Columns["ID"].Visible = false;
         }
 
         private void BtnPlanAll_Click(object sender, EventArgs e)
@@ -1361,6 +1361,36 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
                     }
                 }
             }
+        }
+
+        private void BtnPlanHistorySelect_Click(object sender, EventArgs e)
+        {
+            String StrWhere = String.Empty;
+            DateTime Dt = dtpDate.Value;
+            if (rbtnMonth.Checked == true)
+            {
+                StrWhere = "ExtractTime >= '" + Dt.ToString("yyyy-MM") + "-01' and ExtractTime<'" + Dt.AddMonths(1).ToString("yyyy-MM") + "-01'";
+            }
+            else
+            {
+                StrWhere = "ExtractTime >= '" + Dt.ToString("yyyy-MM-dd") + "' and ExtractTime<'" + Dt.AddDays(1).ToString("yyyy-MM-dd") + "'";
+            }
+            string sqlSelect = @"SELECT
+	                                                    ID,OperateTime AS 提报日期,rtrim(ltrim(WorkCenter)) AS 需求车间,
+	                                                    rtrim(ltrim(ItemNumber)) AS 物料代码,
+	                                                    rtrim(ltrim(ItemDescription)) AS 物料描述,
+	                                                    rtrim(ltrim(ItemUM)) AS 单位,
+	                                                    BuyQuantity AS 需求数量,
+	                                                    rtrim(ltrim(InternationalStandards)) AS 检验标准,
+	                                                    NeedTime AS 需求日期,
+	                                                    rtrim(ltrim(Remark)) AS 备注,
+	                                                    rtrim(ltrim(VendorName)) AS 指定供应商,
+                                                        case when  SYBFlag=0 then '固水'  when  SYBFlag=1 then '粉针' when  SYBFlag=2 then '原料' else '其他' end  AS 事业部,ReceiveTime AS 到货日期,ReceiveQuantity AS 到货数量,ExtractTime AS 提取日期, case when  Flag=1 then '已处理' when  Flag=2 then '已到货' else '' end AS 状态
+                                                    FROM
+	                                                    dbo.SolidBuyList 
+                                                    WHERE
+	                                                    Flag in(1,2) and " + StrWhere + " order by ID";
+            DgvHistory.DataSource = SQLHelper.GetDataTable(GlobalSpace.RYData, sqlSelect);
         }
     }
 }
