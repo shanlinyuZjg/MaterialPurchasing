@@ -1116,25 +1116,6 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
             //DgvHistory.Columns["ID"].Visible = false;
         }
 
-        private void BtnPlanAll_Click(object sender, EventArgs e)
-        {
-            string sqlSelect = @"SELECT
-	                                                    ID,OperateTime AS 提报日期,rtrim(ltrim(WorkCenter)) AS 需求车间,
-	                                                    rtrim(ltrim(ItemNumber)) AS 物料代码,
-	                                                    rtrim(ltrim(ItemDescription)) AS 物料描述,
-	                                                    rtrim(ltrim(ItemUM)) AS 单位,
-	                                                    BuyQuantity AS 需求数量,
-	                                                    rtrim(ltrim(InternationalStandards)) AS 检验标准,
-	                                                    NeedTime AS 需求日期,
-	                                                    rtrim(ltrim(Remark)) AS 备注,
-	                                                    rtrim(ltrim(VendorName)) AS 指定供应商,
-                                                        case when  SYBFlag=0 then '固水'  when  SYBFlag=1 then '粉针' when  SYBFlag=2 then '原料' else '其他' end  AS 事业部
-                                                    FROM
-	                                                    dbo.SolidBuyList  order by ID";
-            dgvItemRequirement.DataSource = SQLHelper.GetDataTable(GlobalSpace.RYData, sqlSelect);
-            dgvItemRequirement.Columns["ID"].Visible = false;
-        }
-
         private void Btntuihui_Click(object sender, EventArgs e)
         {
             List<int> Lint = new List<int>();
