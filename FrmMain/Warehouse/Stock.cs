@@ -1129,7 +1129,7 @@ namespace Global.Warehouse
         private void SendGSEmail(DataRow dr)
         {
             if (dr["GSID"].ToString() == "" || dr["GSID"].ToString() == "0") return;
-            SQLHelper.GetDataTable(GlobalSpace.RYData, "update SolidBuyList set ReceiveTime=GETDATE(),ReceiveQuantity=ReceiveQuantity+" + Convert.ToDecimal(dr["入库数量"].ToString().Trim()) +"  WHERE ID in (" + dr["GSID"].ToString().Replace("|",",")+")");
+            if (!SQLHelper.ExecuteNonQuery(GlobalSpace.RYData, "update SolidBuyList set ReceiveTime=GETDATE(),ReceiveQuantity=ReceiveQuantity+" + Convert.ToDecimal(dr["入库数量"].ToString().Trim()) + "  WHERE ID in (" + dr["GSID"].ToString().Replace("|", ",") + ")")) return;
 
             string str = "SELECT WorkCenter,ItemDescription,ItemNumber FROM SolidBuyList WHERE ID in (" + dr["GSID"].ToString().Replace("|",",")+")";
             DataTable dt = SQLHelper.GetDataTable(GlobalSpace.RYData, str);
