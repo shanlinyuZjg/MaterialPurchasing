@@ -1140,16 +1140,16 @@ namespace Global.Warehouse
                 client.Credentials = new NetworkCredential("Erp@reyoung.com", "ERP1075+-*/");
                 MailMessage mmsg = new MailMessage();
                 mmsg.From = new MailAddress("Erp@reyoung.com");
-                string[] sp = dt.Rows[0][0].ToString().Split('|');
-                for (int i = 0; i < sp.Length; i++)
-                {
-                    string strMail = "SELECT FoxMail FROM WorkMails WHERE WorkCenter='" + sp[i] + "'";
-                    DataTable dtmail = SQLHelper.GetDataTable(GlobalSpace.RYData, strMail);
-                    if (dtmail.Rows.Count > 0)
-                    {
-                        mmsg.To.Add(dtmail.Rows[0][0].ToString().Trim());
-                    }
-                }
+                //string[] sp = dt.Rows[0][0].ToString().Split('|');
+                //for (int i = 0; i < sp.Length; i++)
+                //{
+                //    string strMail = "SELECT FoxMail FROM WorkMails WHERE WorkCenter='" + sp[i] + "'";
+                //    DataTable dtmail = SQLHelper.GetDataTable(GlobalSpace.RYData, strMail);
+                //    if (dtmail.Rows.Count > 0)
+                //    {
+                //        mmsg.To.Add(dtmail.Rows[0][0].ToString().Trim());
+                //    }
+                //}
                 mmsg.To.Add("chenkai@reyoung.com");
                 mmsg.To.Add("caohongling@reyoung.com");
                 mmsg.Subject = "" + dt.Rows[0][1] + "采购物料到货通知";
@@ -6197,6 +6197,40 @@ namespace Global.Warehouse
             int RowIndex = e.RowIndex;
             if (RowIndex < 0) return;
             dgvPODetailFS["Check2", RowIndex].Value = !Convert.ToBoolean(dgvPODetailFS["Check2", RowIndex].Value);
+        }
+
+        private void buttonX4_Click_2(object sender, EventArgs e)
+        {
+            string str = "SELECT WorkCenter,ItemDescription,ItemNumber FROM SolidBuyList WHERE ID in (" + "987|988|989".Replace("|", ",") + ")";
+            DataTable dt = SQLHelper.GetDataTable(GlobalSpace.RYData, str);
+            if (dt.Rows.Count > 0)
+            {
+                SmtpClient client = new SmtpClient("192.168.8.3", 25);
+                client.Credentials = CredentialCache.DefaultNetworkCredentials;
+                client.Credentials = new NetworkCredential("Erp@reyoung.com", "ERP1075+-*/");
+                MailMessage mmsg = new MailMessage();
+                mmsg.From = new MailAddress("Erp@reyoung.com");
+                //string[] sp = dt.Rows[0][0].ToString().Split('|');
+                //for (int i = 0; i < sp.Length; i++)
+                //{
+                //    string strMail = "SELECT FoxMail FROM WorkMails WHERE WorkCenter='" + sp[i] + "'";
+                //    DataTable dtmail = SQLHelper.GetDataTable(GlobalSpace.RYData, strMail);
+                //    if (dtmail.Rows.Count > 0)
+                //    {
+                //        mmsg.To.Add(dtmail.Rows[0][0].ToString().Trim());
+                //    }
+                //}
+                //mmsg.To.Add("chenkai@reyoung.com");
+                //mmsg.To.Add("caohongling@reyoung.com");
+                mmsg.To.Add("zuojinguo@reyoung.com");
+                mmsg.Subject = "" + dt.Rows[0][1] + "采购物料到货通知";
+                mmsg.Body = "各位领导您好" + "" + "\n" +
+                    "编码：" + dt.Rows[0][2] + "" + "\n" +
+                    "固水事业部采购:" + dt.Rows[0][1] + ",物料本次到货，请注意查收!" + "" + "\n" +
+                    "此邮件为系统邮件，请勿回复!";
+                client.Send(mmsg);
+                mmsg.Dispose();
+            }
         }
     }
     }

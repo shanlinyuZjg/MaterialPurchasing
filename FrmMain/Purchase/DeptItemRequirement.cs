@@ -425,7 +425,7 @@ namespace Global.Purchase
             try
             {
 
-                cmd.CommandText = "update  [dbo].[SolidBuyList] set Flag=1,ExtractTime=GETDATE()  where ID in (" + string.Join(",", lint.ToArray()) + ")";
+                cmd.CommandText = "update  [dbo].[SolidBuyList] set Flag=1,ExtractTime=GETDATE(),FSTITime=GETDATE()  where ID in (" + string.Join(",", lint.ToArray()) + ")";
                 cmd.ExecuteNonQuery();
                 cmd.CommandText = "INSERT INTO SolidBuyList_Handle ( SolidBuyList_Handle.PlanID, \n" +
 "	SolidBuyList_Handle.ItemNumber, \n" +
