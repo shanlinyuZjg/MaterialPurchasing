@@ -44,6 +44,7 @@ namespace Global.Purchase
 	                                                    rtrim(ltrim(ItemUM)) AS 单位,
 	                                                    BuyQuantity AS 需求数量,
 	                                                    rtrim(ltrim(InternationalStandards)) AS 检验标准,
+                                                        rtrim(ltrim(ForeignNumber)) AS 联系单号,
 	                                                    NeedTime AS 需求日期,
 	                                                    rtrim(ltrim(Remark)) AS 备注,
 	                                                    rtrim(ltrim(VendorName)) AS 指定供应商,
@@ -459,7 +460,7 @@ namespace Global.Purchase
 "	SolidBuyList.PurChaseNumber,\n" +
 "	SolidBuyList.ReceiveTime,\n" +
 "	SolidBuyList.ReceiveQuantity,\n" +
-"	SolidBuyList.ForeignNumber,\n" +
+"	rtrim(ltrim(SolidBuyList.ForeignNumber)),\n" +
 "	rtrim(ltrim(SolidBuyList.WorkCenter)),\n" +
 "	rtrim(ltrim(SolidBuyList.Remark)),\n" +
 "	SolidBuyList.SYBFlag,0.13 " +
@@ -490,6 +491,7 @@ namespace Global.Purchase
 	                                                    BuyQuantity AS 需求数量,
 VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS 生产商码,ManufacturerName AS 生产商名,PricePreTax AS 税前价格,TaxRate AS 税率,Confirmer AS 确认员,Remark AS 备注,
 	                                                    rtrim(ltrim(InternationalStandards)) AS 检验标准,
+                                                        rtrim(ltrim(ForeignNumber)) AS 联系单号,
 	                                                    NeedTime AS 需求日期,
 	                                                    rtrim(ltrim(PlanVendorName)) AS 计划指定供应商,
 	                                                    rtrim(ltrim(PlanRemark)) AS 计划备注,
@@ -504,7 +506,7 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
             {
                 //this.dgvSpecification.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgvEdit.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                if (dgvEdit.Columns[i].Name == "选择" || dgvEdit.Columns[i].Name == "供应商码" || dgvEdit.Columns[i].Name == "供应商名" || dgvEdit.Columns[i].Name == "生产商码" || dgvEdit.Columns[i].Name == "生产商名" || dgvEdit.Columns[i].Name == "税前价格" || dgvEdit.Columns[i].Name == "备注" || dgvEdit.Columns[i].Name == "检验标准")
+                if (dgvEdit.Columns[i].Name == "选择" || dgvEdit.Columns[i].Name == "供应商码" || dgvEdit.Columns[i].Name == "供应商名" || dgvEdit.Columns[i].Name == "生产商码" || dgvEdit.Columns[i].Name == "生产商名" || dgvEdit.Columns[i].Name == "税前价格" || dgvEdit.Columns[i].Name == "备注" || dgvEdit.Columns[i].Name == "检验标准" || dgvEdit.Columns[i].Name == "联系单号")
                 {
                     dgvEdit.Columns[i].ReadOnly = false;
                 }
@@ -860,7 +862,7 @@ CfQuantity +
                 //	                                                    Flag = 0 order by rtrim(ltrim(ItemNumber))";
                 if (Convert.ToBoolean(dgvEdit["选择", i].Value))
                 {
-                    lstr.Add(@"update dbo.SolidBuyList_Handle set VendorNumber ='" + dgvEdit["供应商码", i].Value.ToString().Trim() + "',VendorName='" + dgvEdit["供应商名", i].Value.ToString().Trim() + "',ManufacturerNumber ='" + dgvEdit["生产商码", i].Value.ToString().Trim() + "',ManufacturerName ='" + dgvEdit["生产商名", i].Value.ToString().Trim() + "',PricePreTax=" + dgvEdit["税前价格", i].Value.ToString().Trim() + ",TaxRate=" + dgvEdit["税率", i].Value.ToString().Trim() + ",Confirmer='" + dgvEdit["确认员", i].Value.ToString().Trim() + "',Remark='" + dgvEdit["备注", i].Value.ToString().Trim() + "', InternationalStandards='" + dgvEdit["检验标准", i].Value.ToString().Trim() + "' where ID=" + dgvEdit["ID", i].Value.ToString());
+                    lstr.Add(@"update dbo.SolidBuyList_Handle set VendorNumber ='" + dgvEdit["供应商码", i].Value.ToString().Trim() + "',VendorName='" + dgvEdit["供应商名", i].Value.ToString().Trim() + "',ManufacturerNumber ='" + dgvEdit["生产商码", i].Value.ToString().Trim() + "',ManufacturerName ='" + dgvEdit["生产商名", i].Value.ToString().Trim() + "',PricePreTax=" + dgvEdit["税前价格", i].Value.ToString().Trim() + ",TaxRate=" + dgvEdit["税率", i].Value.ToString().Trim() + ",Confirmer='" + dgvEdit["确认员", i].Value.ToString().Trim() + "',Remark='" + dgvEdit["备注", i].Value.ToString().Trim() + "', InternationalStandards='" + dgvEdit["检验标准", i].Value.ToString().Trim() + "', ForeignNumber='" + dgvEdit["联系单号", i].Value.ToString().Trim() + "' where ID=" + dgvEdit["ID", i].Value.ToString());
                 }
             }
             if (lstr.Count == 0)
@@ -931,6 +933,7 @@ CfQuantity +
 	                                                    BuyQuantity AS 需求数量,
 VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS 生产商码,ManufacturerName AS 生产商名,PricePreTax AS 税前价格,TaxRate AS 税率,PricePostTax AS 税后价格,Confirmer AS 确认员,Remark AS 备注,
 	                                                    rtrim(ltrim(InternationalStandards)) AS 检验标准,
+                                                        rtrim(ltrim(ForeignNumber)) AS 联系单号,
 	                                                    NeedTime AS 需求日期,
 	                                                    rtrim(ltrim(PlanVendorName)) AS 计划指定供应商,
 	                                                    rtrim(ltrim(PlanRemark)) AS 计划备注,
@@ -1104,6 +1107,7 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
 	                                                    BuyQuantity AS 需求数量,
 VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS 生产商码,ManufacturerName AS 生产商名,PricePreTax AS 税前价格,TaxRate AS 税率,PricePostTax AS 税后价格,Confirmer AS 确认员,Remark AS 备注,
 	                                                    rtrim(ltrim(InternationalStandards)) AS 检验标准,
+                                                        rtrim(ltrim(ForeignNumber)) AS 联系单号,
 	                                                    NeedTime AS 需求日期,
 	                                                    rtrim(ltrim(PlanVendorName)) AS 计划指定供应商,
 	                                                    rtrim(ltrim(PlanRemark)) AS 计划备注,
@@ -1363,6 +1367,7 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
 	                                                    rtrim(ltrim(ItemUM)) AS 单位,
 	                                                    BuyQuantity AS 需求数量,
 	                                                    rtrim(ltrim(InternationalStandards)) AS 检验标准,
+                                                        rtrim(ltrim(ForeignNumber)) AS 联系单号,
 	                                                    NeedTime AS 需求日期,
 	                                                    rtrim(ltrim(Remark)) AS 备注,
 	                                                    rtrim(ltrim(VendorName)) AS 指定供应商,
