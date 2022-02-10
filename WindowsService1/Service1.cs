@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,7 +21,7 @@ namespace WindowsService1
         {
             InitializeComponent();
         }
-        string filePath = @"D:\MyServiceLog.txt";
+        readonly string  filePath = @"D:\MyServiceLog.txt";
         //定时器
         System.Timers.Timer tmBak = new System.Timers.Timer();
         System.Threading.Timer ThTimer;
@@ -168,6 +169,20 @@ namespace WindowsService1
             } 
             catch (Exception ex)
             { return false; }
+        }
+        public void test()
+        {
+            Hashtable ht = new Hashtable();
+            ht.Add("A", "1");
+            ht.Add("B", "2");
+            ht.Add("C", "3");
+            ht.Add("D", "4");
+            ArrayList list = new ArrayList(ht.Keys);
+            list.Sort();
+            foreach (string key in list)
+            {
+                Console.WriteLine("Key : {0} ; Value : {1}.", key, ht[key]);
+            }
         }
     }
 }
