@@ -229,7 +229,15 @@ namespace Global.Purchase
                     sqlCriteria = "ItemDescription Like '%" + strValue + "%'  And (POStatus = 66 OR POStatus = 3)     ORDER BY  POItemPlacedDate DESC";
                     break;
             }
-            return SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect + sqlCriteria);
+            if (string.IsNullOrWhiteSpace(cbbBuyers.Text))
+            {
+                return SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect + sqlCriteria);
+            }
+            else
+            {
+                return SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect +"Buyer ='"+cbbBuyers.Text.Split('|')[0]+"'  and "+ sqlCriteria);
+            }
+
         }
         //获取订单，按照日期降序排序
         private DataTable GetVendorAllPOTimes(string strCriteria, string strValue, string userID)
@@ -521,6 +529,17 @@ namespace Global.Purchase
             dgvPO.DataSource = GetUnConfirmedPO(UserID,3);
         //    dgvPOTimes.DataSource = GetUnConfirmedPOTimes(UserID);
             dgvFOSpecialItem.DataSource = GetFOSpecialItem("");
+            GetcbbBuyers();
+        }
+
+        private void GetcbbBuyers()
+        {
+            cbbBuyers.Items.Clear();
+            DataTable dt= SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, "SELECT UserID+'|'+Name  FROM [dbo].[PurchaseDepartmentRBACByCMF] where PurchaseType='P' and (POType ='D' or POType ='F')");
+            foreach (DataRow dr in dt.Rows)
+            {
+                cbbBuyers.Items.Add(dr[0]);
+            }
         }
 
         private DataTable GetFOSpecialItem(string foNumber)
