@@ -198,7 +198,7 @@ namespace Global.Purchase
         private void DeptItemRequirement_Load(object sender, EventArgs e)
         {
             GetRequireItem();
-            if (PurchaseUser.PurchaseType.Contains("P"))
+            if (!string.IsNullOrWhiteSpace(PurchaseUser.PurchaseType)&&PurchaseUser.PurchaseType.Contains("P"))
             {
                 DataTable dtConfirmType = GetPOItemConfirmPersonList(PurchaseUser.PurchaseType);
                 BindingSource bs = new BindingSource();
@@ -207,6 +207,20 @@ namespace Global.Purchase
                 cbbConfirmPerson.DisplayMember = "Value";
                 cbbConfirmPerson.ValueMember = "Key";
                 cbbConfirmPerson.SelectedIndex = -1;
+            }
+            if (string.IsNullOrWhiteSpace(PurchaseUser.PurchaseType))
+            {
+                foreach (TabItem TP in tabControl1.Tabs)
+                {
+                    if (TP.Text == "操作历史查询")
+                    {
+                        TP.Visible = true;
+                    }
+                    else
+                    {
+                        TP.Visible = false;
+                    }
+                }
             }
         }
         private DataTable GetPOItemConfirmPersonList(string purchaseType)
