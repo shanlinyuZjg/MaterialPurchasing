@@ -652,5 +652,11 @@ namespace Global.Purchase
         {
 
         }
+
+        private void btnFPpriceManage_Click(object sender, EventArgs e)
+        {
+            ForeignOrderItemManage fm = new ForeignOrderItemManage(userID);
+            fm.ShowDialog();
+        }
     }
 }

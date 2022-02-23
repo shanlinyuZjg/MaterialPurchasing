@@ -545,12 +545,12 @@ namespace Global.Purchase
         private DataTable GetFOSpecialItem(string foNumber)
         {
             string sqlCriteria = string.Empty;
-            string sqlSelectItemDetail = @"SELECT
+            string sqlSelectItemDetail = @"SELECT               OperateDateTime 提交日期,
 	                                                            ForeignOrderNumber AS 联系单号,
 	                                                            ItemNumber AS 物料代码,
 	                                                            ItemDescription AS 物料描述,
 	                                                            VendorNumber AS 供应商码,
-                                                                VendorName AS 供应商经,
+                                                                VendorName AS 供应商名,
 	                                                            PurchasePrice AS 采购价格,
 	                                                            ItemUM AS 单位,
 	                                                            Quantity AS 数量,
@@ -568,6 +568,27 @@ namespace Global.Purchase
                 sqlCriteria = " And ForeignOrderNumber like '%"+foNumber+"%'  ";
             }
             return SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelectItemDetail+sqlCriteria+ " Order By Id Desc");
+        }
+        private DataTable GetFOSpecialItemByVN(string VendorName)
+        {
+            string sqlCriteria = string.Empty;
+            string sqlSelectItemDetail = @"SELECT               OperateDateTime 提交日期,
+	                                                            ForeignOrderNumber AS 联系单号,
+	                                                            ItemNumber AS 物料代码,
+	                                                            ItemDescription AS 物料描述,
+	                                                            VendorNumber AS 供应商码,
+                                                                VendorName AS 供应商名,
+	                                                            PurchasePrice AS 采购价格,
+	                                                            ItemUM AS 单位,
+	                                                            Quantity AS 数量,
+	                                                            SpecificationDescription AS 说明,
+	                                                            TotalAmount AS 总金额,
+	                                                            Requirements AS 要求
+                                                            FROM
+	                                                            PurchaseDepartmentForeignOrderItemByCMF  Where IsValid = 1 And Status = 3  And ItemNumber  IN (Select ItemNumber From PurchaseDepartmentForeignOrderItemNotInByCMF)   ";
+                sqlCriteria = " And VendorName like '%" + VendorName + "%'  ";
+            
+            return SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelectItemDetail + sqlCriteria + " Order By Id Desc");
         }
         private DataTable GetFOSpecialItemForSearch()
         {
@@ -656,19 +677,14 @@ namespace Global.Purchase
                 dgvPO.DataSource = GetUnConfirmedPO(UserID,12);
             }
         }
-
-        private void tbiFONumber_TextChanged(object sender, EventArgs e)
-        {
-            tbiFONumber.Text = tbiFONumber.Text.ToUpper();
-            tbiFONumber.SelectionStart = tbiFONumber.Text.Length;
-        }
-
         private void tbiFONumber_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!String.IsNullOrWhiteSpace(tbiFONumber.Text))
             {
                 if (e.KeyChar == (char)13)
                 {
+                    tbiFONumber.Text = tbiFONumber.Text.Trim().ToUpper();
+                    tbiFONumber.SelectionStart = tbiFONumber.Text.Length;
                     dgvFOSpecialItem.DataSource = GetFOSpecialItem(tbiFONumber.Text);
 
                     tbFONumberConfirmed.Text = tbiFONumber.Text;
@@ -955,6 +971,20 @@ namespace Global.Purchase
 	                                        PurchaseOrderRecordByCMF T1
                                         WHERE  T1.PONumber = '" + poNumber + "' And T1.LineNumber='" + lineNumber + "' AND (T1.POStatus = 3 OR T1.POStatus = 66 )";
             return SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, strSql);
+        }
+
+        private void BtnFoSpecialItem_Click(object sender, EventArgs e)
+        {
+            dgvFOSpecialItem.DataSource = GetFOSpecialItem("");
+        }
+
+        private void tbiVendorName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                tbiVendorName.Text = tbiVendorName.Text.Trim();
+                dgvFOSpecialItem.DataSource = GetFOSpecialItemByVN(tbiVendorName.Text);
+            }
         }
     }
 }

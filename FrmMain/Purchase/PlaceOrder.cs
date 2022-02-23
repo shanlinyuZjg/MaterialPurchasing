@@ -2125,7 +2125,8 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
 	                                                            [ItemReceiveType],
 	                                                            [Supervisor],
 	                                                            [ForeignNumber],
-	                                                            [BuyerID],Stock,Bin,ReceiveDate,Guid,UnitPrice
+	                                                            [BuyerID],Stock,Bin,ReceiveDate,Guid,UnitPrice,
+                                                                QualityCheckStandard
                                                         ) SELECT
 	                                                       	[PONumber],
 	                                                        [VendorNumber],
@@ -2143,7 +2144,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
 	                                                        [POItemQuantity],
 	                                                        [ItemReceiveType],
 	                                                        [Superior],
-                                                    [ForeignNumber],Buyer,Stock,Bin,'"+DateTime.Now.ToString("yyyy-MM-dd")+"',Replace(NEWID(),'-',''),UnitPrice  FROM   PurchaseOrderRecordByCMF  WHERE Id = '" + idList[i] + "'";
+                                                    [ForeignNumber],Buyer,Stock,Bin,'" + DateTime.Now.ToString("yyyy-MM-dd")+ "',Replace(NEWID(),'-',''),UnitPrice,QualityCheckStandard  FROM   PurchaseOrderRecordByCMF  WHERE Id = '" + idList[i] + "'";
                   //     MessageBox.Show(sqlInsert);
                 sqlList.Add(sqlInsert);
             }
