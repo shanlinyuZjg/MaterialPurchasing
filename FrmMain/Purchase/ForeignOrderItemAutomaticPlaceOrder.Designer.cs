@@ -49,6 +49,8 @@
             this.BtnSpecialRefresh = new DevComponents.DotNetBar.ButtonX();
             this.dgvFOSpeItemsDetail = new System.Windows.Forms.DataGridView();
             this.Check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.TbForeignOrderNumber = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX4 = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFOConfirmItemsDetail)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -247,6 +249,8 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
+            this.tabPage2.Controls.Add(this.TbForeignOrderNumber);
+            this.tabPage2.Controls.Add(this.labelX4);
             this.tabPage2.Controls.Add(this.BtnAllSelect_dgvSpe);
             this.tabPage2.Controls.Add(this.BtnAllnotSelect_dgvSpe);
             this.tabPage2.Controls.Add(this.BtnSpecialDelete);
@@ -265,7 +269,7 @@
             // 
             this.BtnAllSelect_dgvSpe.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.BtnAllSelect_dgvSpe.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.BtnAllSelect_dgvSpe.Location = new System.Drawing.Point(73, 571);
+            this.BtnAllSelect_dgvSpe.Location = new System.Drawing.Point(227, 565);
             this.BtnAllSelect_dgvSpe.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BtnAllSelect_dgvSpe.Name = "BtnAllSelect_dgvSpe";
             this.BtnAllSelect_dgvSpe.Size = new System.Drawing.Size(93, 31);
@@ -278,7 +282,7 @@
             // 
             this.BtnAllnotSelect_dgvSpe.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.BtnAllnotSelect_dgvSpe.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.BtnAllnotSelect_dgvSpe.Location = new System.Drawing.Point(213, 571);
+            this.BtnAllnotSelect_dgvSpe.Location = new System.Drawing.Point(368, 565);
             this.BtnAllnotSelect_dgvSpe.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BtnAllnotSelect_dgvSpe.Name = "BtnAllnotSelect_dgvSpe";
             this.BtnAllnotSelect_dgvSpe.Size = new System.Drawing.Size(93, 31);
@@ -291,10 +295,10 @@
             // 
             this.BtnSpecialDelete.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.BtnSpecialDelete.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.BtnSpecialDelete.Location = new System.Drawing.Point(663, 571);
+            this.BtnSpecialDelete.Location = new System.Drawing.Point(791, 565);
             this.BtnSpecialDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BtnSpecialDelete.Name = "BtnSpecialDelete";
-            this.BtnSpecialDelete.Size = new System.Drawing.Size(123, 31);
+            this.BtnSpecialDelete.Size = new System.Drawing.Size(93, 31);
             this.BtnSpecialDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.BtnSpecialDelete.TabIndex = 4;
             this.BtnSpecialDelete.Text = "删除";
@@ -304,10 +308,10 @@
             // 
             this.BtnSpecialYixiada.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.BtnSpecialYixiada.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.BtnSpecialYixiada.Location = new System.Drawing.Point(493, 571);
+            this.BtnSpecialYixiada.Location = new System.Drawing.Point(650, 565);
             this.BtnSpecialYixiada.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BtnSpecialYixiada.Name = "BtnSpecialYixiada";
-            this.BtnSpecialYixiada.Size = new System.Drawing.Size(123, 31);
+            this.BtnSpecialYixiada.Size = new System.Drawing.Size(93, 31);
             this.BtnSpecialYixiada.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.BtnSpecialYixiada.TabIndex = 3;
             this.BtnSpecialYixiada.Text = "已下达";
@@ -317,7 +321,7 @@
             // 
             this.BtnSpecialRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.BtnSpecialRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.BtnSpecialRefresh.Location = new System.Drawing.Point(353, 571);
+            this.BtnSpecialRefresh.Location = new System.Drawing.Point(509, 565);
             this.BtnSpecialRefresh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BtnSpecialRefresh.Name = "BtnSpecialRefresh";
             this.BtnSpecialRefresh.Size = new System.Drawing.Size(93, 31);
@@ -351,7 +355,36 @@
             this.Check.HeaderText = "选择";
             this.Check.Name = "Check";
             this.Check.ReadOnly = true;
-            this.Check.Width = 35;
+            this.Check.Width = 46;
+            // 
+            // TbForeignOrderNumber
+            // 
+            // 
+            // 
+            // 
+            this.TbForeignOrderNumber.Border.Class = "TextBoxBorder";
+            this.TbForeignOrderNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.TbForeignOrderNumber.Location = new System.Drawing.Point(82, 565);
+            this.TbForeignOrderNumber.Margin = new System.Windows.Forms.Padding(4);
+            this.TbForeignOrderNumber.Name = "TbForeignOrderNumber";
+            this.TbForeignOrderNumber.PreventEnterBeep = true;
+            this.TbForeignOrderNumber.Size = new System.Drawing.Size(109, 26);
+            this.TbForeignOrderNumber.TabIndex = 38;
+            this.TbForeignOrderNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbForeignOrderNumber_KeyDown);
+            // 
+            // labelX4
+            // 
+            this.labelX4.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX4.Location = new System.Drawing.Point(11, 565);
+            this.labelX4.Margin = new System.Windows.Forms.Padding(4);
+            this.labelX4.Name = "labelX4";
+            this.labelX4.Size = new System.Drawing.Size(73, 31);
+            this.labelX4.TabIndex = 37;
+            this.labelX4.Text = "联系单号";
             // 
             // ForeignOrderItemAutomaticPlaceOrder
             // 
@@ -400,5 +433,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn Check;
         private DevComponents.DotNetBar.ButtonX BtnAllSelect_dgvSpe;
         private DevComponents.DotNetBar.ButtonX BtnAllnotSelect_dgvSpe;
+        private DevComponents.DotNetBar.Controls.TextBoxX TbForeignOrderNumber;
+        private DevComponents.DotNetBar.LabelX labelX4;
     }
 }

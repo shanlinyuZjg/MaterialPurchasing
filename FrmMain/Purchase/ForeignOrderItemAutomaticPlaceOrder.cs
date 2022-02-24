@@ -439,6 +439,16 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,Specification,Comment1,ParentGuid,POItem
             }
             BtnSpecialRefresh_Click(null, null);
         }
+
+        private void TbForeignOrderNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                TbForeignOrderNumber.Text = TbForeignOrderNumber.Text.Trim().ToUpper();
+                string sqlSelect = @"Select ForeignOrderNumber AS 外贸单号, ItemNumber AS 物料代码,ItemDescription AS 物料描述,ItemUM AS 单位,VendorNumber AS 供应商码,VendorName AS 供应商名,PurchasePrice AS 价格,Quantity AS 采购数量,TotalAmount AS 总金额,SpecificationDescription AS 规格,Requirements AS 要求,Id,OperateDateTime AS 申请日期 From PurchaseDepartmentForeignOrderItemByCMF Where IsValid = 1 And Status = 3 And  ForeignOrderNumber like '%"+ TbForeignOrderNumber.Text + "%' And ItemNumber  IN (Select ItemNumber From PurchaseDepartmentForeignOrderItemNotInByCMF)   Order by Id DESC";
+                dgvFOSpeItemsDetail.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
+            }
+        }
     }
 
 }
