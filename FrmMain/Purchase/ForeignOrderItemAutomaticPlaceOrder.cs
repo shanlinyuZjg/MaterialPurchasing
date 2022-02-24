@@ -29,6 +29,7 @@ namespace Global.Purchase
         private void ForeignOrderItemAutomaticPlaceOrder_Load(object sender, EventArgs e)
         {
             LoadFOItemDetail(UserID, 1, 1);
+            BtnSpecialRefresh_Click(null, null);
         }
 
         private void LoadFOItemDetail(string id, int status, int valid)
@@ -359,6 +360,84 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,Specification,Comment1,ParentGuid,POItem
         private void button1_Click(object sender, EventArgs e)
         {
             MessageBox.Show(PurchaseUser.ItemReceiveType);
+        }
+
+        private void BtnSpecialRefresh_Click(object sender, EventArgs e)
+        {
+            string sqlSelect = @"Select ForeignOrderNumber AS 外贸单号, ItemNumber AS 物料代码,ItemDescription AS 物料描述,ItemUM AS 单位,VendorNumber AS 供应商码,VendorName AS 供应商名,PurchasePrice AS 价格,Quantity AS 采购数量,TotalAmount AS 总金额,SpecificationDescription AS 规格,Requirements AS 要求,Id,OperateDateTime AS 申请日期 From PurchaseDepartmentForeignOrderItemByCMF Where IsValid = 1 And Status = 3 And ItemNumber  IN (Select ItemNumber From PurchaseDepartmentForeignOrderItemNotInByCMF)   Order by Id DESC";
+            dgvFOSpeItemsDetail.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
+            //dgvFOSpeItemsDetail.Columns["Id"].Visible = false;
+        }
+
+        private void dgvFOSpeItemsDetail_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                dgvFOSpeItemsDetail["Check", e.RowIndex].Value = !Convert.ToBoolean(dgvFOSpeItemsDetail["Check", e.RowIndex].Value);
+            }
+        }
+
+        private void BtnAllSelect_dgvSpe_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow DgvRow in dgvFOSpeItemsDetail.Rows)
+            {
+                DgvRow.Cells["Check"].Value = true;
+            }
+        }
+
+        private void BtnAllnotSelect_dgvSpe_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow DgvRow in dgvFOSpeItemsDetail.Rows)
+            {
+                DgvRow.Cells["Check"].Value = false;
+            }
+            
+        }
+
+        private void BtnSpecialYixiada_Click(object sender, EventArgs e)
+        {
+            List<int> Lint = new List<int>();
+            foreach (DataGridViewRow DgvRow in dgvFOSpeItemsDetail.Rows)
+            {
+                if (Convert.ToBoolean(DgvRow.Cells["Check"].Value) == true)
+                {
+                    Lint.Add(Convert.ToInt32(DgvRow.Cells["Id"].Value));
+                }
+            }
+            if (Lint.Count == 0) { MessageBox.Show("未选择任何行"); return; }
+            string sqlUpdate = @"Update PurchaseDepartmentForeignOrderItemByCMF Set Status = 2 where Id  IN (" + string.Join( ",",Lint)+")";
+            if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
+            {
+                Custom.MsgEx("更新成功！");
+            }
+            else
+            {
+                Custom.MsgEx("更新失败！");
+            }
+            BtnSpecialRefresh_Click(null,null);
+        }
+
+        private void BtnSpecialDelete_Click(object sender, EventArgs e)
+        {
+            List<int> Lint = new List<int>();
+            foreach (DataGridViewRow DgvRow in dgvFOSpeItemsDetail.Rows)
+            {
+                if (Convert.ToBoolean(DgvRow.Cells["Check"].Value) == true)
+                {
+                    Lint.Add(Convert.ToInt32(DgvRow.Cells["Id"].Value));
+                }
+            }
+            if (Lint.Count == 0) { MessageBox.Show("未选择任何行"); return; }
+            string sqlUpdate = @"Update PurchaseDepartmentForeignOrderItemByCMF Set IsValid = 0 where Id  IN (" + string.Join(",", Lint) + ")";
+            if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
+            {
+                Custom.MsgEx("删除成功！");
+            }
+            else
+            {
+                Custom.MsgEx("删除失败！");
+            }
+            BtnSpecialRefresh_Click(null, null);
         }
     }
 
