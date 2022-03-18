@@ -1512,7 +1512,21 @@ namespace Global.Warehouse
                 //       porv01.POReceiptDate.Value = DateTime.Now.ToString("MMddyy");//此处不确定
                 if (dr["重测日期"] != DBNull.Value && !string.IsNullOrWhiteSpace(dr["重测日期"].ToString()))
                 {
-                    porv01.RetestDate.Value = dr["重测日期"].ToString();
+                    string RetestDate = dr["重测日期"].ToString().Trim();
+                    if (RetestDate.Length == 8)//20200527格式
+                    {
+                        porv01.LotExpirationDate.Value = RetestDate.Substring(4, 4) + RetestDate.Substring(2, 2);
+                    }
+                    else if (RetestDate.Length == 10)//2020.05.27格式
+                    {
+                        porv01.LotExpirationDate.Value = RetestDate.Substring(5, 2) + RetestDate.Substring(8, 2) + RetestDate.Substring(2, 2);
+                    }
+                    else
+                    {
+                        //此处的日期格式不符合要求，故意赋值，在写入四班时会报错，用以提示具体报错问题
+                        porv01.RetestDate.Value = RetestDate;
+                    }
+                    
                 }
                 string expiredDate = dr["到期日期"].ToString();
                 if (expiredDate.Length == 8)//20200527格式

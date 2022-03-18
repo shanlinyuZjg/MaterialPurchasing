@@ -834,7 +834,7 @@ namespace Global.Purchase
                     guid = dgvr.Cells["GUID"].Value.ToString();
                     orderQuantity = Convert.ToDouble(dgvr.Cells["订购数量"].Value);
                     #region 更新主体
-                    receivedQuantity = GetReceivedTotalQuantity(PONumber, lineNumber, GlobalSpace.FSDBConnstr);
+                    receivedQuantity = GetReceivedTotalQuantity(PONumber, lineNumber, GlobalSpace.FSDBMRConnstr);
                     string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set ActualReceiveQuantity = "+receivedQuantity+", POItemRemainedQuantity=" + (orderQuantity - receivedQuantity) + " Where Guid='" + guid + "'";
                     if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
                     {
@@ -860,7 +860,7 @@ namespace Global.Purchase
             string sqlSelect = @"SELECT
                                      TOP 1	TotalReceiptQuantity
                                     FROM
-	                                    PORV
+	                                    _NoLock_FS_HistoryPOReceipt
                                     WHERE
 	                                    PONumber = '" + poNumber + "'  AND POLineNumber = '" + lineNumber + "' ORDER BY HistoryPOReceiptKey DESC";
             DataTable dt = SQLHelper.GetDataTable(connStr, sqlSelect);

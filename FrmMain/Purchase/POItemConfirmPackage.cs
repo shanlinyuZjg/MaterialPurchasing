@@ -899,7 +899,7 @@ namespace Global.Purchase
                 MessageBoxEx.Show("每次更新只能选择一条！", "提示");
                 return;
             }
-            receivedQuantity = GetReceivedTotalQuantity(PONumber, lineNumber, GlobalSpace.FSDBConnstr);
+            receivedQuantity = GetReceivedTotalQuantity(PONumber, lineNumber, GlobalSpace.FSDBMRConnstr);
             string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set POItemRemainedQuantity=" + (orderQuantity - receivedQuantity) + " Where Guid='" + guid + "'";
             if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
             {
@@ -929,7 +929,7 @@ namespace Global.Purchase
             string sqlSelect = @"SELECT
                                      TOP 1	TotalReceiptQuantity
                                     FROM
-	                                    PORV
+	                                    _NoLock_FS_HistoryPOReceipt
                                     WHERE
 	                                    PONumber = '" + poNumber + "'  AND POLineNumber = '" + lineNumber + "' ORDER BY HistoryPOReceiptKey DESC";
             DataTable dt = SQLHelper.GetDataTable(connStr, sqlSelect);

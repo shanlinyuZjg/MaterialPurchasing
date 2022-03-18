@@ -19,7 +19,7 @@ namespace Global.Purchase
             this.EnableGlass = false;
             MessageBoxEx.EnableGlass = false;
             InitializeComponent();
-            PurchaseUser.Group = "M";
+            //PurchaseUser.Group = "M";
         }
 
         private void POItemConfirmerMaintain_Load(object sender, EventArgs e)
