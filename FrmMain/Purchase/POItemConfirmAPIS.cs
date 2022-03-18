@@ -862,7 +862,7 @@ namespace Global.Purchase
                                     FROM
 	                                    _NoLock_FS_HistoryPOReceipt
                                     WHERE
-	                                    PONumber = '" + poNumber + "'  AND POLineNumber = '" + lineNumber + "' ORDER BY HistoryPOReceiptKey DESC";
+	                                    PONumber = '" + poNumber + "'  AND POLineNumber = '" + lineNumber + "' and TransactionDate >='"+DateTime.Now.AddYears(-2).ToString("yyyy-MM-dd")+"' ORDER BY HistoryPOReceiptKey DESC";
             DataTable dt = SQLHelper.GetDataTable(connStr, sqlSelect);
             if (dt.Rows.Count == 1)
             {
