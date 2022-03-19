@@ -27,7 +27,7 @@ namespace Global
             LocalizationKeys.LocalizeString += CommonOperate.LocalizationKeys_LocalizeString;
 
             #region 判断业务逻
-            
+            /*
             if (Args.Length == 0)
             {
                 MessageBox.Show("请登陆瑞阳应用平台后，在平台中启动该程序！", "提示");
@@ -94,7 +94,7 @@ namespace Global
                     MessageBox.Show("未查到相应权限信息，请联系管理员！" + "-" + strPrivilege);
                 }
             }
-            
+            */
             #endregion
             //tabTest = true;
             //Application.Run(new Purchase.ForeignOrderItemSubmit("P11", "沈传荣"));
@@ -104,6 +104,7 @@ namespace Global
             //Application.Run(new FrmWarehouseDeptStockKeeper("S32", "Aa111111", "吕继美", "SFS")); //
             //Application.Run(new FrmWarehouseDeptStockKeeper("S95", "zmC11111", "朱梅翠", "SOFS"));
             //Application.Run(new FrmWarehouseDeptStockKeeper("S06", "KtNc9Yor", "崔翠玲", "SOFS"));
+            Application.Run(new FrmWarehouseDeptStockKeeper("S76", "Qn123456", "秦娜", "SAOFS"));
             //          Application.Run(new Warehouse.FDAPackage());
             //            Application.Run(new Purchase.ForeignOrderItemAutomaticPlaceOrder("P11", "张霞"));
             //Application.Run(new FrmPurchaseDeptSupervisor("DJB", "丁计宝"));

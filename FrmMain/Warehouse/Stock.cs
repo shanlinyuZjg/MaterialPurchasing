@@ -6246,5 +6246,28 @@ namespace Global.Warehouse
                 mmsg.Dispose();
             }
         }
+
+        private void btnAItemDel_Click(object sender, EventArgs e)
+        {
+            List<string> Lstr = new List<string>();
+            foreach (DataGridViewRow dgvr in dgvAssistant.Rows)
+            {
+                if (Convert.ToBoolean(dgvr.Cells["ACheck"].Value))
+                { 
+                    Lstr.Add(dgvr.Cells["Guid"].Value.ToString());
+                }
+            }
+            if (Lstr.Count == 0) { MessageBox.Show("未选择任何行！");return; }
+            string Strsql= "Update  PurchaseOrderRecordHistoryByCMF Set Status = 77,DeleteOperateDateTime='" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "'+'|'+'" + StockUser.UserID + "'    Where Guid in ('" + string.Join("','",Lstr) + "') and Status= 9";
+            if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, Strsql))
+            {
+                MessageBox.Show("删除成功");
+            }
+            else
+            {
+                MessageBox.Show("删除失败");
+            }
+
+        }
     }
     }
