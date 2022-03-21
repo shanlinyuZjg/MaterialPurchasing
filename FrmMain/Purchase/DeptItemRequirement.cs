@@ -815,7 +815,7 @@ CfQuantity +
                                     FROM
 	                                    _NoLock_FS_Vendor	                                    
                                     WHERE
-	                                    VendorID = " + dgvEdit["供应商码", RowIndex].Value.ToString().Trim();
+	                                    VendorID = '" + dgvEdit["供应商码", RowIndex].Value.ToString().Trim()+"'";
             DataTable dtTemp = SQLHelper.GetDataTableOleDb(GlobalSpace.oledbconnstrFSDBMR, strSql);
 
             if (dtTemp.Rows.Count == 1)
@@ -843,7 +843,7 @@ CfQuantity +
                                     FROM
 	                                    _NoLock_FS_Vendor	                                    
                                     WHERE
-	                                    VendorID = " + dgvEdit["生产商码", RowIndex].Value.ToString().Trim();
+	                                    VendorID = '" + dgvEdit["生产商码", RowIndex].Value.ToString().Trim()+"'";
             DataTable dtTemp = SQLHelper.GetDataTableOleDb(GlobalSpace.oledbconnstrFSDBMR, strSql);
 
             if (dtTemp.Rows.Count == 1)
@@ -918,7 +918,7 @@ CfQuantity +
                                                     FROM
 	                                                    dbo.SolidBuyList_Handle 
                                                     WHERE
-	                                                    (VendorNumber is null or ltrim(rtrim(VendorNumber)) ='' or VendorName is null or ltrim(rtrim(VendorName)) ='' or ManufacturerNumber is null or ltrim(rtrim(ManufacturerNumber)) ='' or ManufacturerName is null or ltrim(rtrim(ManufacturerName)) ='' or Confirmer is null or ltrim(rtrim(Confirmer)) ='' or PricePreTax is null or TaxRate is null or PricePreTax <=0 or TaxRate <=0) and Flag = 0 ";
+	                                                    (VendorNumber is null or ltrim(rtrim(VendorNumber)) ='' or VendorName is null or ltrim(rtrim(VendorName)) ='' or ManufacturerNumber is null or ltrim(rtrim(ManufacturerNumber)) ='' or ManufacturerName is null or ltrim(rtrim(ManufacturerName)) ='' or Confirmer is null or ltrim(rtrim(Confirmer)) ='' or PricePreTax is null or TaxRate is null or PricePreTax <0 or TaxRate <0) and Flag = 0 ";
             DataTable dt = SQLHelper.GetDataTable(GlobalSpace.RYData, sqlSelect);
             if (dt.Rows.Count > 0)
             {

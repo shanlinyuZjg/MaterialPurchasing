@@ -214,16 +214,6 @@ namespace Global.Purchase
         
 
         
-
-        private void rbtnLabelCoveredExist_CheckedChanged(object sender, EventArgs e)
-        {
-         
-        }
-
-        private void tbLabelWidth_KeyUp(object sender, KeyEventArgs e)
-        {
-
-        }
     
 
         private void ForeignOrderItemLabel_Load(object sender, EventArgs e)

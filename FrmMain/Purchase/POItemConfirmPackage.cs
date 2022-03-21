@@ -48,7 +48,7 @@ namespace Global.Purchase
         private DataTable GetVendorAllPOConfirmed(string strCriteria, string strValue, string userID)
         {
             string sqlSelect = @"SELECT
-                                                T1.Id,T1.Guid,T1.ForeignNumber AS 联系单号,T1.VendorNumber AS 供应商码,T1.VendorName AS 供应商名,T1.PONumber AS 采购单号,
+                                                T1.Id,T1.Guid,T1.ForeignNumber AS 联系单号,Left(T1.ActualDeliveryDate,10) AS 实际到货日,T1.VendorNumber AS 供应商码,T1.VendorName AS 供应商名,T1.PONumber AS 采购单号,
                                                 T1.LineNumber AS 行号,
 	                                        	T1.ItemNumber AS 物料代码,
 	                                            T1.ItemDescription AS 物料描述,
@@ -56,7 +56,6 @@ namespace Global.Purchase
 	                                            T1.UnitPrice AS 单价,
 	                                            T1.POItemQuantity AS 订购数量,
 	                                            T1.DemandDeliveryDate AS 要求到货日,
-                                                Left(T1.ActualDeliveryDate,10) AS 实际到货日,
                                                 T1.ActualDeliveryQuantity AS 实际到货数量,
                                                 (case T1.POStatus 
                                                           when  '3' then '已下达'  
@@ -119,7 +118,8 @@ namespace Global.Purchase
                 {
                     dgvConfirmed.DataSource = GetVendorAllPOConfirmed("ForeignNumber", tbFONumberConfirmed.Text, UserID);
                     dgvConfirmed.Columns["Id"].Visible = false;
-                    
+                    dgvConfirmed.Columns["Guid"].Visible = false;
+
                     tbFONumber.Text = tbFONumberConfirmed.Text;
                     dgvPO.DataSource = GetVendorAllPO("ForeignNumber", tbFONumber.Text, UserID);
                     dgvPO.Columns["下单日期"].Visible = false;
@@ -179,6 +179,7 @@ namespace Global.Purchase
                     tbFONumberConfirmed.Text = tbFONumber.Text;
                     dgvConfirmed.DataSource = GetVendorAllPOConfirmed("ForeignNumber", tbFONumberConfirmed.Text, UserID);
                     dgvConfirmed.Columns["Id"].Visible = false;
+                    dgvConfirmed.Columns["Guid"].Visible = false;
 
                     tbiFONumber.Text = tbFONumber.Text;
                     dgvFOSpecialItem.DataSource = GetFOSpecialItem(tbiFONumber.Text);
@@ -690,6 +691,7 @@ namespace Global.Purchase
                     tbFONumberConfirmed.Text = tbiFONumber.Text;
                     dgvConfirmed.DataSource = GetVendorAllPOConfirmed("ForeignNumber", tbFONumberConfirmed.Text, UserID);
                     dgvConfirmed.Columns["Id"].Visible = false;
+                    dgvConfirmed.Columns["Guid"].Visible = false;
 
                     tbFONumber.Text = tbiFONumber.Text;
                     dgvPO.DataSource = GetVendorAllPO("ForeignNumber", tbFONumber.Text, UserID);
@@ -829,6 +831,7 @@ namespace Global.Purchase
                 {
                     dgvConfirmed.DataSource = GetVendorAllPOConfirmed("VendorNumber", tbVendorNumberConfirmed.Text, UserID);
                     dgvConfirmed.Columns["Id"].Visible = false;
+                    dgvConfirmed.Columns["Guid"].Visible = false;
                     tbVendorNumberConfirmed.Text = "";
 
                 }
@@ -843,6 +846,7 @@ namespace Global.Purchase
                 {
                     dgvConfirmed.DataSource = GetVendorAllPOConfirmed("VendorName", tbVendorNameConfirmed.Text, UserID);
                     dgvConfirmed.Columns["Id"].Visible = false;
+                    dgvConfirmed.Columns["Guid"].Visible = false;
                     tbVendorNameConfirmed.Text = "";
                 }
             }
@@ -984,6 +988,20 @@ namespace Global.Purchase
             {
                 tbiVendorName.Text = tbiVendorName.Text.Trim();
                 dgvFOSpecialItem.DataSource = GetFOSpecialItemByVN(tbiVendorName.Text);
+            }
+        }
+
+        private void tbItemDescriptionConfirmed_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(tbItemDescriptionConfirmed.Text))
+            {
+                if (e.KeyChar == (char)13)
+                {
+                    dgvConfirmed.DataSource = GetVendorAllPOConfirmed("ItemDescription", tbItemDescriptionConfirmed.Text.Trim(), UserID);
+                    dgvConfirmed.Columns["Id"].Visible = false;
+                    dgvConfirmed.Columns["Guid"].Visible = false;
+                    tbItemDescriptionConfirmed.Text = "";
+                }
             }
         }
     }

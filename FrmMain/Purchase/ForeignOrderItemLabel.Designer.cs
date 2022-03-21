@@ -177,7 +177,6 @@
             this.rbtnLabelCovered.TabStop = true;
             this.rbtnLabelCovered.Text = "覆膜";
             this.rbtnLabelCovered.UseVisualStyleBackColor = true;
-            this.rbtnLabelCovered.CheckedChanged += new System.EventHandler(this.rbtnLabelCoveredExist_CheckedChanged);
             // 
             // rbtnLabelCommon
             // 
@@ -323,7 +322,6 @@
             this.tbLabelWidth.Size = new System.Drawing.Size(79, 23);
             this.tbLabelWidth.TabIndex = 1;
             this.tbLabelWidth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbLabelWidth_KeyPress);
-            this.tbLabelWidth.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbLabelWidth_KeyUp);
             // 
             // tbLabelMannualArea
             // 
