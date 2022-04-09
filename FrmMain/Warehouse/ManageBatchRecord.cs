@@ -1610,10 +1610,11 @@ namespace Global.Warehouse
 "	EBR_ReceiveRecordForInspectUpdateHistory.QualityCheckStandard,\n" +
 "	EBR_ReceiveRecordForInspectUpdateHistory.ModifyContent,\n" +
 "	EBR_ReceiveRecordForInspectUpdateHistory.Modifier,\n" +
-                    "RevisionReason) SELECT *,'" + StrUpdate + "' as ModifyContent,'" + UserId + "|" + UserName + "' as Modifier,'" + strRevisionReason + "' as RevisionReason  FROM EBR_ReceiveRecordForInspect where FileNumber='" + dgvDetail["受控流水号", rowIndex].Value.ToString() + "' and Operator='" + dgvDetail["库管员", rowIndex].Value.ToString() + "'";
+                    "RevisionReason) SELECT *,'" + StrUpdate + "' as ModifyContent,'" + UserId + "|" + UserName + "' as Modifier,'" + strRevisionReason + "' as RevisionReason  FROM EBR_ReceiveRecordForInspect where FileNumber='" + dgvDetail["受控流水号", rowIndex].Value.ToString() + "' and Operator='" + dgvDetail["库管员", rowIndex].Value.ToString() + "' and FileTracedNumber='" + dgvDetail["追溯文件编号", rowIndex].Value.ToString() + "' and FileEdition='" + dgvDetail["版本", rowIndex].Value.ToString() + "' and EffectiveDate='" + dgvDetail["生效日期", rowIndex].Value.ToString() + "'";
+                tbItemDesc.Text = cmd.CommandText;
                 if (cmd.ExecuteNonQuery() != 1)
                 { throw new Exception("修订历史新增条数不为1"); }
-                cmd.CommandText = "update EBR_ReceiveRecordForInspect " + SqlSet.Substring(0, SqlSet.Length - 1) + " where FileNumber='" + dgvDetail["受控流水号", rowIndex].Value.ToString() + "' and Operator='" + dgvDetail["库管员", rowIndex].Value.ToString() + "'";
+                cmd.CommandText = "update EBR_ReceiveRecordForInspect " + SqlSet.Substring(0, SqlSet.Length - 1) + " where FileNumber='" + dgvDetail["受控流水号", rowIndex].Value.ToString() + "' and Operator='" + dgvDetail["库管员", rowIndex].Value.ToString() + "' and FileTracedNumber='" + dgvDetail["追溯文件编号", rowIndex].Value.ToString() + "' and FileEdition='" + dgvDetail["版本", rowIndex].Value.ToString() + "' and EffectiveDate='" + dgvDetail["生效日期", rowIndex].Value.ToString() + "'";
                 if (cmd.ExecuteNonQuery() != 1)
                 { throw new Exception("记录修改条数不为1"); }
                 tran.Commit();//如果两个sql命令都执行成功，则执行commit这个方法，执行这些操作

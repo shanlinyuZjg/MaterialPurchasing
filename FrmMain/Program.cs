@@ -94,7 +94,7 @@ namespace Global
                     MessageBox.Show("未查到相应权限信息，请联系管理员！" + "-" + strPrivilege);
                 }
             }
-            
+
             #endregion
             //tabTest = true;
             //Application.Run(new Purchase.ForeignOrderItemSubmit("P11", "沈传荣"));
@@ -103,12 +103,17 @@ namespace Global
             //Application.Run(new FrmWarehouseDeptStockKeeper("S35", "Zx456789", "张霞", "SO"));
             //Application.Run(new FrmWarehouseDeptStockKeeper("S32", "Aa111111", "吕继美", "SFS")); //
             //Application.Run(new FrmWarehouseDeptStockKeeper("S95", "zmC11111", "朱梅翠", "SOFS"));
-            //Application.Run(new FrmWarehouseDeptStockKeeper("S06", "KtNc9Yor", "崔翠玲", "SOFS"));
+            //Application.Run(new FrmWarehouseDeptStockKeeper("S49", "KtNc9Yor", "高国剑", "SO"));
             //Application.Run(new FrmWarehouseDeptStockKeeper("S76", "Qn123456", "秦娜", "SAOFS"));
-            //          Application.Run(new Warehouse.FDAPackage());
+            //Application.Run(new FrmWarehouseDeptStockKeeper("S42", "Qn123456", "田晓翠", "SO"));
+            //Application.Run(new FrmWarehouseDeptStockKeeper("S88", "Qn123456", "王国栋", "SO"));
             //            Application.Run(new Purchase.ForeignOrderItemAutomaticPlaceOrder("P11", "张霞"));
             //Application.Run(new FrmPurchaseDeptSupervisor("DJB", "丁计宝"));
+            //Application.Run(new FrmStockUserManage("DJB", "丁计宝", "SQA"));
+
+            //Application.Run(new FrmPurchaseDeptInvoice("DJB", "丁计宝"));
             //Application.Run(new FrmMain("P02", "123123", "唐守艳", "PPP"));
+            //Application.Run(new Finance.InvoiceVerify("唐守艳", "P02", "123123"));
             //Application.Run(new FrmMain("P11", "123123", "沈传荣", "PPP"));
             //Application.Run(new FrmMain("P05", "123123", "唐兆红", "PPP"));
             //Application.Run(new FrmMain("C55", "Txd002002", "段秀霞", "KPP"));//大客户

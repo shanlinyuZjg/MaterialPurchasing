@@ -1128,10 +1128,10 @@ namespace Global.Warehouse
         //发送邮件测试
         private void SendGSEmail(DataRow dr)
         {
-            if (dr["GSID"].ToString() == "" || dr["GSID"].ToString() == "0") return;
-            if (!SQLHelper.ExecuteNonQuery(GlobalSpace.RYData, "update SolidBuyList set ReceiveTime=GETDATE(),ReceiveQuantity=ReceiveQuantity+" + Convert.ToDecimal(dr["入库数量"].ToString().Trim()) + "  WHERE ID in (" + dr["GSID"].ToString().Replace("|", ",") + ")")) return;
-
-            string str = "SELECT WorkCenter,ItemDescription,ItemNumber FROM SolidBuyList WHERE ID in (" + dr["GSID"].ToString().Replace("|",",")+")";
+            if (string.IsNullOrWhiteSpace(dr["GSID"].ToString())  || dr["GSID"].ToString() == "0") return;
+            if (!SQLHelper.ExecuteNonQuery(GlobalSpace.RYData, "update SolidBuyList set ReceiveTime=GETDATE(),ReceiveQuantity=ReceiveQuantity+" + Convert.ToDecimal(dr["入库数量"].ToString().Trim()) + ",LotNumber ='"+ dr["厂家批号"].ToString().Trim() + "'  WHERE ID in (" + dr["GSID"].ToString().Replace("|", ",") + ")")) return;
+            //SYBFlag 0：固水；1粉针
+            string str = "SELECT WorkCenter,ItemDescription,ItemNumber,SYBFlag FROM SolidBuyList WHERE ID in (" + dr["GSID"].ToString().Replace("|",",")+")";
             DataTable dt = SQLHelper.GetDataTable(GlobalSpace.RYData, str);
             if (dt.Rows.Count > 0)
             {
@@ -1150,15 +1150,29 @@ namespace Global.Warehouse
                 //        mmsg.To.Add(dtmail.Rows[0][0].ToString().Trim());
                 //    }
                 //}
-                mmsg.To.Add("chenkai@reyoung.com");
-                mmsg.To.Add("caohongling@reyoung.com");
-                mmsg.Subject = "" + dt.Rows[0][1] + "采购物料到货通知";
-                mmsg.Body = "各位领导您好" + "" + "\n" +
-                    "编码：" + dt.Rows[0][2] + "" + "\n" +
-                    "固水事业部采购:" + dt.Rows[0][1] + ",物料本次到货"+ dr["入库数量"].ToString().Trim()+ dr["单位"].ToString().Trim() + "，请注意查收!" + "" + "\n" +
-                    "此邮件为系统邮件，请勿回复!";
-                client.Send(mmsg);
-                mmsg.Dispose();
+                if (dt.Rows[0][3].ToString() == "0")
+                {
+                    mmsg.To.Add("chenkai@reyoung.com");
+                    mmsg.To.Add("caohongling@reyoung.com");
+                    mmsg.Subject = "" + dt.Rows[0][1] + "采购物料到货通知";
+                    mmsg.Body = "各位领导您好" + "" + "\n" +
+                        "编码：" + dt.Rows[0][2] + "" + "\n" +
+                        "固水事业部采购:" + dt.Rows[0][1] + ",物料本次到货" + dr["入库数量"].ToString().Trim() + dr["单位"].ToString().Trim() + "，请注意查收!" + "" + "\n" +
+                        "此邮件为系统邮件，请勿回复!";
+                    client.Send(mmsg);
+                    mmsg.Dispose();
+                }
+                if (dt.Rows[0][3].ToString() == "1")
+                {
+                    mmsg.To.Add("huanghongyan@reyoung.com");
+                    mmsg.Subject = "" + dt.Rows[0][1] + "采购物料到货通知";
+                    mmsg.Body = "各位领导您好" + "" + "\n" +
+                        "编码：" + dt.Rows[0][2] + "" + "\n" +
+                        "粉针事业部采购:" + dt.Rows[0][1] + ",物料本次到货" + dr["入库数量"].ToString().Trim() + dr["单位"].ToString().Trim() + "，请注意查收!" + "" + "\n" +
+                        "此邮件为系统邮件，请勿回复!";
+                    client.Send(mmsg);
+                    mmsg.Dispose();
+                }
             }
         }
 

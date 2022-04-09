@@ -555,6 +555,7 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
         private void btnHebing_Click(object sender, EventArgs e)
         {
             string ItemCode = string.Empty;
+            string Shiyebu = string.Empty;
             string PlanID = string.Empty;
             Decimal PlanQuantity = 0;
             List<int> ID = new List<int>();
@@ -577,6 +578,17 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
                         if (ItemCode != dgvEdit["物料代码", i].Value.ToString().Trim().ToUpper())
                         {
                             MessageBoxEx.Show("合并的物料编码不同！"); return;
+                        }
+                    }
+                    if (Shiyebu == string.Empty)
+                    {
+                        Shiyebu = dgvEdit["事业部", i].Value.ToString();
+                    }
+                    else
+                    {
+                        if (Shiyebu != dgvEdit["事业部", i].Value.ToString())
+                        {
+                            MessageBoxEx.Show("合并的事业部不同！"); return;
                         }
                     }
                     if (PlanID == string.Empty)
