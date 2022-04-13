@@ -4867,6 +4867,9 @@ namespace Global.Warehouse
                             dr["VendorLotNumber"] = lotnumber.Substring(0, lotnumber.Length - 5);
                             dr["FONumber"] = fonumber;
                         }
+
+                        if(string.IsNullOrWhiteSpace(dr["VendorLotNumber"].ToString()))
+                            dr["VendorLotNumber"] = lotnumber;
                     }
 
                     dr["PackageUM"] = "件";
