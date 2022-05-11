@@ -100,13 +100,14 @@ namespace Global
             //Application.Run(new Purchase.ForeignOrderItemSubmit("P11", "沈传荣"));
             // Application.Run(new Finance.RawMaterialInfo());
             //        Application.Run(new Purchase.OldRecord("P11"));//SO  SFS
-            //Application.Run(new FrmWarehouseDeptStockKeeper("S35", "Zx456789", "张霞", "SO"));
+            //Application.Run(new FrmWarehouseDeptStockKeeper("S13", "Zx789789", "张霞", "SFS"));
             //Application.Run(new FrmWarehouseDeptStockKeeper("S32", "Aa111111", "吕继美", "SFS")); //
             //Application.Run(new FrmWarehouseDeptStockKeeper("S95", "zmC11111", "朱梅翠", "SOFS"));
             //Application.Run(new FrmWarehouseDeptStockKeeper("S49", "KtNc9Yor", "高国剑", "SO"));
             //Application.Run(new FrmWarehouseDeptStockKeeper("S76", "Qn123456", "秦娜", "SAOFS"));
             //Application.Run(new FrmWarehouseDeptStockKeeper("S42", "Qn123456", "田晓翠", "SO"));
             //Application.Run(new FrmWarehouseDeptStockKeeper("S88", "Qn123456", "王国栋", "SO"));
+            //Application.Run(new FrmWarehouseDeptStockKeeper("S69", "Qn123456", "吴蒙", "SO"));
             //            Application.Run(new Purchase.ForeignOrderItemAutomaticPlaceOrder("P11", "张霞"));
             //Application.Run(new FrmPurchaseDeptSupervisor("DJB", "丁计宝"));
             //Application.Run(new FrmStockUserManage("DJB", "丁计宝", "SQA"));

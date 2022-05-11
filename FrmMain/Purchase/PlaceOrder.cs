@@ -1314,7 +1314,7 @@ namespace Global.Purchase
                 //>0.1|<-0.1，>0.05 |<-0.05
                 string rate = CommonOperate.CompareItemPriceToStandardPrice(fPrice, standardPrice);
 
-                if (rate == "0.1" || rate == "0.15")
+                if (Convert.ToDouble(rate) >= 0.1 )
                 {
                     Custom.MsgEx("该物料下达价格与标准价格相差超出10%，无法下达订单！请先修改物料标准成本");
                     paraListPriceRecord.Add(new SqlParameter("@Range", rate));
@@ -1369,7 +1369,7 @@ namespace Global.Purchase
                 }
                 else
                 {
-                    if (rate == "0.15")
+                    if (Convert.ToDouble(rate) >= 0.15)
                     {
                         Custom.MsgEx("该物料下达价格与标准价格相差超出15%，无法下达订单！请先修改物料标准成本");
                         isNeedRecord = true;
