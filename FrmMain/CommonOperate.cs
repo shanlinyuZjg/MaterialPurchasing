@@ -1774,7 +1774,7 @@ GSID,QualityCheckStandard,RequireDept,Comment1,ForeignNumber
         {
             string dreturn = string.Empty;
             //2021.03.10 沈传荣打电话，反馈丁处确认临时调整为5倍；与丁处电话沟通后，同时五金材料也临时调整为5倍。
-            if ((price - standardPrice) / standardPrice >=5 || (price - standardPrice) / standardPrice <= -5)
+            if ((price - standardPrice) / standardPrice >= 5 || (price - standardPrice) / standardPrice <= -5)
             {
                 dreturn = "5";
             }
@@ -1782,13 +1782,17 @@ GSID,QualityCheckStandard,RequireDept,Comment1,ForeignNumber
             {
                 dreturn = "0.15";
             }
-            else if ((price-standardPrice)/ standardPrice > 0.1 || (price - standardPrice) / standardPrice < -0.1)
+            else if ((price - standardPrice) / standardPrice > 0.1 || (price - standardPrice) / standardPrice < -0.1)
             {
                 dreturn = "0.1";
             }
-            else if((price - standardPrice) / standardPrice > 0.05 || (price - standardPrice) / standardPrice < -0.05)
+            else if ((price - standardPrice) / standardPrice > 0.05 || (price - standardPrice) / standardPrice < -0.05)
             {
                 dreturn = "0.05";
+            }
+            else
+            {
+                dreturn = "0";
             }
             return dreturn;
         }
