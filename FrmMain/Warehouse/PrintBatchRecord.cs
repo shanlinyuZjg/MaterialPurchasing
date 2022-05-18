@@ -678,19 +678,19 @@ namespace Global.Warehouse
 
             if (DR["LotNumberType"] == DBNull.Value)
             {
-                Report.ParameterByName("LotNumberType").AsString = "□生产商批号   □供应商批号";
+                Report.ParameterByName("LotNumberType").AsString = "□生产商批号 □供应商批号";
             }
             else if (DR["LotNumberType"].ToString() == "生产商批号")
             {
-                Report.ParameterByName("LotNumberType").AsString = "☑生产商批号   □供应商批号";
+                Report.ParameterByName("LotNumberType").AsString = "☑生产商批号 □供应商批号";
             }
             else if (DR["LotNumberType"].ToString() == "供应商批号")
             {
-                Report.ParameterByName("LotNumberType").AsString = "□生产商批号   ☑供应商批号";
+                Report.ParameterByName("LotNumberType").AsString = "□生产商批号 ☑供应商批号";
             }
             else
             {
-                Report.ParameterByName("LotNumberType").AsString = "□生产商批号   □供应商批号";
+                Report.ParameterByName("LotNumberType").AsString = "□生产商批号 □供应商批号";
             }
 
             if (DR["IsApprovedVendor"] == DBNull.Value)
