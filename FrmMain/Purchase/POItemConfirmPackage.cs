@@ -449,6 +449,7 @@ namespace Global.Purchase
                                                 T1.ParentGuid AS ParentGUID,
                                                 T1.LineNumber AS 行号,
                                                 T1.ForeignNumber AS 外贸单号,
+                                                T1.RequireDept  AS 需求部门,
 	                                        	T1.ItemNumber AS 物料代码,
 	                                            T1.ItemDescription AS 物料描述,
 	                                            T1.LineUM AS 单位,	                                         
