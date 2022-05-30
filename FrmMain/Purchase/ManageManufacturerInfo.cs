@@ -124,7 +124,7 @@ namespace Global.Purchase
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (tbItemNumber.Text == "" || tbVendorName.Text == "" || tbVendorNumber.Text == "" || tbManufacturerName.Text == "")
+            if (tbItemNumber.Text.Trim() == "" || tbVendorName.Text.Trim() == "" || tbVendorNumber.Text.Trim() == "" || tbManufacturerName.Text.Trim() == "")
             {
                 MessageBoxEx.Show("不能有空项！","提示");
             }
@@ -139,19 +139,14 @@ namespace Global.Purchase
                 {
                     string sqlInsert = string.Empty;
                     string mNumber = string.Empty;
-                    if (rbtnVendorNumberExist.Checked)
-                    {
+                   
                         mNumber = tbManufacturerNumber.Text.Trim();
                         if(string.IsNullOrWhiteSpace(mNumber))
                         {
                             MessageBoxEx.Show("请填写生产商码！", "提示");
                             return;
                         }
-                    }
-                    else if(rbtnAutomaticGenerateMNumber.Checked)
-                    {
-                        mNumber = GenerateManufacturerNumber();
-                    }
+                   
                      sqlInsert = @"INSERT INTO ItemManufacturerInfoByCMF (
 	                            VendorNumber,
 	                            VendorName,
