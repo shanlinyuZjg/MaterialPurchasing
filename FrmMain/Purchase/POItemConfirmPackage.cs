@@ -57,6 +57,7 @@ namespace Global.Purchase
 	                                            T1.POItemQuantity AS 订购数量,
 	                                            T1.DemandDeliveryDate AS 要求到货日,
                                                 T1.ActualDeliveryQuantity AS 实际到货数量,
+                                                T1.StockKeeper AS 库管员,
                                                 (case T1.POStatus 
                                                           when  '3' then '已下达'  
                                                           when  '4' then '已到货'                                                       
