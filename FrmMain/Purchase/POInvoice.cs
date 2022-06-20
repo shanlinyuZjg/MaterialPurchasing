@@ -802,6 +802,7 @@ namespace Global.Purchase
             {
                 if(!string.IsNullOrEmpty(tbInvoicedView.Text))
                 {
+                    tbInvoiceNumber.Text=tbInvoicedView.Text.Trim();
                     string sqlSelect = @"SELECT
                                 ForeignNumber AS 联系单号,
 	                            ReceiveDate AS 入库日期,
