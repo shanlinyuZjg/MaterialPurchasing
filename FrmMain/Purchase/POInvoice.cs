@@ -135,8 +135,7 @@ namespace Global.Purchase
 
         private void GetVendorPODetail(string vendorNumber)
         {
-            string sqlSelectExist = @"Select [Key] From PurchaseOrderInvoiceRecordByCMF";
-
+            string sqlSelectExist = @"Select [Key] From PurchaseOrderInvoiceRecordByCMF where VendorNumber ='"+ vendorNumber + "'";
             List<string> keyList = SQLHelper.GetList(GlobalSpace.FSDBConnstr, sqlSelectExist, "Key");
             string sqlSelect = string.Empty;
             string   selectPO = string.Empty;
@@ -187,17 +186,17 @@ namespace Global.Purchase
 	                                                                                                                    FSDB.dbo.PORV T1,
 	                                                                                                                    FSDBMR.dbo._NoLock_FS_Item T2
                                                                                                                     WHERE
-	                                                                                                                    T1.ItemNumber = T2.ItemNumber And  T1.POReceiptDate >= '{0}'  And T1.VendorID='"+vendorNumber+"'  ORDER BY T1.TransactionDate,T1.TransactionTime ASC";
+	                                                                                                                    T1.ItemNumber = T2.ItemNumber And  T1.POReceiptDate >= '{0}'  And T1.VendorID='"+vendorNumber+ "' And T1.HistoryPOReceiptKey not in ({1})  ORDER BY T1.TransactionDate,T1.TransactionTime ASC";
                 selectPO = @"Select ForeignNumber,PONumber,LineNumber From PurchaseOrderRecordByCMF Where VendorNumber='" + vendorNumber + "' And IsPurePo = 0 And POItemPlacedDate >='{0}'";
 
                 if (rbtnNoDate.Checked)
                 {
-                    sqlSelect = string.Format(sqlSelect, "2020-01-01", string.Join("','", keyList.ToArray()));
+                    sqlSelect = string.Format(sqlSelect, "2020-01-01", string.Join(",", keyList.ToArray()));
                     selectPO = string.Format(selectPO, "2020-01-01");
                 }
                 else
                 {
-                    sqlSelect = string.Format(sqlSelect, "2020-12-01", string.Join("','", keyList.ToArray()));
+                    sqlSelect = string.Format(sqlSelect, "2020-12-01", string.Join(",", keyList.ToArray()));
                     selectPO = string.Format(selectPO, "2020-12-01");
                 }
             }  
@@ -230,10 +229,10 @@ namespace Global.Purchase
                     }
                 }
 
-                if (keyList.Contains(dt.Rows[i - 1]["Key"].ToString()))
-                {
-                    dt.Rows.RemoveAt(i - 1);
-                }
+                //if (keyList.Contains(dt.Rows[i - 1]["Key"].ToString()))
+                //{
+                //    dt.Rows.RemoveAt(i - 1);
+                //}
             }
 
             dgvPODetail.DataSource = dt;

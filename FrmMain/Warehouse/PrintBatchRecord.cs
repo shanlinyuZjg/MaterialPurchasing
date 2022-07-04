@@ -912,6 +912,10 @@ namespace Global.Warehouse
                 StrReport += "（□有  □无）";
             }
             Report.ParameterByName("Report").AsString = StrReport;
+            if (StockUser.District == "工业园1号仓库")  //20220701 及以后
+            { Report.ParameterByName("RecordNumber").AsString = "记录编号：JW-201"; }
+            else
+            { Report.ParameterByName("RecordNumber").AsString = "记录编号：JW-005"; }
         }
         //获取到最新流水号
         private string GetFileTracedNumber()

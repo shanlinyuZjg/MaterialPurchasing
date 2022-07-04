@@ -88,7 +88,7 @@ namespace Global
 
             if (dt.Rows[0]["District"] != DBNull.Value || dt.Rows[0]["District"].ToString() !="")
             {
-                StockUser.District = dt.Rows[0]["District"].ToString();
+                StockUser.District = dt.Rows[0]["District"].ToString().Trim();
             }
             else
             {
