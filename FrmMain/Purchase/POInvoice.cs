@@ -136,12 +136,14 @@ namespace Global.Purchase
         private void GetVendorPODetail(string vendorNumber)
         {
             string sqlSelectExist = @"Select [Key] From PurchaseOrderInvoiceRecordByCMF where VendorNumber ='"+ vendorNumber + "'";
+            //string sqlSelectExist = @"Select [Key] From PurchaseOrderInvoiceRecordByCMF";
+
             List<string> keyList = SQLHelper.GetList(GlobalSpace.FSDBConnstr, sqlSelectExist, "Key");
             string sqlSelect = string.Empty;
-            string   selectPO = string.Empty;
+            string selectPO = string.Empty;
             if (keyList.Count > 0)
             {
-                                                        sqlSelect = @"SELECT
+                sqlSelect = @"SELECT
                                                         '' AS 联系单号,
 	                                                        T1.POReceiptDate AS 入库日期,
 	                                                        T1.PONumber AS 采购单号,
@@ -186,27 +188,27 @@ namespace Global.Purchase
 	                                                                                                                    FSDB.dbo.PORV T1,
 	                                                                                                                    FSDBMR.dbo._NoLock_FS_Item T2
                                                                                                                     WHERE
-	                                                                                                                    T1.ItemNumber = T2.ItemNumber And  T1.POReceiptDate >= '{0}'  And T1.VendorID='"+vendorNumber+ "' And T1.HistoryPOReceiptKey not in ({1})  ORDER BY T1.TransactionDate,T1.TransactionTime ASC";
+	                                                                                                                    T1.ItemNumber = T2.ItemNumber And  T1.POReceiptDate >= '{0}'  And T1.VendorID='" + vendorNumber + "'  ORDER BY T1.TransactionDate,T1.TransactionTime ASC";
                 selectPO = @"Select ForeignNumber,PONumber,LineNumber From PurchaseOrderRecordByCMF Where VendorNumber='" + vendorNumber + "' And IsPurePo = 0 And POItemPlacedDate >='{0}'";
 
                 if (rbtnNoDate.Checked)
                 {
-                    sqlSelect = string.Format(sqlSelect, "2020-01-01", string.Join(",", keyList.ToArray()));
+                    sqlSelect = string.Format(sqlSelect, "2020-01-01", string.Join("','", keyList.ToArray()));
                     selectPO = string.Format(selectPO, "2020-01-01");
                 }
                 else
                 {
-                    sqlSelect = string.Format(sqlSelect, "2020-12-01", string.Join(",", keyList.ToArray()));
+                    sqlSelect = string.Format(sqlSelect, "2020-12-01", string.Join("','", keyList.ToArray()));
                     selectPO = string.Format(selectPO, "2020-12-01");
                 }
-            }  
+            }
 
-            DataTable dt = SQLHelper.GetDataTableOleDb(GlobalSpace.oledbconnstrFSDB, sqlSelect);          
+            DataTable dt = SQLHelper.GetDataTableOleDb(GlobalSpace.oledbconnstrFSDB, sqlSelect);
             DataTable dtPO = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, selectPO);
-       
 
 
-            for(int i = dt.Rows.Count; i > 0;i--)
+
+            for (int i = dt.Rows.Count; i > 0; i--)
             {
 
                 string number = dt.Rows[i - 1]["行号"].ToString();
@@ -229,14 +231,14 @@ namespace Global.Purchase
                     }
                 }
 
-                //if (keyList.Contains(dt.Rows[i - 1]["Key"].ToString()))
-                //{
-                //    dt.Rows.RemoveAt(i - 1);
-                //}
+                if (keyList.Contains(dt.Rows[i - 1]["Key"].ToString()))
+                {
+                    dt.Rows.RemoveAt(i - 1);
+                }
             }
 
             dgvPODetail.DataSource = dt;
-       
+
 
         }
 
