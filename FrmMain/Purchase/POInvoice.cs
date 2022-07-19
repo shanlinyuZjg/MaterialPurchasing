@@ -141,8 +141,7 @@ namespace Global.Purchase
             List<string> keyList = SQLHelper.GetList(GlobalSpace.FSDBConnstr, sqlSelectExist, "Key");
             string sqlSelect = string.Empty;
             string selectPO = string.Empty;
-            if (keyList.Count > 0)
-            {
+            
                 sqlSelect = @"SELECT
                                                         '' AS 联系单号,
 	                                                        T1.POReceiptDate AS 入库日期,
@@ -201,7 +200,7 @@ namespace Global.Purchase
                     sqlSelect = string.Format(sqlSelect, "2020-12-01", string.Join("','", keyList.ToArray()));
                     selectPO = string.Format(selectPO, "2020-12-01");
                 }
-            }
+            
 
             DataTable dt = SQLHelper.GetDataTableOleDb(GlobalSpace.oledbconnstrFSDB, sqlSelect);
             DataTable dtPO = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, selectPO);
@@ -230,10 +229,12 @@ namespace Global.Purchase
                         dt.Rows[i - 1]["联系单号"] = drs[0]["ForeignNumber"].ToString();
                     }
                 }
-
-                if (keyList.Contains(dt.Rows[i - 1]["Key"].ToString()))
+                if (keyList.Count > 0)
                 {
-                    dt.Rows.RemoveAt(i - 1);
+                    if (keyList.Contains(dt.Rows[i - 1]["Key"].ToString()))
+                    {
+                        dt.Rows.RemoveAt(i - 1);
+                    }
                 }
             }
 
