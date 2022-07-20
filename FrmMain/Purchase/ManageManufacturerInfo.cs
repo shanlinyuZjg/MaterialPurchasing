@@ -94,10 +94,6 @@ namespace Global.Purchase
             }
         }
 
-        private void dgvManufacturerInfo_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            dgvManufacturerInfo_CellDoubleClick(sender, e);
-        }
 
         private void dgvManufacturerInfo_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -124,7 +120,7 @@ namespace Global.Purchase
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (tbItemNumber.Text.Trim() == "" || tbVendorName.Text.Trim() == "" || tbVendorNumber.Text.Trim() == "" || tbManufacturerName.Text.Trim() == "")
+            if (tbItemNumber.Text.Trim() == "" || tbVendorName.Text.Trim() == "" || tbVendorNumber.Text.Trim() == "" || tbManufacturerName.Text.Trim() == ""|| tbManufacturerNumber.Text.Trim() == "")
             {
                 MessageBoxEx.Show("不能有空项！","提示");
             }
@@ -173,11 +169,7 @@ namespace Global.Purchase
                     if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlInsert, sqlparams))
                     {
                         MessageBoxEx.Show("信息添加成功！", "提示");
-                        tbItemNumber.Text = "";
-                        tbVendorName.Text = "";
-                        tbVendorNumber.Text = "";
-                        tbManufacturerName.Text = "";
-                        tbManufacturerNumber.Text = "";
+                        
 
                         string sqlSelect = @"SELECT
                             Id,
@@ -190,6 +182,11 @@ namespace Global.Purchase
 	                        ItemManufacturerInfoByCMF Where VendorNumber = '" + tbVendorNumber.Text.Trim() + "' Order by Id Desc";
                         dgvManufacturerInfo.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
                         dgvManufacturerInfo.Columns["Id"].Visible = false;
+                        tbItemNumber.Text = "";
+                        tbVendorName.Text = "";
+                        tbVendorNumber.Text = "";
+                        tbManufacturerName.Text = "";
+                        tbManufacturerNumber.Text = "";
 
 
                     }
@@ -253,5 +250,51 @@ namespace Global.Purchase
                 }
             }
         }
-    }
+
+        private void ADD_Click(object sender, EventArgs e)
+        {
+            tbManufacturerNum_M.Text = tbManufacturerNum_M.Text.Trim().ToUpper();
+            tbManufacturerName_M.Text = tbManufacturerName_M.Text.Trim();
+            if(string.IsNullOrWhiteSpace(tbManufacturerNum_M.Text)|| string.IsNullOrWhiteSpace(tbManufacturerName_M.Text))
+            { MessageBox.Show("请输入生产商编码及名称");return; }
+            //查询四班编码是否已占用
+            string strSql = @"SELECT
+	                                    VendorID as 供应商码,
+	                                    VendorName as 供应商名
+                                    FROM
+	                                    _NoLock_FS_Vendor	                                    
+                                    WHERE
+	                                    VendorID = '" + tbManufacturerNum_M.Text + "'";
+            if ((SQLHelper.GetDataTableOleDb(GlobalSpace.oledbconnstrFSDBMR, strSql)).Rows.Count == 1)
+            {
+                MessageBox.Show("四班编码已存在！"); return;
+            }
+            //Insert
+            string sqlInsert = @"INSERT INTO ManufacturerNumberName (
+	                            ManufacturerNumber,
+	                            ManufacturerName,
+                                Operator
+                          )
+                            VALUES
+	                            (@ManufacturerNumber ,@ManufacturerName ,@Operator
+	                            )";
+            SqlParameter[] sqlparams =
+            {
+                        new SqlParameter("@ManufacturerNumber",tbManufacturerNum_M.Text),
+                        new SqlParameter("@ManufacturerName",tbManufacturerName_M.Text),
+                        new SqlParameter("@Operator",userID)
+
+                    };
+
+            if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlInsert, sqlparams))
+            {
+                MessageBoxEx.Show("生产商添加成功！", "提示");
+            }
+            else 
+            {
+                MessageBoxEx.Show("生产商添加失败！", "提示");
+            }
+
+            }
+        }
 }
