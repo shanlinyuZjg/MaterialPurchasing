@@ -59,10 +59,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
-            this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.DgvManufacturerSelect = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.TbCode = new System.Windows.Forms.TextBox();
+            this.TbName = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.SoftDelete = new System.Windows.Forms.Button();
@@ -70,7 +70,7 @@
             this.ForthShift = new System.Windows.Forms.Button();
             this.Update = new System.Windows.Forms.Button();
             this.ADD = new System.Windows.Forms.Button();
-            this.dataGridViewX2 = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.DgvManufacturer = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.label8 = new System.Windows.Forms.Label();
             this.tbManufacturerNum_M = new System.Windows.Forms.TextBox();
             this.tbManufacturerName_M = new System.Windows.Forms.TextBox();
@@ -81,9 +81,9 @@
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvManufacturerSelect)).BeginInit();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvManufacturer)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -219,7 +219,7 @@
             this.labelX1.Name = "labelX1";
             this.labelX1.Size = new System.Drawing.Size(296, 23);
             this.labelX1.TabIndex = 18;
-            this.labelX1.Text = "若四班不存在,请咨询供应供应商编码管理员";
+            this.labelX1.Text = "若四班不存在,请在生产商查询中查询";
             // 
             // label4
             // 
@@ -335,10 +335,10 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.labelX2);
-            this.tabPage2.Controls.Add(this.dataGridViewX1);
+            this.tabPage2.Controls.Add(this.DgvManufacturerSelect);
             this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.textBox1);
-            this.tabPage2.Controls.Add(this.textBox2);
+            this.tabPage2.Controls.Add(this.TbCode);
+            this.tabPage2.Controls.Add(this.TbName);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -354,19 +354,20 @@
             // 
             // 
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(297, 44);
+            this.labelX2.Location = new System.Drawing.Point(527, 77);
             this.labelX2.Name = "labelX2";
-            this.labelX2.Size = new System.Drawing.Size(77, 23);
+            this.labelX2.Size = new System.Drawing.Size(405, 23);
             this.labelX2.TabIndex = 38;
-            this.labelX2.Text = "回车可查询";
+            this.labelX2.Text = "回车可查询,表格中双击可选中，若未查询出请联系供应生产商管理员";
             // 
-            // dataGridViewX1
+            // DgvManufacturerSelect
             // 
-            this.dataGridViewX1.AllowUserToAddRows = false;
-            this.dataGridViewX1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.DgvManufacturerSelect.AllowUserToAddRows = false;
+            this.DgvManufacturerSelect.AllowUserToDeleteRows = false;
+            this.DgvManufacturerSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewX1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DgvManufacturerSelect.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -374,8 +375,8 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewX1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridViewX1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvManufacturerSelect.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.DgvManufacturerSelect.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -383,12 +384,13 @@
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridViewX1.EnableHeadersVisualStyles = false;
-            this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dataGridViewX1.Location = new System.Drawing.Point(3, 128);
-            this.dataGridViewX1.MultiSelect = false;
-            this.dataGridViewX1.Name = "dataGridViewX1";
+            this.DgvManufacturerSelect.DefaultCellStyle = dataGridViewCellStyle5;
+            this.DgvManufacturerSelect.EnableHeadersVisualStyles = false;
+            this.DgvManufacturerSelect.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.DgvManufacturerSelect.Location = new System.Drawing.Point(3, 128);
+            this.DgvManufacturerSelect.MultiSelect = false;
+            this.DgvManufacturerSelect.Name = "DgvManufacturerSelect";
+            this.DgvManufacturerSelect.ReadOnly = true;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -396,11 +398,12 @@
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewX1.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridViewX1.RowTemplate.Height = 23;
-            this.dataGridViewX1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewX1.Size = new System.Drawing.Size(986, 420);
-            this.dataGridViewX1.TabIndex = 37;
+            this.DgvManufacturerSelect.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.DgvManufacturerSelect.RowTemplate.Height = 23;
+            this.DgvManufacturerSelect.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DgvManufacturerSelect.Size = new System.Drawing.Size(986, 420);
+            this.DgvManufacturerSelect.TabIndex = 37;
+            this.DgvManufacturerSelect.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvManufacturerSelect_CellDoubleClick);
             // 
             // label6
             // 
@@ -411,19 +414,21 @@
             this.label6.TabIndex = 16;
             this.label6.Text = "生产商编码";
             // 
-            // textBox1
+            // TbCode
             // 
-            this.textBox1.Location = new System.Drawing.Point(193, 44);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(81, 21);
-            this.textBox1.TabIndex = 18;
+            this.TbCode.Location = new System.Drawing.Point(193, 44);
+            this.TbCode.Name = "TbCode";
+            this.TbCode.Size = new System.Drawing.Size(81, 21);
+            this.TbCode.TabIndex = 18;
+            this.TbCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbCode_KeyPress);
             // 
-            // textBox2
+            // TbName
             // 
-            this.textBox2.Location = new System.Drawing.Point(193, 80);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(312, 21);
-            this.textBox2.TabIndex = 17;
+            this.TbName.Location = new System.Drawing.Point(193, 80);
+            this.TbName.Name = "TbName";
+            this.TbName.Size = new System.Drawing.Size(312, 21);
+            this.TbName.TabIndex = 17;
+            this.TbName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbName_KeyPress);
             // 
             // label7
             // 
@@ -441,7 +446,7 @@
             this.tabPage3.Controls.Add(this.ForthShift);
             this.tabPage3.Controls.Add(this.Update);
             this.tabPage3.Controls.Add(this.ADD);
-            this.tabPage3.Controls.Add(this.dataGridViewX2);
+            this.tabPage3.Controls.Add(this.DgvManufacturer);
             this.tabPage3.Controls.Add(this.label8);
             this.tabPage3.Controls.Add(this.tbManufacturerNum_M);
             this.tabPage3.Controls.Add(this.tbManufacturerName_M);
@@ -460,26 +465,29 @@
             this.SoftDelete.Name = "SoftDelete";
             this.SoftDelete.Size = new System.Drawing.Size(75, 23);
             this.SoftDelete.TabIndex = 48;
-            this.SoftDelete.Text = "停用";
+            this.SoftDelete.Text = "删除";
             this.SoftDelete.UseVisualStyleBackColor = true;
+            this.SoftDelete.Click += new System.EventHandler(this.SoftDelete_Click);
             // 
             // All
             // 
-            this.All.Location = new System.Drawing.Point(789, 80);
+            this.All.Location = new System.Drawing.Point(685, 80);
             this.All.Name = "All";
             this.All.Size = new System.Drawing.Size(75, 23);
             this.All.TabIndex = 47;
             this.All.Text = "全部";
             this.All.UseVisualStyleBackColor = true;
+            this.All.Click += new System.EventHandler(this.All_Click);
             // 
             // ForthShift
             // 
-            this.ForthShift.Location = new System.Drawing.Point(685, 80);
+            this.ForthShift.Location = new System.Drawing.Point(789, 80);
             this.ForthShift.Name = "ForthShift";
             this.ForthShift.Size = new System.Drawing.Size(75, 23);
             this.ForthShift.TabIndex = 46;
             this.ForthShift.Text = "已录四班";
             this.ForthShift.UseVisualStyleBackColor = true;
+            this.ForthShift.Click += new System.EventHandler(this.ForthShift_Click);
             // 
             // Update
             // 
@@ -489,6 +497,7 @@
             this.Update.TabIndex = 45;
             this.Update.Text = "修改";
             this.Update.UseVisualStyleBackColor = true;
+            this.Update.Click += new System.EventHandler(this.Update_Click);
             // 
             // ADD
             // 
@@ -500,13 +509,14 @@
             this.ADD.UseVisualStyleBackColor = true;
             this.ADD.Click += new System.EventHandler(this.ADD_Click);
             // 
-            // dataGridViewX2
+            // DgvManufacturer
             // 
-            this.dataGridViewX2.AllowUserToAddRows = false;
-            this.dataGridViewX2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.DgvManufacturer.AllowUserToAddRows = false;
+            this.DgvManufacturer.AllowUserToDeleteRows = false;
+            this.DgvManufacturer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewX2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DgvManufacturer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -514,8 +524,8 @@
             dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewX2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            this.dataGridViewX2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvManufacturer.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.DgvManufacturer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -523,12 +533,13 @@
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX2.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dataGridViewX2.EnableHeadersVisualStyles = false;
-            this.dataGridViewX2.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dataGridViewX2.Location = new System.Drawing.Point(3, 130);
-            this.dataGridViewX2.MultiSelect = false;
-            this.dataGridViewX2.Name = "dataGridViewX2";
+            this.DgvManufacturer.DefaultCellStyle = dataGridViewCellStyle8;
+            this.DgvManufacturer.EnableHeadersVisualStyles = false;
+            this.DgvManufacturer.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.DgvManufacturer.Location = new System.Drawing.Point(3, 130);
+            this.DgvManufacturer.MultiSelect = false;
+            this.DgvManufacturer.Name = "DgvManufacturer";
+            this.DgvManufacturer.ReadOnly = true;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -536,11 +547,12 @@
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewX2.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            this.dataGridViewX2.RowTemplate.Height = 23;
-            this.dataGridViewX2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewX2.Size = new System.Drawing.Size(986, 420);
-            this.dataGridViewX2.TabIndex = 43;
+            this.DgvManufacturer.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.DgvManufacturer.RowTemplate.Height = 23;
+            this.DgvManufacturer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DgvManufacturer.Size = new System.Drawing.Size(986, 420);
+            this.DgvManufacturer.TabIndex = 43;
+            this.DgvManufacturer.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvManufacturer_CellDoubleClick);
             // 
             // label8
             // 
@@ -594,10 +606,10 @@
             this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvManufacturerSelect)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvManufacturer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -626,17 +638,17 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dataGridViewX1;
+        private DevComponents.DotNetBar.Controls.DataGridViewX DgvManufacturerSelect;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox TbCode;
+        private System.Windows.Forms.TextBox TbName;
         private System.Windows.Forms.Label label7;
         private DevComponents.DotNetBar.LabelX labelX2;
         private System.Windows.Forms.Button All;
         private System.Windows.Forms.Button ForthShift;
         private System.Windows.Forms.Button Update;
         private System.Windows.Forms.Button ADD;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dataGridViewX2;
+        private DevComponents.DotNetBar.Controls.DataGridViewX DgvManufacturer;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox tbManufacturerNum_M;
         private System.Windows.Forms.TextBox tbManufacturerName_M;
