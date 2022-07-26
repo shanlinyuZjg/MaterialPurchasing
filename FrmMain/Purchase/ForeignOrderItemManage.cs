@@ -28,8 +28,16 @@ namespace Global.Purchase
             //tabControl1.SelectedTabIndex = 0;
             GetSpec();
             GetBox();
+            GetCarbon();
         }
+        //获取所有纸箱的信息
+        private void GetCarbon()
+        {
+            string sqlSelect = @"Select VendorNumber As  供应商码,VendorName AS 供应商名,CarbonPrice AS 纸箱价格,CellPrice AS 格挡价格,PaperPrice as 垫板价格,Id  From PurchaseDepartmentForeignOrderPackageCarbonByCMF order by Id desc";
+            dgvCarbon.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
+           
 
+        }
         //获取所有说明书的信息
         private void GetSpec()
         {
@@ -50,6 +58,10 @@ namespace Global.Purchase
             dgvBox.DataSource= SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
             for (int i = 0; i < this.dgvBox.Columns.Count; i++)
             {
+                //if (this.dgvBox.Columns[i].Name != "BoxCheck")
+                //{
+                //    this.dgvBox.Columns[i].ReadOnly = true;
+                //}
                 //this.dgvSpecification.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                 this.dgvBox.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
@@ -165,6 +177,22 @@ VALUES
             else
             {
                 MessageBoxEx.Show("删除失败！", "提示");
+            }
+        }
+
+        private void dgvBox_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvBox.Columns[e.ColumnIndex].Name == "BoxCheck")
+            {
+                dgvBox["BoxCheck", e.RowIndex].Value = !Convert.ToBoolean(dgvBox["BoxCheck", e.RowIndex].Value);
+            }
+        }
+        //SpecCheck
+        private void dgvSpecification_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvSpecification.Columns[e.ColumnIndex].Name == "SpecCheck")
+            {
+                dgvSpecification["SpecCheck", e.RowIndex].Value = !Convert.ToBoolean(dgvSpecification["SpecCheck", e.RowIndex].Value);
             }
         }
     }

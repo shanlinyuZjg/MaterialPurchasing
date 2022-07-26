@@ -39,7 +39,7 @@ namespace Global.Purchase
         List<string> poErrorList = new List<string>();
         List<string> poToSuperiorList = new List<string>();
         List<string> iteminfoList = new List<string>();
-        List<string> WithoutRestrictItemList = new List<string>();
+        //List<string> WithoutRestrictItemList = new List<string>();
         Dictionary<string,string> ItemConfirmerDict = new Dictionary<string, string>();
         List<string> StockSpecialItemList = new List<string>();
         string SpecialItemKeeper = string.Empty;
@@ -395,7 +395,7 @@ namespace Global.Purchase
         private void PlaceOrder_Load(object sender, EventArgs e)
         {
             string sqlSelect = @"Select ItemNumber From PurchaseDepartmentWithourResrtict";
-            WithoutRestrictItemList = SQLHelper.GetList(GlobalSpace.FSDBConnstr, sqlSelect, "ItemNumber");
+            //WithoutRestrictItemList = SQLHelper.GetList(GlobalSpace.FSDBConnstr, sqlSelect, "ItemNumber");
 
             if (PurchaseUser.UserStatus == 2)
             {
@@ -998,91 +998,7 @@ namespace Global.Purchase
               //      double standardPrice = 1.2;
                     List<string> itemList = GetItemWithoutReviewList();
                     List<string> itemNotComparePriceList = GetItemNotComparePriceList();
-                    //>0.1|<-0.1，>0.05 |<-0.05
-                    //  UserInfo.PriceCompare = 1;
-                    //     Custom.MsgEx(PurchaseUser.PriceCompare.ToString());
-                
-                    /*
-                    if (PurchaseUser.PriceCompare == 1)
-                    {
-                        if(!itemNotComparePriceList.Contains(tbItemNumber.Text))
-                        {
-                      //      Custom.MsgEx("不包含该物料代码" + tbItemNumber.Text+itemNotComparePriceList.Count.ToString());
-                            string rate = CommonOperate.CompareItemPriceToStandardPrice(fPrice / (1 + fTaxRate), standardPrice);
-                            string itemType = tbItemNumber.Text.Trim().Substring(0, 1);
-
-                            if (itemType == "P")
-                            {
-                                if (!WithoutRestrictItemList.Contains(tbItemNumber.Text))
-                                {
-                                    //>0.1|<-0.1，>0.05 |<-0.05
-                                    if (rate == "5")
-                                    {
-                                        MessageBoxEx.Show("当前采购价格与四班标准成本相差超过5倍！无法下达订单，请先修改成本。", "提示");
-                                        return;
-                                    }
-                                }
-                                else
-                                {
-
-                                }
-
-                                if (rate == "0.15")
-                                {
-                                    Custom.MsgEx("该物料下达价格与标准价格相差超出15%，无法下达订单！请先修改物料标准成本");
-                                    btnAddItemToPO.Enabled = false;
-                                    return;
-                                }
-                                else if (rate == "0.1")
-                                {
-                                    Custom.MsgEx("该物料下达价格与标准价格相差超出10%，请及时修改物料标准成本！");
-                                    btnAddItemToPO.Enabled = true;
-                                }
-                                else
-                                {
-                                    btnAddItemToPO.Enabled = true;
-                                }
-                            }
-                            else if (itemType == "M")
-                            {
-                                if (rate == "0.1" || rate == "0.15")
-                                {
-                                    Custom.MsgEx("该物料下达价格与标准价格相差超出10%，无法下达订单！请先修改物料标准成本");
-                                    btnAddItemToPO.Enabled = false;
-                                    return;
-                                }
-                                else if (rate == "0.05")
-                                {
-                                    Custom.MsgEx("该物料下达价格与标准价格相差超出5%，请及时修改物料标准成本！");
-                                    btnAddItemToPO.Enabled = true;
-                                }
-                                else
-                                {
-                                    btnAddItemToPO.Enabled = true;
-                                }
-                            }
-                            else if (itemType == "A")
-                            {
-                                if (rate == "0.1")
-                                {
-                                    Custom.MsgEx("该物料下达价格与标准价格相差超出10%，请及时修改物料标准成本");
-                                }
-                                else if (rate == "0.05")
-                                {
-                                    Custom.MsgEx("该物料下达价格与标准价格相差超出5%，请及时修改物料标准成本！");
-                                }
-                                else
-                                {
-
-                                }
-                            }
-                        }
-                        else
-                        {
-                     //       Custom.MsgEx("不包含该物料代码" + tbItemNumber.Text);
-                        }
-                    }
-                             */
+                    
                     string strResult = (fPrice / (1 + fTaxRate)).ToString();
                     bool b = strResult.Contains(".");
                     string[] sArray = { };
@@ -1301,7 +1217,7 @@ namespace Global.Purchase
                     Custom.Msg("外贸用原辅料请填写联系单号！多个联系单号请全部填写，使用横线“A1234-B3421-C1234”的格式区分；事业部未提供时，请计划员提供虚拟联系单号。");
                     return;                
             }
-
+            //价格差异控制---财务要求
             string sqlItemPriceCompareInsert = @"Insert Into PurchaseDepartmentPriceRestrictRecord (ItemNumber,ItemDescription,UserID,Range,UserName,StandardPrice,PlacedUnitPrice) Values ('" + tbItemNumber.Text + "','" + tbItemDescription.Text + "','" + fsuserid + "',@Range,'"+fsusername+"',@StandardPrice,@PlacedUnitPrice) ";
             List<SqlParameter> paraListPriceRecord = new List<SqlParameter>();
             bool isNeedRecord = false;
@@ -1317,39 +1233,31 @@ namespace Global.Purchase
                 if (Convert.ToDouble(rate) >= 0.1 )
                 {
                     Custom.MsgEx("该物料下达价格与标准价格相差超出10%，无法下达订单！请先修改物料标准成本");
-                    paraListPriceRecord.Add(new SqlParameter("@Range", rate));
-                    isNeedRecord = true;
-                    btnAddItemToPO.Enabled = false;
                     return;
                 }
                 else if (rate == "0.05")
                 {
                     Custom.MsgEx("该物料下达价格与标准价格相差超出5%，请及时修改物料标准成本！");
-                    btnAddItemToPO.Enabled = true;
                     paraListPriceRecord.Add(new SqlParameter("@Range", rate));
                     isNeedRecord = true;
-                }
-                else
-                {
-                    btnAddItemToPO.Enabled = true;
                 }
 
               
             }
             else if (PurchaseUser.PriceCompare == 1 || PurchaseUser.PriceCompare == 2)
             {   
-                if(!WithoutRestrictItemList.Contains(tbItemNumber.Text))
-                {
+                //if(!WithoutRestrictItemList.Contains(tbItemNumber.Text))
+                //{
                     double fPrice = Convert.ToDouble(tbPricePostTax.Text);
                     double standardPrice = Convert.ToDouble(lblFSItemPrice.Text);
                     //>0.1|<-0.1，>0.05 |<-0.05
                     string rate = CommonOperate.CompareItemPriceToStandardPrice(fPrice, standardPrice);
-                    if (rate == "5")
+                    if (Convert.ToDouble(rate) >= 5)
                     {
                         MessageBoxEx.Show("当前采购价格与四班标准成本相差超过5倍！无法下达订单，请先修改成本。", "提示");
                         return;
                     }
-                }              
+                //}              
             }
             else if (PurchaseUser.PriceCompare == 3)
             {
@@ -1361,7 +1269,7 @@ namespace Global.Purchase
 
                 if (itemNotComparePriceList.Contains(tbItemNumber.Text))
                 {
-                    if (rate == "5")
+                    if (Convert.ToDouble(rate) >= 5)
                     {
                         MessageBoxEx.Show("当前采购价格与四班标准成本相差超过5倍！无法下达订单，请先修改成本。", "提示");
                         return;
@@ -1372,21 +1280,13 @@ namespace Global.Purchase
                     if (Convert.ToDouble(rate) >= 0.15)
                     {
                         Custom.MsgEx("该物料下达价格与标准价格相差超出15%，无法下达订单！请先修改物料标准成本");
-                        isNeedRecord = true;
-                        paraListPriceRecord.Add(new SqlParameter("@Range", rate));
-                        btnAddItemToPO.Enabled = false;
                         return;
                     }
                     else if (rate == "0.1")
                     {
                         Custom.MsgEx("该物料下达价格与标准价格相差超出10%，请及时修改物料标准成本！");
-                        btnAddItemToPO.Enabled = true;
                         isNeedRecord = true;
                         paraListPriceRecord.Add(new SqlParameter("@Range", rate));
-                    }
-                    else
-                    {
-                        btnAddItemToPO.Enabled = true;
                     }
                 }
             }
@@ -3720,7 +3620,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
             strPONumber = tbPONumberInDetail.Text.Trim();
             strId = dgvPOItemDetail["Id", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
             strLineNumber = dgvPOItemDetail["行号", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
-            strItemNumber = dgvPOItemDetail["物料代码", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
+            strItemNumber = dgvPOItemDetail["物料代码", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString().Trim();
             strPromisedDate = dgvPOItemDetail["需求日期", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
             strItemQuantity = Convert.ToDouble(dgvPOItemDetail["订购数量", dgvPOItemDetail.CurrentCell.RowIndex].Value);
             strItemUnitPrice = Convert.ToDouble(dgvPOItemDetail["单价", dgvPOItemDetail.CurrentCell.RowIndex].Value);
@@ -3732,49 +3632,60 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
 
             string rate = CommonOperate.CompareItemPriceToStandardPrice(strItemUnitPrice,standardPrice);
             string itemType = strItemNumber.Trim().Substring(0, 1);
-            if(PurchaseUser.PriceCompare == 1)
+
+            #region 价格比较
+            if (PurchaseUser.PriceCompare == 0)
             {
-                if(!itemNotComparePriceList.Contains(strItemNumber))
+
+                if (Convert.ToDouble(rate) >= 0.1)
                 {
-                    if (itemType == "P")
+                    Custom.MsgEx("该物料下达价格与标准价格相差超出10%，无法下达订单！请先修改物料标准成本");
+                    return;
+                }
+                else if (rate == "0.05")
+                {
+                    Custom.MsgEx("该物料下达价格与标准价格相差超出5%，请及时修改物料标准成本！");
+                }
+
+
+            }
+            else if (PurchaseUser.PriceCompare == 1 || PurchaseUser.PriceCompare == 2)
+            {
+                //if(!WithoutRestrictItemList.Contains(tbItemNumber.Text))
+                //{
+              
+                if (Convert.ToDouble(rate) >= 5)
+                {
+                    MessageBoxEx.Show("当前采购价格与四班标准成本相差超过5倍！无法下达订单，请先修改成本。", "提示");
+                    return;
+                }
+                //}              
+            }
+            else if (PurchaseUser.PriceCompare == 3)
+            {
+                
+                if (itemNotComparePriceList.Contains(strItemNumber))
+                {
+                    if (Convert.ToDouble(rate) >= 5)
                     {
-                        if (rate == "0.15")
-                        {
-                            Custom.MsgEx("该物料下达价格与标准价格相差超出15%,请先修改物料标准成本!");
-                            return;
-                        }
-                        else if (rate == "0.1")
-                        {
-                            Custom.MsgEx("该物料下达价格与标准价格相差超出10%，请及时修改物料标准成本！");
-                        }
-                    }
-                    else if (itemType == "M")
-                    {
-                        if (rate == "0.1")
-                        {
-                            Custom.MsgEx("该物料下达价格与标准价格相差超出10%，请先修改物料标准成本！"); return;
-                        }
-                        else if (rate == "0.05")
-                        {
-                            Custom.MsgEx("该物料下达价格与标准价格相差超出5%，请及时修改物料标准成本！");
-                        }
-                    }
-                    else if (itemType == "A")
-                    {
-                        if (rate == "0.1")
-                        {
-                            Custom.MsgEx("该物料下达价格与标准价格相差超出10%，请及时修改物料标准成本");
-                        }
-                        else if (rate == "0.05")
-                        {
-                            Custom.MsgEx("该物料下达价格与标准价格相差超出5%，请及时修改物料标准成本！");
-                        }
+                        MessageBoxEx.Show("当前采购价格与四班标准成本相差超过5倍！无法下达订单，请先修改成本。", "提示");
+                        return;
                     }
                 }
-                
+                else
+                {
+                    if (Convert.ToDouble(rate) >= 0.15)
+                    {
+                        Custom.MsgEx("该物料下达价格与标准价格相差超出15%，无法下达订单！请先修改物料标准成本");
+                        return;
+                    }
+                    else if (rate == "0.1")
+                    {
+                        Custom.MsgEx("该物料下达价格与标准价格相差超出10%，请及时修改物料标准成本！");
+                    }
+                }
             }
-
-
+            #endregion 价格比较
             string sqlSelect = @"Select POStatus From PurchaseOrderRecordByCMF Where Id = '" + strId + "'";
 
             int poStatus = Convert.ToInt32(SQLHelper.GetItemValue(GlobalSpace.FSDBConnstr, "POStatus", sqlSelect));

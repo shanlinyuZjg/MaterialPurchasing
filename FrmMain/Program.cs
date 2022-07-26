@@ -117,6 +117,7 @@ namespace Global
 
             //Application.Run(new FrmPurchaseDeptInvoice("DJB", "丁计宝"));
             //Application.Run(new FrmMain("P02", "123123", "唐守艳", "PPP"));
+            //Application.Run(new FrmMain("P03", "123123", "郑尧", "PPP"));
             //Application.Run(new Finance.InvoiceVerify("唐守艳", "P02", "123123"));
             //Application.Run(new FrmMain("P11", "123123", "沈传荣", "PPP"));
             //Application.Run(new FrmMain("P05", "123123", "唐兆红", "PPP"));

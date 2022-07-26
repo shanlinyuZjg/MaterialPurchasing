@@ -266,14 +266,16 @@ namespace Global.Purchase
             else
             { Custom.MsgEx("请先选中一行！"); }
         }
-
+        //字符集，此处用于供应商名字模糊查询供应商时使用
+        Encoding GB2312 = Encoding.GetEncoding("gb2312");
+        Encoding ISO88591 = Encoding.GetEncoding("iso-8859-1");
         private void ADD_Click(object sender, EventArgs e)
         {
             tbManufacturerNum_M.Text = tbManufacturerNum_M.Text.Trim().ToUpper();
             tbManufacturerName_M.Text = tbManufacturerName_M.Text.Trim();
             if(string.IsNullOrWhiteSpace(tbManufacturerNum_M.Text)|| string.IsNullOrWhiteSpace(tbManufacturerName_M.Text))
             { MessageBox.Show("请输入生产商编码及名称");return; }
-            //查询四班编码是否已占用
+            //查询四班编码名称是否已占用
             string strSql = @"SELECT
 	                                    VendorID as 供应商码,
 	                                    VendorName as 供应商名
@@ -285,6 +287,17 @@ namespace Global.Purchase
             {
                 MessageBox.Show("四班编码已存在！"); return;
             }
+            strSql = @"SELECT
+	                                    VendorID as 供应商码,
+	                                    VendorName as 供应商名
+                                    FROM
+	                                    _NoLock_FS_Vendor	                                    
+                                    WHERE
+	                                    VendorName = '" + ISO88591.GetString(GB2312.GetBytes(tbManufacturerName_M.Text)) + "' and VendorStatus='A'";
+            if ((SQLHelper.GetDataTableOleDb(GlobalSpace.oledbconnstrFSDBMR, strSql)).Rows.Count >0)
+            {
+                MessageBox.Show("四班供应商名称已存在！"); return;
+            }
             //查询生产商编码是否已存在
             string strSql1 = @"SELECT
 	                                    *
@@ -295,6 +308,16 @@ namespace Global.Purchase
             if ((SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, strSql1)).Rows.Count == 1)
             {
                 MessageBox.Show("生产商编码已存在！"); return;
+            }
+            strSql1 = @"SELECT
+	                                    *
+                                    FROM
+	                                    ManufacturerNumberName	                                    
+                                    WHERE
+	                                    ManufacturerName = '" + tbManufacturerName_M.Text + "'";
+            if ((SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, strSql1)).Rows.Count >0)
+            {
+                MessageBox.Show("生产商名称已存在！"); return;
             }
             //Insert
             string sqlInsert = @"INSERT INTO ManufacturerNumberName (
@@ -350,6 +373,29 @@ namespace Global.Purchase
             tbManufacturerName_M.Text = tbManufacturerName_M.Text.Trim();
             if (string.IsNullOrWhiteSpace(tbManufacturerNum_M.Text) || string.IsNullOrWhiteSpace(tbManufacturerName_M.Text))
             { MessageBox.Show("请输入生产商编码及名称"); return; }
+            //查询四班名称是否已占用
+            string  strSql = @"SELECT
+	                                    VendorID as 供应商码,
+	                                    VendorName as 供应商名
+                                    FROM
+	                                    _NoLock_FS_Vendor	                                    
+                                    WHERE
+	                                    VendorName = '" + ISO88591.GetString(GB2312.GetBytes(tbManufacturerName_M.Text)) + "' and VendorStatus='A'";
+            if ((SQLHelper.GetDataTableOleDb(GlobalSpace.oledbconnstrFSDBMR, strSql)).Rows.Count > 0)
+            {
+                MessageBox.Show("四班供应商名称已存在！"); return;
+            }
+            //查询生产商名称是否已存在
+            string  strSql1 = @"SELECT
+	                                    *
+                                    FROM
+	                                    ManufacturerNumberName	                                    
+                                    WHERE
+	                                    ManufacturerName = '" + tbManufacturerName_M.Text + "'";
+            if ((SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, strSql1)).Rows.Count > 0)
+            {
+                MessageBox.Show("生产商名称已存在！"); return;
+            }
             //update
             string sqlInsert = @"update ManufacturerNumberName set ManufacturerName='"+ tbManufacturerName_M.Text + "',  UpdateHistory=CONCAT(CONCAT(UpdateHistory,CONCAT(ManufacturerName,CONVERT(varchar(100), GETDATE(), 20))),'" + userID + ";'), Operator='" + userID+ "' where ManufacturerNumber='"+ tbManufacturerNum_M.Text + "' and Status=1"; 
             if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlInsert))
