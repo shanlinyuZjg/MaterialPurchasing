@@ -113,25 +113,25 @@ namespace Global.Purchase
         private void btnSpecDelete_Click(object sender, EventArgs e)
         {
             List<string> idList = new List<string>();
-            foreach(DataGridViewRow dgvr in dgvSpecification.Rows)
+            foreach (DataGridViewRow dgvr in dgvSpecification.Rows)
             {
-                if(Convert.ToBoolean(dgvr.Cells["SpecCheck"].Value))
+                if (Convert.ToBoolean(dgvr.Cells["SpecCheck"].Value))
                 {
                     idList.Add(dgvr.Cells["Id"].Value.ToString());
                 }
             }
 
             string sqlUpdate = @"Delete From PurchaseDepartmentForeignOrderPackageSpecificationByCMF Where Id IN ('{0}')";
-            sqlUpdate = string.Format(sqlUpdate, string.Join("','",idList.ToArray()));
-            if(SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr,sqlUpdate))            
-                {
-                    MessageBoxEx.Show("删除成功！", "提示");
-                    GetSpec();
-                }
-                else
-                {
-                    MessageBoxEx.Show("删除失败！", "提示");
-                }
+            sqlUpdate = string.Format(sqlUpdate, string.Join("','", idList.ToArray()));
+            if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
+            {
+                MessageBoxEx.Show("删除成功！", "提示");
+                GetSpec();
+            }
+            else
+            {
+                MessageBoxEx.Show("删除失败！", "提示");
+            }
         }
 
         private void btnBoxAdd_Click(object sender, EventArgs e)
@@ -182,17 +182,86 @@ VALUES
 
         private void dgvBox_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvBox.Columns[e.ColumnIndex].Name == "BoxCheck")
+            if (e.RowIndex > -1)
             {
-                dgvBox["BoxCheck", e.RowIndex].Value = !Convert.ToBoolean(dgvBox["BoxCheck", e.RowIndex].Value);
+                if (dgvBox.Columns[e.ColumnIndex].Name == "BoxCheck")
+                {
+                    dgvBox["BoxCheck", e.RowIndex].Value = !Convert.ToBoolean(dgvBox["BoxCheck", e.RowIndex].Value);
+                }
             }
         }
         //SpecCheck
         private void dgvSpecification_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvSpecification.Columns[e.ColumnIndex].Name == "SpecCheck")
+            if (e.RowIndex > -1)
             {
-                dgvSpecification["SpecCheck", e.RowIndex].Value = !Convert.ToBoolean(dgvSpecification["SpecCheck", e.RowIndex].Value);
+                if (dgvSpecification.Columns[e.ColumnIndex].Name == "SpecCheck")
+                {
+                    dgvSpecification["SpecCheck", e.RowIndex].Value = !Convert.ToBoolean(dgvSpecification["SpecCheck", e.RowIndex].Value);
+                }
+            }
+        }
+
+        private void dgvCarbon_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                if (dgvCarbon.Columns[e.ColumnIndex].Name == "CarbonCheck")
+                {
+                    dgvCarbon["CarbonCheck", e.RowIndex].Value = !Convert.ToBoolean(dgvCarbon["CarbonCheck", e.RowIndex].Value);
+                }
+            }
+        }
+
+        private void btnCarbonAdd_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(tbCarbonPrice.Text) || string.IsNullOrWhiteSpace(tbCellPrice.Text) || string.IsNullOrWhiteSpace(tbPaperPrice.Text) || string.IsNullOrWhiteSpace(tbCarbonVendorName.Text) || string.IsNullOrWhiteSpace(tbCarbonVendorNum.Text))
+            {
+                MessageBoxEx.Show("内容不能为空！", "提示");
+                return;
+            }
+            string sqlInsert = @"INSERT INTO [FSDB].[dbo].[PurchaseDepartmentForeignOrderPackageCarbonByCMF] (
+	                                            [VendorNumber],
+	                                            [VendorName],
+	                                            [CarbonPrice],
+	                                            [CellPrice],
+                                                [PaperPrice],
+	                                            [Operator]
+                                            )
+                                            VALUES
+	                                            ( '" + tbCarbonVendorNum.Text.Trim().ToUpper() + "',  '" + tbCarbonVendorName.Text.Trim() + "','" + tbCarbonPrice.Text.Trim() + "','" + tbCellPrice.Text.Trim() + "','" + tbPaperPrice.Text.Trim() + "', '" + UserID + "' )";
+            if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlInsert))
+            {
+                MessageBoxEx.Show("增加成功！", "提示");
+                GetCarbon();
+            }
+            else
+            {
+                MessageBoxEx.Show("增加失败！", "提示");
+            }
+        }
+
+        private void btnCarbonDel_Click(object sender, EventArgs e)
+        {
+            List<string> idList = new List<string>();
+            foreach (DataGridViewRow dgvr in dgvCarbon.Rows)
+            {
+                if (Convert.ToBoolean(dgvr.Cells["CarbonCheck"].Value))
+                {
+                    idList.Add(dgvr.Cells["Id"].Value.ToString());
+                }
+            }
+
+            string sqlUpdate = @"Delete From PurchaseDepartmentForeignOrderPackageCarbonByCMF Where Id IN ('{0}')";
+            sqlUpdate = string.Format(sqlUpdate, string.Join("','", idList.ToArray()));
+            if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
+            {
+                MessageBoxEx.Show("删除成功！", "提示");
+                GetCarbon();
+            }
+            else
+            {
+                MessageBoxEx.Show("删除失败！", "提示");
             }
         }
     }

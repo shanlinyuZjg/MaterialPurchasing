@@ -773,7 +773,7 @@ namespace Global.Purchase
                     FROM
 	                    ItemManufacturerInfoByCMF
                     WHERE
-	                    ItemNumber = '" + tbItemNumber.Text + "'    AND VendorNumber = '" + tbItemNumber.Tag.ToString() + "' ";
+	                    ItemNumber = '" + tbItemNumber.Text + "'    AND VendorNumber = '" + tbItemNumber.Tag.ToString() + "' and Status=0";
                    //     MessageBox.Show(strSql);
                         List<string> mList = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, strSql).AsEnumerable().Select(r => r.Field<string>("MInfo")).ToList() ;
                //         MessageBox.Show(mList.Count.ToString());

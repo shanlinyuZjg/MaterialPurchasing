@@ -276,7 +276,8 @@ namespace Global.Warehouse
 	                                        T1.RetestDate AS 重测日期,	                                        
 	                                        T1.InspectionPeriod,
 	                                        T1.StockKeeper,
-	                                        ItemReceiveType,VendorNumber,VendorName,UnitPrice
+	                                        ItemReceiveType,VendorNumber,VendorName,UnitPrice,
+                                            QualityCheckStandard AS 请验标准
                                         FROM
 	                                        PurchaseOrderRecordHistoryByCMF T1
                                         WHERE
@@ -302,7 +303,8 @@ namespace Global.Warehouse
 	                                        T1.RetestDate AS 重测日期,	                                        
 	                                        T1.InspectionPeriod,
 	                                        T1.StockKeeper,
-	                                        ItemReceiveType,VendorNumber,VendorName
+	                                        ItemReceiveType,VendorNumber,VendorName,
+                                            QualityCheckStandard AS 请验标准
                                         FROM
 	                                        PurchaseOrderRecordHistoryByCMF T1
                                         WHERE
@@ -336,7 +338,8 @@ namespace Global.Warehouse
 	                                        T1.RetestDate AS 重测日期,
 	                                        T1.InspectionPeriod,
 	                                        T1.StockKeeper,
-	                                        ItemReceiveType,VendorNumber,VendorName,UnitPrice
+	                                        ItemReceiveType,VendorNumber,VendorName,UnitPrice,
+                                            QualityCheckStandard AS 请验标准
                                         FROM
 	                                        PurchaseOrderRecordHistoryByCMF T1
                                         WHERE

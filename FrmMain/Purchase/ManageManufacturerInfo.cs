@@ -38,7 +38,7 @@ namespace Global.Purchase
                             FROM
                                 ItemManufacturerInfoByCMF
                             WHERE
-                                ItemNumber = '" + tbItemNumber.Text.ToString() + "' and Status = 0";
+                                ItemNumber like '%" + tbItemNumber.Text.ToString() + "%' and Status = 0";
             dgvManufacturerInfo.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
             dgvManufacturerInfo.Columns["Id"].Visible = false;
 
@@ -52,16 +52,7 @@ namespace Global.Purchase
         {
             if (e.KeyChar == (char)13)
             {
-                if (string.IsNullOrEmpty(tbItemNumber.Text.ToString()))
-                {
-                    MessageBoxEx.Show("查询值不能为空！","提示");
-                    return;
-                }
-                else
-                {
-                    btnSearch_Click(sender, e);
-                }
-
+                btnSearch_Click(sender, e);
             }
         }
 
@@ -79,7 +70,7 @@ namespace Global.Purchase
 	                        ManufacturerNumber AS 生产商代码,
 	                        ManufacturerName AS 生产商
                         FROM
-	                        ItemManufacturerInfoByCMF Where VendorNumber = '" + tbVendorNumber.Text.Trim()+"'";
+	                        ItemManufacturerInfoByCMF Where VendorNumber = '" + tbVendorNumber.Text.Trim()+"' and Status = 0";
                     dgvManufacturerInfo.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
                     dgvManufacturerInfo.Columns["Id"].Visible = false;
                     tbItemNumber.Text = "";
@@ -126,7 +117,7 @@ namespace Global.Purchase
             }
             else
             {
-                string sqlCheck = @"Select count(Id) from ItemManufacturerInfoByCMF Where ItemNumber='"+tbItemNumber.Text.Trim()+"' and VendorNumber='"+tbVendorNumber.Text.Trim()+"' and ManufacturerNumber='"+tbManufacturerNumber.Text.Trim()+"'";
+                string sqlCheck = @"Select count(Id) from ItemManufacturerInfoByCMF Where ItemNumber='"+tbItemNumber.Text.Trim()+"' and VendorNumber='"+tbVendorNumber.Text.Trim()+"' and ManufacturerNumber='"+tbManufacturerNumber.Text.Trim()+ "' and Status=0";
                 if(SQLHelper.Exist(GlobalSpace.FSDBConnstr, sqlCheck))
                 {
                     MessageBoxEx.Show("该物料的生产商和供应商信息已存在，请先查找确认！", "提示");
@@ -136,13 +127,7 @@ namespace Global.Purchase
                     string sqlInsert = string.Empty;
                     string mNumber = string.Empty;
                    
-                        mNumber = tbManufacturerNumber.Text.Trim();
-                        if(string.IsNullOrWhiteSpace(mNumber))
-                        {
-                            MessageBoxEx.Show("请填写生产商码！", "提示");
-                            return;
-                        }
-                   
+                        mNumber = tbManufacturerNumber.Text.Trim().ToUpper();
                      sqlInsert = @"INSERT INTO ItemManufacturerInfoByCMF (
 	                            VendorNumber,
 	                            VendorName,
@@ -157,8 +142,8 @@ namespace Global.Purchase
 	                            )";
                     SqlParameter[] sqlparams =
                     {
-                        new SqlParameter("@VendorNumber",tbVendorNumber.Text.Trim()),
-                        new SqlParameter("@VendorName",tbVendorName.Text.ToString()),
+                        new SqlParameter("@VendorNumber",tbVendorNumber.Text.Trim().ToUpper()),
+                        new SqlParameter("@VendorName",tbVendorName.Text.ToString().Trim()),
                         new SqlParameter("@ManufacturerNumber",mNumber),
                         new SqlParameter("@ManufacturerName",tbManufacturerName.Text.ToString()),
                         new SqlParameter("@ItemNumber",tbItemNumber.Text.Trim()),
@@ -179,7 +164,7 @@ namespace Global.Purchase
 	                        ManufacturerNumber AS 生产商代码,
 	                        ManufacturerName AS 生产商
                         FROM
-	                        ItemManufacturerInfoByCMF Where VendorNumber = '" + tbVendorNumber.Text.Trim() + "' Order by Id Desc";
+	                        ItemManufacturerInfoByCMF Where VendorNumber = '" + tbVendorNumber.Text.Trim().ToUpper() + "' and Status=0 Order by Id Desc";
                         dgvManufacturerInfo.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
                         dgvManufacturerInfo.Columns["Id"].Visible = false;
                         tbItemNumber.Text = "";
@@ -253,7 +238,8 @@ namespace Global.Purchase
             if (dgvManufacturerInfo.SelectedRows.Count == 1)
             {
                 string id = dgvManufacturerInfo.SelectedRows[0].Cells["Id"].Value.ToString();
-                string sqlDelete = @"Delete From ItemManufacturerInfoByCMF Where Id = '" + id + "'";
+                //string sqlDelete = @"Delete From ItemManufacturerInfoByCMF Where Id = '" + id + "'";
+                string sqlDelete = @"Update ItemManufacturerInfoByCMF set Status=1,DeleteOperator='"+userID+ "',DelDateTime=getdate() Where Id = '" + id + "'";
                 if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlDelete))
                 {
                     Custom.MsgEx("删除成功！");
