@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using Global.Helper;
 using System.Data.SqlClient;
+using System.Net.Mail;
+using System.Net;
 
 namespace Global.Purchase
 {
@@ -27,22 +29,50 @@ namespace Global.Purchase
             userID = id;
             InitializeComponent();
         }
+        private string Path = string.Empty;
+        private string PoNumber = string.Empty;
+        private string VendorNumber = string.Empty;
+        private string VendorName = string.Empty;
+
+        /// <summary>
+        /// 邮件发送时调用
+        /// </summary>
+        /// <param name="id">用户ID</param>
+        /// <param name="poNumber">采购单号</param>
+        /// <param name="path">附件地址</param>
+        public VendorEmailSetting(string id, string poNumber, string path,string vendornumber,string vendorname)
+        {
+            this.EnableGlass = false;
+            MessageBoxEx.EnableGlass = false;
+            userID = id;
+            PoNumber = poNumber;
+            Path = path;
+            VendorNumber = vendornumber;
+            VendorName = vendorname;
+            InitializeComponent();
+            GBemailsend.Visible = true;
+            this.Text = vendornumber+vendorname + " " + poNumber;
+        }
+
+    
 
         private void VendorEmailSetting_Load(object sender, EventArgs e)
         {
-            tbVendorName.Focus();
+            tbVendorNumber.Text = VendorNumber;
+            btnSearch_Click(null, null);
         }
 
         private void LoadVendorEmail()
         {
-            string sqlSelect = @"Select VendorNumber AS 供应商码,VendorName AS 名称,Email AS 邮箱 From PurchaseDepartmentVendorEmailByCMF";
+            string sqlSelect = @"Select Id, VendorNumber AS 供应商码,VendorName AS 名称,Email AS 邮箱 From PurchaseDepartmentVendorEmailByCMF";
             dgvVendorEmail.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
+            dgvVendorEmail.Columns["Id"].Visible = false;
         }
 
-        private bool IsExist(string vendorid)
+        private bool IsExist()
         {
-            string sqlSelect = @"Select Count(Id) From PurchaseDepartmentVendorEmailByCMF Where VendorNumber='"+vendorid+"'";
-            if(SQLHelper.Exist(GlobalSpace.FSDBConnstr, sqlSelect))
+            string sqlSelect = @"Select Count(Id) From PurchaseDepartmentVendorEmailByCMF Where VendorNumber='" + tbVendorNumber.Text + "' and Email='" + tbEmail.Text + "'";
+            if (SQLHelper.Exist(GlobalSpace.FSDBConnstr, sqlSelect))
             {
                 return true;
             }
@@ -51,14 +81,19 @@ namespace Global.Purchase
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if(IsExist(tbVendorNumber.Text.Trim()))
+            tbVendorNumber.Text = tbVendorNumber.Text.Trim();
+            tbVendorName.Text = tbVendorName.Text.Trim();
+            tbEmail.Text = tbEmail.Text.Trim();
+            if (tbVendorNumber.Text != "" && tbVendorName.Text != "" && tbEmail.Text != "")
             {
-                MessageBoxEx.Show("请注意：该供应商邮箱已存在！", "提示");
-                string sqlSelect = @"Select VendorNumber AS 供应商码,VendorName AS 名称,Email AS 邮箱 From PurchaseDepartmentVendorEmailByCMF Where VendorNumber='"+tbVendorNumber.Text.Trim()+"'";
-                dgvVendorEmail.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
-
-                if (tbVendorNumber.Text != "" && tbVendorName.Text != "" && tbEmail.Text != "")
+                if (IsExist())
                 {
+                    MessageBoxEx.Show("该供应商邮箱已存在！", "提示");
+
+                }
+                else
+                {
+
                     string sqlInsert = @"Insert Into PurchaseDepartmentVendorEmailByCMF (VendorNumber,VendorName,Email) Values(@VendorNumber,@VendorName,@Email)";
                     SqlParameter[] sqlparams =
                     {
@@ -78,102 +113,44 @@ namespace Global.Purchase
                     {
                         MessageBoxEx.Show("增加失败！", "提示");
                     }
-                }
-                else
-                {
-                    MessageBoxEx.Show("供应商代码，名称和邮箱均不能为空！", "提示");
-                }
 
 
+                }
             }
             else
             {
-                if(tbVendorNumber.Text !="" && tbVendorName.Text !="" && tbEmail.Text !="")
-                {
-                    string sqlInsert = @"Insert Into PurchaseDepartmentVendorEmailByCMF (VendorNumber,VendorName,Email) Values(@VendorNumber,@VendorName,@Email)";
-                    SqlParameter[] sqlparams =
-                    {
-                        new SqlParameter("@VendorNumber",tbVendorNumber.Text.Trim()),
-                        new SqlParameter("@VendorName",tbVendorName.Text.Trim()),
-                        new SqlParameter("@Email",tbEmail.Text.Trim())
-                    };
-                    if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlInsert, sqlparams) )
-                    {
-                        MessageBoxEx.Show("增加成功！", "提示");
-                        tbVendorName.Text = "";
-                        tbVendorNumber.Text = "";
-                        tbEmail.Text = "";
-                        LoadVendorEmail();
-                    }
-                    else
-                    {
-                        MessageBoxEx.Show("增加失败！", "提示");
-                    }
-                }
-                else
-                {
-                    MessageBoxEx.Show("供应商代码，名称和邮箱均不能为空！", "提示");
-                }
-
+                MessageBoxEx.Show("供应商代码，名称和邮箱均不能为空！", "提示");
             }
         }
 
-        private void dgvVendorEmail_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            dgvVendorEmail_CellDoubleClick(sender, e);
-        }
 
-        private void dgvVendorEmail_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if(e.RowIndex < 0)
-            {
-                MessageBoxEx.Show("请点击有效区域！", "提示");
-            }
-            else
-            {
-                tbVendorNumber.Text = dgvVendorEmail.Rows[e.RowIndex].Cells["供应商码"].Value.ToString();
-                tbVendorNumber.Tag = dgvVendorEmail.Rows[e.RowIndex].Cells["供应商码"].Value.ToString();
-                tbVendorName.Text = dgvVendorEmail.Rows[e.RowIndex].Cells["名称"].Value.ToString();
-                tbEmail.Text = dgvVendorEmail.Rows[e.RowIndex].Cells["邮箱"].Value.ToString();
-            }
-        }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if(tbVendorNumber.Tag.ToString() =="")
+            List<string> list = new List<string>();
+            for (int i = 0; i < dgvVendorEmail.Rows.Count; i++)
             {
-                MessageBoxEx.Show("该供应商信息不是从下边列表中获得，为确保准确性不能直接进行修改！", "提示");
+                if (Convert.ToBoolean(dgvVendorEmail["EmaiCheck", i].Value))
+                    list.Add(dgvVendorEmail["Id", i].Value.ToString());
+            }
+            if (list.Count == 0) { MessageBox.Show("未选择"); return; }
+            string sqlUpdate = @"delete from PurchaseDepartmentVendorEmailByCMF where Id in ('" + string.Join("','", list) + "')";
+            if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
+            {
+                MessageBoxEx.Show("删除成功！", "提示");
+                LoadVendorEmail();
             }
             else
             {
-                if(tbEmail.Text.Trim() !="")
-                {
-                    string sqlUpdate = @"Update PurchaseDepartmentVendorEmailByCMF Set Email='" + tbEmail.Text.Trim() + "' Where VendorNumber='" + tbVendorNumber.Tag.ToString() + "'";
-                    if(SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate) )
-                    {
-                        MessageBoxEx.Show("更新成功！", "提示");
-                        tbVendorNumber.Text = "";
-                        tbEmail.Text = "";
-                        tbVendorName.Text = "";
-                        LoadVendorEmail();
-                    }
-                    else
-                    {
-                        MessageBoxEx.Show("更新失败！", "提示");
-                    }
-                }
-                else
-                {
-                    MessageBoxEx.Show("邮箱不能为空！", "提示");
-                }
-
+                MessageBoxEx.Show("删除失败！", "提示");
             }
         }
 
         private void tbVendorNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar == (char)13)
+            if (e.KeyChar == (char)13)
             {
+                tbVendorNumber.Text = tbVendorNumber.Text.Trim();
                 if (tbVendorNumber.Text.Trim() != "")
                 {
                     string vendorname = CommonOperate.GetVendorInfo(tbVendorNumber.Text.Trim());
@@ -198,12 +175,102 @@ namespace Global.Purchase
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string sqlSelect = @"Select VendorNumber AS 供应商码,VendorName AS 名称,Email AS 邮箱 From PurchaseDepartmentVendorEmailByCMF Where VendorNumber='" + tbVendorNumber.Text.Trim() + "'";
+            string sqlSelect = @"Select Id, VendorNumber AS 供应商码,VendorName AS 名称,Email AS 邮箱 From PurchaseDepartmentVendorEmailByCMF Where VendorNumber like '%" + tbVendorNumber.Text.Trim() + "%'";
             dgvVendorEmail.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
+            dgvVendorEmail.Columns["Id"].Visible = false;
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+
+        private void dgvVendorEmail_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            int i = e.RowIndex;
+            if (i > -1)
+            {
+                dgvVendorEmail["EmaiCheck", i].Value = !Convert.ToBoolean(dgvVendorEmail["EmaiCheck", i].Value);
+            }
+        }
+
+        private void EmailSend_Click(object sender, EventArgs e)
+        {
+            string sqlSelectUserInfo = @"Select UserID, Email,Password,Name From PurchaseDepartmentRBACByCMF Where UserID='" + userID + "' or UserID=(select SupervisorID From PurchaseDepartmentRBACByCMF Where UserID='" + userID + "')";
+            DataTable dtUserInfo = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelectUserInfo);
+            string UserName = string.Empty;
+            string EmailPassword = string.Empty;
+            foreach (DataRow dr in dtUserInfo.Rows)
+            {
+                if(dr["UserID"].ToString()==userID)
+                {
+                    if (dr["Email"].ToString() == string.Empty)
+                    {
+                        MessageBox.Show("邮箱未设置！");
+                        return;
+                    }
+                    else
+                    {
+                        CBme.Tag = dr["Email"].ToString();
+                        UserName = dr["Name"].ToString();
+                        EmailPassword = dr["Password"].ToString();
+
+                    }
+                }
+                else
+                {
+                    CKleader.Tag = dr["Email"].ToString();
+                }
+            }
+            List<string> smtpList = CommonOperate.GetSMTPServerInfo();
+            if (smtpList.Count > 0)
+            {
+                MailMessage mmsg = new MailMessage();
+                try
+                {
+                    mmsg.From = new MailAddress(CBme.Tag.ToString(), UserName);
+                    for (int i = 0; i < dgvVendorEmail.Rows.Count; i++)
+                    {
+                        if (Convert.ToBoolean(dgvVendorEmail["EmaiCheck", i].Value))
+                        {
+                            mmsg.To.Add(dgvVendorEmail["邮箱", i].Value.ToString());
+                        }
+                    }
+                    if (mmsg.To.Count == 0) { MessageBox.Show("未选择收件人！");return; }
+                    if (CKleader.Checked)
+                    {
+                        if (CKleader.Tag != null)
+                            if (!string.IsNullOrWhiteSpace(CKleader.Tag.ToString()))
+                                mmsg.CC.Add(CKleader.Tag.ToString());
+
+                    }
+                    if (CBme.Checked)
+                    {
+                        mmsg.CC.Add(CBme.Tag.ToString());
+
+                    }
+                    mmsg.Subject = "瑞阳制药有限公司采购订单";
+                    mmsg.Body = VendorName + "：" + "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "您好!<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;附件是瑞阳制药有限公司采购订单，请查收并及时配货，有问题及时联系！";
+                    //IsBodyHtml为True，如果邮件内容中有需要换行等操作的，使用<br>来换行或者其他的标识符
+                    mmsg.IsBodyHtml = true;
+                    Attachment mailAttach = new Attachment(Path);
+                    mmsg.Attachments.Add(mailAttach);
+                    mmsg.BodyEncoding = System.Text.Encoding.GetEncoding("UTF-8");
+                    mmsg.Priority = MailPriority.High;
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = smtpList[0];
+                    smtp.Port = Convert.ToInt32(smtpList[1]);
+                    smtp.Credentials = new NetworkCredential(CBme.Tag.ToString(), CommonOperate.Base64Decrypt(EmailPassword));
+                    smtp.Send(mmsg);
+                    mmsg.Dispose();
+                    MessageBox.Show("邮件发送完成");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("邮件发送失败:"+ex.Message);
+                }
+            }
+            else
+            {
+                MessageBoxEx.Show("未设置SMTP服务器IP地址和端口，请联系管理员！", "提示");
+            }
+
 
         }
     }

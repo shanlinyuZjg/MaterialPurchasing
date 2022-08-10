@@ -2256,113 +2256,37 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
 
         private void btnSendVendorPOMail_Click(object sender, EventArgs e)
         {
-            if(GlobalSpace.vendorEmailList != null)
+            tbPOForSearch.Text = tbPOForSearch.Text.Trim().ToUpper();
+            if (GlobalSpace.vendorEmailList != null)
             {
                 if (GlobalSpace.vendorEmailList.Count > 0)
                 {
                     GlobalSpace.vendorEmailList.Clear();
                 }
             }
-          
+
             string filePath = string.Empty;
 
             //判断当前订单导出的Excel文件是否存在
-            string sqlSelect = @"Select Name,FilePath From PurchaseDepartmentFilePathByCMF Where BuyerID='" + fsuserid + "' And Status = 0 And Name = '" + "采购订单导出路径" + "'";
+            string sqlSelect = @"Select Name,FilePath From PurchaseDepartmentFilePathByCMF Where BuyerID='" + fsuserid + "' And Status = 0 And Name = '采购订单导出路径'";
 
             DataTable dtTemp = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
             if (dtTemp.Rows.Count > 0)
             {
                 filePath = dtTemp.Rows[0]["FilePath"].ToString();
             }
-
-            if (tbPOForSearch.Text != "")
+            if (!string.IsNullOrWhiteSpace(tbPOForSearch.Text))
             {
-                if (File.Exists(filePath + "\\" + tbPOForSearch.Text.Trim() + ".xlsx"))
+                DataRow dr3 = GetVendorIDAndName(tbPOForSearch.Text);
+                string vendorNumber = dr3["VendorNumber"].ToString();
+                string vendorName = dr3["VendorName"].ToString();
+                if (File.Exists(filePath + "\\" + vendorName + " " + tbPOForSearch.Text + ".xlsx"))
                 {
-                    string sqlSelectUserInfo = @"Select Email,Password,Name From PurchaseDepartmentRBACByCMF Where UserID='" + fsuserid + "'";
-                    string sqlSelectVendorInfo = @"Select VendorNumber From PurchaseOrderRecordByCMF Where PONumber='" + tbPOForSearch.Text.Trim() + "'";
-                    string vendorNumber = string.Empty;
-                    DataTable dtVendorInfo = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelectVendorInfo);
-                    if (dtVendorInfo.Rows.Count > 0)
-                    {
-                        vendorNumber = dtVendorInfo.Rows[0]["VendorNumber"].ToString();
-                    }
-                    else
-                    {
-                        MessageBoxEx.Show("未查到该供应商信息！", "提示");
-                        return;
-                    }
 
-                    string sqlSelectVendorInfo2 = @"Select VendorName,Email From PurchaseDepartmentVendorEmailByCMF Where VendorNumber='" + vendorNumber + "'";
-                    DataTable dtUserInfo = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelectUserInfo);
-                    DataTable dtVendorInfo2 = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelectVendorInfo2);
-                    string vendorEmail = string.Empty;
-                    string vendorName = string.Empty;
-                    if (dtVendorInfo2.Rows.Count > 0)
-                    {
-                        if(dtVendorInfo2.Rows.Count == 1)
-                        {
-                            vendorEmail = dtVendorInfo2.Rows[0]["Email"].ToString();
-                            vendorName = dtVendorInfo2.Rows[0]["VendorName"].ToString();
-                        }
-                        else
-                        {
-                            Custom.MsgEx("该供应商有多个联系人邮箱，请选择！");
-                            ChooseVendorEmail cve = new ChooseVendorEmail(vendorNumber);
-                            cve.ShowDialog();
-                            vendorName = GlobalSpace.vendorEmailList[0].ToString();
-                            vendorEmail = GlobalSpace.vendorEmailList[1].ToString();
-                        }
-
-                    }
-                    else
-                    {
-                        MessageBoxEx.Show("供应商邮箱未设置！", "提示");
-                        return;
-                    }
-                    if (dtUserInfo.Rows.Count > 0)
-                    {
-                        if (dtUserInfo.Rows[0]["Email"] != DBNull.Value)
-                        {
-                            if (dtUserInfo.Rows[0]["Email"].ToString() != "")
-                            {
-                                List<string> smtpList = CommonOperate.GetSMTPServerInfo();
-                                if (smtpList.Count > 0)
-                                {
-                                    Email email = new Email();
-                                    email.fromEmail = dtUserInfo.Rows[0]["Email"].ToString();
-                                    email.fromPerson = dtUserInfo.Rows[0]["Name"].ToString();
-                                    email.toEmail = vendorEmail;
-                                    email.toPerson = vendorName;
-                                    email.encoding = "UTF-8";
-                                    email.smtpServer = smtpList[0];
-                                    email.userName = dtUserInfo.Rows[0]["Email"].ToString();
-                                    email.passWord = CommonOperate.Base64Decrypt(dtUserInfo.Rows[0]["Password"].ToString());
-                                    email.emailTitle = "瑞阳制药有限公司采购订单";
-                                    email.emailContent = vendorName + "：" + "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "您好!<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;附件是瑞阳制药有限公司采购订单，请查收并及时配货，有问题及时联系！";
-
-                                    if (MailHelper.SendEmailWithAttachment(email, (filePath + "\\" + tbPOForSearch.Text.Trim() + ".xlsx")))
-                                    {
-                                        MessageBoxEx.Show("邮件发送成功！", "提示");
-                                    }
-                                    else
-                                    {
-                                        MessageBoxEx.Show("邮件发送失败！", "提示");
-                                    }
-                                }
-                                else
-                                {
-                                    MessageBoxEx.Show("未设置SMTP服务器IP地址和端口，请联系管理员！", "提示");
-                                }
-
-                            }
-                        }
-                        else
-                        {
-                            MessageBoxEx.Show("自己的邮箱未设置！", "提示");
-                        }
-                    }
+                    VendorEmailSetting Ves = new VendorEmailSetting(fsuserid, tbPOForSearch.Text.Trim().ToUpper(), filePath + "\\" + vendorName + " " + tbPOForSearch.Text + ".xlsx", vendorNumber, vendorName);
+                    Ves.ShowDialog();
                 }
+
                 else
                 {
                     MessageBoxEx.Show("没有导出该订单的文件，请先导出！", "提示");
@@ -2380,42 +2304,6 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
             return (DataTable)dgvPO2.DataSource;
         }
 
-        private void btnSubmitPOToStockKeeper_Click(object sender, EventArgs e)
-        {
-            string poNumber = tbPOForSearch.Text.Trim();
-            List<string> sqlList = new List<string>();
-
-            if (string.IsNullOrEmpty(poNumber))
-            {
-                MessageBoxEx.Show("采购单号不能为空！", "提示");
-            }
-            else
-            {
-                string strCheck = @" Select Count(Id) from PurchaseOrdersByCMF Where PONumber='" + poNumber + "' And POStatus >= 3";
-                if (SQLHelper.Exist(GlobalSpace.FSDBConnstr, strCheck))
-                {
-                    foreach (DataGridViewRow dgvr in dgvPO2.Rows)
-                    {
-                        if (Convert.ToBoolean(dgvr.Cells["Choose"].Value) == true && dgvr.Cells["POStatus2"].Value.ToString() == "已下达")
-                        {                         
-                            string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set POStatus = 4 Where Guid = '" + dgvr.Cells["GUID"].Value.ToString() + "' ";
-                            sqlList.Add(sqlUpdate);
-                        }             
-                    }
-
-                    if (SQLHelper.BatchExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlList))
-                    {
-                        Custom.MsgEx("更新成功！");
-                        dgvPO2.DataSource = GetVendorPOItemsDetail(tbPOForSearch.Text.Trim());
-                        dgvPO2.Columns["GUID"].Visible = false;
-                    }
-                    else
-                    {
-                        Custom.MsgEx("更新失败，联系管理员！");
-                    }
-                }
-            }
-        }
         //更新订单状态
         private bool UpdatePOStatus(string poNumber, int status)
         {
@@ -2508,6 +2396,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
 
         private void btnSearchPO2_Click(object sender, EventArgs e)
         {
+            tbPOForSearch.Text= tbPOForSearch.Text.Trim();
             if (tbPOForSearch.Text != "")
             {
                 if (GetVendorPOItemsDetail(tbPOForSearch.Text.Trim()) != null)
@@ -2781,14 +2670,14 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                     Custom.MsgEx("订单号不能为空！");
                     return;
                 }
-
-                if (File.Exists(filePath + "\\" + poNumber + ".xlsx"))
+                DataRow dr3 = GetVendorIDAndName(poNumber);
+                string vendorNumber = dr3["VendorNumber"].ToString();
+                string vendorName = dr3["VendorName"].ToString();
+                if (File.Exists(filePath + "\\" + vendorName+" "+ poNumber + ".xlsx"))
                 {
                     if (MessageBoxEx.Show("该订单的导出文件已经存在，确定要覆盖么？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
                     {
-                        DataRow dr3 = GetVendorIDAndName(poNumber);
-                        string vendorNumber = dr3["VendorNumber"].ToString();
-                        string vendorName = dr3["VendorName"].ToString();
+                        
 
                         if (dgvPO2.Rows.Count > 0)
                         {
@@ -2840,9 +2729,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                 }
                 else
                 {
-                    DataRow dr3 = GetVendorIDAndName(poNumber);
-                    string vendorNumber = dr3["VendorNumber"].ToString();
-                    string vendorName = dr3["VendorName"].ToString();
+                    
 
                     if (dgvPO2.Rows.Count > 0)
                     {

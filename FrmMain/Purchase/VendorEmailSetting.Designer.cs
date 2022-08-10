@@ -37,8 +37,15 @@
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.tbEmail = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.dgvVendorEmail = new System.Windows.Forms.DataGridView();
+            this.EmaiCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btnSearch = new DevComponents.DotNetBar.ButtonX();
+            this.GBemailsend = new System.Windows.Forms.GroupBox();
+            this.EmailSend = new System.Windows.Forms.Button();
+            this.CKleader = new System.Windows.Forms.CheckBox();
+            this.CBme = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVendorEmail)).BeginInit();
+            this.GBemailsend.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAdd
@@ -113,7 +120,7 @@
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnUpdate.TabIndex = 0;
-            this.btnUpdate.Text = "修改";
+            this.btnUpdate.Text = "删除";
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // labelX3
@@ -144,16 +151,30 @@
             // dgvVendorEmail
             // 
             this.dgvVendorEmail.AllowUserToAddRows = false;
+            this.dgvVendorEmail.AllowUserToDeleteRows = false;
+            this.dgvVendorEmail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvVendorEmail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvVendorEmail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVendorEmail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.EmaiCheck});
             this.dgvVendorEmail.Location = new System.Drawing.Point(1, 71);
             this.dgvVendorEmail.Name = "dgvVendorEmail";
             this.dgvVendorEmail.ReadOnly = true;
+            this.dgvVendorEmail.RowHeadersVisible = false;
             this.dgvVendorEmail.RowTemplate.Height = 23;
-            this.dgvVendorEmail.Size = new System.Drawing.Size(474, 508);
+            this.dgvVendorEmail.Size = new System.Drawing.Size(997, 508);
             this.dgvVendorEmail.TabIndex = 3;
-            this.dgvVendorEmail.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVendorEmail_CellContentDoubleClick);
-            this.dgvVendorEmail.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVendorEmail_CellDoubleClick);
+            this.dgvVendorEmail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVendorEmail_CellClick);
+            // 
+            // EmaiCheck
+            // 
+            this.EmaiCheck.HeaderText = "选择  ";
+            this.EmaiCheck.Name = "EmaiCheck";
+            this.EmaiCheck.ReadOnly = true;
+            this.EmaiCheck.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.EmaiCheck.Width = 42;
             // 
             // btnSearch
             // 
@@ -167,11 +188,66 @@
             this.btnSearch.Text = "查找";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
+            // GBemailsend
+            // 
+            this.GBemailsend.Controls.Add(this.label1);
+            this.GBemailsend.Controls.Add(this.EmailSend);
+            this.GBemailsend.Controls.Add(this.CKleader);
+            this.GBemailsend.Controls.Add(this.CBme);
+            this.GBemailsend.Location = new System.Drawing.Point(493, 2);
+            this.GBemailsend.Name = "GBemailsend";
+            this.GBemailsend.Size = new System.Drawing.Size(505, 63);
+            this.GBemailsend.TabIndex = 4;
+            this.GBemailsend.TabStop = false;
+            this.GBemailsend.Visible = false;
+            // 
+            // EmailSend
+            // 
+            this.EmailSend.Location = new System.Drawing.Point(135, 18);
+            this.EmailSend.Name = "EmailSend";
+            this.EmailSend.Size = new System.Drawing.Size(75, 23);
+            this.EmailSend.TabIndex = 2;
+            this.EmailSend.Text = "发送邮件";
+            this.EmailSend.UseVisualStyleBackColor = true;
+            this.EmailSend.Click += new System.EventHandler(this.EmailSend_Click);
+            // 
+            // CKleader
+            // 
+            this.CKleader.AutoSize = true;
+            this.CKleader.Location = new System.Drawing.Point(70, 21);
+            this.CKleader.Name = "CKleader";
+            this.CKleader.Size = new System.Drawing.Size(48, 16);
+            this.CKleader.TabIndex = 1;
+            this.CKleader.Text = "领导";
+            this.CKleader.UseVisualStyleBackColor = true;
+            // 
+            // CBme
+            // 
+            this.CBme.AutoSize = true;
+            this.CBme.Checked = true;
+            this.CBme.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CBme.Location = new System.Drawing.Point(10, 21);
+            this.CBme.Name = "CBme";
+            this.CBme.Size = new System.Drawing.Size(48, 16);
+            this.CBme.TabIndex = 0;
+            this.CBme.Text = "自己";
+            this.CBme.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(249, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(227, 12);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "请确保Excel附件已导出，且不是打开状态";
+            // 
             // VendorEmailSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(478, 582);
+            this.ClientSize = new System.Drawing.Size(999, 582);
+            this.Controls.Add(this.GBemailsend);
             this.Controls.Add(this.dgvVendorEmail);
             this.Controls.Add(this.tbVendorName);
             this.Controls.Add(this.tbEmail);
@@ -190,6 +266,8 @@
             this.Text = "供应商邮箱设置";
             this.Load += new System.EventHandler(this.VendorEmailSetting_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVendorEmail)).EndInit();
+            this.GBemailsend.ResumeLayout(false);
+            this.GBemailsend.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -206,5 +284,11 @@
         private DevComponents.DotNetBar.Controls.TextBoxX tbEmail;
         private System.Windows.Forms.DataGridView dgvVendorEmail;
         private DevComponents.DotNetBar.ButtonX btnSearch;
+        private System.Windows.Forms.GroupBox GBemailsend;
+        private System.Windows.Forms.Button EmailSend;
+        private System.Windows.Forms.CheckBox CKleader;
+        private System.Windows.Forms.CheckBox CBme;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn EmaiCheck;
+        private System.Windows.Forms.Label label1;
     }
 }

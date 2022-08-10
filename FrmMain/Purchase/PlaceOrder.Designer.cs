@@ -145,9 +145,23 @@
             this.tbVendorNumber2 = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX26 = new DevComponents.DotNetBar.LabelX();
             this.labelX22 = new DevComponents.DotNetBar.LabelX();
-            this.btnSubmitPOToStockKeeper = new DevComponents.DotNetBar.ButtonX();
             this.btnSendVendorPOMail = new DevComponents.DotNetBar.ButtonX();
             this.dgvPO2 = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.GUID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LineNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemUM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrderQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemSum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StockKeeper = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.POStatus2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DemandDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ForeignNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ManufacturerNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ManufacturerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ActualDeliveryQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.superTabItem1 = new DevComponents.DotNetBar.SuperTabItem();
             this.superTabControlPanel3 = new DevComponents.DotNetBar.SuperTabControlPanel();
             this.btnConfirmPOItemGetInvoice = new DevComponents.DotNetBar.ButtonX();
@@ -176,21 +190,6 @@
             this.关闭改行物料ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除该订单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.GUID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LineNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemUM = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrderQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemSum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StockKeeper = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.POStatus2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DemandDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ForeignNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ManufacturerNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ManufacturerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ActualDeliveryQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelEx2.SuspendLayout();
             this.panelEx1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl2)).BeginInit();
@@ -1451,7 +1450,6 @@
             this.superTabControlPanel1.Controls.Add(this.btnVendorEmailSetting);
             this.superTabControlPanel1.Controls.Add(this.btnExportToExcel);
             this.superTabControlPanel1.Controls.Add(this.groupBox2);
-            this.superTabControlPanel1.Controls.Add(this.btnSubmitPOToStockKeeper);
             this.superTabControlPanel1.Controls.Add(this.btnSendVendorPOMail);
             this.superTabControlPanel1.Controls.Add(this.dgvPO2);
             this.superTabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1657,19 +1655,6 @@
             this.labelX22.TabIndex = 21;
             this.labelX22.Text = "订单编号";
             // 
-            // btnSubmitPOToStockKeeper
-            // 
-            this.btnSubmitPOToStockKeeper.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnSubmitPOToStockKeeper.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSubmitPOToStockKeeper.Location = new System.Drawing.Point(915, 3);
-            this.btnSubmitPOToStockKeeper.Name = "btnSubmitPOToStockKeeper";
-            this.btnSubmitPOToStockKeeper.Size = new System.Drawing.Size(80, 23);
-            this.btnSubmitPOToStockKeeper.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnSubmitPOToStockKeeper.TabIndex = 20;
-            this.btnSubmitPOToStockKeeper.Text = "确认到货";
-            this.btnSubmitPOToStockKeeper.Visible = false;
-            this.btnSubmitPOToStockKeeper.Click += new System.EventHandler(this.btnSubmitPOToStockKeeper_Click);
-            // 
             // btnSendVendorPOMail
             // 
             this.btnSendVendorPOMail.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -1739,6 +1724,112 @@
             this.dgvPO2.Size = new System.Drawing.Size(1254, 294);
             this.dgvPO2.TabIndex = 0;
             this.dgvPO2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPO2_CellContentClick);
+            // 
+            // GUID
+            // 
+            this.GUID.DataPropertyName = "GUID";
+            this.GUID.HeaderText = "GUID";
+            this.GUID.Name = "GUID";
+            this.GUID.Visible = false;
+            this.GUID.Width = 54;
+            // 
+            // LineNumber
+            // 
+            this.LineNumber.DataPropertyName = "LineNumber";
+            this.LineNumber.HeaderText = "行号";
+            this.LineNumber.Name = "LineNumber";
+            this.LineNumber.Width = 54;
+            // 
+            // ItemNumber
+            // 
+            this.ItemNumber.DataPropertyName = "ItemNumber";
+            this.ItemNumber.HeaderText = "物料代码";
+            this.ItemNumber.Name = "ItemNumber";
+            this.ItemNumber.Width = 78;
+            // 
+            // ItemDescription
+            // 
+            this.ItemDescription.DataPropertyName = "ItemDescription";
+            this.ItemDescription.HeaderText = "物料描述";
+            this.ItemDescription.Name = "ItemDescription";
+            this.ItemDescription.Width = 78;
+            // 
+            // ItemUM
+            // 
+            this.ItemUM.DataPropertyName = "ItemUM";
+            this.ItemUM.HeaderText = "单位";
+            this.ItemUM.Name = "ItemUM";
+            this.ItemUM.Width = 54;
+            // 
+            // UnitPrice
+            // 
+            this.UnitPrice.DataPropertyName = "UnitPrice";
+            this.UnitPrice.HeaderText = "单价";
+            this.UnitPrice.Name = "UnitPrice";
+            this.UnitPrice.Width = 54;
+            // 
+            // OrderQuantity
+            // 
+            this.OrderQuantity.DataPropertyName = "OrderQuantity";
+            this.OrderQuantity.HeaderText = "订购数量";
+            this.OrderQuantity.Name = "OrderQuantity";
+            this.OrderQuantity.Width = 78;
+            // 
+            // ItemSum
+            // 
+            this.ItemSum.DataPropertyName = "ItemSum";
+            this.ItemSum.HeaderText = "合计";
+            this.ItemSum.Name = "ItemSum";
+            this.ItemSum.Width = 54;
+            // 
+            // StockKeeper
+            // 
+            this.StockKeeper.DataPropertyName = "StockKeeper";
+            this.StockKeeper.HeaderText = "库管员";
+            this.StockKeeper.Name = "StockKeeper";
+            this.StockKeeper.Width = 66;
+            // 
+            // POStatus2
+            // 
+            this.POStatus2.DataPropertyName = "POStatus";
+            this.POStatus2.HeaderText = "状态";
+            this.POStatus2.Name = "POStatus2";
+            this.POStatus2.Width = 54;
+            // 
+            // DemandDate
+            // 
+            this.DemandDate.DataPropertyName = "DemandDate";
+            this.DemandDate.HeaderText = "需求日期";
+            this.DemandDate.Name = "DemandDate";
+            this.DemandDate.Width = 78;
+            // 
+            // ForeignNumber
+            // 
+            this.ForeignNumber.DataPropertyName = "ForeignNumber";
+            this.ForeignNumber.HeaderText = "外贸单号";
+            this.ForeignNumber.Name = "ForeignNumber";
+            this.ForeignNumber.Width = 78;
+            // 
+            // ManufacturerNumber
+            // 
+            this.ManufacturerNumber.DataPropertyName = "ManufacturerNumber";
+            this.ManufacturerNumber.HeaderText = "生产商码";
+            this.ManufacturerNumber.Name = "ManufacturerNumber";
+            this.ManufacturerNumber.Width = 78;
+            // 
+            // ManufacturerName
+            // 
+            this.ManufacturerName.DataPropertyName = "ManufacturerName";
+            this.ManufacturerName.HeaderText = "生产商名";
+            this.ManufacturerName.Name = "ManufacturerName";
+            this.ManufacturerName.Width = 78;
+            // 
+            // ActualDeliveryQuantity
+            // 
+            this.ActualDeliveryQuantity.DataPropertyName = "ActualDeliveryQuantity";
+            this.ActualDeliveryQuantity.HeaderText = "到货数量";
+            this.ActualDeliveryQuantity.Name = "ActualDeliveryQuantity";
+            this.ActualDeliveryQuantity.Width = 78;
             // 
             // superTabItem1
             // 
@@ -2103,112 +2194,6 @@
             this.删除该订单ToolStripMenuItem.Text = "删除该订单";
             this.删除该订单ToolStripMenuItem.Click += new System.EventHandler(this.删除该订单ToolStripMenuItem_Click);
             // 
-            // GUID
-            // 
-            this.GUID.DataPropertyName = "GUID";
-            this.GUID.HeaderText = "GUID";
-            this.GUID.Name = "GUID";
-            this.GUID.Visible = false;
-            this.GUID.Width = 54;
-            // 
-            // LineNumber
-            // 
-            this.LineNumber.DataPropertyName = "LineNumber";
-            this.LineNumber.HeaderText = "行号";
-            this.LineNumber.Name = "LineNumber";
-            this.LineNumber.Width = 54;
-            // 
-            // ItemNumber
-            // 
-            this.ItemNumber.DataPropertyName = "ItemNumber";
-            this.ItemNumber.HeaderText = "物料代码";
-            this.ItemNumber.Name = "ItemNumber";
-            this.ItemNumber.Width = 78;
-            // 
-            // ItemDescription
-            // 
-            this.ItemDescription.DataPropertyName = "ItemDescription";
-            this.ItemDescription.HeaderText = "物料描述";
-            this.ItemDescription.Name = "ItemDescription";
-            this.ItemDescription.Width = 78;
-            // 
-            // ItemUM
-            // 
-            this.ItemUM.DataPropertyName = "ItemUM";
-            this.ItemUM.HeaderText = "单位";
-            this.ItemUM.Name = "ItemUM";
-            this.ItemUM.Width = 54;
-            // 
-            // UnitPrice
-            // 
-            this.UnitPrice.DataPropertyName = "UnitPrice";
-            this.UnitPrice.HeaderText = "单价";
-            this.UnitPrice.Name = "UnitPrice";
-            this.UnitPrice.Width = 54;
-            // 
-            // OrderQuantity
-            // 
-            this.OrderQuantity.DataPropertyName = "OrderQuantity";
-            this.OrderQuantity.HeaderText = "订购数量";
-            this.OrderQuantity.Name = "OrderQuantity";
-            this.OrderQuantity.Width = 78;
-            // 
-            // ItemSum
-            // 
-            this.ItemSum.DataPropertyName = "ItemSum";
-            this.ItemSum.HeaderText = "合计";
-            this.ItemSum.Name = "ItemSum";
-            this.ItemSum.Width = 54;
-            // 
-            // StockKeeper
-            // 
-            this.StockKeeper.DataPropertyName = "StockKeeper";
-            this.StockKeeper.HeaderText = "库管员";
-            this.StockKeeper.Name = "StockKeeper";
-            this.StockKeeper.Width = 66;
-            // 
-            // POStatus2
-            // 
-            this.POStatus2.DataPropertyName = "POStatus";
-            this.POStatus2.HeaderText = "状态";
-            this.POStatus2.Name = "POStatus2";
-            this.POStatus2.Width = 54;
-            // 
-            // DemandDate
-            // 
-            this.DemandDate.DataPropertyName = "DemandDate";
-            this.DemandDate.HeaderText = "需求日期";
-            this.DemandDate.Name = "DemandDate";
-            this.DemandDate.Width = 78;
-            // 
-            // ForeignNumber
-            // 
-            this.ForeignNumber.DataPropertyName = "ForeignNumber";
-            this.ForeignNumber.HeaderText = "外贸单号";
-            this.ForeignNumber.Name = "ForeignNumber";
-            this.ForeignNumber.Width = 78;
-            // 
-            // ManufacturerNumber
-            // 
-            this.ManufacturerNumber.DataPropertyName = "ManufacturerNumber";
-            this.ManufacturerNumber.HeaderText = "生产商码";
-            this.ManufacturerNumber.Name = "ManufacturerNumber";
-            this.ManufacturerNumber.Width = 78;
-            // 
-            // ManufacturerName
-            // 
-            this.ManufacturerName.DataPropertyName = "ManufacturerName";
-            this.ManufacturerName.HeaderText = "生产商名";
-            this.ManufacturerName.Name = "ManufacturerName";
-            this.ManufacturerName.Width = 78;
-            // 
-            // ActualDeliveryQuantity
-            // 
-            this.ActualDeliveryQuantity.DataPropertyName = "ActualDeliveryQuantity";
-            this.ActualDeliveryQuantity.HeaderText = "到货数量";
-            this.ActualDeliveryQuantity.Name = "ActualDeliveryQuantity";
-            this.ActualDeliveryQuantity.Width = 78;
-            // 
             // PlaceOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2299,7 +2284,6 @@
         private DevComponents.DotNetBar.Controls.TextBoxX tbVendorNumber2;
         private DevComponents.DotNetBar.LabelX labelX22;
         private DevComponents.DotNetBar.ButtonX btnSendVendorPOMail;
-        private DevComponents.DotNetBar.ButtonX btnSubmitPOToStockKeeper;
         private DevComponents.DotNetBar.ButtonX btnExportToExcel;
         private DevComponents.DotNetBar.ButtonX btnVendorEmailSetting;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvPONumberForInvoice;
