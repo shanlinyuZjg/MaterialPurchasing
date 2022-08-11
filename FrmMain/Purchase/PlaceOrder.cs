@@ -2280,10 +2280,10 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                 DataRow dr3 = GetVendorIDAndName(tbPOForSearch.Text);
                 string vendorNumber = dr3["VendorNumber"].ToString();
                 string vendorName = dr3["VendorName"].ToString();
-                if (File.Exists(filePath + "\\" + vendorName + " " + tbPOForSearch.Text + ".xlsx"))
+                if (File.Exists(filePath + "\\" +  tbPOForSearch.Text + ".xlsx"))
                 {
 
-                    VendorEmailSetting Ves = new VendorEmailSetting(fsuserid, tbPOForSearch.Text.Trim().ToUpper(), filePath + "\\" + vendorName + " " + tbPOForSearch.Text + ".xlsx", vendorNumber, vendorName);
+                    VendorEmailSetting Ves = new VendorEmailSetting(fsuserid, tbPOForSearch.Text.Trim().ToUpper(), filePath + "\\" +  tbPOForSearch.Text + ".xlsx", vendorNumber, vendorName);
                     Ves.ShowDialog();
                 }
 
@@ -2673,7 +2673,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                 DataRow dr3 = GetVendorIDAndName(poNumber);
                 string vendorNumber = dr3["VendorNumber"].ToString();
                 string vendorName = dr3["VendorName"].ToString();
-                if (File.Exists(filePath + "\\" + vendorName+" "+ poNumber + ".xlsx"))
+                if (File.Exists(filePath + "\\" +  poNumber + ".xlsx"))
                 {
                     if (MessageBoxEx.Show("该订单的导出文件已经存在，确定要覆盖么？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
                     {
@@ -2936,7 +2936,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                 */
                 AutosizeColumnWidth(sheet1, dt.Columns.Count-1);
                 
-                FileStream file = new FileStream(filePath + "\\" +vendorname+" "+ ponumber + ".xlsx", FileMode.Create);
+                FileStream file = new FileStream(filePath + "\\" + ponumber + ".xlsx", FileMode.Create);
                 workbook.Write(file);
                 file.Close();
                 workbook.Close();
