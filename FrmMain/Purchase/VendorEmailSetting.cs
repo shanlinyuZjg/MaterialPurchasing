@@ -62,12 +62,6 @@ namespace Global.Purchase
             btnSearch_Click(null, null);
         }
 
-        private void LoadVendorEmail()
-        {
-            string sqlSelect = @"Select Id, VendorNumber AS 供应商码,VendorName AS 名称,Email AS 邮箱 From PurchaseDepartmentVendorEmailByCMF";
-            dgvVendorEmail.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
-            dgvVendorEmail.Columns["Id"].Visible = false;
-        }
 
         private bool IsExist()
         {
@@ -94,12 +88,13 @@ namespace Global.Purchase
                 else
                 {
 
-                    string sqlInsert = @"Insert Into PurchaseDepartmentVendorEmailByCMF (VendorNumber,VendorName,Email) Values(@VendorNumber,@VendorName,@Email)";
+                    string sqlInsert = @"Insert Into PurchaseDepartmentVendorEmailByCMF (VendorNumber,VendorName,Email,EmailName) Values(@VendorNumber,@VendorName,@Email,@EmailName)";
                     SqlParameter[] sqlparams =
                     {
                         new SqlParameter("@VendorNumber",tbVendorNumber.Text.Trim()),
                         new SqlParameter("@VendorName",tbVendorName.Text.Trim()),
-                        new SqlParameter("@Email",tbEmail.Text.Trim())
+                        new SqlParameter("@Email",tbEmail.Text.Trim()),
+                        new SqlParameter("@EmailName",tbEmailName.Text.Trim())
                     };
                     if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlInsert, sqlparams))
                     {
@@ -107,7 +102,8 @@ namespace Global.Purchase
                         tbVendorName.Text = "";
                         tbVendorNumber.Text = "";
                         tbEmail.Text = "";
-                        LoadVendorEmail();
+                        tbEmailName.Text = "";
+                        btnSearch_Click(null, null);
                     }
                     else
                     {
@@ -119,7 +115,7 @@ namespace Global.Purchase
             }
             else
             {
-                MessageBoxEx.Show("供应商代码，名称和邮箱均不能为空！", "提示");
+                MessageBoxEx.Show("供应商代码，供应商名和邮箱均不能为空！", "提示");
             }
         }
 
@@ -138,7 +134,7 @@ namespace Global.Purchase
             if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
             {
                 MessageBoxEx.Show("删除成功！", "提示");
-                LoadVendorEmail();
+                btnSearch_Click(null, null);
             }
             else
             {
@@ -175,7 +171,7 @@ namespace Global.Purchase
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string sqlSelect = @"Select Id, VendorNumber AS 供应商码,VendorName AS 名称,Email AS 邮箱 From PurchaseDepartmentVendorEmailByCMF Where VendorNumber like '%" + tbVendorNumber.Text.Trim() + "%'";
+            string sqlSelect = @"Select Id, VendorNumber AS 供应商码,VendorName AS 供应商名,Email AS 邮箱,EmailName AS 姓名 From PurchaseDepartmentVendorEmailByCMF Where VendorNumber like '%" + tbVendorNumber.Text.Trim() + "%'";
             dgvVendorEmail.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
             dgvVendorEmail.Columns["Id"].Visible = false;
         }
@@ -229,7 +225,7 @@ namespace Global.Purchase
                     {
                         if (Convert.ToBoolean(dgvVendorEmail["EmaiCheck", i].Value))
                         {
-                            mmsg.To.Add(dgvVendorEmail["邮箱", i].Value.ToString());
+                            mmsg.To.Add(new MailAddress(dgvVendorEmail["邮箱", i].Value.ToString(), dgvVendorEmail["姓名", i].Value.ToString()));
                         }
                     }
                     if (mmsg.To.Count == 0) { MessageBox.Show("未选择收件人！");return; }
@@ -251,6 +247,10 @@ namespace Global.Purchase
                     mmsg.IsBodyHtml = true;
                     Attachment mailAttach = new Attachment(Path);
                     mmsg.Attachments.Add(mailAttach);
+                    for (int i = 0; i < DgvFJ.Rows.Count; i++)
+                    {
+                        mmsg.Attachments.Add(new Attachment(DgvFJ["FilePath",i].Value.ToString()));
+                    }
                     mmsg.BodyEncoding = System.Text.Encoding.GetEncoding("UTF-8");
                     mmsg.Priority = MailPriority.High;
                     SmtpClient smtp = new SmtpClient();
@@ -272,6 +272,35 @@ namespace Global.Purchase
             }
 
 
+        }
+
+        private void AddAttachment_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog file = new OpenFileDialog();
+            if (file.ShowDialog() == DialogResult.OK)
+            {
+                DgvFJ.Rows.Add(file.FileName);
+                
+            }
+        }
+
+        private void DgvFJ_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                if (DgvFJ.Columns[e.ColumnIndex].Name == "Operate")
+                {
+                    DgvFJ.Rows.RemoveAt(e.RowIndex);
+                }
+            }
+        }
+
+        private void btnAll_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dgvVendorEmail.Rows.Count; i++)
+            {
+                dgvVendorEmail["EmaiCheck", i].Value = true;
+            }
         }
     }
 }

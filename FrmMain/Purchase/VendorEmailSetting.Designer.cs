@@ -40,19 +40,27 @@
             this.EmaiCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btnSearch = new DevComponents.DotNetBar.ButtonX();
             this.GBemailsend = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.EmailSend = new System.Windows.Forms.Button();
             this.CKleader = new System.Windows.Forms.CheckBox();
             this.CBme = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.AddAttachment = new System.Windows.Forms.Button();
+            this.DgvFJ = new System.Windows.Forms.DataGridView();
+            this.FilePath = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Operate = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.tbEmailName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX4 = new DevComponents.DotNetBar.LabelX();
+            this.btnAll = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVendorEmail)).BeginInit();
             this.GBemailsend.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvFJ)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAdd
             // 
             this.btnAdd.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnAdd.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnAdd.Location = new System.Drawing.Point(325, 39);
+            this.btnAdd.Location = new System.Drawing.Point(445, 39);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(62, 23);
             this.btnAdd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -92,11 +100,11 @@
             // 
             // 
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(178, 12);
+            this.labelX2.Location = new System.Drawing.Point(167, 12);
             this.labelX2.Name = "labelX2";
-            this.labelX2.Size = new System.Drawing.Size(30, 23);
+            this.labelX2.Size = new System.Drawing.Size(58, 23);
             this.labelX2.TabIndex = 1;
-            this.labelX2.Text = "名称";
+            this.labelX2.Text = "供应商名";
             // 
             // tbVendorName
             // 
@@ -105,19 +113,19 @@
             // 
             this.tbVendorName.Border.Class = "TextBoxBorder";
             this.tbVendorName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbVendorName.Location = new System.Drawing.Point(214, 12);
+            this.tbVendorName.Location = new System.Drawing.Point(231, 12);
             this.tbVendorName.Name = "tbVendorName";
             this.tbVendorName.PreventEnterBeep = true;
-            this.tbVendorName.Size = new System.Drawing.Size(173, 21);
+            this.tbVendorName.Size = new System.Drawing.Size(197, 21);
             this.tbVendorName.TabIndex = 2;
             // 
             // btnUpdate
             // 
             this.btnUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnUpdate.Location = new System.Drawing.Point(398, 39);
+            this.btnUpdate.Location = new System.Drawing.Point(529, 39);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.Size = new System.Drawing.Size(62, 23);
             this.btnUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnUpdate.TabIndex = 0;
             this.btnUpdate.Text = "删除";
@@ -145,7 +153,7 @@
             this.tbEmail.Location = new System.Drawing.Point(57, 41);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.PreventEnterBeep = true;
-            this.tbEmail.Size = new System.Drawing.Size(151, 21);
+            this.tbEmail.Size = new System.Drawing.Size(188, 21);
             this.tbEmail.TabIndex = 2;
             // 
             // dgvVendorEmail
@@ -164,7 +172,7 @@
             this.dgvVendorEmail.ReadOnly = true;
             this.dgvVendorEmail.RowHeadersVisible = false;
             this.dgvVendorEmail.RowTemplate.Height = 23;
-            this.dgvVendorEmail.Size = new System.Drawing.Size(997, 508);
+            this.dgvVendorEmail.Size = new System.Drawing.Size(656, 508);
             this.dgvVendorEmail.TabIndex = 3;
             this.dgvVendorEmail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVendorEmail_CellClick);
             // 
@@ -180,9 +188,9 @@
             // 
             this.btnSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSearch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSearch.Location = new System.Drawing.Point(398, 11);
+            this.btnSearch.Location = new System.Drawing.Point(445, 11);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.Size = new System.Drawing.Size(62, 23);
             this.btnSearch.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSearch.TabIndex = 0;
             this.btnSearch.Text = "查找";
@@ -190,20 +198,33 @@
             // 
             // GBemailsend
             // 
+            this.GBemailsend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GBemailsend.Controls.Add(this.DgvFJ);
+            this.GBemailsend.Controls.Add(this.AddAttachment);
             this.GBemailsend.Controls.Add(this.label1);
             this.GBemailsend.Controls.Add(this.EmailSend);
             this.GBemailsend.Controls.Add(this.CKleader);
             this.GBemailsend.Controls.Add(this.CBme);
-            this.GBemailsend.Location = new System.Drawing.Point(493, 2);
+            this.GBemailsend.Location = new System.Drawing.Point(665, 2);
             this.GBemailsend.Name = "GBemailsend";
-            this.GBemailsend.Size = new System.Drawing.Size(505, 63);
+            this.GBemailsend.Size = new System.Drawing.Size(430, 577);
             this.GBemailsend.TabIndex = 4;
             this.GBemailsend.TabStop = false;
             this.GBemailsend.Visible = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(93, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(227, 12);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "请确保Excel附件已导出，且不是打开状态";
+            // 
             // EmailSend
             // 
-            this.EmailSend.Location = new System.Drawing.Point(135, 18);
+            this.EmailSend.Location = new System.Drawing.Point(278, 40);
             this.EmailSend.Name = "EmailSend";
             this.EmailSend.Size = new System.Drawing.Size(75, 23);
             this.EmailSend.TabIndex = 2;
@@ -214,7 +235,7 @@
             // CKleader
             // 
             this.CKleader.AutoSize = true;
-            this.CKleader.Location = new System.Drawing.Point(70, 21);
+            this.CKleader.Location = new System.Drawing.Point(213, 43);
             this.CKleader.Name = "CKleader";
             this.CKleader.Size = new System.Drawing.Size(48, 16);
             this.CKleader.TabIndex = 1;
@@ -226,27 +247,103 @@
             this.CBme.AutoSize = true;
             this.CBme.Checked = true;
             this.CBme.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CBme.Location = new System.Drawing.Point(10, 21);
+            this.CBme.Location = new System.Drawing.Point(153, 43);
             this.CBme.Name = "CBme";
             this.CBme.Size = new System.Drawing.Size(48, 16);
             this.CBme.TabIndex = 0;
             this.CBme.Text = "自己";
             this.CBme.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // AddAttachment
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(249, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(227, 12);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "请确保Excel附件已导出，且不是打开状态";
+            this.AddAttachment.Location = new System.Drawing.Point(62, 40);
+            this.AddAttachment.Name = "AddAttachment";
+            this.AddAttachment.Size = new System.Drawing.Size(75, 23);
+            this.AddAttachment.TabIndex = 4;
+            this.AddAttachment.Text = "增加附件";
+            this.AddAttachment.UseVisualStyleBackColor = true;
+            this.AddAttachment.Click += new System.EventHandler(this.AddAttachment_Click);
+            // 
+            // DgvFJ
+            // 
+            this.DgvFJ.AllowUserToAddRows = false;
+            this.DgvFJ.AllowUserToDeleteRows = false;
+            this.DgvFJ.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.DgvFJ.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DgvFJ.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvFJ.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.FilePath,
+            this.Operate});
+            this.DgvFJ.Location = new System.Drawing.Point(6, 82);
+            this.DgvFJ.Name = "DgvFJ";
+            this.DgvFJ.ReadOnly = true;
+            this.DgvFJ.RowHeadersVisible = false;
+            this.DgvFJ.RowTemplate.Height = 23;
+            this.DgvFJ.Size = new System.Drawing.Size(418, 486);
+            this.DgvFJ.TabIndex = 5;
+            this.DgvFJ.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvFJ_CellContentClick);
+            // 
+            // FilePath
+            // 
+            this.FilePath.HeaderText = "文件路径";
+            this.FilePath.Name = "FilePath";
+            this.FilePath.ReadOnly = true;
+            this.FilePath.Width = 78;
+            // 
+            // Operate
+            // 
+            this.Operate.HeaderText = "操作";
+            this.Operate.Name = "Operate";
+            this.Operate.ReadOnly = true;
+            this.Operate.Text = "删除";
+            this.Operate.UseColumnTextForButtonValue = true;
+            this.Operate.Width = 35;
+            // 
+            // tbEmailName
+            // 
+            // 
+            // 
+            // 
+            this.tbEmailName.Border.Class = "TextBoxBorder";
+            this.tbEmailName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbEmailName.Location = new System.Drawing.Point(294, 39);
+            this.tbEmailName.Name = "tbEmailName";
+            this.tbEmailName.PreventEnterBeep = true;
+            this.tbEmailName.Size = new System.Drawing.Size(134, 21);
+            this.tbEmailName.TabIndex = 5;
+            // 
+            // labelX4
+            // 
+            // 
+            // 
+            // 
+            this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX4.Location = new System.Drawing.Point(258, 40);
+            this.labelX4.Name = "labelX4";
+            this.labelX4.Size = new System.Drawing.Size(32, 23);
+            this.labelX4.TabIndex = 6;
+            this.labelX4.Text = "姓名";
+            // 
+            // btnAll
+            // 
+            this.btnAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnAll.Location = new System.Drawing.Point(529, 12);
+            this.btnAll.Name = "btnAll";
+            this.btnAll.Size = new System.Drawing.Size(62, 23);
+            this.btnAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnAll.TabIndex = 7;
+            this.btnAll.Text = "全选";
+            this.btnAll.Click += new System.EventHandler(this.btnAll_Click);
             // 
             // VendorEmailSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(999, 582);
+            this.ClientSize = new System.Drawing.Size(1094, 582);
+            this.Controls.Add(this.btnAll);
+            this.Controls.Add(this.tbEmailName);
+            this.Controls.Add(this.labelX4);
             this.Controls.Add(this.GBemailsend);
             this.Controls.Add(this.dgvVendorEmail);
             this.Controls.Add(this.tbVendorName);
@@ -268,6 +365,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvVendorEmail)).EndInit();
             this.GBemailsend.ResumeLayout(false);
             this.GBemailsend.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvFJ)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -290,5 +388,12 @@
         private System.Windows.Forms.CheckBox CBme;
         private System.Windows.Forms.DataGridViewCheckBoxColumn EmaiCheck;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button AddAttachment;
+        private System.Windows.Forms.DataGridView DgvFJ;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FilePath;
+        private System.Windows.Forms.DataGridViewButtonColumn Operate;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbEmailName;
+        private DevComponents.DotNetBar.LabelX labelX4;
+        private DevComponents.DotNetBar.ButtonX btnAll;
     }
 }
