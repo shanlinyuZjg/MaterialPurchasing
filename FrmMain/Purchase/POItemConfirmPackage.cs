@@ -48,7 +48,7 @@ namespace Global.Purchase
         private DataTable GetVendorAllPOConfirmed(string strCriteria, string strValue, string userID)
         {
             string sqlSelect = @"SELECT
-                                                T1.Id,T1.Guid,T1.ForeignNumber AS 联系单号,Left(T1.ActualDeliveryDate,10) AS 实际到货日,T1.VendorNumber AS 供应商码,T1.VendorName AS 供应商名,T1.PONumber AS 采购单号,
+                                                T1.Id,T1.Guid,T1.ForeignNumber AS 联系单号,T1.RequireDept  AS 需求部门,Left(T1.ActualDeliveryDate,10) AS 实际到货日,T1.VendorNumber AS 供应商码,T1.VendorName AS 供应商名,T1.PONumber AS 采购单号,
                                                 T1.LineNumber AS 行号,
 	                                        	T1.ItemNumber AS 物料代码,
 	                                            T1.ItemDescription AS 物料描述,
