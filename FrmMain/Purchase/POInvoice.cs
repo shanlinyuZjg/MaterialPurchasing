@@ -102,6 +102,7 @@ namespace Global.Purchase
         {
             if(e.KeyChar == (char)13)
             {
+                TbVendorNumName.Text = string.Empty;
                 if (!string.IsNullOrWhiteSpace(tbVendorName.Text))
                 {
                     string str = ISO88591.GetString(GB2312.GetBytes(tbVendorName.Text.Trim()));
@@ -125,8 +126,20 @@ namespace Global.Purchase
                     else
                     {
                         vendorNumber = dt.Rows[0]["VendorNumber"].ToString();
-
                         GetVendorPODetail(vendorNumber);
+
+                        string strSql = @"SELECT
+	                                    VendorID,
+	                                    VendorName
+                                    FROM
+	                                    _NoLock_FS_Vendor	                                    
+                                    WHERE
+	                                    VendorID = '" + vendorNumber + "'";
+                        DataTable dtTemp = SQLHelper.GetDataTableOleDb(GlobalSpace.oledbconnstrFSDBMR, strSql);
+                        if (dtTemp.Rows.Count == 1)
+                        {
+                            TbVendorNumName.Text = vendorNumber + "   " + dtTemp.Rows[0]["VendorName"].ToString();
+                        }
                     }
                 }
             }
@@ -182,7 +195,8 @@ namespace Global.Purchase
 		                                                        FROM
 			                                                        FSDBMR.dbo._NoLock_FS_UserAccess 
 		                                                        WHERE
-			                                                        UserID = T2.ItemReference3) AS 库管员,T1.HistoryPOReceiptKey AS [Key]
+			                                                        UserID = T2.ItemReference3) AS 库管员,T1.HistoryPOReceiptKey AS [Key],
+(CONVERT(VARCHAR(10),T1.TransactionDate,120) + ' ' +  CONVERT(varchar(100), T1.TransactionTime, 24))  as  ADateTime
                                                                                                                     FROM
 	                                                                                                                    FSDB.dbo.PORV T1,
 	                                                                                                                    FSDBMR.dbo._NoLock_FS_Item T2
@@ -326,7 +340,8 @@ namespace Global.Purchase
 		                                        FROM
 			                                        FSDBMR.dbo._NoLock_FS_UserAccess 
 		                                        WHERE
-			                                        UserID = T2.ItemReference3) AS 库管员,T1.HistoryPOReceiptKey AS [Key]
+			                                        UserID = T2.ItemReference3) AS 库管员,T1.HistoryPOReceiptKey AS [Key],
+(CONVERT(VARCHAR(10),T1.TransactionDate,120) + ' ' +  CONVERT(varchar(100), T1.TransactionTime, 24))  as  ADateTime
                                         FROM
 	                                        FSDB.dbo.PORV T1,
 	                                        FSDBMR.dbo._NoLock_FS_Item T2
@@ -571,7 +586,7 @@ namespace Global.Purchase
             dt.Columns.Remove("公司批号");
             dt.Columns.Remove("采购员");
             dt.Columns.Remove("库管员");
-            dt.Columns.Remove("Key");
+           // dt.Columns.Remove("Key");
             dt.Columns.Remove("累计入库量");
             string timeStr = DateTime.Now.ToString("yy-MM-dd HH:mm:ss");
             //string filePath = @"D:\\"+VendorName+DateTime.Now.ToString("yy-MM-dd ")+".xlsx";
