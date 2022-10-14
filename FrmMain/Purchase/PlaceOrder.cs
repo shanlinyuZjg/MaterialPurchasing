@@ -1958,12 +1958,12 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                                         }
                                         if(PurchaseUser.UserStatus == 2 || PurchaseUser.UserStatus == 3 || dr["IsDirectPurchaseVial"].ToString() == "1"|| dr["IsDirectFOOrder"].ToString() == "1")//五金采购员和大客户，直接产生到货记录
                                         {
-                                            strUpdate = @"Update PurchaseOrderRecordByCMF Set POStatus= 4,ActualDeliveryDate='"+DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")+"',LineNumber = '" + lineNumberString + "'  Where  Id='" + dr["Id"].ToString() + "'";
+                                            strUpdate = @"Update PurchaseOrderRecordByCMF Set POStatus= 4,ActualDeliveryDate='"+DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")+"',LineNumber = '" + lineNumberString + "',FSadddt=GETDATE()  Where  Id='" + dr["Id"].ToString() + "'";
                                             itemIdList.Add(dr["Id"].ToString());
                                         }
                                         else
                                         {
-                                            strUpdate = @"Update PurchaseOrderRecordByCMF Set POStatus= 3,LineNumber = '" + lineNumberString + "'  Where  Id='" + dr["Id"].ToString() + "'";
+                                            strUpdate = @"Update PurchaseOrderRecordByCMF Set POStatus= 3,LineNumber = '" + lineNumberString + "',FSadddt=GETDATE()  Where  Id='" + dr["Id"].ToString() + "'";
                                         }
                                         sqlList.Add(strUpdate);
                                      //   UpdatePOItemStatus(poList[i], dr);
@@ -3594,7 +3594,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
             else if (poStatus == 3)
             {
 
-                string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set DemandDeliveryDate = '" + strPromisedDate + "',NeededDate='" + strPromisedDate + "',PromisedDate='" + strPromisedDate + "',UnitPrice=" + strItemUnitPrice + ",PricePreTax = " + strItemUnitPrice * (1 + Convert.ToDouble(cbbTaxRate.Text)) + " ,POItemQuantity=" + strItemQuantity + ", ForeignNumber = '" + strFONumber + "' Where Id = '" + strId + "'";
+                string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set DemandDeliveryDate = '" + strPromisedDate + "',NeededDate='" + strPromisedDate + "',PromisedDate='" + strPromisedDate + "',UnitPrice=" + strItemUnitPrice + ",PricePreTax = " + strItemUnitPrice * (1 + Convert.ToDouble(cbbTaxRate.Text)) + " ,POItemQuantity=" + strItemQuantity + ", ForeignNumber = '" + strFONumber + "',FSupdatedt=GETDATE() Where Id = '" + strId + "'";
 
                 strItemNumber = dgvPOItemDetail["物料代码", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
 
