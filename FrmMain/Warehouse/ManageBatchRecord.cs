@@ -140,7 +140,8 @@ namespace Global.Warehouse
 
         private DataTable GetBatchRecord(string type, string value)
         {
-            string sqlSelect = @"SELECT
+            string sqlSelect = @"SELECT  
+                                                    Id,
 	                                                FileNumber AS 受控流水号,ApplyDate AS 请验日期,
 	                                                VendorName AS 供应商名,
 	                                                ManufacturerName AS 生产商名,
@@ -285,6 +286,7 @@ namespace Global.Warehouse
                 dgvDetail.Columns[i].ReadOnly = true;
             }
             this.Tag = true;
+            RevisionReason.Text = string.Empty;
         }
 
         /*      private void btnBatchPrint_Click(object sender, EventArgs e)
@@ -1396,19 +1398,19 @@ namespace Global.Warehouse
         {
             int rowIndex = e.RowIndex;
             int columnIndex=e.ColumnIndex;
-            int UpdateItemCount = 0;
-            if (dgvDetail[columnIndex, rowIndex].Style.ForeColor != Color.Red)
-            {
-                for (int i = 0; i < dgvDetail.Columns.Count; i++)
-                {
-                    if (dgvDetail[i, rowIndex].Style.ForeColor == Color.Red) UpdateItemCount++;
-                }
-                if (UpdateItemCount >= 3)
-                {
-                    MessageBoxEx.Show("最多修改3处！");
-                    return;
-                }
-            }
+            //int UpdateItemCount = 0;
+            //if (dgvDetail[columnIndex, rowIndex].Style.ForeColor != Color.Red)
+            //{
+            //    for (int i = 0; i < dgvDetail.Columns.Count; i++)
+            //    {
+            //        if (dgvDetail[i, rowIndex].Style.ForeColor == Color.Red) UpdateItemCount++;
+            //    }
+            //    if (UpdateItemCount >= 3)
+            //    {
+            //        MessageBoxEx.Show("最多修改3处！");
+            //        return;
+            //    }
+            //}
             if (rowIndex >= 0 && columnIndex >= 0 && dgvDetail.Columns[columnIndex].Name != "受控流水号" && dgvDetail.Columns[columnIndex].Name != "库管员" && dgvDetail.Columns[columnIndex].Name != "复核人")
             {
                 InputBox inp = new InputBox(dgvDetail.Columns[columnIndex].Name, dgvDetail[columnIndex,rowIndex].Value.ToString());
@@ -1443,9 +1445,9 @@ namespace Global.Warehouse
         private void 修改ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string strRevisionReason = RevisionReason.Text.Trim();
-            if (strRevisionReason == "请输入修订原因" || RevisionReason.Visible == false ||string.IsNullOrWhiteSpace(strRevisionReason))
+            if (strRevisionReason == "请输入修订原因" ||string.IsNullOrWhiteSpace(strRevisionReason))
             {
-                MessageBoxEx.Show("请按 ALT+U，在请输入修订原因文本框内输入修订原因！");
+                MessageBoxEx.Show("请在请输入修订原因文本框内输入修订原因！");
                 return;
 
             }
@@ -1615,11 +1617,11 @@ namespace Global.Warehouse
 "	EBR_ReceiveRecordForInspectUpdateHistory.QualityCheckStandard,\n" +
 "	EBR_ReceiveRecordForInspectUpdateHistory.ModifyContent,\n" +
 "	EBR_ReceiveRecordForInspectUpdateHistory.Modifier,\n" +
-                    "RevisionReason) SELECT *,'" + StrUpdate + "' as ModifyContent,'" + UserId + "|" + UserName + "' as Modifier,'" + strRevisionReason + "' as RevisionReason  FROM EBR_ReceiveRecordForInspect where FileNumber='" + dgvDetail["受控流水号", rowIndex].Value.ToString() + "' and Operator='" + dgvDetail["库管员", rowIndex].Value.ToString() + "' and FileTracedNumber='" + dgvDetail["追溯文件编号", rowIndex].Value.ToString() + "' and FileEdition='" + dgvDetail["版本", rowIndex].Value.ToString() + "' and EffectiveDate='" + dgvDetail["生效日期", rowIndex].Value.ToString() + "'";
+                    "RevisionReason) SELECT *,'" + StrUpdate + "' as ModifyContent,'" + UserId + "|" + UserName + "' as Modifier,'" + strRevisionReason + "' as RevisionReason  FROM EBR_ReceiveRecordForInspect where Id=" + dgvDetail["Id", rowIndex].Value.ToString() ;
                 tbItemDesc.Text = cmd.CommandText;
                 if (cmd.ExecuteNonQuery() != 1)
                 { throw new Exception("修订历史新增条数不为1"); }
-                cmd.CommandText = "update EBR_ReceiveRecordForInspect " + SqlSet.Substring(0, SqlSet.Length - 1) + " where FileNumber='" + dgvDetail["受控流水号", rowIndex].Value.ToString() + "' and Operator='" + dgvDetail["库管员", rowIndex].Value.ToString() + "' and FileTracedNumber='" + dgvDetail["追溯文件编号", rowIndex].Value.ToString() + "' and FileEdition='" + dgvDetail["版本", rowIndex].Value.ToString() + "' and EffectiveDate='" + dgvDetail["生效日期", rowIndex].Value.ToString() + "'";
+                cmd.CommandText = "update EBR_ReceiveRecordForInspect " + SqlSet.Substring(0, SqlSet.Length - 1) + " where Id=" + dgvDetail["Id", rowIndex].Value.ToString() ;
                 if (cmd.ExecuteNonQuery() != 1)
                 { throw new Exception("记录修改条数不为1"); }
                 tran.Commit();//如果两个sql命令都执行成功，则执行commit这个方法，执行这些操作
@@ -1633,17 +1635,17 @@ namespace Global.Warehouse
             btnView_Click_1(sender, e);
             #endregion
         }
-        bool BtnVisible = true;
-        private void ManageBatchRecord_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == (Keys.U | Keys.Alt))//按下alt+s键
-            {
-                e.Handled = true;//将Handled设置为true，指示已经处理过KeyPress事件
-                btnUpdateRecord.Visible = BtnVisible;
-                RevisionReason.Visible = BtnVisible;
-                BtnVisible = !BtnVisible;
-            }
-        }
+        //bool BtnVisible = true;
+        //private void ManageBatchRecord_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyData == (Keys.U | Keys.Alt))//按下alt+s键
+        //    {
+        //        e.Handled = true;//将Handled设置为true，指示已经处理过KeyPress事件
+        //        btnUpdateRecord.Visible = BtnVisible;
+        //        RevisionReason.Visible = BtnVisible;
+        //        BtnVisible = !BtnVisible;
+        //    }
+        //}
 
         private void RevisionReason_Click(object sender, EventArgs e)
         {
