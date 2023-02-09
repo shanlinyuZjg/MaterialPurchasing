@@ -518,6 +518,12 @@
     <Compile Include="Purchase\PrintInvoiceItemDetail.Designer.cs">
       <DependentUpon>PrintInvoiceItemDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchase\PurchaseOrderClose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\PurchaseOrderClose.Designer.cs">
+      <DependentUpon>PurchaseOrderClose.cs</DependentUpon>
+    </Compile>
     <Compile Include="Purchase\PurchaseVials.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -882,6 +888,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\PrintInvoiceItemDetail.resx">
       <DependentUpon>PrintInvoiceItemDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\PurchaseOrderClose.resx">
+      <DependentUpon>PurchaseOrderClose.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\PurchaseVials.resx">
       <DependentUpon>PurchaseVials.cs</DependentUpon>

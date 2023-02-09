@@ -617,8 +617,8 @@ namespace Global.Purchase
         {
             string strSqlCheck = @"Select  Count(Id) From  PurchaseOrderRecordByCMF Where PONumber='" + ponumber + "'";
             string strSql = string.Empty;
-            if(PurchaseUser.PurchaseType.Contains("M"))
-            {
+            //if(PurchaseUser.PurchaseType.Contains("M"))
+            //{
                 strSql = @"SELECT
                                                 T1.Id,
                                                 T1.Guid,
@@ -645,43 +645,45 @@ namespace Global.Purchase
                                                 end     
                                                 ) as 物料状态,
                                                 T1.ManufacturerNumber AS 生产商码,
-                                                T1.ManufacturerName AS  生产商名
+                                                T1.ManufacturerName AS  生产商名,
+                                                T1.TaxRate           AS  税率,
+                                                T1.DemandDeliveryDate AS 需求日期旧
                                         FROM
 	                                        PurchaseOrderRecordByCMF T1
                                         WHERE
 	                                        T1.PONumber = '" + ponumber + "' And T1.POStatus <> 99 And IsPurePO = 0";
-            }
-            else
-            {
-                strSql = @"SELECT
-                                                T1.Id,
-                                                T1.Guid,
-                                                T1.LineNumber AS 行号,
-	                                        	T1.ItemNumber AS 物料代码,
-	                                            T1.ItemDescription AS 物料描述,
-	                                            T1.LineUM AS 单位,
-	                                            T1.LineType AS 类型,
-	                                            T1.LineStatus AS 状态,
-	                                            T1.UnitPrice AS 单价,
-	                                            T1.POItemQuantity AS 订购数量,
-	                                            T1.DemandDeliveryDate AS 需求日期,
-	                                            T1.ForeignNumber AS 外贸单号,
-                                                  (     case T1.POStatus
-                                                        when  '0' then '已准备'
-                                                         when  '1' then '已提交'
-                                                         when  '2' then '已审核'
-                                                         when  '3' then '已下达' 
-                                                        when  '4' then '已到货' 
-                                                        when  '5' then '已收货' 
-                                                        when  '6' then '已入库' 
-                                                        when  '7' then '已开票' 
-                                                end     
-                                                ) as 物料状态  
-                                        FROM
-	                                        PurchaseOrderRecordByCMF T1
-                                        WHERE
-	                                        T1.PONumber = '" + ponumber + "' And T1.POStatus <> 99 And IsPurePO = 0";
-            }
+            //}
+            //else
+            //{
+            //    strSql = @"SELECT
+            //                                    T1.Id,
+            //                                    T1.Guid,
+            //                                    T1.LineNumber AS 行号,
+	           //                             	T1.ItemNumber AS 物料代码,
+	           //                                 T1.ItemDescription AS 物料描述,
+	           //                                 T1.LineUM AS 单位,
+	           //                                 T1.LineType AS 类型,
+	           //                                 T1.LineStatus AS 状态,
+	           //                                 T1.UnitPrice AS 单价,
+	           //                                 T1.POItemQuantity AS 订购数量,
+	           //                                 T1.DemandDeliveryDate AS 需求日期,
+	           //                                 T1.ForeignNumber AS 外贸单号,
+            //                                      (     case T1.POStatus
+            //                                            when  '0' then '已准备'
+            //                                             when  '1' then '已提交'
+            //                                             when  '2' then '已审核'
+            //                                             when  '3' then '已下达' 
+            //                                            when  '4' then '已到货' 
+            //                                            when  '5' then '已收货' 
+            //                                            when  '6' then '已入库' 
+            //                                            when  '7' then '已开票' 
+            //                                    end     
+            //                                    ) as 物料状态
+            //                            FROM
+	           //                             PurchaseOrderRecordByCMF T1
+            //                            WHERE
+	           //                             T1.PONumber = '" + ponumber + "' And T1.POStatus <> 99 And IsPurePO = 0";
+            //}
            
 
 
@@ -697,6 +699,10 @@ namespace Global.Purchase
                 dgvPOItemDetail.Columns["类型"].ReadOnly = true;
                 dgvPOItemDetail.Columns["状态"].ReadOnly = true;
                 dgvPOItemDetail.Columns["物料状态"].ReadOnly = true;
+                dgvPOItemDetail.Columns["生产商码"].ReadOnly = true;
+                dgvPOItemDetail.Columns["生产商名"].ReadOnly = true;
+                dgvPOItemDetail.Columns["税率"].ReadOnly = true;
+                dgvPOItemDetail.Columns["需求日期旧"].Visible = false; 
 
                 dgvPOItemDetail.Columns["单价"].DefaultCellStyle.BackColor = System.Drawing.Color.Coral;
                 dgvPOItemDetail.Columns["订购数量"].DefaultCellStyle.BackColor = System.Drawing.Color.Coral;
@@ -3512,7 +3518,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
             strItemQuantity = Convert.ToDouble(dgvPOItemDetail["订购数量", dgvPOItemDetail.CurrentCell.RowIndex].Value);
             strItemUnitPrice = Convert.ToDouble(dgvPOItemDetail["单价", dgvPOItemDetail.CurrentCell.RowIndex].Value);
             strFONumber = dgvPOItemDetail["外贸单号", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
-
+            double TaxRate=Convert.ToDouble(dgvPOItemDetail["税率", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString());
             List<string> itemNotComparePriceList = GetItemNotComparePriceList();
 
             double standardPrice = Convert.ToDouble(GetItemStandardPrice(strItemNumber));
@@ -3579,7 +3585,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
 
             if (poStatus < 3)
             {
-                string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set DemandDeliveryDate = '" + strPromisedDate + "',NeededDate='" + strPromisedDate + "',PromisedDate='" + strPromisedDate + "',UnitPrice=" + strItemUnitPrice + ",PricePreTax = "+ strItemUnitPrice*(1+Convert.ToDouble(cbbTaxRate.Text)) + " ,POItemQuantity=" + strItemQuantity + ", ForeignNumber = '" + strFONumber + "' Where Id = '" + strId + "'";
+                string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set DemandDeliveryDate = '" + strPromisedDate + "',NeededDate='" + strPromisedDate + "',PromisedDate='" + strPromisedDate + "',UnitPrice=" + strItemUnitPrice + ",PricePreTax = "+ strItemUnitPrice*(1+ TaxRate) + " ,POItemQuantity=" + strItemQuantity + ", ForeignNumber = '" + strFONumber + "' Where Id = '" + strId + "'";
 
                 if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate) )
                 {
@@ -3594,7 +3600,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
             else if (poStatus == 3)
             {
 
-                string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set DemandDeliveryDate = '" + strPromisedDate + "',NeededDate='" + strPromisedDate + "',PromisedDate='" + strPromisedDate + "',UnitPrice=" + strItemUnitPrice + ",PricePreTax = " + strItemUnitPrice * (1 + Convert.ToDouble(cbbTaxRate.Text)) + " ,POItemQuantity=" + strItemQuantity + ", ForeignNumber = '" + strFONumber + "',FSupdatedt=GETDATE() Where Id = '" + strId + "'";
+                string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set DemandDeliveryDate = '" + strPromisedDate + "',NeededDate='" + strPromisedDate + "',PromisedDate='" + strPromisedDate + "',UnitPrice=" + strItemUnitPrice + ",PricePreTax = " + strItemUnitPrice * (1 + TaxRate) + " ,POItemQuantity=" + strItemQuantity + ", ForeignNumber = '" + strFONumber + "',FSupdatedt=GETDATE() Where Id = '" + strId + "'";
 
                 strItemNumber = dgvPOItemDetail["物料代码", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
 
@@ -3656,7 +3662,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
             if (poStatus < 3)
             {
                 string sqlUpdate = @"Delete From  PurchaseOrderRecordByCMF  Where Guid = '" + guid + "'";
-                if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate) )
+                if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
                 {
                     Custom.MsgEx("删除成功！");
                     ShowPOItemDetail(tbPONumberInDetail.Text.Trim());
@@ -3668,44 +3674,8 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
             }
             else if (poStatus == 3)
             {
-                string sqlUpdate = @"Delete From  PurchaseOrderRecordByCMF  Where Guid = '" + guid + "'";
-
-                strItemNumber = dgvPOItemDetail["物料代码", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
-                strPromisedDate = dgvPOItemDetail["需求日期", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
-
-                FSFunctionLib.FSConfigFileInitialize(GlobalSpace.fsconfigfilepath, fsuserid, fspassword);
-
-                POMT15 myPomt = new POMT15();
-
-                myPomt.PONumber.Value = strPONumber;
-                myPomt.POLineNumber.Value = strLineNumber;
-                myPomt.ItemNumber.Value = strItemNumber;
-                myPomt.PromisedDateOld.Value = strPromisedDate;
-                myPomt.POLineSubType.Value = "L";
-
-
-                if (FSFunctionLib.fstiClient.ProcessId(myPomt, null))
-                {
-                    if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate) )
-                    {
-                        Custom.MsgEx("删除成功！");
-                        ShowPOItemDetail(tbPONumberInDetail.Text.Trim());
-                        FSFunctionLib.FSExit();
-                    }
-                    else
-                    {
-                        Custom.MsgEx("四班记录删除成功，程序记录删除失败，请联系管理员！");
-                    }
-                }
-                else
-                {
-                    FSFunctionLib.FSErrorMsg("物料删除失败");
-                }
-            }
-            else
-            {
                 //对于大客户的订单，下单后直接写入四班并且产生到货记录，此处还需要同时删除到货记录
-                if(PurchaseUser.UserStatus == 2)
+                if (PurchaseUser.UserStatus == 2)
                 {
                     List<string> sqlList = new List<string>();
                     string sqlDelete = @"Delete From  PurchaseOrderRecordByCMF  Where Guid = '" + guid + "'";
@@ -3747,15 +3717,48 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                 }
                 else
                 {
-                    Custom.MsgEx("物料状态不允许进行修改！");
+
+
+                    string sqlUpdate = @"Delete From  PurchaseOrderRecordByCMF  Where Guid = '" + guid + "'";
+
+                    strItemNumber = dgvPOItemDetail["物料代码", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
+                    strPromisedDate = dgvPOItemDetail["需求日期", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
+
+                    FSFunctionLib.FSConfigFileInitialize(GlobalSpace.fsconfigfilepath, fsuserid, fspassword);
+
+                    POMT15 myPomt = new POMT15();
+
+                    myPomt.PONumber.Value = strPONumber;
+                    myPomt.POLineNumber.Value = strLineNumber;
+                    myPomt.ItemNumber.Value = strItemNumber;
+                    myPomt.PromisedDateOld.Value = strPromisedDate;
+                    myPomt.POLineSubType.Value = "L";
+
+
+                    if (FSFunctionLib.fstiClient.ProcessId(myPomt, null))
+                    {
+                        if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
+                        {
+                            Custom.MsgEx("删除成功！");
+                            ShowPOItemDetail(tbPONumberInDetail.Text.Trim());
+                            FSFunctionLib.FSExit();
+                        }
+                        else
+                        {
+                            Custom.MsgEx("四班记录删除成功，程序记录删除失败，请联系管理员！");
+                        }
+                    }
+                    else
+                    {
+                        FSFunctionLib.FSErrorMsg("物料删除失败");
+                    }
                 }
-
             }
+            else
+            {
 
-        }
-
-        private void dgvPOItemDetail_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+                Custom.MsgEx("物料状态不允许进行修改！");
+            }
 
         }
 
@@ -3770,6 +3773,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                         dgvPOItemDetail.ClearSelection();
                         dgvPOItemDetail.Rows[e.RowIndex].Selected = true;
                         dgvPOItemDetail.CurrentCell = dgvPOItemDetail.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                        strPromisedDateOld = dgvPOItemDetail.Rows[e.RowIndex].Cells["需求日期旧"].Value.ToString();
                         this.contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
                     }
                 }
@@ -3778,13 +3782,10 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
 
         private void dgvPOItemDetail_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                strPromisedDateOld = dgvPOItemDetail.Rows[e.RowIndex].Cells["需求日期"].Value.ToString();
-            }
+
         }
 
-      
+
 
         private void tbForeignNumber_Enter(object sender, EventArgs e)
         {
@@ -4572,14 +4573,14 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
             string itemNumber = dgvPOItemDetail["物料代码", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
             string promisedDate = dgvPOItemDetail["需求日期", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
             string Id = dgvPOItemDetail["Id", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
-            string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set POStatus = 5  Where Id = '" + Id + "'";
+            string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set LineStatus = 5  Where Id = '" + Id + "'";
             FSFunctionLib.FSConfigFileInitialize(GlobalSpace.fsconfigfilepath, fsuserid, fspassword);
 
             POMT12 myPomt12 = new POMT12();
             myPomt12.PONumber.Value = poNumber;
             myPomt12.POLineNumber.Value = lineNumber;
             myPomt12.ItemNumber.Value = itemNumber;
-            myPomt12.PromisedDate.Value = promisedDate;
+            //myPomt12.PromisedDate.Value = promisedDate;
             myPomt12.PromisedDateOld.Value = strPromisedDateOld;
             myPomt12.POLineSubType.Value = "L";
             myPomt12.POLineStatus.Value = "5";
@@ -4588,20 +4589,20 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
             { 
                 if(SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr,sqlUpdate))
                 {
-                    Custom.MsgEx("修改成功！");
+                    Custom.MsgEx("关闭成功！");
                     ShowPOItemDetail(tbPONumberInDetail.Text.Trim());
                     FSFunctionLib.FSExit();
                 }
                 else
                 {
-                    Custom.MsgEx("四班修改成功，记录修改失败！");
+                    Custom.MsgEx("四班关闭成功，记录修改失败！");
                     FSFunctionLib.FSExit();
                 }
 
             }
             else
             {
-                FSFunctionLib.FSErrorMsg("物料修改失败");
+                FSFunctionLib.FSErrorMsg("关闭失败");
             }
 
 
@@ -4670,6 +4671,53 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
         private void tbRequireDept_Click(object sender, EventArgs e)
         {
             tbRequireDept.Text = "";
+        }
+
+        private void 打开改行物料ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string poNumber = tbPONumberInDetail.Text.Trim();
+            string lineNumber = dgvPOItemDetail["行号", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
+            string itemNumber = dgvPOItemDetail["物料代码", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
+            string promisedDate = dgvPOItemDetail["需求日期", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
+            string Id = dgvPOItemDetail["Id", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
+            string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set LineStatus = 4  Where Id = '" + Id + "'";
+            FSFunctionLib.FSConfigFileInitialize(GlobalSpace.fsconfigfilepath, fsuserid, fspassword);
+
+            POMT12 myPomt12 = new POMT12();
+            myPomt12.PONumber.Value = poNumber;
+            myPomt12.POLineNumber.Value = lineNumber;
+            myPomt12.ItemNumber.Value = itemNumber;
+            //myPomt12.PromisedDate.Value = promisedDate; //5状态改成4状态 承诺交货日 ？能不能改
+            myPomt12.PromisedDateOld.Value = strPromisedDateOld;
+            myPomt12.POLineSubType.Value = "L";
+            myPomt12.POLineStatus.Value = "4";
+
+            if (FSFunctionLib.fstiClient.ProcessId(myPomt12, null))
+            {
+                if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
+                {
+                    Custom.MsgEx("修改成功！");
+                    ShowPOItemDetail(tbPONumberInDetail.Text.Trim());
+                    FSFunctionLib.FSExit();
+                }
+                else
+                {
+                    Custom.MsgEx("四班修改成功，记录修改失败！");
+                    FSFunctionLib.FSExit();
+                }
+
+            }
+            else
+            {
+                FSFunctionLib.FSErrorMsg("物料修改失败");
+            }
+        }
+
+        private void BtnOrderClosed_Click(object sender, EventArgs e)
+        {
+            //fsuserid, fspassword
+            PurchaseOrderClose Poc = new PurchaseOrderClose(fsuserid, fspassword);
+            Poc.ShowDialog();
         }
     }
 
