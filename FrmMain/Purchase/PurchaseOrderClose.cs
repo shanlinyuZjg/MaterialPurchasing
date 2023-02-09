@@ -81,6 +81,12 @@ namespace Global.Purchase
 
         private void BtnOrderClose_Click(object sender, EventArgs e)
         {
+            if (FSFunctionLib.FSConfigFileInitialize(GlobalSpace.fsconfigfilepath, FsUser, FsPassword))
+            {
+                MessageBox.Show("四班登录失败");
+                return;
+            }
+            int AllSuccess = 1;
             for (int i = 0; i < this.dataGridView1.Rows.Count; i++)
             {
                 if (Convert.ToBoolean(dataGridView1.Rows[i].Cells["Check"].Value))
@@ -90,7 +96,7 @@ namespace Global.Purchase
                     string itemNumber = dataGridView1.Rows[i].Cells["物料编码"].Value.ToString().Trim();
                     string promisedDateOld = dataGridView1.Rows[i].Cells["承诺交货日"].Value.ToString().Trim();
                     string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set LineStatus = 5  Where PONumber = '" + poNumber + "' and LineNumber ='"+ lineNumber + "'";
-                    FSFunctionLib.FSConfigFileInitialize(GlobalSpace.fsconfigfilepath, FsUser, FsPassword);
+                   
 
                     POMT12 myPomt12 = new POMT12();
                     myPomt12.PONumber.Value = poNumber;
@@ -100,7 +106,7 @@ namespace Global.Purchase
                     myPomt12.PromisedDateOld.Value = promisedDateOld;
                     myPomt12.POLineSubType.Value = "L";
                     myPomt12.POLineStatus.Value = "5";
-                    int AllSuccess = 1;
+                    
                     if (FSFunctionLib.fstiClient.ProcessId(myPomt12, null))
                     {
                         if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
@@ -110,7 +116,7 @@ namespace Global.Purchase
                         }
                         else
                         {
-                            MessageBox.Show("四班关闭成功，记录修改失败！");
+                            MessageBox.Show("四班关闭成功，无纸化办公记录修改失败！");
                         }
 
                     }
@@ -120,16 +126,19 @@ namespace Global.Purchase
                         AllSuccess = 0;
                         dataGridView1.Rows[i].DefaultCellStyle.ForeColor = Color.Red;
                     }
-                    FSFunctionLib.FSExit();
-                    if (AllSuccess == 1)
-                    {
-                        MessageBox.Show("全部修改成功");
-                    }
-                    else
-                    {
-                        MessageBox.Show("部分修改失败，已红色标示。");
-                    }
+                    
+                   
                 }
+               
+            }
+            FSFunctionLib.FSExit();
+            if (AllSuccess == 1)
+            {
+                MessageBox.Show("订单全部关闭成功");
+            }
+            else
+            {
+                MessageBox.Show("部分订单关闭失败，已红色标示。");
             }
         }
 
