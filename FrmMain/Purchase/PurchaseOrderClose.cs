@@ -81,7 +81,7 @@ namespace Global.Purchase
 
         private void BtnOrderClose_Click(object sender, EventArgs e)
         {
-            if (FSFunctionLib.FSConfigFileInitialize(GlobalSpace.fsconfigfilepath, FsUser, FsPassword))
+            if (!FSFunctionLib.FSConfigFileInitialize(GlobalSpace.fsconfigfilepath, FsUser, FsPassword))
             {
                 MessageBox.Show("四班登录失败");
                 return;
