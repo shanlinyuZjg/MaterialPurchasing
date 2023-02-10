@@ -45,6 +45,8 @@
             this.btnReMatchVendorNumber = new DevComponents.DotNetBar.ButtonX();
             this.dgvItemFailed = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.superTabItem2 = new DevComponents.DotNetBar.SuperTabItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TbTaxRate = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).BeginInit();
             this.superTabControl1.SuspendLayout();
             this.superTabControlPanel1.SuspendLayout();
@@ -92,6 +94,8 @@
             // 
             this.superTabControlPanel1.CanvasColor = System.Drawing.Color.Maroon;
             this.superTabControlPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
+            this.superTabControlPanel1.Controls.Add(this.TbTaxRate);
+            this.superTabControlPanel1.Controls.Add(this.label1);
             this.superTabControlPanel1.Controls.Add(this.dgvDetail);
             this.superTabControlPanel1.Controls.Add(this.btnPO);
             this.superTabControlPanel1.Controls.Add(this.btnMakeVendorWithVendorNumber);
@@ -123,7 +127,7 @@
             dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(21)))), ((int)(((byte)(110)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvDetail.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDetail.EnableHeadersVisualStyles = false;
@@ -146,7 +150,7 @@
             // 
             this.btnPO.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnPO.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnPO.Location = new System.Drawing.Point(251, 10);
+            this.btnPO.Location = new System.Drawing.Point(429, 12);
             this.btnPO.Name = "btnPO";
             this.btnPO.Size = new System.Drawing.Size(77, 28);
             this.btnPO.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -158,7 +162,7 @@
             // 
             this.btnMakeVendorWithVendorNumber.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnMakeVendorWithVendorNumber.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnMakeVendorWithVendorNumber.Location = new System.Drawing.Point(131, 10);
+            this.btnMakeVendorWithVendorNumber.Location = new System.Drawing.Point(131, 12);
             this.btnMakeVendorWithVendorNumber.Name = "btnMakeVendorWithVendorNumber";
             this.btnMakeVendorWithVendorNumber.Size = new System.Drawing.Size(75, 28);
             this.btnMakeVendorWithVendorNumber.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -170,7 +174,7 @@
             // 
             this.btnViewAllItems.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnViewAllItems.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnViewAllItems.Location = new System.Drawing.Point(16, 10);
+            this.btnViewAllItems.Location = new System.Drawing.Point(16, 12);
             this.btnViewAllItems.Name = "btnViewAllItems";
             this.btnViewAllItems.Size = new System.Drawing.Size(75, 28);
             this.btnViewAllItems.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -223,7 +227,7 @@
             dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(21)))), ((int)(((byte)(110)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvItemFailed.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvItemFailed.EnableHeadersVisualStyles = false;
@@ -250,6 +254,23 @@
             this.superTabItem2.Text = "失败物料";
             this.superTabItem2.Visible = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(264, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "税率";
+            // 
+            // TbTaxRate
+            // 
+            this.TbTaxRate.Location = new System.Drawing.Point(301, 16);
+            this.TbTaxRate.Name = "TbTaxRate";
+            this.TbTaxRate.Size = new System.Drawing.Size(100, 21);
+            this.TbTaxRate.TabIndex = 5;
+            this.TbTaxRate.Text = "0.13";
+            // 
             // AssistantItems
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -263,6 +284,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).EndInit();
             this.superTabControl1.ResumeLayout(false);
             this.superTabControlPanel1.ResumeLayout(false);
+            this.superTabControlPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetail)).EndInit();
             this.superTabControlPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemFailed)).EndInit();
@@ -283,5 +305,7 @@
         private DevComponents.DotNetBar.ButtonX btnReMatchVendorNumber;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvItemFailed;
         private DevComponents.DotNetBar.SuperTabItem superTabItem2;
+        private System.Windows.Forms.TextBox TbTaxRate;
+        private System.Windows.Forms.Label label1;
     }
 }

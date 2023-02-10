@@ -42,6 +42,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.TbForeignOrderNumber = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX4 = new DevComponents.DotNetBar.LabelX();
             this.BtnAllSelect_dgvSpe = new DevComponents.DotNetBar.ButtonX();
             this.BtnAllnotSelect_dgvSpe = new DevComponents.DotNetBar.ButtonX();
             this.BtnSpecialDelete = new DevComponents.DotNetBar.ButtonX();
@@ -49,8 +51,8 @@
             this.BtnSpecialRefresh = new DevComponents.DotNetBar.ButtonX();
             this.dgvFOSpeItemsDetail = new System.Windows.Forms.DataGridView();
             this.Check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.TbForeignOrderNumber = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.labelX4 = new DevComponents.DotNetBar.LabelX();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TbTaxRate = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFOConfirmItemsDetail)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -67,7 +69,7 @@
             this.dgvFOConfirmItemsDetail.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvFOConfirmItemsDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFOConfirmItemsDetail.Location = new System.Drawing.Point(11, 8);
-            this.dgvFOConfirmItemsDetail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvFOConfirmItemsDetail.Margin = new System.Windows.Forms.Padding(4);
             this.dgvFOConfirmItemsDetail.Name = "dgvFOConfirmItemsDetail";
             this.dgvFOConfirmItemsDetail.RowTemplate.Height = 23;
             this.dgvFOConfirmItemsDetail.Size = new System.Drawing.Size(1263, 555);
@@ -77,8 +79,8 @@
             // 
             this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX1.Location = new System.Drawing.Point(75, 571);
-            this.buttonX1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonX1.Location = new System.Drawing.Point(184, 572);
+            this.buttonX1.Margin = new System.Windows.Forms.Padding(4);
             this.buttonX1.Name = "buttonX1";
             this.buttonX1.Size = new System.Drawing.Size(93, 31);
             this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -90,8 +92,8 @@
             // 
             this.btnManageSpecialItem.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnManageSpecialItem.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnManageSpecialItem.Location = new System.Drawing.Point(1071, 571);
-            this.btnManageSpecialItem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnManageSpecialItem.Location = new System.Drawing.Point(1109, 572);
+            this.btnManageSpecialItem.Margin = new System.Windows.Forms.Padding(4);
             this.btnManageSpecialItem.Name = "btnManageSpecialItem";
             this.btnManageSpecialItem.Size = new System.Drawing.Size(125, 31);
             this.btnManageSpecialItem.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -106,8 +108,8 @@
             // 
             this.tbDelayDays.Border.Class = "TextBoxBorder";
             this.tbDelayDays.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbDelayDays.Location = new System.Drawing.Point(819, 569);
-            this.tbDelayDays.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbDelayDays.Location = new System.Drawing.Point(860, 574);
+            this.tbDelayDays.Margin = new System.Windows.Forms.Padding(4);
             this.tbDelayDays.Name = "tbDelayDays";
             this.tbDelayDays.PreventEnterBeep = true;
             this.tbDelayDays.Size = new System.Drawing.Size(40, 26);
@@ -121,8 +123,8 @@
             // 
             this.tbArrivedDate.Border.Class = "TextBoxBorder";
             this.tbArrivedDate.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbArrivedDate.Location = new System.Drawing.Point(528, 571);
-            this.tbArrivedDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbArrivedDate.Location = new System.Drawing.Point(595, 574);
+            this.tbArrivedDate.Margin = new System.Windows.Forms.Padding(4);
             this.tbArrivedDate.Name = "tbArrivedDate";
             this.tbArrivedDate.PreventEnterBeep = true;
             this.tbArrivedDate.Size = new System.Drawing.Size(89, 26);
@@ -135,10 +137,10 @@
             // 
             // 
             this.labelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX6.Location = new System.Drawing.Point(625, 571);
-            this.labelX6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelX6.Location = new System.Drawing.Point(692, 572);
+            this.labelX6.Margin = new System.Windows.Forms.Padding(4);
             this.labelX6.Name = "labelX6";
-            this.labelX6.Size = new System.Drawing.Size(116, 31);
+            this.labelX6.Size = new System.Drawing.Size(114, 31);
             this.labelX6.TabIndex = 31;
             this.labelX6.Text = "MMddyyyy格式";
             // 
@@ -149,8 +151,8 @@
             // 
             // 
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(769, 569);
-            this.labelX2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelX2.Location = new System.Drawing.Point(813, 572);
+            this.labelX2.Margin = new System.Windows.Forms.Padding(4);
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(41, 31);
             this.labelX2.TabIndex = 32;
@@ -163,8 +165,8 @@
             // 
             // 
             this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX1.Location = new System.Drawing.Point(455, 571);
-            this.labelX1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelX1.Location = new System.Drawing.Point(522, 572);
+            this.labelX1.Margin = new System.Windows.Forms.Padding(4);
             this.labelX1.Name = "labelX1";
             this.labelX1.Size = new System.Drawing.Size(73, 31);
             this.labelX1.TabIndex = 33;
@@ -178,8 +180,8 @@
             // 
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX5.ForeColor = System.Drawing.Color.DeepPink;
-            this.labelX5.Location = new System.Drawing.Point(201, 571);
-            this.labelX5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelX5.Location = new System.Drawing.Point(293, 572);
+            this.labelX5.Margin = new System.Windows.Forms.Padding(4);
             this.labelX5.Name = "labelX5";
             this.labelX5.Size = new System.Drawing.Size(225, 31);
             this.labelX5.TabIndex = 34;
@@ -192,8 +194,8 @@
             // 
             // 
             this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX3.Location = new System.Drawing.Point(867, 569);
-            this.labelX3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelX3.Location = new System.Drawing.Point(905, 572);
+            this.labelX3.Margin = new System.Windows.Forms.Padding(4);
             this.labelX3.Name = "labelX3";
             this.labelX3.Size = new System.Drawing.Size(41, 31);
             this.labelX3.TabIndex = 32;
@@ -203,8 +205,8 @@
             // 
             this.btnUnPlaceOrderItemMaintain.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnUnPlaceOrderItemMaintain.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnUnPlaceOrderItemMaintain.Location = new System.Drawing.Point(897, 571);
-            this.btnUnPlaceOrderItemMaintain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnUnPlaceOrderItemMaintain.Location = new System.Drawing.Point(935, 572);
+            this.btnUnPlaceOrderItemMaintain.Margin = new System.Windows.Forms.Padding(4);
             this.btnUnPlaceOrderItemMaintain.Name = "btnUnPlaceOrderItemMaintain";
             this.btnUnPlaceOrderItemMaintain.Size = new System.Drawing.Size(165, 31);
             this.btnUnPlaceOrderItemMaintain.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -218,7 +220,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1290, 641);
@@ -227,6 +229,8 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
+            this.tabPage1.Controls.Add(this.TbTaxRate);
+            this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.dgvFOConfirmItemsDetail);
             this.tabPage1.Controls.Add(this.btnUnPlaceOrderItemMaintain);
             this.tabPage1.Controls.Add(this.buttonX1);
@@ -239,9 +243,9 @@
             this.tabPage1.Controls.Add(this.labelX3);
             this.tabPage1.Controls.Add(this.labelX2);
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage1.Size = new System.Drawing.Size(1282, 611);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "订单下达";
@@ -258,104 +262,12 @@
             this.tabPage2.Controls.Add(this.BtnSpecialRefresh);
             this.tabPage2.Controls.Add(this.dgvFOSpeItemsDetail);
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage2.Size = new System.Drawing.Size(1282, 611);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "特殊物料";
-            // 
-            // BtnAllSelect_dgvSpe
-            // 
-            this.BtnAllSelect_dgvSpe.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.BtnAllSelect_dgvSpe.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.BtnAllSelect_dgvSpe.Location = new System.Drawing.Point(227, 565);
-            this.BtnAllSelect_dgvSpe.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.BtnAllSelect_dgvSpe.Name = "BtnAllSelect_dgvSpe";
-            this.BtnAllSelect_dgvSpe.Size = new System.Drawing.Size(93, 31);
-            this.BtnAllSelect_dgvSpe.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.BtnAllSelect_dgvSpe.TabIndex = 6;
-            this.BtnAllSelect_dgvSpe.Text = "全选";
-            this.BtnAllSelect_dgvSpe.Click += new System.EventHandler(this.BtnAllSelect_dgvSpe_Click);
-            // 
-            // BtnAllnotSelect_dgvSpe
-            // 
-            this.BtnAllnotSelect_dgvSpe.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.BtnAllnotSelect_dgvSpe.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.BtnAllnotSelect_dgvSpe.Location = new System.Drawing.Point(368, 565);
-            this.BtnAllnotSelect_dgvSpe.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.BtnAllnotSelect_dgvSpe.Name = "BtnAllnotSelect_dgvSpe";
-            this.BtnAllnotSelect_dgvSpe.Size = new System.Drawing.Size(93, 31);
-            this.BtnAllnotSelect_dgvSpe.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.BtnAllnotSelect_dgvSpe.TabIndex = 5;
-            this.BtnAllnotSelect_dgvSpe.Text = "全不选";
-            this.BtnAllnotSelect_dgvSpe.Click += new System.EventHandler(this.BtnAllnotSelect_dgvSpe_Click);
-            // 
-            // BtnSpecialDelete
-            // 
-            this.BtnSpecialDelete.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.BtnSpecialDelete.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.BtnSpecialDelete.Location = new System.Drawing.Point(791, 565);
-            this.BtnSpecialDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.BtnSpecialDelete.Name = "BtnSpecialDelete";
-            this.BtnSpecialDelete.Size = new System.Drawing.Size(93, 31);
-            this.BtnSpecialDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.BtnSpecialDelete.TabIndex = 4;
-            this.BtnSpecialDelete.Text = "删除";
-            this.BtnSpecialDelete.Click += new System.EventHandler(this.BtnSpecialDelete_Click);
-            // 
-            // BtnSpecialYixiada
-            // 
-            this.BtnSpecialYixiada.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.BtnSpecialYixiada.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.BtnSpecialYixiada.Location = new System.Drawing.Point(650, 565);
-            this.BtnSpecialYixiada.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.BtnSpecialYixiada.Name = "BtnSpecialYixiada";
-            this.BtnSpecialYixiada.Size = new System.Drawing.Size(93, 31);
-            this.BtnSpecialYixiada.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.BtnSpecialYixiada.TabIndex = 3;
-            this.BtnSpecialYixiada.Text = "已下达";
-            this.BtnSpecialYixiada.Click += new System.EventHandler(this.BtnSpecialYixiada_Click);
-            // 
-            // BtnSpecialRefresh
-            // 
-            this.BtnSpecialRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.BtnSpecialRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.BtnSpecialRefresh.Location = new System.Drawing.Point(509, 565);
-            this.BtnSpecialRefresh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.BtnSpecialRefresh.Name = "BtnSpecialRefresh";
-            this.BtnSpecialRefresh.Size = new System.Drawing.Size(93, 31);
-            this.BtnSpecialRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.BtnSpecialRefresh.TabIndex = 2;
-            this.BtnSpecialRefresh.Text = "刷新";
-            this.BtnSpecialRefresh.Click += new System.EventHandler(this.BtnSpecialRefresh_Click);
-            // 
-            // dgvFOSpeItemsDetail
-            // 
-            this.dgvFOSpeItemsDetail.AllowUserToAddRows = false;
-            this.dgvFOSpeItemsDetail.AllowUserToDeleteRows = false;
-            this.dgvFOSpeItemsDetail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvFOSpeItemsDetail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgvFOSpeItemsDetail.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
-            this.dgvFOSpeItemsDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFOSpeItemsDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Check});
-            this.dgvFOSpeItemsDetail.Location = new System.Drawing.Point(11, 8);
-            this.dgvFOSpeItemsDetail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dgvFOSpeItemsDetail.Name = "dgvFOSpeItemsDetail";
-            this.dgvFOSpeItemsDetail.ReadOnly = true;
-            this.dgvFOSpeItemsDetail.RowTemplate.Height = 23;
-            this.dgvFOSpeItemsDetail.Size = new System.Drawing.Size(1262, 545);
-            this.dgvFOSpeItemsDetail.TabIndex = 0;
-            this.dgvFOSpeItemsDetail.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvFOSpeItemsDetail_CellMouseClick);
-            // 
-            // Check
-            // 
-            this.Check.HeaderText = "选择";
-            this.Check.Name = "Check";
-            this.Check.ReadOnly = true;
-            this.Check.Width = 46;
             // 
             // TbForeignOrderNumber
             // 
@@ -386,6 +298,115 @@
             this.labelX4.TabIndex = 37;
             this.labelX4.Text = "联系单号";
             // 
+            // BtnAllSelect_dgvSpe
+            // 
+            this.BtnAllSelect_dgvSpe.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.BtnAllSelect_dgvSpe.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.BtnAllSelect_dgvSpe.Location = new System.Drawing.Point(227, 565);
+            this.BtnAllSelect_dgvSpe.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnAllSelect_dgvSpe.Name = "BtnAllSelect_dgvSpe";
+            this.BtnAllSelect_dgvSpe.Size = new System.Drawing.Size(93, 31);
+            this.BtnAllSelect_dgvSpe.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.BtnAllSelect_dgvSpe.TabIndex = 6;
+            this.BtnAllSelect_dgvSpe.Text = "全选";
+            this.BtnAllSelect_dgvSpe.Click += new System.EventHandler(this.BtnAllSelect_dgvSpe_Click);
+            // 
+            // BtnAllnotSelect_dgvSpe
+            // 
+            this.BtnAllnotSelect_dgvSpe.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.BtnAllnotSelect_dgvSpe.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.BtnAllnotSelect_dgvSpe.Location = new System.Drawing.Point(368, 565);
+            this.BtnAllnotSelect_dgvSpe.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnAllnotSelect_dgvSpe.Name = "BtnAllnotSelect_dgvSpe";
+            this.BtnAllnotSelect_dgvSpe.Size = new System.Drawing.Size(93, 31);
+            this.BtnAllnotSelect_dgvSpe.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.BtnAllnotSelect_dgvSpe.TabIndex = 5;
+            this.BtnAllnotSelect_dgvSpe.Text = "全不选";
+            this.BtnAllnotSelect_dgvSpe.Click += new System.EventHandler(this.BtnAllnotSelect_dgvSpe_Click);
+            // 
+            // BtnSpecialDelete
+            // 
+            this.BtnSpecialDelete.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.BtnSpecialDelete.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.BtnSpecialDelete.Location = new System.Drawing.Point(791, 565);
+            this.BtnSpecialDelete.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnSpecialDelete.Name = "BtnSpecialDelete";
+            this.BtnSpecialDelete.Size = new System.Drawing.Size(93, 31);
+            this.BtnSpecialDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.BtnSpecialDelete.TabIndex = 4;
+            this.BtnSpecialDelete.Text = "删除";
+            this.BtnSpecialDelete.Click += new System.EventHandler(this.BtnSpecialDelete_Click);
+            // 
+            // BtnSpecialYixiada
+            // 
+            this.BtnSpecialYixiada.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.BtnSpecialYixiada.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.BtnSpecialYixiada.Location = new System.Drawing.Point(650, 565);
+            this.BtnSpecialYixiada.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnSpecialYixiada.Name = "BtnSpecialYixiada";
+            this.BtnSpecialYixiada.Size = new System.Drawing.Size(93, 31);
+            this.BtnSpecialYixiada.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.BtnSpecialYixiada.TabIndex = 3;
+            this.BtnSpecialYixiada.Text = "已下达";
+            this.BtnSpecialYixiada.Click += new System.EventHandler(this.BtnSpecialYixiada_Click);
+            // 
+            // BtnSpecialRefresh
+            // 
+            this.BtnSpecialRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.BtnSpecialRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.BtnSpecialRefresh.Location = new System.Drawing.Point(509, 565);
+            this.BtnSpecialRefresh.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnSpecialRefresh.Name = "BtnSpecialRefresh";
+            this.BtnSpecialRefresh.Size = new System.Drawing.Size(93, 31);
+            this.BtnSpecialRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.BtnSpecialRefresh.TabIndex = 2;
+            this.BtnSpecialRefresh.Text = "刷新";
+            this.BtnSpecialRefresh.Click += new System.EventHandler(this.BtnSpecialRefresh_Click);
+            // 
+            // dgvFOSpeItemsDetail
+            // 
+            this.dgvFOSpeItemsDetail.AllowUserToAddRows = false;
+            this.dgvFOSpeItemsDetail.AllowUserToDeleteRows = false;
+            this.dgvFOSpeItemsDetail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvFOSpeItemsDetail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvFOSpeItemsDetail.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
+            this.dgvFOSpeItemsDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFOSpeItemsDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Check});
+            this.dgvFOSpeItemsDetail.Location = new System.Drawing.Point(11, 8);
+            this.dgvFOSpeItemsDetail.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvFOSpeItemsDetail.Name = "dgvFOSpeItemsDetail";
+            this.dgvFOSpeItemsDetail.ReadOnly = true;
+            this.dgvFOSpeItemsDetail.RowTemplate.Height = 23;
+            this.dgvFOSpeItemsDetail.Size = new System.Drawing.Size(1262, 545);
+            this.dgvFOSpeItemsDetail.TabIndex = 0;
+            this.dgvFOSpeItemsDetail.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvFOSpeItemsDetail_CellMouseClick);
+            // 
+            // Check
+            // 
+            this.Check.HeaderText = "选择";
+            this.Check.Name = "Check";
+            this.Check.ReadOnly = true;
+            this.Check.Width = 46;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(22, 579);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(40, 16);
+            this.label1.TabIndex = 38;
+            this.label1.Text = "税率";
+            // 
+            // TbTaxRate
+            // 
+            this.TbTaxRate.Location = new System.Drawing.Point(73, 574);
+            this.TbTaxRate.Name = "TbTaxRate";
+            this.TbTaxRate.Size = new System.Drawing.Size(67, 26);
+            this.TbTaxRate.TabIndex = 39;
+            this.TbTaxRate.Text = "0.13";
+            // 
             // ForeignOrderItemAutomaticPlaceOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -394,7 +415,7 @@
             this.Controls.Add(this.tabControl1);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ForeignOrderItemAutomaticPlaceOrder";
@@ -404,6 +425,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvFOConfirmItemsDetail)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFOSpeItemsDetail)).EndInit();
             this.ResumeLayout(false);
@@ -435,5 +457,7 @@
         private DevComponents.DotNetBar.ButtonX BtnAllnotSelect_dgvSpe;
         private DevComponents.DotNetBar.Controls.TextBoxX TbForeignOrderNumber;
         private DevComponents.DotNetBar.LabelX labelX4;
+        private System.Windows.Forms.TextBox TbTaxRate;
+        private System.Windows.Forms.Label label1;
     }
 }

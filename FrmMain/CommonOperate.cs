@@ -1335,7 +1335,7 @@ namespace Global
                                             )
                                             VALUES
 	                                            (
-	                                            '" + tempPONumber + "','" + dr["供应商代码"].ToString() + "', '" + dr["供应商名称"].ToString() + "', '" + dr["供应商代码"].ToString() + "', '" + dr["供应商名称"].ToString() + "', '" + dr["物料代码"].ToString().ToUpper() + "', '" + dr["物料描述"].ToString() + "','" + ItemInfoList[4] + "', '" + buyerID + "', '" + buyerName + "','" + supervisorID + "','" + dr["承诺到货"].ToString() + "',1," + Math.Round(Convert.ToDouble(dr["采购单价"]) /(1+taxRate), 9) + "," + Convert.ToDouble(dr["采购单价"]) + ",'P',4, '" + dr["承诺到货"].ToString() + "','" + dr["承诺到货"].ToString() + "'," + Convert.ToDouble(dr["采购数量"]) + ",'" + itemKeeper.Trim() + "','" + ItemInfoList[1] + "','" + ItemInfoList[2] + "','" + ItemInfoList[0] + "','" + Guid.NewGuid().ToString() + "',0,'" + parentGuid + "','"+ dr["确认人"].ToString() + "','"+ PurchaseUser.ItemReceiveType+"','C')"; 
+	                                            '" + tempPONumber + "','" + dr["供应商代码"].ToString() + "', '" + dr["供应商名称"].ToString() + "', '" + dr["供应商代码"].ToString() + "', '" + dr["供应商名称"].ToString() + "', '" + dr["物料代码"].ToString().ToUpper() + "', '" + dr["物料描述"].ToString() + "','" + ItemInfoList[4] + "', '" + buyerID + "', '" + buyerName + "','" + supervisorID + "','" + dr["承诺到货"].ToString() + "',1," + Math.Round(Convert.ToDouble(dr["采购单价"]) /(1+taxRate), 9) + "," + Convert.ToDouble(dr["采购单价"]) + ",'P',4, '" + dr["承诺到货"].ToString() + "','" + dr["承诺到货"].ToString() + "'," + Convert.ToDouble(dr["采购数量"]) + ",'" + itemKeeper.Trim() + "','" + ItemInfoList[1] + "','" + ItemInfoList[2] + "','" + ItemInfoList[0] + "','" + Guid.NewGuid().ToString() + "','"+taxRate.ToString()+"','" + parentGuid + "','"+ dr["确认人"].ToString() + "','"+ PurchaseUser.ItemReceiveType+"','C')"; 
                         sqlList.Add(sqlPOItemInsert);
                     }
                 }
@@ -1586,7 +1586,7 @@ GSID,QualityCheckStandard,RequireDept,Comment1,ForeignNumber
             return sus;
         }
         //批量下达订单和添加物料到订单中
-        public static bool PlaceAssistantItemOrderWithItemDetail(string poType, DataTable dtVendorL, DataTable dtItem, string buyerName, string buyerID, string supervisorID, int poStatus,out List<string> guidList)
+        public static bool PlaceAssistantItemOrderWithItemDetail(string poType, DataTable dtVendorL, DataTable dtItem, string buyerName, string buyerID, string supervisorID, int poStatus,out List<string> guidList,double TaxRate)
         {
             guidList = new List<string>();
             List<string> sqlList = new List<string>();
@@ -1695,7 +1695,7 @@ GSID,QualityCheckStandard,RequireDept,Comment1,ForeignNumber
                                             )
                                             VALUES
 	                                            (
-	                                            '" + tempPONumber + "','" + drs[k]["供应商代码"].ToString() + "', '" + drs[k]["供应商名称"].ToString() + "', '" + drs[k]["供应商代码"].ToString() + "', '" + drs[k]["供应商名称"].ToString() + "', '" + drs[k]["物料代码"].ToString() + "', '" + drs[k]["物料描述"].ToString() + "','" + ItemInfoList[4] + "', '" + buyerID + "', '" + buyerName + "','" + supervisorID + "','" + DateTime.Now.AddMonths(1).ToString("MMddyy") + "',2," + Math.Round(Convert.ToDouble(drs[k]["采购单价"]) / 1.13, 9) + "," + Convert.ToDouble(drs[k]["采购单价"]) + ",'P',4, '" + DateTime.Now.AddMonths(1).ToString("MMddyy") + "','" + DateTime.Now.AddMonths(1).ToString("MMddyy") + "'," + Convert.ToDouble(drs[k]["采购数量"]) + ",'" + itemKeeper.Trim() + "','" + ItemInfoList[1] + "','" + ItemInfoList[2] + "','" + ItemInfoList[0] + "','" + Guid.NewGuid().ToString() + "',0,'" + parentGuid + "','P07','"+ drs[k]["需求部门"].ToString() + "','"+ drs[k]["备注"].ToString() + "','"+ PurchaseUser.ItemReceiveType+"')";
+	                                            '" + tempPONumber + "','" + drs[k]["供应商代码"].ToString() + "', '" + drs[k]["供应商名称"].ToString() + "', '" + drs[k]["供应商代码"].ToString() + "', '" + drs[k]["供应商名称"].ToString() + "', '" + drs[k]["物料代码"].ToString() + "', '" + drs[k]["物料描述"].ToString() + "','" + ItemInfoList[4] + "', '" + buyerID + "', '" + buyerName + "','" + supervisorID + "','" + DateTime.Now.AddMonths(1).ToString("MMddyy") + "',2," + Math.Round(Convert.ToDouble(drs[k]["采购单价"]) / (1+TaxRate), 9) + "," + Convert.ToDouble(drs[k]["采购单价"]) + ",'P',4, '" + DateTime.Now.AddMonths(1).ToString("MMddyy") + "','" + DateTime.Now.AddMonths(1).ToString("MMddyy") + "'," + Convert.ToDouble(drs[k]["采购数量"]) + ",'" + itemKeeper.Trim() + "','" + ItemInfoList[1] + "','" + ItemInfoList[2] + "','" + ItemInfoList[0] + "','" + Guid.NewGuid().ToString() + "','"+TaxRate.ToString()+"','" + parentGuid + "','P07','"+ drs[k]["需求部门"].ToString() + "','"+ drs[k]["备注"].ToString() + "','"+ PurchaseUser.ItemReceiveType+"')";
                         sqlList.Add(sqlPOItemInsert);
                     }
                 }

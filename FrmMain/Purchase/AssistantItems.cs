@@ -93,6 +93,7 @@ namespace Global.Purchase
 
         private void btnPO_Click(object sender, EventArgs e)
         {
+            double TaxRate = Convert.ToDouble(TbTaxRate.Text);
             //1、获取去重的供应商代码列表
             DataTable dtTemp = (DataTable)dgvDetail.DataSource;
 
@@ -107,7 +108,7 @@ namespace Global.Purchase
             //2、遍历供应商代码列表，根据供应商代码查找对应的物料信息并写入四班
             List<string> guidList = new List<string>();
             List<string> sqlList = new List<string>();
-            if(CommonOperate.PlaceAssistantItemOrderWithItemDetail("PA", dtVendor, dtItem, UserName, UserID, SupervisorID, 2,out guidList))
+            if(CommonOperate.PlaceAssistantItemOrderWithItemDetail("PA", dtVendor, dtItem, UserName, UserID, SupervisorID, 2,out guidList,TaxRate))
             {
                 for(int i = 0; i< guidList.Count;i++)
                 {
