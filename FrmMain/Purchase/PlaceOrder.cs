@@ -2473,7 +2473,8 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                                                 T1.ActualDeliveryQuantity AS ActualDeliveryQuantity,
                                                 (T1.UnitPrice*T1.POItemQuantity) As ItemSum,
                                                 T1.StockKeeper,
-                                                (case T1.POStatus when  '1' then '已提交'
+                                                (case T1.POStatus  when  '-1' then '已取消' when  '0' then '已准备'
+                                                           when  '1' then '已提交'
                                                          when  '2' then '已审核'
                                                          when  '3' then '已下达' 
                                                         when  '4' then '已到货' 
