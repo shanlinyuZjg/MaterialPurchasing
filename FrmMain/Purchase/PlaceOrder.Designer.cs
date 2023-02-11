@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            DevComponents.DotNetBar.Rendering.SuperTabColorTable superTabColorTable2 = new DevComponents.DotNetBar.Rendering.SuperTabColorTable();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle121 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle122 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle123 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle124 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle125 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle126 = new System.Windows.Forms.DataGridViewCellStyle();
+            DevComponents.DotNetBar.Rendering.SuperTabColorTable superTabColorTable1 = new DevComponents.DotNetBar.Rendering.SuperTabColorTable();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle127 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle128 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle129 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle130 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle131 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle132 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle133 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle134 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle135 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelEx2 = new DevComponents.DotNetBar.PanelEx();
             this.btnGetItemInfo = new DevComponents.DotNetBar.ButtonX();
             this.cbbConfirmPerson = new System.Windows.Forms.ComboBox();
@@ -58,6 +58,7 @@
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
             this.superTabControl2 = new DevComponents.DotNetBar.SuperTabControl();
             this.superTabControlPanel4 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.BtnOrderClosed = new DevComponents.DotNetBar.ButtonX();
             this.rbtnAutomatic = new System.Windows.Forms.RadioButton();
             this.rbtnMannual = new System.Windows.Forms.RadioButton();
             this.cbbPOPrefix = new System.Windows.Forms.ComboBox();
@@ -73,7 +74,6 @@
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.btnCancelAllChecked = new DevComponents.DotNetBar.ButtonX();
             this.cbbVendor = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.btnCheckedByPassword = new DevComponents.DotNetBar.ButtonX();
             this.btnSubmitPO = new DevComponents.DotNetBar.ButtonX();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.tbVendorNumber = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -127,6 +127,7 @@
             this.labelX6 = new DevComponents.DotNetBar.LabelX();
             this.labelX5 = new DevComponents.DotNetBar.LabelX();
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
+            this.btnCheckedByPassword = new DevComponents.DotNetBar.ButtonX();
             this.panelEx4 = new DevComponents.DotNetBar.PanelEx();
             this.superTabControl1 = new DevComponents.DotNetBar.SuperTabControl();
             this.superTabControlPanel1 = new DevComponents.DotNetBar.SuperTabControlPanel();
@@ -187,11 +188,10 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.修改该行物料ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除该行物料ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.关闭改行物料ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.打开改行物料ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除该订单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BtnOrderClosed = new DevComponents.DotNetBar.ButtonX();
+            this.该订单行作废ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.打开该订单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelEx2.SuspendLayout();
             this.panelEx1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl2)).BeginInit();
@@ -478,6 +478,18 @@
             this.superTabControlPanel4.TabItem = this.superTabItem4;
             this.superTabControlPanel4.Click += new System.EventHandler(this.superTabControlPanel4_Click);
             // 
+            // BtnOrderClosed
+            // 
+            this.BtnOrderClosed.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.BtnOrderClosed.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.BtnOrderClosed.Location = new System.Drawing.Point(310, 119);
+            this.BtnOrderClosed.Name = "BtnOrderClosed";
+            this.BtnOrderClosed.Size = new System.Drawing.Size(63, 23);
+            this.BtnOrderClosed.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.BtnOrderClosed.TabIndex = 32;
+            this.BtnOrderClosed.Text = "订单关闭";
+            this.BtnOrderClosed.Click += new System.EventHandler(this.BtnOrderClosed_Click);
+            // 
             // rbtnAutomatic
             // 
             this.rbtnAutomatic.AutoSize = true;
@@ -656,18 +668,6 @@
             this.cbbVendor.SelectedIndexChanged += new System.EventHandler(this.cbbVendor_SelectedIndexChanged);
             this.cbbVendor.SelectionChangeCommitted += new System.EventHandler(this.cbbVendor_SelectionChangeCommitted);
             // 
-            // btnCheckedByPassword
-            // 
-            this.btnCheckedByPassword.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCheckedByPassword.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCheckedByPassword.Location = new System.Drawing.Point(915, 3);
-            this.btnCheckedByPassword.Name = "btnCheckedByPassword";
-            this.btnCheckedByPassword.Size = new System.Drawing.Size(63, 23);
-            this.btnCheckedByPassword.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCheckedByPassword.TabIndex = 8;
-            this.btnCheckedByPassword.Text = "密码审核";
-            this.btnCheckedByPassword.Click += new System.EventHandler(this.btnCheckedByPassword_Click);
-            // 
             // btnSubmitPO
             // 
             this.btnSubmitPO.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -806,37 +806,37 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvPO.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvPO.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPO.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle121.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle121.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle121.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle121.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle121.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle121.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle121.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPO.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle121;
             this.dgvPO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPO.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvPOCheck});
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPO.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle122.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle122.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle122.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle122.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle122.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle122.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle122.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPO.DefaultCellStyle = dataGridViewCellStyle122;
             this.dgvPO.EnableHeadersVisualStyles = false;
             this.dgvPO.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvPO.Location = new System.Drawing.Point(8, 148);
             this.dgvPO.Name = "dgvPO";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPO.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle123.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle123.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle123.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle123.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle123.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle123.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle123.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPO.RowHeadersDefaultCellStyle = dataGridViewCellStyle123;
             this.dgvPO.RowTemplate.Height = 23;
             this.dgvPO.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPO.Size = new System.Drawing.Size(434, 213);
@@ -954,35 +954,35 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPOItemDetail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvPOItemDetail.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPOItemDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle124.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle124.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle124.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle124.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle124.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle124.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle124.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPOItemDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle124;
             this.dgvPOItemDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPOItemDetail.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle125.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle125.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle125.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle125.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle125.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle125.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle125.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPOItemDetail.DefaultCellStyle = dataGridViewCellStyle125;
             this.dgvPOItemDetail.EnableHeadersVisualStyles = false;
             this.dgvPOItemDetail.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvPOItemDetail.Location = new System.Drawing.Point(495, 91);
             this.dgvPOItemDetail.Name = "dgvPOItemDetail";
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPOItemDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle126.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle126.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle126.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle126.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle126.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle126.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle126.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPOItemDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle126;
             this.dgvPOItemDetail.RowTemplate.Height = 23;
             this.dgvPOItemDetail.Size = new System.Drawing.Size(999, 317);
             this.dgvPOItemDetail.TabIndex = 5;
@@ -1384,6 +1384,18 @@
             this.labelX4.TabIndex = 2;
             this.labelX4.Text = "订单编号";
             // 
+            // btnCheckedByPassword
+            // 
+            this.btnCheckedByPassword.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCheckedByPassword.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCheckedByPassword.Location = new System.Drawing.Point(915, 3);
+            this.btnCheckedByPassword.Name = "btnCheckedByPassword";
+            this.btnCheckedByPassword.Size = new System.Drawing.Size(63, 23);
+            this.btnCheckedByPassword.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCheckedByPassword.TabIndex = 8;
+            this.btnCheckedByPassword.Text = "密码审核";
+            this.btnCheckedByPassword.Click += new System.EventHandler(this.btnCheckedByPassword_Click);
+            // 
             // panelEx4
             // 
             this.panelEx4.CanvasColor = System.Drawing.SystemColors.Control;
@@ -1436,9 +1448,9 @@
             this.superTabControl1.Tabs.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.superTabItem1,
             this.superTabItem3});
-            superTabColorTable2.InnerBorder = System.Drawing.Color.White;
-            superTabColorTable2.OuterBorder = System.Drawing.Color.White;
-            this.superTabControl1.TabStripColor = superTabColorTable2;
+            superTabColorTable1.InnerBorder = System.Drawing.Color.White;
+            superTabColorTable1.OuterBorder = System.Drawing.Color.White;
+            this.superTabControl1.TabStripColor = superTabColorTable1;
             this.superTabControl1.Text = "superTabControl1";
             // 
             // superTabControlPanel1
@@ -1677,14 +1689,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPO2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvPO2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPO2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle127.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle127.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle127.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle127.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle127.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle127.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle127.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPO2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle127;
             this.dgvPO2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPO2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.GUID,
@@ -1702,26 +1714,26 @@
             this.ManufacturerNumber,
             this.ManufacturerName,
             this.ActualDeliveryQuantity});
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPO2.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle128.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle128.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle128.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle128.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle128.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle128.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle128.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPO2.DefaultCellStyle = dataGridViewCellStyle128;
             this.dgvPO2.EnableHeadersVisualStyles = false;
             this.dgvPO2.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvPO2.Location = new System.Drawing.Point(233, 61);
             this.dgvPO2.Name = "dgvPO2";
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPO2.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle129.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle129.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle129.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle129.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle129.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle129.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle129.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPO2.RowHeadersDefaultCellStyle = dataGridViewCellStyle129;
             this.dgvPO2.RowTemplate.Height = 23;
             this.dgvPO2.Size = new System.Drawing.Size(1254, 294);
             this.dgvPO2.TabIndex = 0;
@@ -2060,37 +2072,37 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPOItemsForInvoiceDetail.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPOItemsForInvoiceDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle130.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle130.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle130.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle130.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle130.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle130.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle130.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPOItemsForInvoiceDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle130;
             this.dgvPOItemsForInvoiceDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPOItemsForInvoiceDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.InvoiceCheck});
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPOItemsForInvoiceDetail.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle131.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle131.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle131.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle131.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle131.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle131.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle131.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPOItemsForInvoiceDetail.DefaultCellStyle = dataGridViewCellStyle131;
             this.dgvPOItemsForInvoiceDetail.EnableHeadersVisualStyles = false;
             this.dgvPOItemsForInvoiceDetail.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvPOItemsForInvoiceDetail.Location = new System.Drawing.Point(279, 33);
             this.dgvPOItemsForInvoiceDetail.Name = "dgvPOItemsForInvoiceDetail";
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle27.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPOItemsForInvoiceDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle132.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle132.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle132.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle132.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle132.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle132.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle132.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPOItemsForInvoiceDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle132;
             this.dgvPOItemsForInvoiceDetail.RowHeadersVisible = false;
             this.dgvPOItemsForInvoiceDetail.RowTemplate.Height = 23;
             this.dgvPOItemsForInvoiceDetail.Size = new System.Drawing.Size(1201, 306);
@@ -2109,35 +2121,35 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvPONumberForInvoice.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvPONumberForInvoice.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle28.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle28.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPONumberForInvoice.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle133.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle133.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle133.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle133.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle133.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle133.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle133.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPONumberForInvoice.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle133;
             this.dgvPONumberForInvoice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle29.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle29.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPONumberForInvoice.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle134.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle134.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle134.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle134.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle134.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle134.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle134.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPONumberForInvoice.DefaultCellStyle = dataGridViewCellStyle134;
             this.dgvPONumberForInvoice.EnableHeadersVisualStyles = false;
             this.dgvPONumberForInvoice.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvPONumberForInvoice.Location = new System.Drawing.Point(3, 34);
             this.dgvPONumberForInvoice.Name = "dgvPONumberForInvoice";
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle30.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPONumberForInvoice.RowHeadersDefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle135.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle135.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle135.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle135.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle135.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle135.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle135.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPONumberForInvoice.RowHeadersDefaultCellStyle = dataGridViewCellStyle135;
             this.dgvPONumberForInvoice.RowTemplate.Height = 23;
             this.dgvPONumberForInvoice.Size = new System.Drawing.Size(270, 307);
             this.dgvPONumberForInvoice.TabIndex = 25;
@@ -2157,38 +2169,24 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.修改该行物料ToolStripMenuItem,
             this.删除该行物料ToolStripMenuItem,
-            this.关闭改行物料ToolStripMenuItem,
-            this.打开改行物料ToolStripMenuItem});
+            this.该订单行作废ToolStripMenuItem,
+            this.打开该订单ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(344, 114);
             // 
             // 修改该行物料ToolStripMenuItem
             // 
             this.修改该行物料ToolStripMenuItem.Name = "修改该行物料ToolStripMenuItem";
-            this.修改该行物料ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.修改该行物料ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.修改该行物料ToolStripMenuItem.Text = "修改该行物料";
             this.修改该行物料ToolStripMenuItem.Click += new System.EventHandler(this.修改该行物料ToolStripMenuItem_Click);
             // 
             // 删除该行物料ToolStripMenuItem
             // 
             this.删除该行物料ToolStripMenuItem.Name = "删除该行物料ToolStripMenuItem";
-            this.删除该行物料ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.删除该行物料ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.删除该行物料ToolStripMenuItem.Text = "删除该行物料";
             this.删除该行物料ToolStripMenuItem.Click += new System.EventHandler(this.删除该行物料ToolStripMenuItem_Click);
-            // 
-            // 关闭改行物料ToolStripMenuItem
-            // 
-            this.关闭改行物料ToolStripMenuItem.Name = "关闭改行物料ToolStripMenuItem";
-            this.关闭改行物料ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.关闭改行物料ToolStripMenuItem.Text = "关闭该行物料";
-            this.关闭改行物料ToolStripMenuItem.Click += new System.EventHandler(this.关闭改行物料ToolStripMenuItem_Click);
-            // 
-            // 打开改行物料ToolStripMenuItem
-            // 
-            this.打开改行物料ToolStripMenuItem.Name = "打开改行物料ToolStripMenuItem";
-            this.打开改行物料ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.打开改行物料ToolStripMenuItem.Text = "打开该行物料";
-            this.打开改行物料ToolStripMenuItem.Click += new System.EventHandler(this.打开改行物料ToolStripMenuItem_Click);
             // 
             // contextMenuStrip2
             // 
@@ -2204,17 +2202,19 @@
             this.删除该订单ToolStripMenuItem.Text = "删除该订单";
             this.删除该订单ToolStripMenuItem.Click += new System.EventHandler(this.删除该订单ToolStripMenuItem_Click);
             // 
-            // BtnOrderClosed
+            // 该订单行作废ToolStripMenuItem
             // 
-            this.BtnOrderClosed.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.BtnOrderClosed.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.BtnOrderClosed.Location = new System.Drawing.Point(310, 119);
-            this.BtnOrderClosed.Name = "BtnOrderClosed";
-            this.BtnOrderClosed.Size = new System.Drawing.Size(63, 23);
-            this.BtnOrderClosed.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.BtnOrderClosed.TabIndex = 32;
-            this.BtnOrderClosed.Text = "订单关闭";
-            this.BtnOrderClosed.Click += new System.EventHandler(this.BtnOrderClosed_Click);
+            this.该订单行作废ToolStripMenuItem.Name = "该订单行作废ToolStripMenuItem";
+            this.该订单行作废ToolStripMenuItem.Size = new System.Drawing.Size(343, 22);
+            this.该订单行作废ToolStripMenuItem.Text = "取消该订单(四班状态改为5，物料状态改为已取消)";
+            this.该订单行作废ToolStripMenuItem.Click += new System.EventHandler(this.该订单行作废ToolStripMenuItem_Click);
+            // 
+            // 打开该订单ToolStripMenuItem
+            // 
+            this.打开该订单ToolStripMenuItem.Name = "打开该订单ToolStripMenuItem";
+            this.打开该订单ToolStripMenuItem.Size = new System.Drawing.Size(343, 22);
+            this.打开该订单ToolStripMenuItem.Text = "打开该订单(四班状态改为4，物料状态改为已下达)";
+            this.打开该订单ToolStripMenuItem.Click += new System.EventHandler(this.打开该订单ToolStripMenuItem_Click);
             // 
             // PlaceOrder
             // 
@@ -2382,7 +2382,6 @@
         private System.Windows.Forms.RadioButton rbtnAutomatic;
         private DevComponents.DotNetBar.Controls.TextBoxX tbBatches;
         private DevComponents.DotNetBar.LabelX lblBatches;
-        private System.Windows.Forms.ToolStripMenuItem 关闭改行物料ToolStripMenuItem;
         private DevComponents.DotNetBar.ButtonX btnPOInvoice;
         private System.Windows.Forms.DataGridViewCheckBoxColumn InvoiceCheck;
         private DevComponents.DotNetBar.Controls.TextBoxX tbEditionQuantity;
@@ -2404,7 +2403,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ManufacturerNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn ManufacturerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ActualDeliveryQuantity;
-        private System.Windows.Forms.ToolStripMenuItem 打开改行物料ToolStripMenuItem;
         private DevComponents.DotNetBar.ButtonX BtnOrderClosed;
+        private System.Windows.Forms.ToolStripMenuItem 该订单行作废ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 打开该订单ToolStripMenuItem;
     }
 }

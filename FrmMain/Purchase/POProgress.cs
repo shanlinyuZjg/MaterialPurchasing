@@ -36,7 +36,7 @@ namespace Global.Purchase
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string sqlSelect = sqlSelect = @"SELECT  
-                                                      (case POStatus when  '0' then '已准备'
+                                                      (case POStatus when '-1' then '已取消' when  '0' then '已准备'
                                                                  when  '1' then '已提交'
                                                                  when  '2' then '已审核'
                                                                  when  '3' then '已下达' 

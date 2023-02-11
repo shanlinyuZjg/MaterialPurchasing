@@ -626,14 +626,14 @@ namespace Global.Purchase
 	                                        	T1.ItemNumber AS 物料代码,
 	                                            T1.ItemDescription AS 物料描述,
 	                                            T1.LineUM AS 单位,
-	                                            T1.LineType AS 类型,
-	                                            T1.LineStatus AS 状态,
+	                                            T1.LineStatus AS 四班状态,
                                                 T1.PricePreTax AS 含税单价,
 	                                            T1.UnitPrice AS 单价,
 	                                            T1.POItemQuantity AS 订购数量,
 	                                            T1.DemandDeliveryDate AS 需求日期,
 	                                            T1.ForeignNumber AS 外贸单号,
                                                   (     case T1.POStatus
+                                                        when  '-1' then '已取消'
                                                         when  '0' then '已准备'
                                                          when  '1' then '已提交'
                                                          when  '2' then '已审核'
@@ -647,6 +647,7 @@ namespace Global.Purchase
                                                 T1.ManufacturerNumber AS 生产商码,
                                                 T1.ManufacturerName AS  生产商名,
                                                 T1.TaxRate           AS  税率,
+	                                            T1.LineType AS 类型,
                                                 T1.DemandDeliveryDate AS 需求日期旧
                                         FROM
 	                                        PurchaseOrderRecordByCMF T1
@@ -697,7 +698,8 @@ namespace Global.Purchase
                 dgvPOItemDetail.Columns["物料描述"].ReadOnly = true;
                 dgvPOItemDetail.Columns["单位"].ReadOnly = true;
                 dgvPOItemDetail.Columns["类型"].ReadOnly = true;
-                dgvPOItemDetail.Columns["状态"].ReadOnly = true;
+                dgvPOItemDetail.Columns["四班状态"].ReadOnly = true;
+                dgvPOItemDetail.Columns["含税单价"].ReadOnly = true;
                 dgvPOItemDetail.Columns["物料状态"].ReadOnly = true;
                 dgvPOItemDetail.Columns["生产商码"].ReadOnly = true;
                 dgvPOItemDetail.Columns["生产商名"].ReadOnly = true;
@@ -4718,6 +4720,87 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
             //fsuserid, fspassword
             PurchaseOrderClose Poc = new PurchaseOrderClose(fsuserid, fspassword);
             Poc.ShowDialog();
+        }
+
+        private void 该订单行作废ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string poNumber = tbPONumberInDetail.Text.Trim();
+            string lineNumber = dgvPOItemDetail["行号", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
+            string itemNumber = dgvPOItemDetail["物料代码", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
+            string promisedDate = dgvPOItemDetail["需求日期", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
+            string Id = dgvPOItemDetail["Id", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
+            string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set LineStatus = 5, POStatus = -1  Where Id = '" + Id + "'";
+            FSFunctionLib.FSConfigFileInitialize(GlobalSpace.fsconfigfilepath, fsuserid, fspassword);
+
+            POMT12 myPomt12 = new POMT12();
+            myPomt12.PONumber.Value = poNumber;
+            myPomt12.POLineNumber.Value = lineNumber;
+            myPomt12.ItemNumber.Value = itemNumber;
+            //myPomt12.PromisedDate.Value = promisedDate;
+            myPomt12.PromisedDateOld.Value = strPromisedDateOld;
+            myPomt12.POLineSubType.Value = "L";
+            myPomt12.POLineStatus.Value = "5";
+
+            if (FSFunctionLib.fstiClient.ProcessId(myPomt12, null))
+            {
+                if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
+                {
+                    Custom.MsgEx("取消订单行明细成功！");
+                    ShowPOItemDetail(tbPONumberInDetail.Text.Trim());
+                    FSFunctionLib.FSExit();
+                }
+                else
+                {
+                    Custom.MsgEx("四班关闭成功，记录修改失败！");
+                    FSFunctionLib.FSExit();
+                }
+
+            }
+            else
+            {
+                FSFunctionLib.FSErrorMsg("操作失败");
+            }
+
+        }
+
+        private void 打开该订单ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string poNumber = tbPONumberInDetail.Text.Trim();
+            string lineNumber = dgvPOItemDetail["行号", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
+            string itemNumber = dgvPOItemDetail["物料代码", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
+            string promisedDate = dgvPOItemDetail["需求日期", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
+            string Id = dgvPOItemDetail["Id", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
+            string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set LineStatus = 4, POStatus = 3  Where Id = '" + Id + "'";
+            FSFunctionLib.FSConfigFileInitialize(GlobalSpace.fsconfigfilepath, fsuserid, fspassword);
+
+            POMT12 myPomt12 = new POMT12();
+            myPomt12.PONumber.Value = poNumber;
+            myPomt12.POLineNumber.Value = lineNumber;
+            myPomt12.ItemNumber.Value = itemNumber;
+            //myPomt12.PromisedDate.Value = promisedDate;
+            myPomt12.PromisedDateOld.Value = strPromisedDateOld;
+            myPomt12.POLineSubType.Value = "L";
+            myPomt12.POLineStatus.Value = "4";
+
+            if (FSFunctionLib.fstiClient.ProcessId(myPomt12, null))
+            {
+                if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
+                {
+                    Custom.MsgEx("打开订单行明细成功！");
+                    ShowPOItemDetail(tbPONumberInDetail.Text.Trim());
+                    FSFunctionLib.FSExit();
+                }
+                else
+                {
+                    Custom.MsgEx("四班打开成功，记录修改失败！");
+                    FSFunctionLib.FSExit();
+                }
+
+            }
+            else
+            {
+                FSFunctionLib.FSErrorMsg("操作失败");
+            }
         }
     }
 
