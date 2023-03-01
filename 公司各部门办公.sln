@@ -11,14 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "原生程序测试", "原�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "027财务办公程序", "..\..\027财务办公程序\027财务办公程序.csproj", "{D2E38B9E-73DA-4F9C-BDF5-CD14B7EF2A27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetSpider", "..\..\图片爬虫\NetSpider\NetSpider.csproj", "{05D45BC4-0361-4237-AB4D-0B20DCDA030A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "028数据提取", "..\..\028数据提取\028数据提取.csproj", "{E67B30AE-D440-49F1-9FE8-7B9164B50433}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "公司预算系统", "..\..\029公司预算系统\BudgetAndExpenditureManageSystem\公司预算系统.csproj", "{AF5ACAEE-3E7F-4DFB-9408-BCC24D52ED2F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "付款单打印及审核程序", "..\..\030付款单打印及审核程序\ClientPrint\付款单打印及审核程序.csproj", "{BB35C6E5-D580-4DD9-927B-9D6FB3AA5392}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "付款单权限增加", "付款单权限增加\付款单权限增加.csproj", "{A9EDE586-C62F-42FD-9608-5FD4DB03C547}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "035电子发票审核", "035电子发票审核\035电子发票审核.csproj", "{3C62DB0E-1412-43FC-B90A-543B8634EA42}"
@@ -67,38 +59,6 @@ Global
 		{D2E38B9E-73DA-4F9C-BDF5-CD14B7EF2A27}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D2E38B9E-73DA-4F9C-BDF5-CD14B7EF2A27}.Release|x86.ActiveCfg = Release|x86
 		{D2E38B9E-73DA-4F9C-BDF5-CD14B7EF2A27}.Release|x86.Build.0 = Release|x86
-		{05D45BC4-0361-4237-AB4D-0B20DCDA030A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{05D45BC4-0361-4237-AB4D-0B20DCDA030A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{05D45BC4-0361-4237-AB4D-0B20DCDA030A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{05D45BC4-0361-4237-AB4D-0B20DCDA030A}.Debug|x86.Build.0 = Debug|Any CPU
-		{05D45BC4-0361-4237-AB4D-0B20DCDA030A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{05D45BC4-0361-4237-AB4D-0B20DCDA030A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{05D45BC4-0361-4237-AB4D-0B20DCDA030A}.Release|x86.ActiveCfg = Release|Any CPU
-		{05D45BC4-0361-4237-AB4D-0B20DCDA030A}.Release|x86.Build.0 = Release|Any CPU
-		{E67B30AE-D440-49F1-9FE8-7B9164B50433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E67B30AE-D440-49F1-9FE8-7B9164B50433}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E67B30AE-D440-49F1-9FE8-7B9164B50433}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{E67B30AE-D440-49F1-9FE8-7B9164B50433}.Debug|x86.Build.0 = Debug|Any CPU
-		{E67B30AE-D440-49F1-9FE8-7B9164B50433}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E67B30AE-D440-49F1-9FE8-7B9164B50433}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E67B30AE-D440-49F1-9FE8-7B9164B50433}.Release|x86.ActiveCfg = Release|Any CPU
-		{E67B30AE-D440-49F1-9FE8-7B9164B50433}.Release|x86.Build.0 = Release|Any CPU
-		{AF5ACAEE-3E7F-4DFB-9408-BCC24D52ED2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF5ACAEE-3E7F-4DFB-9408-BCC24D52ED2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF5ACAEE-3E7F-4DFB-9408-BCC24D52ED2F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{AF5ACAEE-3E7F-4DFB-9408-BCC24D52ED2F}.Debug|x86.Build.0 = Debug|Any CPU
-		{AF5ACAEE-3E7F-4DFB-9408-BCC24D52ED2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF5ACAEE-3E7F-4DFB-9408-BCC24D52ED2F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AF5ACAEE-3E7F-4DFB-9408-BCC24D52ED2F}.Release|x86.ActiveCfg = Release|Any CPU
-		{AF5ACAEE-3E7F-4DFB-9408-BCC24D52ED2F}.Release|x86.Build.0 = Release|Any CPU
-		{BB35C6E5-D580-4DD9-927B-9D6FB3AA5392}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BB35C6E5-D580-4DD9-927B-9D6FB3AA5392}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BB35C6E5-D580-4DD9-927B-9D6FB3AA5392}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BB35C6E5-D580-4DD9-927B-9D6FB3AA5392}.Debug|x86.Build.0 = Debug|Any CPU
-		{BB35C6E5-D580-4DD9-927B-9D6FB3AA5392}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BB35C6E5-D580-4DD9-927B-9D6FB3AA5392}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BB35C6E5-D580-4DD9-927B-9D6FB3AA5392}.Release|x86.ActiveCfg = Release|Any CPU
-		{BB35C6E5-D580-4DD9-927B-9D6FB3AA5392}.Release|x86.Build.0 = Release|Any CPU
 		{A9EDE586-C62F-42FD-9608-5FD4DB03C547}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A9EDE586-C62F-42FD-9608-5FD4DB03C547}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9EDE586-C62F-42FD-9608-5FD4DB03C547}.Debug|x86.ActiveCfg = Debug|Any CPU
