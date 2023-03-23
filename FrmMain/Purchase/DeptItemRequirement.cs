@@ -60,6 +60,7 @@ namespace Global.Purchase
                 //this.dgvSpecification.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgvItemRequirement.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
+            PLan.Checked = true;
         }
         private void GetRequireItem1()
         {
@@ -95,106 +96,8 @@ namespace Global.Purchase
                 dgvEdit.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
         }
-        private void tbVendorName_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            string str = string.Empty;
-            str = ISO88591.GetString(GB2312.GetBytes(tbVendorName.Text.ToString()));
-            cbbVendorNumber.Items.Clear();
-            if (e.KeyChar == (char)13)
-            {
-                if (string.IsNullOrEmpty(tbVendorName.Text.Trim()))
-                {
-                    MessageBoxEx.Show("查询内容不得为空！");
-                }
-                else
-                {
-                    cbbVendorNumber.Text = "";
-                    if (cbbVendorNumber.Items.Count > 0)
-                    {
-                        cbbVendorNumber.Items.Clear();
-                    }
-                    string strSql = @"SELECT
-	                                    VendorID,
-	                                    VendorName
-                                    FROM
-	                                    _NoLock_FS_Vendor	                                    
-                                    WHERE
-	                                    VendorName like '%" + str + "%'";
-                    DataTable dtTemp = SQLHelper.GetDataTableOleDb(GlobalSpace.oledbconnstrFSDBMR, strSql);
-                    if (dtTemp.Rows.Count > 0)
-                    {
-                        if (dtTemp.Rows.Count == 1)
-                        {
-                            cbbVendorNumber.Text = dtTemp.Rows[0]["VendorID"].ToString() + "|" + dtTemp.Rows[0]["VendorName"].ToString();
-                        }
-                        else
-                        {
-                            cbbVendorNumber.Text = "";
-                            foreach (DataRow dr in dtTemp.Rows)
-                            {
-                                cbbVendorNumber.Items.Add(dr["VendorID"].ToString() + "|" + dr["VendorName"].ToString());
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        private void btnConfirm_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(cbbVendorNumber.Text) || string.IsNullOrWhiteSpace(tbPricePreTax.Text) || string.IsNullOrWhiteSpace(tbRemark.Text))
-            {
-                MessageBoxEx.Show("信息不能为空！", "提示");
-                return;
-            }
-            List<string> sqlList = new List<string>();
-            foreach (DataGridViewRow dgvr in dgvItemRequirement.Rows)
-            {
-                if (Convert.ToBoolean(dgvr.Cells["Check"].Value))
-                {
-                    string sqlInsert = @"INSERT INTO [FSDB].[dbo].[PurchaseDepartmentDeptRequirement] (
-	                                                            [ItemNumber],
-	                                                            [ItemDescription],
-	                                                            [UM],
-	                                                            [RequireQuantity],
-	                                                            [InspectStandard],
-	                                                            [RequireDate],
-	                                                            [RemarkOriginal],
-	                                                            [AppointedVendor],
-	                                                            [VendorNumber],
-	                                                            [VendorName],
-	                                                            [UniqueID],
-	                                                            [Remark],PricePreTax,Creator
-                                                            )
-                                                            VALUES
-	                                                            ('" + dgvr.Cells["物料代码"].Value.ToString() + "','" + dgvr.Cells["物料描述"].Value.ToString() + "',	'" + dgvr.Cells["单位"].Value.ToString() + "','" + Convert.ToDouble(dgvr.Cells["需求数量"].Value) + "','" + dgvr.Cells["检验标准"].Value.ToString() + "','" + dgvr.Cells["需求日期"].Value.ToString() + "','" + dgvr.Cells["备注"].Value.ToString() + "','" + dgvr.Cells["指定供应商"].Value.ToString() + "','" + cbbVendorNumber.Text.Split('|')[0] + "','" + cbbVendorNumber.Text.Split('|')[1] + "','" + Convert.ToInt32(dgvr.Cells["ID"].Value) + "','" + tbRemark.Text + "'," + Convert.ToDouble(tbPricePreTax.Text) + ",'" + PurchaseUser.UserID + "' )";
-                    sqlList.Add(sqlInsert);
-                }
-            }
-            if (sqlList.Count == 0)
-            {
-                MessageBoxEx.Show("请选择一条待处理计划！", "提示");
-                return;
-            }
-            else if (sqlList.Count > 1)
-            {
-                MessageBoxEx.Show("一次只能处理一条需求计划信息", "提示");
-                return;
-            }
-            else
-            {
-                if (SQLHelper.BatchExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlList))
-                {
-                    MessageBoxEx.Show("确认成功！", "提示");
-                    GetRequireItem();
-                }
-                else
-                {
-                    MessageBoxEx.Show("确认失败！", "提示");
-                }
-            }
-        }
-
+      
+       
         private void DeptItemRequirement_Load(object sender, EventArgs e)
         {
             GetRequireItem();
@@ -238,26 +141,7 @@ namespace Global.Purchase
             string sqlSelect = @"Select UserID,(UserID+'|'+Name) AS Name From PurchaseDepartmentRBACByCMF Where POItemConfirmType = '" + type + "'";
             return SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
         }
-        private void BtTableExport_Click(object sender, EventArgs e)
-        {
-            if (dgvItemRequirement.Rows.Count == 0)
-            { MessageBox.Show("无数据！"); return; }
-            #region
-            if (!CheckCodeUnit(dgvItemRequirement))
-            {
-                MessageBoxEx.Show("物料代码或单位不准确，已红色标示！");
-                return;
-            }
-            #endregion
-            string filePath = getExcelpath();
-            if (filePath.IndexOf(":") < 0)
-            { return; }
-            TableToExcel(dgvItemRequirement, filePath);
-            MessageBox.Show("导出完成");
-            SetFlag1(dgvItemRequirement);
-            GetRequireItem();
-        }
-
+     
         private bool CheckCodeUnit(DataGridView dgv)
         {
             bool bl = true;
@@ -412,8 +296,14 @@ namespace Global.Purchase
                 return;
             }
             #endregion
-
-            BatchExtract(dgvItemRequirement);
+            if (PLan.Checked)
+            {
+                BatchExtract(dgvItemRequirement);
+            }
+            else
+            {
+                ImportBatchExtract(dgvItemRequirement);
+            }
 
         }
         private void BatchExtract(DataGridView dt)
@@ -494,7 +384,86 @@ namespace Global.Purchase
             con.Close();
             #endregion
         }
+        private void ImportBatchExtract(DataGridView dt)
+        {
+            List<string> lint = new List<string>();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                if (Convert.ToBoolean(dt.Rows[i].Cells["Check"].Value))
+                {
+                    string syb = dt.Rows[i].Cells["事业部"].Value.ToString().Trim();
+                    
+                    int sybInt;
+                    if (syb == "固水")
+                    { sybInt = 0; }
+                    else if (syb == "粉针")
+                    { sybInt = 1; }
+                    else if (syb == "原料")
+                    { sybInt = 2; }
+                    else
+                    { sybInt = 3; }
+                    lint.Add("INSERT INTO SolidBuyList_Handle ( " +
+    "	SolidBuyList_Handle.ItemNumber, \n" +
+    "	SolidBuyList_Handle.ItemDescription, \n" +
+    "	SolidBuyList_Handle.ItemUM, \n" +
+    "	SolidBuyList_Handle.BuyQuantity, \n" +
+    "	SolidBuyList_Handle.InternationalStandards, \n" +
+    "	SolidBuyList_Handle.NeedTime, \n" +
+    "	SolidBuyList_Handle.OperateTime, \n" +
+    "	SolidBuyList_Handle.PlanVendorName, \n" +
+    "	SolidBuyList_Handle.ForeignNumber, \n" +
+    "	SolidBuyList_Handle.WorkCenter, \n" +
+    "	SolidBuyList_Handle.PlanRemark, \n" +
+    "	SolidBuyList_Handle.SYBFlag,TaxRate) values ('" +
+    dt.Rows[i].Cells["物料代码"].Value.ToString().Trim() +"','"+
+    dt.Rows[i].Cells["物料描述"].Value.ToString().Trim() + "','" +
+   dt.Rows[i].Cells["单位"].Value.ToString().Trim() + "','" +
+   dt.Rows[i].Cells["需求数量"].Value.ToString().Trim() + "','" +
+   dt.Rows[i].Cells["检验标准"].Value.ToString().Trim() + "','" +
+dt.Rows[i].Cells["需求日期"].Value.ToString().Trim() + "','" +
+    DateTime.Now.ToString() + "','" +
+   dt.Rows[i].Cells["指定供应商"].Value.ToString().Trim() + "','" +
+   dt.Rows[i].Cells["联系单号"].Value.ToString().Trim() + "','" +
+   dt.Rows[i].Cells["需求车间"].Value.ToString().Trim() + "','" +
+    dt.Rows[i].Cells["备注"].Value.ToString().Trim() + "'," +
+    sybInt +",0.13 )" );
+                }
+            }
+            if (lint.Count == 0)
+            {
+                MessageBoxEx.Show("未选中任何行"); return;
+            }
+            #region 事务批量添加数据
+            SqlConnection con = new SqlConnection(GlobalSpace.RYData);
+            con.Open();
+            SqlTransaction tran = con.BeginTransaction();//先实例SqlTransaction类，使用这个事务使用的是con 这个连接，使用BeginTransaction这个方法来开始执行这个事务
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.Transaction = tran;
+            try
+            {
 
+                foreach (string str in lint)
+                {
+                    cmd.CommandText = str;
+                    cmd.ExecuteNonQuery();
+                }
+                tran.Commit();
+                MessageBoxEx.Show("提取完成！");
+                GetRequireItem();
+            }
+            catch (Exception ex)
+            {
+                tran.Rollback();
+                MessageBoxEx.Show("提取失败：" + ex.Message);
+            }
+            finally
+            {
+                tran.Dispose();
+                con.Close();
+            }
+            #endregion
+        }
         private void btnExtractRefresh_Click(object sender, EventArgs e)
         {
             string sqlSelect = @"SELECT
@@ -559,6 +528,9 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
             string PlanID = string.Empty;
             Decimal PlanQuantity = 0;
             List<int> ID = new List<int>();
+            int count = 0;
+            bool PlanYes = false;
+            bool PlanNo = false;
             for (int i = 0; i < dgvEdit.Rows.Count; i++)
             {
                 if (Convert.ToBoolean(dgvEdit["选择", i].Value) == true)
@@ -597,14 +569,26 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
                     }
                     else
                     {
-                        PlanID += "|" + Item;
+                        if (string.IsNullOrWhiteSpace(Item))
+                        {
+                            PlanNo = true;
+                        }
+                        else
+                        {
+                            PlanID += "|" + Item;
+                            PlanYes = true;
+                        }
                     }
                     PlanQuantity += Convert.ToDecimal(dgvEdit["需求数量", i].Value.ToString());
                     ID.Add(Convert.ToInt32(dgvEdit["ID", i].Value.ToString()));
                 }
+                count++;
             }
-
-            if (PlanID == string.Empty || PlanID.Split('|').Length == 1)
+            if (PlanNo && PlanYes)
+            {
+                MessageBoxEx.Show("导入计划跟提取计划不能合并！"); return;
+            }
+            if (count == 0)
             {
                 MessageBoxEx.Show("请至少选择2条信息！"); return;
             }
@@ -1157,11 +1141,17 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
                     Lint.Add(Convert.ToInt32(dgvEdit["ID", i].Value));
                     if (TbID == string.Empty)
                     {
-                        TbID += dgvEdit["提报序号", i].Value.ToString();
+                        if (!string.IsNullOrWhiteSpace(dgvEdit["提报序号", i].Value.ToString()))
+                        {
+                            TbID += dgvEdit["提报序号", i].Value.ToString();
+                        }
                     }
                     else
                     {
-                        TbID +="|"+dgvEdit["提报序号", i].Value.ToString();
+                        if (!string.IsNullOrWhiteSpace(dgvEdit["提报序号", i].Value.ToString()))
+                        {
+                            TbID += "|" + dgvEdit["提报序号", i].Value.ToString();
+                        }
                     }
                 }
             }
@@ -1186,9 +1176,11 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
             cmd.Transaction = tran;
             try
             {
-
-                cmd.CommandText = "update  [dbo].[SolidBuyList] set Flag=0 where ID in (" + TbID.Replace("|",",") + ")";
-                cmd.ExecuteNonQuery();
+                if (!string.IsNullOrWhiteSpace(TbID))
+                {
+                    cmd.CommandText = "update  [dbo].[SolidBuyList] set Flag=0 where ID in (" + TbID.Replace("|", ",") + ")";
+                    cmd.ExecuteNonQuery();
+                }
                 cmd.CommandText = "delete from  SolidBuyList_Handle where ID in("+string.Join(",",Lint)+")";
                 cmd.ExecuteNonQuery();
 
@@ -1424,6 +1416,37 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
                                                     WHERE
 	                                                    Flag = 0 order by ID";
             DgvHistory.DataSource = SQLHelper.GetDataTable(GlobalSpace.RYData, sqlSelect);
+        }
+
+        private void PlanImport_Click(object sender, EventArgs e)
+        {
+            
+            try
+            {
+                string file = "";
+                OpenFileDialog dialog = new OpenFileDialog();
+                //dialog.Multiselect = true;//该值确定是否可以选择多个文件
+                dialog.Title = "请选择文件夹";
+                dialog.Filter = "Excel文件(*.xlsx)|*.xlsx|Excel文件(*.xls)|*.xls";
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    file = dialog.FileName;
+                }
+                else return;
+                dgvItemRequirement.DataSource = ExcelToTable(file);
+                Import.Checked = true;
+                //#region 设置列宽
+                //for (int i = 0; i < this.dgv.Columns.Count; i++)
+                //{
+                //    this.dgv.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                //    this.dgv.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                //}
+                //#endregion
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
