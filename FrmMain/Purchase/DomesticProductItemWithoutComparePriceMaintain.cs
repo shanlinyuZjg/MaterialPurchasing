@@ -103,5 +103,17 @@ namespace Global.Purchase
                 }
             }
         }
+
+        private void btnManageItemPrice_Click(object sender, EventArgs e)
+        {
+            ManageItemPrice mip = new ManageItemPrice(PurchaseUser.UserID);
+            mip.ShowDialog();
+        }
+
+        private void btnItemWithoutReview_Click(object sender, EventArgs e)
+        {
+            DomesticProductItemWithoutReview dpwr = new DomesticProductItemWithoutReview();
+            dpwr.ShowDialog();
+        }
     }
 }
