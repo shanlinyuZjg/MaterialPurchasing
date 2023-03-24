@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
@@ -48,7 +49,7 @@ namespace Global.Purchase
 	                                                    NeedTime AS 需求日期,
 	                                                    rtrim(ltrim(Remark)) AS 备注,
 	                                                    rtrim(ltrim(VendorName)) AS 指定供应商,
-                                                        case when  SYBFlag=0 then '固水'  when  SYBFlag=1 then '粉针' when  SYBFlag=2 then '原料' else '其他' end  AS 事业部
+                                                        case when  SYBFlag=0 then '固水'  when  SYBFlag=1 then '粉针' when  SYBFlag=2 then '原料' when  SYBFlag=3 then '大客户' else '其他' end  AS 事业部
                                                     FROM
 	                                                    dbo.SolidBuyList 
                                                     WHERE
@@ -400,8 +401,10 @@ namespace Global.Purchase
                     { sybInt = 1; }
                     else if (syb == "原料")
                     { sybInt = 2; }
-                    else
+                    else if (syb == "大客户")
                     { sybInt = 3; }
+                    else
+                    { sybInt = -1; }
                     lint.Add("INSERT INTO SolidBuyList_Handle ( " +
     "	SolidBuyList_Handle.ItemNumber, \n" +
     "	SolidBuyList_Handle.ItemDescription, \n" +
@@ -478,7 +481,7 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
 	                                                    NeedTime AS 需求日期,
 	                                                    rtrim(ltrim(PlanVendorName)) AS 计划指定供应商,
 	                                                    rtrim(ltrim(PlanRemark)) AS 计划备注,
-                                                        case when  SYBFlag=0 then '固水'  when  SYBFlag=1 then '粉针' when  SYBFlag=2 then '原料' else '其他' end  AS 事业部,rtrim(ltrim(WorkCenter)) AS 需求车间,State,OperateTime AS 提报日期
+                                                        case when  SYBFlag=0 then '固水'  when  SYBFlag=1 then '粉针' when  SYBFlag=2 then '原料' when  SYBFlag=3 then '大客户' else '其他' end  AS 事业部,rtrim(ltrim(WorkCenter)) AS 需求车间,State,OperateTime AS 提报日期
                                                     FROM
 	                                                    dbo.SolidBuyList_Handle 
                                                     WHERE
@@ -947,7 +950,7 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
 	                                                    NeedTime AS 需求日期,
 	                                                    rtrim(ltrim(PlanVendorName)) AS 计划指定供应商,
 	                                                    rtrim(ltrim(PlanRemark)) AS 计划备注,
-                                                        case when  SYBFlag=0 then '固水'  when  SYBFlag=1 then '粉针' when  SYBFlag=2 then '原料' else '其他' end  AS 事业部,rtrim(ltrim(WorkCenter)) AS 需求车间,State,OperateTime AS 提报日期
+                                                        case when  SYBFlag=0 then '固水'  when  SYBFlag=1 then '粉针' when  SYBFlag=2 then '原料' when  SYBFlag=3 then '大客户' else '其他' end  AS 事业部,rtrim(ltrim(WorkCenter)) AS 需求车间,State,OperateTime AS 提报日期
                                                     FROM
 	                                                    dbo.SolidBuyList_Handle 
                                                     WHERE
@@ -1221,7 +1224,7 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
             FileStream fs = new FileStream(saveDialog.FileName, FileMode.OpenOrCreate);
 
             BinaryWriter bw = new BinaryWriter(fs);
-            byte[] data = Resources.内包价格;
+            byte[] data = (byte[])Resources.内包价格;
             bw.Write(data, 0, data.Length);
             bw.Close();
             fs.Close();
@@ -1446,6 +1449,54 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnManageItemPrice_Click(object sender, EventArgs e)
+        {
+            ManageItemPrice mip = new ManageItemPrice(PurchaseUser.UserID);
+            mip.ShowDialog();
+        }
+
+        private void btnItemWithoutReview_Click(object sender, EventArgs e)
+        {
+            DomesticProductItemWithoutReview dpwr = new DomesticProductItemWithoutReview();
+            dpwr.ShowDialog();
+        }
+
+        private void BtnItemImportTemplate_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveDialog = new SaveFileDialog();
+
+            saveDialog.DefaultExt = "";
+
+            saveDialog.Filter = "Excel文件|*.xlsx";
+
+            saveDialog.FileName = "物料计划导入模板";
+
+            if (saveDialog.ShowDialog() != DialogResult.OK)
+
+            {
+
+                return;
+
+            }
+
+
+            FileStream fs = new FileStream(saveDialog.FileName, FileMode.OpenOrCreate);
+
+            BinaryWriter bw = new BinaryWriter(fs);
+            byte[] data = (byte[])Resources.物料计划导入;
+            bw.Write(data, 0, data.Length);
+            bw.Close();
+            fs.Close();
+
+            if (File.Exists(saveDialog.FileName))
+
+            {
+
+                System.Diagnostics.Process.Start(saveDialog.FileName); //打开文件
+
             }
         }
     }

@@ -994,6 +994,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Resources\内包价格.xlsx" />
+    <None Include="Resources\物料计划导入.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Axgregn6Lib">
