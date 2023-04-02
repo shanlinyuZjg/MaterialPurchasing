@@ -13,14 +13,14 @@ namespace Global
         public static readonly string fsTestconfigfilepath = "Z:\\mfgsys\\fs.cfg";
 
         public static readonly string FDAConnstr = "server=192.168.29.100;database=RYZY_YJM;uid=erp;pwd=123456";
-        public static readonly string FSDBConnstr = "server=192.168.8.11;database=FSDB;uid=xym;pwd=xym-123";
+        public static readonly string FSDBConnstr = "server=192.168.8.11;database=FSDB;uid=xym;pwd=xym-123+-*/";
         public static readonly string TestFSDBConnstr = "server=192.168.8.12;database=FSDB;uid=xym;pwd=xym-123";
 
-        public static readonly string FSDBMRConnstr = "server=192.168.8.11;database=fsdbmr;uid=program;pwd=program";
+        public static readonly string FSDBMRConnstr = "server=192.168.8.11;database=fsdbmr;uid=xym;pwd=xym-123+-*/";
         public static readonly string TestFSDBMRConnstr = "server=192.168.8.51;database=fsdbtr;uid=program;pwd=program";
 
-        public static readonly string oledbconnstrFSDBMR = "Provider=SQLOLEDB.1;Persist Security Info=True;Use Procedure for Prepare=1;Auto Translate=false;Data Source=192.168.8.11;Initial Catalog=fsdbmr;User ID=program;Password=program";
-        public static readonly string oledbconnstrFSDB = "Provider=SQLOLEDB.1;Persist Security Info=True;Use Procedure for Prepare=1;Auto Translate=false;Data Source=192.168.8.11;Initial Catalog=fsdb;User ID=xym;Password=xym-123";
+        public static readonly string oledbconnstrFSDBMR = "Provider=SQLOLEDB.1;Persist Security Info=True;Use Procedure for Prepare=1;Auto Translate=false;Data Source=192.168.8.11;Initial Catalog=fsdbmr;uid=xym;pwd=xym-123+-*/";
+        public static readonly string oledbconnstrFSDB = "Provider=SQLOLEDB.1;Persist Security Info=True;Use Procedure for Prepare=1;Auto Translate=false;Data Source=192.168.8.11;Initial Catalog=fsdb;User ID=xym;Password=xym-123+-*/";
       //  public static readonly string connstrBPM = "server=192.168.8.67;database=UltimusBusiness;uid=fs;pwd=ERP1075+-*/";
         public static readonly string connstrBPM = "server=192.168.8.28;database=BPMDBRY;uid=workflow;pwd=workflow";
         public static readonly string GeneralEBRConnStr = "server=192.168.8.49;database=RYStockEBR;uid=stock;pwd=stockEBR2020!";
@@ -44,7 +44,7 @@ namespace Global
         //测试服务器连接信息
         public static readonly string connstrFSDBTR = "server=192.168.8.12;database=FSDBTR;uid=sa;pwd=ERPtest321";
         public static readonly string connstrFSDBTEST = "server=192.168.8.12;database=FSDB;uid=sa;pwd=ERPtest321";      
-        public static readonly string oledbconnstrFSDBTR = "Provider=SQLOLEDB.1;Password=program;Persist Security Info=True;User ID=program;Initial Catalog=FSDBMR;Data Source=192.168.8.11;Use Procedure for Prepare=1;Auto Translate=false;";
+
     */
         public static List<string> foItemInfoList;
         public static List<string> vendorEmailList;
