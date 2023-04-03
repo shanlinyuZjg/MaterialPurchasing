@@ -561,12 +561,22 @@ namespace Global.Finance
             myAPID03.PONumberReceiptSequenceNumber.Value = dt.Rows[0]["订单号序号"].ToString();
             myAPID03.LineItemNumber.Value = dt.Rows[0]["行号"].ToString();
             myAPID03.ItemAccountMoCo.Value = dt.Rows[0]["物料代码"].ToString();
-            myAPID03.POReceiptQuantity.Value = dt.Rows[0]["入库数量"].ToString();
+            //myAPID03.POReceiptQuantity.Value = dt.Rows[0]["入库数量"].ToString();
             myAPID03.InvoiceMatchedQuantity.Value = dt.Rows[0]["已匹配数量"].ToString();
-            myAPID03.InvoiceQuantity.Value = dt.Rows[0]["匹配数量"].ToString();
+            //myAPID03.InvoiceQuantity.Value = dt.Rows[0]["匹配数量"].ToString();
             myAPID03.LineItemUM.Value = dt.Rows[0]["单位"].ToString();
             myAPID03.InvoiceControllingUnitCost.Value = dt.Rows[0]["匹配单价"].ToString();
 
+            if (dt.Rows[0]["入库数量"].ToString().Contains("-"))
+            {
+                myAPID03.POReceiptQuantity.Value = dt.Rows[0]["入库数量"].ToString().Replace("-", "") + "-";
+                myAPID03.InvoiceQuantity.Value = dt.Rows[0]["匹配数量"].ToString().Replace("-", "") + "-";
+            }
+            else
+            {
+                myAPID03.POReceiptQuantity.Value = dt.Rows[0]["入库数量"].ToString();
+                myAPID03.InvoiceQuantity.Value = dt.Rows[0]["匹配数量"].ToString();
+            }
             try
             {
                 if (!FSFunctionLib.fstiClient.ProcessId(myAPID03, null))
@@ -605,8 +615,8 @@ namespace Global.Finance
             myAPID03.ItemAccountMoCo.Value = dt.Rows[0]["物料代码"].ToString();
             if(dt.Rows[0]["入库数量"].ToString().Contains("-"))
             {
-                myAPID03.POReceiptQuantity.Value = dt.Rows[0]["入库数量"].ToString()+ "-" ;
-                myAPID03.InvoiceQuantity.Value = dt.Rows[0]["匹配数量"].ToString()+ "-";
+                myAPID03.POReceiptQuantity.Value = dt.Rows[0]["入库数量"].ToString().Replace("-","")+ "-" ;
+                myAPID03.InvoiceQuantity.Value = dt.Rows[0]["匹配数量"].ToString().Replace("-", "") + "-";
             }
             else
             {
@@ -617,8 +627,7 @@ namespace Global.Finance
             myAPID03.InvoiceMatchedQuantity.Value = dt.Rows[0]["已匹配数量"].ToString();
             
             myAPID03.LineItemUM.Value = dt.Rows[0]["单位"].ToString();
-            myAPID03.InvoiceControllingUnitCost.Value = (Math.Round(leftAmount/Convert.ToDecimal(dt.Rows[0]["入库数量"]),8)).ToString() ;//dt.Rows[0]["匹配单价"].ToString();
-
+            myAPID03.InvoiceControllingUnitCost.Value = (Math.Round(leftAmount/Convert.ToDecimal(dt.Rows[0]["入库数量"]),8)).ToString().Replace("-", "");//dt.Rows[0]["匹配单价"].ToString();
             try
             {
                 if (!FSFunctionLib.fstiClient.ProcessId(myAPID03, null))
