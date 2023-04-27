@@ -215,7 +215,7 @@ namespace Global.Finance
 
             SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate0);
             
-            if (!FSFunctionLib.FSConfigFileInitialize(GlobalSpace.Testfsconfigfilepath, FSID, FSPassword))
+            if (!FSFunctionLib.FSConfigFileInitialize(GlobalSpace.fsconfigfilepath, FSID, FSPassword))
             {
                 MessageBox.Show("四班登录失败！", "提示");
                 return;
