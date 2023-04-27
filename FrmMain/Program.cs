@@ -121,6 +121,7 @@ namespace Global
             //Application.Run(new FrmPurchaseDeptSupervisor("DJB", "丁计宝"));
             //Application.Run(new FrmStockUserManage("DJB", "丁计宝", "SQA"));
 
+            //Application.Run(new FrmPurchaseDeptInvoice("CX", "张琴琴", "PM03"));
             //Application.Run(new FrmPurchaseDeptInvoice("DJB", "丁计宝"));
             //Application.Run(new FrmMain("P02", "123123", "唐守艳", "PPP"));
             //Application.Run(new FrmPurchaseDeptInvoiceAudit("", "左进国", "ZJG"));

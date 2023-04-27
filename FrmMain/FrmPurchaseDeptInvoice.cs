@@ -47,7 +47,7 @@ namespace Global
 
         private void buttonItem1_Click(object sender, EventArgs e)
         {
-            Purchase.POInvoice poi = new Purchase.POInvoice();
+            Purchase.POInvoice_MR poi = new Purchase.POInvoice_MR(fsUserID, fsUserName);
             CommonOperate.BindFormToTabControl(tabCtrlForm, poi, btniPOItemConfirm.Name, btniPOItemConfirm.Text);
         }
     }
