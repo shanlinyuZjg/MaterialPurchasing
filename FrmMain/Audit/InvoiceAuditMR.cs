@@ -1,9 +1,13 @@
 ﻿using Global.Helper;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -67,26 +71,32 @@ namespace Global.Audit
             TbVendorName.Text =   DGV1["供应商名", RowIndex].Value.ToString();
             TbInvoiceNumberS.Text = DGV1["发票号", RowIndex].Value.ToString();
 
-            string sqlSelect = $@"SELECT VendorNumber 供应商码, 
-	VendorName 供应商名, 
+            string sqlSelect = $@"SELECT 
+	InvoiceNumberS 发票号,
+    ForeignNumber 联系单号,
+	ReceiveDate 入库日期, 
 	PONumber 采购单号, 
-	LineNumber 行号, 
-	SequenceNumber 序号, 
+	LineNumber 行号,  
 	ItemNumber 物料编码, 
 	ItemDescription 物料描述, 
-	UM 单位, 
-	ReceiveQuantity 入库量, 
+	UM 单位,  
+    OrderQuantity 订单量,
+	ReceiveQuantity 入库量,
 	UnitPrice 单价, 
-	Amount 总价, 
-	InvoiceNumberS 发票号, 
+	Amount 总价,
+    LotNumber 厂家批号,
+    InnerLotNumber 公司批号,   
+    Buyer 采购员,
+    Stockkeeper 库管员,
+	ManufacturerID 生产商码, 
+	ManufacturerName 生厂商名,
     AllAmount 入库总金额,
     InvoiceNumber 四班票号,
     InvoiceTaxedAmount 总税额,
     InvoiceAmount 不含税发票总额,
-	InvoiceMatchedQuantity 已匹配数量, 
-	ReceiveDate 入库日期, 
-	ForeignNumber 联系单号,
-	APReceiptLineKey 
+	InvoiceMatchedQuantity 已匹配数量,
+	SequenceNumber 序号,
+	Id,APReceiptLineKey
                                                 FROM
 	                                                PurchaseOrderInvoiceRecordMRByCMF where VendorNumber ='{DGV1["供应商码", RowIndex].Value.ToString()}' and InvoiceNumberS='{TbInvoiceNumberS.Text}'";
             DGV2.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
@@ -139,6 +149,79 @@ namespace Global.Audit
             else
             {
                 MessageBox.Show("退回失败");
+            }
+        }
+
+        private void BtnExportExel_Click(object sender, EventArgs e)
+        {
+            if (DGV2.Rows.Count == 0)
+            { MessageBox.Show("无数据！"); return; }
+
+            string filePath = getExcelpath();
+            if (filePath.IndexOf(":") < 0)
+            { return; }
+            TableToExcel(DGV2, filePath);
+            MessageBox.Show("导出完成");
+        }
+        private static string getExcelpath()
+        {
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.DefaultExt = "xlsx";
+            saveDialog.Filter = "EXCEL表格|*.xlsx";
+            //saveDialog.FileName = "条形码";
+            saveDialog.ShowDialog();
+            return saveDialog.FileName;
+        }
+        public static void TableToExcel(DataGridView dt, string file)
+        {
+            //AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+            IWorkbook workbook;
+            string fileExt = Path.GetExtension(file).ToLower();
+            if (fileExt == ".xlsx")
+            { workbook = new XSSFWorkbook(); }
+            else if (fileExt == ".xls")
+            { workbook = new HSSFWorkbook(); }
+            else { workbook = null; }
+            if (workbook == null) { return; }
+            ISheet sheet = string.IsNullOrEmpty(dt.Name) ? workbook.CreateSheet("Sheet1") : workbook.CreateSheet(dt.Name);
+
+            //表头  
+            IRow row = sheet.CreateRow(0);
+            for (int i = 0; i < dt.Columns.Count; i++)
+            {
+                ICell cell = row.CreateCell(i);
+                cell.SetCellValue(dt.Columns[i].HeaderText);
+            }
+
+            //数据  
+            for (int i = 0, x = 0; i < dt.Rows.Count; i++, x++)
+            {
+
+                IRow row1 = sheet.CreateRow(x + 1);
+                for (int j = 0; j < dt.Columns.Count; j++)
+                {
+                    ICell cell = row1.CreateCell(j);
+                    //if (j == 9)
+                    //{
+                    //    cell.SetCellValue(dt.Rows[i].Cells[j].Value == null ? "" : Convert.ToDateTime(dt.Rows[i].Cells[j].Value.ToString()).ToString("MMddyy"));
+                    //}
+                    //else
+                    //{
+                        cell.SetCellValue(dt.Rows[i].Cells[j].Value == null ? "" : dt.Rows[i].Cells[j].Value.ToString());
+                    //}
+                }
+
+            }
+
+            //转为字节数组  
+            MemoryStream stream = new MemoryStream();//读写内存的对象
+            workbook.Write(stream);
+            var buf = stream.ToArray();//字节数组
+            //保存为Excel文件  
+            using (FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write))
+            {
+                fs.Write(buf, 0, buf.Length);
+                fs.Flush();//缓冲区在内存中有个临时区域  盆 两个水缸 //缓冲区装满才会自动提交
             }
         }
     }

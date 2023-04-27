@@ -53,16 +53,19 @@ namespace Global.Purchase
             int RowIndex = e.RowIndex;
             if (RowIndex < 0) return;
 
-            string sqlSelect = $@"SELECT Id,
-    Remarks 备注,VendorNumber 供应商码, 
-	VendorName 供应商名, 
+            string sqlSelect = $@"SELECT 
+    Remarks 备注, 
+    ForeignNumber 联系单号,
+	ReceiveDate 入库日期, 
 	PONumber 采购单号, 
-	LineNumber 行号, 
-	SequenceNumber 序号, 
+	LineNumber 行号,  
 	ItemNumber 物料编码, 
 	ItemDescription 物料描述, 
 	UM 单位, 
 	ReceiveQuantity 入库量, 
+    OrderQuantity 订单量,
+    LotNumber 厂家批号,
+    InnerLotNumber 公司批号,
 	UnitPrice 单价, 
 	Amount 总价, 
 	InvoiceNumberS 发票号, 
@@ -71,9 +74,10 @@ namespace Global.Purchase
     InvoiceTaxedAmount 总税额,
     InvoiceAmount 不含税发票总额,
 	InvoiceMatchedQuantity 已匹配数量, 
-	ReceiveDate 入库日期, 
-	ForeignNumber 联系单号,
-	APReceiptLineKey 
+	VendorNumber 供应商码, 
+	VendorName 供应商名,
+	SequenceNumber 序号,
+	Id,APReceiptLineKey 
                                                 FROM
 	                                                PurchaseOrderInvoiceRecordMRByCMF where VendorNumber ='{DGV1["供应商码", RowIndex].Value.ToString()}' and Sequence='{DGV1["顺序", RowIndex].Value.ToString()}' and Status=0 and (InvoiceNumberS is null or InvoiceNumberS ='')";
             DGV2.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
@@ -179,6 +183,7 @@ namespace Global.Purchase
         {
             int RowIndex = e.RowIndex;
             if (RowIndex < 0) return;
+            if (e.ColumnIndex < 0) return;
             if (DGV2.Columns[e.ColumnIndex].Name == "Check")
             {
                 DGV2["Check", RowIndex].Value = !Convert.ToBoolean(DGV2["Check", RowIndex].Value);

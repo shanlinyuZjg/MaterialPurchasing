@@ -109,7 +109,7 @@ namespace Global.Purchase
             TbAmount.Text = string.Empty;
 
           
-
+            
         }
 
         private void BtnInvoiceConfrim_Click(object sender, EventArgs e)
@@ -151,10 +151,10 @@ namespace Global.Purchase
 	Amount, 
 	APReceiptLineKey, 
 	Sequence, 
-    Operator
+    Operator,OrderQuantity,LotNumber,InnerLotNumber,Buyer,Stockkeeper,ManufacturerID,ManufacturerName
                                                                             )
                                                                             VALUES
-	                                                                            ('{VendorID}','{VendorName}','{Dgv2["采购单号",i].Value}','{Dgv2["行号", i].Value}','{Dgv2["序号", i].Value}','{Dgv2["物料编码", i].Value}','{Dgv2["物料描述", i].Value}','{Dgv2["单位", i].Value}','{Dgv2["入库量", i].Value}','{Dgv2["已匹配数量", i].Value}','{Dgv2["入库日期", i].Value}','{Dgv2["联系单号", i].Value}','{Dgv2["单价", i].Value}','{Dgv2["合计", i].Value}','{Dgv2["KEY", i].Value}','{Sequence}','{UserID}')";
+	                                                                            ('{VendorID}','{VendorName}','{Dgv2["采购单号",i].Value}','{Dgv2["行号", i].Value}','{Dgv2["序号", i].Value}','{Dgv2["物料编码", i].Value}','{Dgv2["物料描述", i].Value}','{Dgv2["单位", i].Value}','{Dgv2["入库量", i].Value}','{Dgv2["已匹配数量", i].Value}','{Dgv2["入库日期", i].Value}','{Dgv2["联系单号", i].Value}','{Dgv2["单价", i].Value}','{Dgv2["合计", i].Value}','{Dgv2["KEY", i].Value}','{Sequence}','{UserID}','{Dgv2["订单量", i].Value}','{Dgv2["厂家批号", i].Value}','{Dgv2["公司批号", i].Value}','{Dgv2["采购员", i].Value}','{Dgv2["库管员", i].Value}','{Dgv2["生产商码", i].Value}','{Dgv2["生产商名", i].Value}')";
                 sqlList.Add(sqlInsert);
             }
 
@@ -276,6 +276,44 @@ namespace Global.Purchase
                 {
                     dt1.Rows.Add((Dgv1.Rows[i].DataBoundItem as DataRowView).Row.ItemArray);
                 }
+            }
+            dt1.Columns.Add("订单量");
+            dt1.Columns.Add("公司批号");
+            dt1.Columns.Add("厂家批号");
+            dt1.Columns.Add("采购员");
+            dt1.Columns.Add("库管员");
+            dt1.Columns.Add("生产商码");
+            dt1.Columns.Add("生产商名");
+            foreach (DataRow dr in dt1.Rows)
+            {
+                string StrPO = $@"SELECT C.UserName,B.LineItemOrderedQuantity FROM [dbo].[_NoLock_FS_POHeader] A INNER JOIN [dbo].[_NoLock_FS_POLine] B on A.POHeaderKey =B.POHeaderKey INNER JOIN dbo._NoLock_FS_UserAccess C on C.UserID=A.Buyer where A.PONumber='{dr["采购单号"].ToString()}' and B.POLineNumber='{dr["行号"].ToString().TrimStart('0')}'";
+                DataTable dtPO = SQLHelper.GetDataTableOleDb(GlobalSpace.oledbconnstrFSDBMR, StrPO);
+                dr["订单量"] = dtPO.Rows[0]["LineItemOrderedQuantity"].ToString().Trim();
+                dr["采购员"] = dtPO.Rows[0]["UserName"].ToString().Trim();
+
+
+                string StrPORV = $@"SELECT APReceiptLineKey FROM _NoLock_FS_APReceiptLine where PONumber='{dr["采购单号"]}' and POLineNumber='{dr["行号"]}' and POReceiptQuantity = {dr["入库量"]} and POReceiptDate ='{dr["入库日期"]}' order by APReceiptLineKey";
+                DataTable dtPORV = SQLHelper.GetDataTableOleDb(GlobalSpace.oledbconnstrFSDBMR, StrPORV);
+                int Sequence=-1;
+                for (int i = 0; i < dtPORV.Rows.Count; i++)
+                {
+                    if (dtPORV.Rows[i]["APReceiptLineKey"].ToString() == dr["KEY"].ToString())
+                    {
+                        Sequence = i;
+                        break;
+                    }
+                }
+                string StrPORV1 = $@"SELECT A.LotNumber,A.VendorLotNumber,A.LotUserDefined5,A.LotDescription,C.UserName FROM [dbo].[_NoLock_FS_HistoryPOReceipt] A INNER JOIN dbo._NoLock_FS_UserAccess C on C.UserID=A.UserID where  A.PONumber='{dr["采购单号"]}' and A.POLineNumber='{dr["行号"].ToString().TrimStart('0')}' and A.ReceiptQuantity={dr["入库量"]} and A.TransactionDate='{dr["入库日期"]}' order by A.HistoryPOReceiptKey";
+                if (Convert.ToDecimal(dr["入库量"].ToString()) < 0)
+                {
+                    StrPORV1 = $@"SELECT A.LotNumber,A.VendorLotNumber,A.LotUserDefined5,A.LotDescription,C.UserName FROM [dbo].[_NoLock_FS_HistoryPOReceipt] A INNER JOIN dbo._NoLock_FS_UserAccess C on C.UserID=A.UserID where  A.PONumber='{dr["采购单号"]}' and A.POLineNumber='{dr["行号"].ToString().TrimStart('0')}' and A.ReversedQuantity={dr["入库量"].ToString().TrimStart('-')} and A.TransactionDate='{dr["入库日期"]}' order by A.HistoryPOReceiptKey";
+                }
+                DataTable dtPORV1 = SQLHelper.GetDataTableOleDb(GlobalSpace.oledbconnstrFSDBMR, StrPORV1);
+                dr["公司批号"] = dtPORV1.Rows[Sequence]["VendorLotNumber"].ToString().Trim();
+                dr["厂家批号"] = dtPORV1.Rows[Sequence]["LotNumber"].ToString().Trim();
+                dr["库管员"] = dtPORV1.Rows[Sequence]["UserName"].ToString().Trim();
+                dr["生产商码"] = dtPORV1.Rows[Sequence]["LotUserDefined5"].ToString().Trim();
+                dr["生产商名"] = dtPORV1.Rows[Sequence]["LotDescription"].ToString().Trim();
             }
             Dgv2.DataSource = dt1;
             for (int i = 0; i < this.Dgv2.Columns.Count; i++)
@@ -417,6 +455,7 @@ namespace Global.Purchase
         {
             int RowIndex = e.RowIndex;
             if (RowIndex < 0) return;
+            if (e.ColumnIndex < 0) return;
             if (Dgv1.Columns[e.ColumnIndex].Name == "Check")
             {
                 Dgv1["Check", RowIndex].Value = !Convert.ToBoolean(Dgv1["Check", RowIndex].Value);

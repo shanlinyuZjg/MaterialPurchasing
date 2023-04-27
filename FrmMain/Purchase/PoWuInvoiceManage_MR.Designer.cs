@@ -250,6 +250,7 @@ namespace Global.Purchase
             this.Controls.Add(this.DGV1);
             this.Name = "PoWuInvoiceManage_MR";
             this.Text = "无票管理";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.PoWuInvoiceManage_MR_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DGV2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV1)).EndInit();

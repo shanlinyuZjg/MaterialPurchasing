@@ -43,14 +43,14 @@ namespace Global.Purchase
                 sqlSelect = $@"SELECT
                                                     distinct VendorNumber 供应商码,  VendorName 供应商名, InvoiceNumberS 发票号,Status
                                                 FROM
-	                                                PurchaseOrderInvoiceRecordMRByCMF where Status >1 and OperateAudit ='{UserID}' and AuditUpdateDateTime >='{dateTimePicker1.Value.ToString("yyyy-MM-dd")}' and AuditUpdateDateTime <'{dateTimePicker2.Value.AddDays(1).ToString("yyyy-MM-dd")}' and VendorNumber like '%{TbVendorNumber.Text.Trim()}%' and VendorName like '%{TbVendorName.Text.Trim()}%' and InvoiceNumberS like '%{TbInvoiceS.Text.Trim()}%'";
+	                                                PurchaseOrderInvoiceRecordMRByCMF where Status >0 and OperateAudit ='{UserID}' and AuditUpdateDateTime >='{dateTimePicker1.Value.ToString("yyyy-MM-dd")}' and AuditUpdateDateTime <'{dateTimePicker2.Value.AddDays(1).ToString("yyyy-MM-dd")}' and VendorNumber like '%{TbVendorNumber.Text.Trim()}%' and VendorName like '%{TbVendorName.Text.Trim()}%' and InvoiceNumberS like '%{TbInvoiceS.Text.Trim()}%'";
             }
             else
             {
                 sqlSelect = $@"SELECT
                                                     distinct VendorNumber 供应商码,  VendorName 供应商名, InvoiceNumberS 发票号,Status
                                                 FROM
-	                                                PurchaseOrderInvoiceRecordMRByCMF where Status >2 and OperateFinance ='{UserID}' and FinanceUpdateDateTime >='{dateTimePicker1.Value.ToString("yyyy-MM-dd")}' and FinanceUpdateDateTime <'{dateTimePicker2.Value.AddDays(1).ToString("yyyy-MM-dd")}' and VendorNumber like '%{TbVendorNumber.Text.Trim()}%' and VendorName like '%{TbVendorName.Text.Trim()}%' and InvoiceNumberS like '%{TbInvoiceS.Text.Trim()}%'";
+	                                                PurchaseOrderInvoiceRecordMRByCMF where Status >0 and OperateFinance ='{UserID}' and FinanceUpdateDateTime >='{dateTimePicker1.Value.ToString("yyyy-MM-dd")}' and FinanceUpdateDateTime <'{dateTimePicker2.Value.AddDays(1).ToString("yyyy-MM-dd")}' and VendorNumber like '%{TbVendorNumber.Text.Trim()}%' and VendorName like '%{TbVendorName.Text.Trim()}%' and InvoiceNumberS like '%{TbInvoiceS.Text.Trim()}%'";
             }
             DGV1.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
             for (int i = 0; i < DGV1.Columns.Count; i++)
@@ -64,26 +64,32 @@ namespace Global.Purchase
             int RowIndex = e.RowIndex;
             if (RowIndex < 0) return;
 
-            string sqlSelect = $@"SELECT VendorNumber 供应商码, 
-	VendorName 供应商名, 
+            string sqlSelect = $@"SELECT 
+	InvoiceNumberS 发票号,
+    ForeignNumber 联系单号,
+	ReceiveDate 入库日期, 
 	PONumber 采购单号, 
-	LineNumber 行号, 
-	SequenceNumber 序号, 
+	LineNumber 行号,  
 	ItemNumber 物料编码, 
 	ItemDescription 物料描述, 
-	UM 单位, 
-	ReceiveQuantity 入库量, 
+	UM 单位,  
+    OrderQuantity 订单量,
+	ReceiveQuantity 入库量,
 	UnitPrice 单价, 
-	Amount 总价, 
-	InvoiceNumberS 发票号, 
+	Amount 总价,
+    LotNumber 厂家批号,
+    InnerLotNumber 公司批号,   
+    Buyer 采购员,
+    Stockkeeper 库管员,
+	ManufacturerID 生产商码, 
+	ManufacturerName 生厂商名,
     AllAmount 入库总金额,
     InvoiceNumber 四班票号,
     InvoiceTaxedAmount 总税额,
     InvoiceAmount 不含税发票总额,
-	InvoiceMatchedQuantity 已匹配数量, 
-	ReceiveDate 入库日期, 
-	ForeignNumber 联系单号,
-	APReceiptLineKey 
+	InvoiceMatchedQuantity 已匹配数量,
+	SequenceNumber 序号,
+	Id,APReceiptLineKey
                                                 FROM
 	                                                PurchaseOrderInvoiceRecordMRByCMF where VendorNumber ='{DGV1["供应商码", RowIndex].Value.ToString()}' and InvoiceNumberS='{DGV1["发票号", RowIndex].Value.ToString()}'";
             DGV2.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);

@@ -222,6 +222,7 @@ namespace Global.Finance
             // 
             this.TbInvoiceAllAmount.Location = new System.Drawing.Point(961, 41);
             this.TbInvoiceAllAmount.Name = "TbInvoiceAllAmount";
+            this.TbInvoiceAllAmount.ReadOnly = true;
             this.TbInvoiceAllAmount.Size = new System.Drawing.Size(109, 21);
             this.TbInvoiceAllAmount.TabIndex = 26;
             // 

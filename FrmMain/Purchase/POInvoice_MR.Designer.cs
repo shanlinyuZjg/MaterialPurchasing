@@ -108,7 +108,7 @@ namespace Global.Purchase
             this.TbVendorNameRO.Location = new System.Drawing.Point(328, 12);
             this.TbVendorNameRO.Name = "TbVendorNameRO";
             this.TbVendorNameRO.ReadOnly = true;
-            this.TbVendorNameRO.Size = new System.Drawing.Size(325, 21);
+            this.TbVendorNameRO.Size = new System.Drawing.Size(297, 21);
             this.TbVendorNameRO.TabIndex = 3;
             // 
             // Dgv2
@@ -143,6 +143,7 @@ namespace Global.Purchase
             this.TbInvoiceNumber.Name = "TbInvoiceNumber";
             this.TbInvoiceNumber.Size = new System.Drawing.Size(126, 21);
             this.TbInvoiceNumber.TabIndex = 8;
+            this.TbInvoiceNumber.Visible = false;
             // 
             // label2
             // 
@@ -152,6 +153,7 @@ namespace Global.Purchase
             this.label2.Size = new System.Drawing.Size(41, 12);
             this.label2.TabIndex = 7;
             this.label2.Text = "发票号";
+            this.label2.Visible = false;
             // 
             // TbAmount
             // 
@@ -167,6 +169,7 @@ namespace Global.Purchase
             this.TbTax.Name = "TbTax";
             this.TbTax.Size = new System.Drawing.Size(81, 21);
             this.TbTax.TabIndex = 11;
+            this.TbTax.Visible = false;
             // 
             // label3
             // 
@@ -176,6 +179,7 @@ namespace Global.Purchase
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 10;
             this.label3.Text = "税额";
+            this.label3.Visible = false;
             // 
             // TbInvoiceAmount
             // 
@@ -183,6 +187,7 @@ namespace Global.Purchase
             this.TbInvoiceAmount.Name = "TbInvoiceAmount";
             this.TbInvoiceAmount.Size = new System.Drawing.Size(88, 21);
             this.TbInvoiceAmount.TabIndex = 13;
+            this.TbInvoiceAmount.Visible = false;
             // 
             // label4
             // 
@@ -192,10 +197,11 @@ namespace Global.Purchase
             this.label4.Size = new System.Drawing.Size(101, 12);
             this.label4.TabIndex = 12;
             this.label4.Text = "不含税发票总金额";
+            this.label4.Visible = false;
             // 
             // BtnInvoiceConfrim
             // 
-            this.BtnInvoiceConfrim.Location = new System.Drawing.Point(286, 339);
+            this.BtnInvoiceConfrim.Location = new System.Drawing.Point(300, 339);
             this.BtnInvoiceConfrim.Name = "BtnInvoiceConfrim";
             this.BtnInvoiceConfrim.Size = new System.Drawing.Size(75, 23);
             this.BtnInvoiceConfrim.TabIndex = 14;
@@ -232,7 +238,7 @@ namespace Global.Purchase
             // 
             // BtnSelect
             // 
-            this.BtnSelect.Location = new System.Drawing.Point(659, 12);
+            this.BtnSelect.Location = new System.Drawing.Point(630, 12);
             this.BtnSelect.Name = "BtnSelect";
             this.BtnSelect.Size = new System.Drawing.Size(57, 23);
             this.BtnSelect.TabIndex = 18;
@@ -242,7 +248,7 @@ namespace Global.Purchase
             // 
             // BtnInvoiceManage
             // 
-            this.BtnInvoiceManage.Location = new System.Drawing.Point(934, 12);
+            this.BtnInvoiceManage.Location = new System.Drawing.Point(896, 12);
             this.BtnInvoiceManage.Name = "BtnInvoiceManage";
             this.BtnInvoiceManage.Size = new System.Drawing.Size(75, 23);
             this.BtnInvoiceManage.TabIndex = 20;
@@ -262,7 +268,7 @@ namespace Global.Purchase
             // 
             // RowStart
             // 
-            this.RowStart.Location = new System.Drawing.Point(777, 13);
+            this.RowStart.Location = new System.Drawing.Point(735, 13);
             this.RowStart.Name = "RowStart";
             this.RowStart.Size = new System.Drawing.Size(46, 21);
             this.RowStart.TabIndex = 25;
@@ -270,7 +276,7 @@ namespace Global.Purchase
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(734, 17);
+            this.label6.Location = new System.Drawing.Point(692, 17);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 12);
             this.label6.TabIndex = 24;
@@ -278,7 +284,7 @@ namespace Global.Purchase
             // 
             // RowEnd
             // 
-            this.RowEnd.Location = new System.Drawing.Point(874, 13);
+            this.RowEnd.Location = new System.Drawing.Point(832, 13);
             this.RowEnd.Name = "RowEnd";
             this.RowEnd.Size = new System.Drawing.Size(46, 21);
             this.RowEnd.TabIndex = 26;
@@ -287,7 +293,7 @@ namespace Global.Purchase
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(830, 17);
+            this.label7.Location = new System.Drawing.Point(788, 17);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 12);
             this.label7.TabIndex = 22;
@@ -301,11 +307,12 @@ namespace Global.Purchase
             this.BtnYOUInvoiceConfrim.TabIndex = 27;
             this.BtnYOUInvoiceConfrim.Text = "有票确认";
             this.BtnYOUInvoiceConfrim.UseVisualStyleBackColor = true;
+            this.BtnYOUInvoiceConfrim.Visible = false;
             this.BtnYOUInvoiceConfrim.Click += new System.EventHandler(this.BtnYOUInvoiceConfrim_Click);
             // 
             // BtnWuInvoiceManage
             // 
-            this.BtnWuInvoiceManage.Location = new System.Drawing.Point(380, 338);
+            this.BtnWuInvoiceManage.Location = new System.Drawing.Point(421, 338);
             this.BtnWuInvoiceManage.Name = "BtnWuInvoiceManage";
             this.BtnWuInvoiceManage.Size = new System.Drawing.Size(75, 23);
             this.BtnWuInvoiceManage.TabIndex = 28;
