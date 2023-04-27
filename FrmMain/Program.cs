@@ -41,7 +41,7 @@ namespace Global
                 string strPrivilege = Args[6];
                 string loginUserID = Args[7];
                 //         MessageBox.Show(strPrivilege);
-
+                //0 FSID ,1 FSpw,2 name
                 string[] dbFSDB = strfsdb.Split('|');
                 string[] dbFSDBMR = strfsdbmr.Split('|');
                 //FSDB数据库连接传值
@@ -60,10 +60,11 @@ namespace Global
                 {
                     Application.Run(new FrmMain(Args[0], Args[1], Args[2], strPrivilege));
                 }
-                else if (strPrivilege.Contains("FAP"))
+                else if (strPrivilege.Contains("FAP"))//财务
                 {
                     //  MessageBox.Show( Args[2] + "-" + Args[1] + "-" + Args[0] + "-" + strPrivilege);
-                    Application.Run(new Finance.InvoiceVerify(Args[2], Args[0], Args[1]));
+                    //Application.Run(new Finance.InvoiceVerify( Args[0], Args[1], Args[2]));
+                    Application.Run(new FrmPurchaseDeptInvoiceFinance(Args[0], Args[1], Args[2]));
                 }
                 else if (strPrivilege.Contains("PPC"))
                 {
@@ -77,9 +78,13 @@ namespace Global
                 {
                     Application.Run(new FrmMain(Args[0], Args[1], Args[2], strPrivilege));
                 }
-                else if (strPrivilege.Contains("TAX"))
+                else if (strPrivilege.Contains("TAX"))//供应只有发票匹配
                 {
-                    Application.Run(new FrmPurchaseDeptInvoice(Args[0], Args[2]));
+                    Application.Run(new FrmPurchaseDeptInvoice(Args[0], Args[2], Args[7]));
+                }
+                else if (strPrivilege.Contains("AUD"))//审计
+                {
+                    Application.Run(new FrmPurchaseDeptInvoiceAudit(Args[0], Args[2], Args[7]));
                 }
                 else if (strPrivilege.Contains("SAOFS") || strPrivilege.Contains("SOFS") || strPrivilege.Contains("SO") || strPrivilege.Contains("SFS"))
                 {
@@ -118,6 +123,10 @@ namespace Global
 
             //Application.Run(new FrmPurchaseDeptInvoice("DJB", "丁计宝"));
             //Application.Run(new FrmMain("P02", "123123", "唐守艳", "PPP"));
+            //Application.Run(new FrmPurchaseDeptInvoiceAudit("", "左进国", "ZJG"));
+            //Application.Run(new FrmPurchaseDeptInvoiceFinance("ZJG", "123456", "左进国"));
+            //Application.Run(new Global.Purchase.POInvoice_MR( "ZJG", "左进国"));
+            //Application.Run(new Global.Finance.InvoiceVerifyMR("左进国","ZJG","123456"));
             //Application.Run(new FrmMain("P03", "123123", "郑尧", "PPP"));
             //Application.Run(new FrmMain("P06", "123123", "李云", "PPP"));
             //Application.Run(new Finance.InvoiceVerify("唐守艳", "P02", "123123"));

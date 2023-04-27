@@ -1124,7 +1124,7 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
 	                                                    NeedTime AS 需求日期,
 	                                                    rtrim(ltrim(PlanVendorName)) AS 计划指定供应商,
 	                                                    rtrim(ltrim(PlanRemark)) AS 计划备注,
-                                                        case when  SYBFlag=0 then '固水'  when  SYBFlag=1 then '粉针' when  SYBFlag=2 then '原料' else '其他' end  AS 事业部,rtrim(ltrim(WorkCenter)) AS 需求车间,State,OperateTime AS 提报日期,PlaceOrderTime AS 下单日期
+                                                        case when  SYBFlag=0 then '固水'  when  SYBFlag=1 then '粉针' when  SYBFlag=2 then '原料' when  SYBFlag=3 then '大客户' else '其他' end  AS 事业部,rtrim(ltrim(WorkCenter)) AS 需求车间,State,OperateTime AS 提报日期,PlaceOrderTime AS 下单日期
                                                     FROM
 	                                                    dbo.SolidBuyList_Handle 
                                                     WHERE
@@ -1392,7 +1392,7 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
 	                                                    NeedTime AS 需求日期,
 	                                                    rtrim(ltrim(Remark)) AS 备注,
 	                                                    rtrim(ltrim(VendorName)) AS 指定供应商,
-                                                        case when  SYBFlag=0 then '固水'  when  SYBFlag=1 then '粉针' when  SYBFlag=2 then '原料' else '其他' end  AS 事业部,ReceiveTime AS 到货日期,ReceiveQuantity AS 到货数量,ExtractTime AS 提取日期, case when  Flag=1 then '已处理' when  Flag=2 then '已到货' else '' end AS 状态
+                                                        case when  SYBFlag=0 then '固水'  when  SYBFlag=1 then '粉针' when  SYBFlag=2 then '原料' when  SYBFlag=3 then '大客户' else '其他' end  AS 事业部,ReceiveTime AS 到货日期,ReceiveQuantity AS 到货数量,ExtractTime AS 提取日期, case when  Flag=1 then '已处理' when  Flag=2 then '已到货' else '' end AS 状态
                                                     FROM
 	                                                    dbo.SolidBuyList 
                                                     WHERE
@@ -1413,7 +1413,7 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
 	                                                    NeedTime AS 需求日期,
 	                                                    rtrim(ltrim(Remark)) AS 备注,
 	                                                    rtrim(ltrim(VendorName)) AS 指定供应商,
-                                                        case when  SYBFlag=0 then '固水'  when  SYBFlag=1 then '粉针' when  SYBFlag=2 then '原料' else '其他' end  AS 事业部
+                                                        case when  SYBFlag=0 then '固水'  when  SYBFlag=1 then '粉针' when  SYBFlag=2 then '原料' when  SYBFlag=3 then '大客户' else '其他' end  AS 事业部
                                                     FROM
 	                                                    dbo.SolidBuyList 
                                                     WHERE

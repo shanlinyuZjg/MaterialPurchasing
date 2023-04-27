@@ -93,5 +93,6 @@ namespace Global
          //   string str = GB2312.GetString(ISO88591.GetBytes(error.Description));
             MessageBox.Show(strMgs + ":" + error.Description);
         }
+
     }
 }

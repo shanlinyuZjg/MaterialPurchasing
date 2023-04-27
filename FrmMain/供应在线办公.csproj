@@ -142,6 +142,12 @@
     <Compile Include="Audit\InvoiceAudit.Designer.cs">
       <DependentUpon>InvoiceAudit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Audit\InvoiceAuditMR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Audit\InvoiceAuditMR.Designer.cs">
+      <DependentUpon>InvoiceAuditMR.cs</DependentUpon>
+    </Compile>
     <Compile Include="CommonOperate.cs" />
     <Compile Include="Custom.cs" />
     <Compile Include="Finance\InvoiceVerify.cs">
@@ -149,6 +155,12 @@
     </Compile>
     <Compile Include="Finance\InvoiceVerify.Designer.cs">
       <DependentUpon>InvoiceVerify.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\InvoiceVerifyMR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\InvoiceVerifyMR.Designer.cs">
+      <DependentUpon>InvoiceVerifyMR.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmProgress.cs">
       <SubType>Form</SubType>
@@ -174,16 +186,16 @@
     <Compile Include="FrmStockFileManager.Designer.cs">
       <DependentUpon>FrmStockFileManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmPurchaseDeptInvoiceFinance.cs">
+    <Compile Include="Finance\FrmPurchaseDeptInvoiceFinance.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPurchaseDeptInvoiceFinance.Designer.cs">
+    <Compile Include="Finance\FrmPurchaseDeptInvoiceFinance.Designer.cs">
       <DependentUpon>FrmPurchaseDeptInvoiceFinance.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmPurchaseDeptInvoiceAudit.cs">
+    <Compile Include="Audit\FrmPurchaseDeptInvoiceAudit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPurchaseDeptInvoiceAudit.Designer.cs">
+    <Compile Include="Audit\FrmPurchaseDeptInvoiceAudit.Designer.cs">
       <DependentUpon>FrmPurchaseDeptInvoiceAudit.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmPurchaseDeptInvoice.cs">
@@ -204,12 +216,21 @@
     <Compile Include="FrmWarehouseDeptStockKeeper.Designer.cs">
       <DependentUpon>FrmWarehouseDeptStockKeeper.cs</DependentUpon>
     </Compile>
+    <Compile Include="FSerror.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FSerror.Designer.cs">
+      <DependentUpon>FSerror.cs</DependentUpon>
+    </Compile>
     <Compile Include="FSFunctionLib.cs" />
     <Compile Include="GlobalSpace.cs" />
     <Compile Include="Helper\DataGridViewMultiPageHelper.cs" />
     <Compile Include="Helper\ExcelHelper.cs" />
     <Compile Include="Helper\GetHostInfo.cs" />
     <Compile Include="Helper\MailHelper.cs" />
+    <Compile Include="Helper\MPSTab.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Helper\SQLHelper.cs" />
     <Compile Include="MoMoDataGridViewX.cs">
       <SubType>Component</SubType>
@@ -464,11 +485,35 @@
     <Compile Include="Purchase\POInvoice.Designer.cs">
       <DependentUpon>POInvoice.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchase\PoWuInvoiceManage_MR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\PoWuInvoiceManage_MR.Designer.cs">
+      <DependentUpon>PoWuInvoiceManage_MR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\PoInvoiceManage_MR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\PoInvoiceManage_MR.Designer.cs">
+      <DependentUpon>PoInvoiceManage_MR.cs</DependentUpon>
+    </Compile>
     <Compile Include="Purchase\POInvoiceSearch.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Purchase\POInvoiceSearch.Designer.cs">
       <DependentUpon>POInvoiceSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\PoInvoiceSelect_MR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\PoInvoiceSelect_MR.Designer.cs">
+      <DependentUpon>PoInvoiceSelect_MR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase\POInvoice_MR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\POInvoice_MR.Designer.cs">
+      <DependentUpon>POInvoice_MR.cs</DependentUpon>
     </Compile>
     <Compile Include="Purchase\POItemConfirmAPIS.cs">
       <SubType>Form</SubType>
@@ -707,8 +752,14 @@
     <EmbeddedResource Include="Audit\InvoiceAudit.resx">
       <DependentUpon>InvoiceAudit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Audit\InvoiceAuditMR.resx">
+      <DependentUpon>InvoiceAuditMR.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Finance\InvoiceVerify.resx">
       <DependentUpon>InvoiceVerify.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\InvoiceVerifyMR.resx">
+      <DependentUpon>InvoiceVerifyMR.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmProgress.resx">
       <DependentUpon>FrmProgress.cs</DependentUpon>
@@ -722,10 +773,10 @@
     <EmbeddedResource Include="FrmStockFileManager.resx">
       <DependentUpon>FrmStockFileManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPurchaseDeptInvoiceFinance.resx">
+    <EmbeddedResource Include="Finance\FrmPurchaseDeptInvoiceFinance.resx">
       <DependentUpon>FrmPurchaseDeptInvoiceFinance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPurchaseDeptInvoiceAudit.resx">
+    <EmbeddedResource Include="Audit\FrmPurchaseDeptInvoiceAudit.resx">
       <DependentUpon>FrmPurchaseDeptInvoiceAudit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPurchaseDeptInvoice.resx">
@@ -736,6 +787,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmWarehouseDeptStockKeeper.resx">
       <DependentUpon>FrmWarehouseDeptStockKeeper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FSerror.resx">
+      <DependentUpon>FSerror.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintReport.resx">
       <DependentUpon>PrintReport.cs</DependentUpon>
@@ -862,8 +916,20 @@
     <EmbeddedResource Include="Purchase\POInvoice.resx">
       <DependentUpon>POInvoice.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\PoWuInvoiceManage_MR.resx">
+      <DependentUpon>PoWuInvoiceManage_MR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\PoInvoiceManage_MR.resx">
+      <DependentUpon>PoInvoiceManage_MR.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Purchase\POInvoiceSearch.resx">
       <DependentUpon>POInvoiceSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\PoInvoiceSelect_MR.resx">
+      <DependentUpon>PoInvoiceSelect_MR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\POInvoice_MR.resx">
+      <DependentUpon>POInvoice_MR.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\POItemConfirmAPIS.resx">
       <DependentUpon>POItemConfirmAPIS.cs</DependentUpon>

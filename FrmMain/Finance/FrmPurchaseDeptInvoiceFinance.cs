@@ -11,17 +11,19 @@ using Global.Helper;
 
 namespace Global
 {
-    public partial class FrmPurchaseDeptInvoiceAudit : Office2007RibbonForm
+    public partial class FrmPurchaseDeptInvoiceFinance : Office2007RibbonForm
     {
         string fsUserID = string.Empty;
         string fsUserName = string.Empty;
-        public FrmPurchaseDeptInvoiceAudit(string id,string name)
+        string Password = string.Empty;
+        public FrmPurchaseDeptInvoiceFinance(string id, string pw, string name)
         {
             this.EnableGlass = false;
             MessageBoxEx.EnableGlass = false;
             InitializeComponent();
             fsUserID = id;
             fsUserName = name;
+            Password = pw;
         }
 
         private void FrmPurchaseDeptConfirmer_Load(object sender, EventArgs e)
@@ -36,9 +38,18 @@ namespace Global
         {
             // Purchase.PlaceOrder po = new Purchase.PlaceOrder(fsUserID, fsPassword, fsUserName);
             //     CommonOperate.BindFormToTabControl(tabCtrlForm, po, btniPOItemConfirm.Name, btniPOItemConfirm.Text);
+            /*
             Purchase.POInvoice poi = new Purchase.POInvoice();
-            CommonOperate.BindFormToTabControl(tabCtrlForm, poi, btniPOItemConfirm.Name, btniPOItemConfirm.Text);
+            CommonOperate.BindFormToTabControl(tabCtrlForm, poi, btniPOItemConfirm.Name, btniPOItemConfirm.Text);*/
+            Finance.InvoiceVerify iv = new Finance.InvoiceVerify(fsUserID,Password,fsUserName);
+            CommonOperate.BindFormToTabControl(tabCtrlForm, iv, btniPOItemConfirm.Name, btniPOItemConfirm.Text); 
 
+        }
+
+        private void buttonItem1_Click(object sender, EventArgs e)
+        {
+            Finance.InvoiceVerifyMR iv = new Finance.InvoiceVerifyMR(fsUserID, Password, fsUserName);
+            CommonOperate.BindFormToTabControl(tabCtrlForm, iv, buttonItem1.Name, buttonItem1.Text);
         }
     }
 }

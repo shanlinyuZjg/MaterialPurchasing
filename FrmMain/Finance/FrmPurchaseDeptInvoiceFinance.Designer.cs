@@ -1,6 +1,6 @@
 ﻿namespace Global
 {
-    partial class FrmPurchaseDeptInvoiceAudit
+    partial class FrmPurchaseDeptInvoiceFinance
     {
         /// <summary>
         /// Required designer variable.
@@ -40,6 +40,8 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolExtra = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssl = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ribbonBar2 = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonControl1.SuspendLayout();
             this.ribbonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabCtrlForm)).BeginInit();
@@ -61,7 +63,7 @@
             this.ribbonControl1.Location = new System.Drawing.Point(5, 1);
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
-            this.ribbonControl1.Size = new System.Drawing.Size(835, 128);
+            this.ribbonControl1.Size = new System.Drawing.Size(974, 128);
             this.ribbonControl1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonControl1.SystemText.MaximizeRibbonText = "&Maximize the Ribbon";
             this.ribbonControl1.SystemText.MinimizeRibbonText = "Mi&nimize the Ribbon";
@@ -85,12 +87,13 @@
             // ribbonPanel1
             // 
             this.ribbonPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonPanel1.Controls.Add(this.ribbonBar2);
             this.ribbonPanel1.Controls.Add(this.ribbonBar1);
             this.ribbonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ribbonPanel1.Location = new System.Drawing.Point(0, 56);
             this.ribbonPanel1.Name = "ribbonPanel1";
             this.ribbonPanel1.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanel1.Size = new System.Drawing.Size(835, 69);
+            this.ribbonPanel1.Size = new System.Drawing.Size(974, 69);
             // 
             // 
             // 
@@ -123,7 +126,7 @@
             this.btniPOItemConfirm});
             this.ribbonBar1.Location = new System.Drawing.Point(3, 0);
             this.ribbonBar1.Name = "ribbonBar1";
-            this.ribbonBar1.Size = new System.Drawing.Size(78, 66);
+            this.ribbonBar1.Size = new System.Drawing.Size(73, 66);
             this.ribbonBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBar1.TabIndex = 0;
             // 
@@ -141,7 +144,7 @@
             this.btniPOItemConfirm.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
             this.btniPOItemConfirm.Name = "btniPOItemConfirm";
             this.btniPOItemConfirm.SubItemsExpandWidth = 14;
-            this.btniPOItemConfirm.Text = "开票确认";
+            this.btniPOItemConfirm.Text = "发票核销";
             this.btniPOItemConfirm.Click += new System.EventHandler(this.btniPOItemConfirm_Click);
             // 
             // ribbonTabItem1
@@ -149,12 +152,12 @@
             this.ribbonTabItem1.Checked = true;
             this.ribbonTabItem1.Name = "ribbonTabItem1";
             this.ribbonTabItem1.Panel = this.ribbonPanel1;
-            this.ribbonTabItem1.Text = "开票管理";
+            this.ribbonTabItem1.Text = "发票管理";
             // 
             // styleManager1
             // 
             this.styleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Blue;
-            this.styleManager1.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(71)))), ((int)(((byte)(42))))));
+            this.styleManager1.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.Gray, System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(71)))), ((int)(((byte)(42))))));
             // 
             // tabCtrlForm
             // 
@@ -169,7 +172,7 @@
             this.tabCtrlForm.Name = "tabCtrlForm";
             this.tabCtrlForm.SelectedTabFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
             this.tabCtrlForm.SelectedTabIndex = -1;
-            this.tabCtrlForm.Size = new System.Drawing.Size(835, 384);
+            this.tabCtrlForm.Size = new System.Drawing.Size(974, 388);
             this.tabCtrlForm.TabIndex = 4;
             this.tabCtrlForm.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabCtrlForm.Text = "tabControl1";
@@ -180,9 +183,9 @@
             this.toolStripStatusLabel1,
             this.toolExtra,
             this.tssl});
-            this.statusStrip1.Location = new System.Drawing.Point(5, 491);
+            this.statusStrip1.Location = new System.Drawing.Point(5, 495);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(835, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(974, 22);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -199,21 +202,60 @@
             // tssl
             // 
             this.tssl.Name = "tssl";
-            this.tssl.Size = new System.Drawing.Size(820, 17);
+            this.tssl.Size = new System.Drawing.Size(959, 17);
             this.tssl.Spring = true;
             this.tssl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // FrmPurchaseDeptInvoiceAudit
+            // ribbonBar2
+            // 
+            this.ribbonBar2.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBar2.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBar2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBar2.ContainerControlProcessDialogKey = true;
+            this.ribbonBar2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBar2.DragDropSupport = true;
+            this.ribbonBar2.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem1});
+            this.ribbonBar2.Location = new System.Drawing.Point(76, 0);
+            this.ribbonBar2.Name = "ribbonBar2";
+            this.ribbonBar2.Size = new System.Drawing.Size(73, 66);
+            this.ribbonBar2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBar2.TabIndex = 1;
+            // 
+            // 
+            // 
+            this.ribbonBar2.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBar2.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // buttonItem1
+            // 
+            this.buttonItem1.Image = global::Global.Properties.Resources.openofficeorg_20_calc;
+            this.buttonItem1.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.buttonItem1.Name = "buttonItem1";
+            this.buttonItem1.SubItemsExpandWidth = 14;
+            this.buttonItem1.Text = "发票核销\r\n新版";
+            this.buttonItem1.Click += new System.EventHandler(this.buttonItem1_Click);
+            // 
+            // FrmPurchaseDeptInvoiceFinance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(845, 515);
+            this.ClientSize = new System.Drawing.Size(984, 519);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabCtrlForm);
             this.Controls.Add(this.ribbonControl1);
-            this.Name = "FrmPurchaseDeptInvoiceAudit";
+            this.Name = "FrmPurchaseDeptInvoiceFinance";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "瑞阳制药股份有限公司发票在线审核系统";
+            this.Text = "瑞阳制药股份有限公司发票在线核销系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmPurchaseDeptConfirmer_Load);
             this.ribbonControl1.ResumeLayout(false);
@@ -240,5 +282,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolExtra;
         private System.Windows.Forms.ToolStripStatusLabel tssl;
+        private DevComponents.DotNetBar.RibbonBar ribbonBar2;
+        private DevComponents.DotNetBar.ButtonItem buttonItem1;
     }
 }

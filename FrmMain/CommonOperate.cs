@@ -421,7 +421,7 @@ namespace Global
                 tabControl.SelectTab(strName);
             }
         }
-
+        
         //检测是否已经打开tabpage，没有的话返回false，有的话返回true
         public static bool IsTabpageExist(string strName, System.Windows.Forms.TabControl tc)
         {
@@ -519,6 +519,56 @@ namespace Global
             tp.Text = strText;
             tp.Name = strName;
            
+
+            if (!IsOpenTab(strName, tabControl))
+            {
+                tcp.TabItem = tp;
+                tp.AttachedControl = tcp;
+                tabControl.Controls.Add(tcp);
+                tabControl.Tabs.Add(tp);
+                tabControl.SelectedTab = tp;
+            }
+            tabControl.Refresh();
+        }
+        public static void BindFormToTabControl(DevComponents.DotNetBar.TabControl tabControl, Form frm, string strName, string strText)
+        {
+            /*
+            if (!IsTabpageExist(strName, tabControl))
+            {
+                DevComponents.DotNetBar.TabItem ti = tabControl.CreateTab(strText);
+                DevComponents.DotNetBar.TabControlPanel tcp = new DevComponents.DotNetBar.TabControlPanel();
+                ti.AttachedControl = tcp;
+                ti.Name = strName;
+                ti.Text = strText;
+                tcp.TabItem = ti;
+                tcp.Dock = DockStyle.Fill;
+                tcp.Location = new System.Drawing.Point(0, 0);
+                tcp.Name = strName + "TabCTLPanel";
+                frm.Dock = DockStyle.Fill;
+                frm.WindowState = FormWindowState.Maximized;
+                frm.TopLevel = false;
+                frm.FormBorderStyle = FormBorderStyle.None;
+
+                tcp.Controls.Add(frm);
+                tabControl.Controls.Add(tcp);
+                frm.Show();
+                tabControl.SelectedTab = ti;
+            }*/
+            DevComponents.DotNetBar.TabItem tp = new DevComponents.DotNetBar.TabItem();
+            DevComponents.DotNetBar.TabControlPanel tcp = new DevComponents.DotNetBar.TabControlPanel();
+            tcp.Dock = System.Windows.Forms.DockStyle.Fill;
+            tcp.Location = new System.Drawing.Point(0, 0);
+
+            frm.TopLevel = false;
+
+            frm.FormBorderStyle = FormBorderStyle.None;
+
+            frm.Dock = System.Windows.Forms.DockStyle.Fill;
+            tcp.Controls.Add(frm);
+            frm.Show();
+            tp.Text = strText;
+            tp.Name = strName;
+
 
             if (!IsOpenTab(strName, tabControl))
             {
@@ -1966,6 +2016,46 @@ GSID,QualityCheckStandard,RequireDept,Comment1,ForeignNumber
             set
             {
                 foreignNumber = value;
+            }
+        }
+        public static void FormShow(Form fm, string text, System.Windows.Forms.TabControl tabControl1)
+        {
+            fm.Text = text;
+            Type type = fm.GetType();
+            string FullName = type.FullName;
+            bool bl = false;
+            foreach (TabPage TP in tabControl1.TabPages)
+            {
+                if (TP.Name == FullName)
+                {
+                    bl = true;
+                    break;
+                }
+            }
+            if (bl)
+            {
+                fm.Dispose();
+                tabControl1.SelectedTab = tabControl1.TabPages[FullName];//打开tabPage
+            }
+            else
+            {
+                //设置窗体没有边框 加入到选项卡中
+                fm.FormBorderStyle = FormBorderStyle.None;
+
+                fm.TopLevel = false;
+                TabPage tabPage = new TabPage();
+                tabPage.Name = FullName;
+                tabPage.Text = text + "  ";
+                tabControl1.TabPages.Add(tabPage);
+                fm.Parent = tabControl1.TabPages[FullName];
+
+                //fm.BackColor = Color.FromArgb(185, 215, 255);
+                fm.ControlBox = false;
+
+                fm.Dock = DockStyle.Fill;
+
+                fm.Show();
+                tabControl1.SelectedTab = tabControl1.TabPages[FullName];//打开tabPage
             }
         }
     }

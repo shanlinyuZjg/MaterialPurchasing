@@ -32,7 +32,7 @@ namespace Global.Finance
 
         decimal InvoiceAmount = 0;
 
-        public InvoiceVerify(string name, string fsID, string fsPassword)
+        public InvoiceVerify( string fsID, string fsPassword, string name)
         {
             this.EnableGlass = false;
             MessageBoxEx.EnableGlass = false;

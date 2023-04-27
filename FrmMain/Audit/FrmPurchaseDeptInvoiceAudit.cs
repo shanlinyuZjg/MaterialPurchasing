@@ -11,16 +11,23 @@ using Global.Helper;
 
 namespace Global
 {
-    public partial class FrmPurchaseDeptInvoiceFinance : Office2007RibbonForm
+    public partial class FrmPurchaseDeptInvoiceAudit : Office2007RibbonForm
     {
         string fsUserID = string.Empty;
         string fsUserName = string.Empty;
-        public FrmPurchaseDeptInvoiceFinance(string id,string name)
+        public FrmPurchaseDeptInvoiceAudit(string id,string name,string loginID)
         {
             this.EnableGlass = false;
             MessageBoxEx.EnableGlass = false;
             InitializeComponent();
-            fsUserID = id;
+            if (id == "CX" || string.IsNullOrWhiteSpace(id))
+            {
+                fsUserID = loginID;
+            }
+            else
+            {
+                fsUserID = id;
+            }
             fsUserName = name;
         }
 
@@ -36,11 +43,8 @@ namespace Global
         {
             // Purchase.PlaceOrder po = new Purchase.PlaceOrder(fsUserID, fsPassword, fsUserName);
             //     CommonOperate.BindFormToTabControl(tabCtrlForm, po, btniPOItemConfirm.Name, btniPOItemConfirm.Text);
-            /*
-            Purchase.POInvoice poi = new Purchase.POInvoice();
-            CommonOperate.BindFormToTabControl(tabCtrlForm, poi, btniPOItemConfirm.Name, btniPOItemConfirm.Text);*/
-            Finance.InvoiceVerify iv = new Finance.InvoiceVerify("","","");
-            CommonOperate.BindFormToTabControl(tabCtrlForm, iv, btniPOItemConfirm.Name, btniPOItemConfirm.Text); 
+            Global.Audit.InvoiceAuditMR poi = new Global.Audit.InvoiceAuditMR(fsUserID,fsUserName);
+            CommonOperate.BindFormToTabControl(tabCtrlForm, poi, btniPOItemConfirm.Name, btniPOItemConfirm.Text);
 
         }
     }

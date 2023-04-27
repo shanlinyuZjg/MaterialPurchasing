@@ -8,18 +8,18 @@ namespace Global
 {
     public class GlobalSpace
     {
-        public static readonly string fsconfigfilepath = "M:\\mfgsys\\fs.cfg";
-    //    public static readonly string fsconfigfilepath = "Z:\\mfgsys\\fs.cfg";
+        public static readonly string fsconfigfilepath = "M:\\mfgsys\\fs.cfg";//正式
+        public static readonly string Testfsconfigfilepath = "T:\\mfgsys\\fs.cfg";//测试
         public static readonly string fsTestconfigfilepath = "Z:\\mfgsys\\fs.cfg";
 
         public static readonly string FDAConnstr = "server=192.168.29.100;database=RYZY_YJM;uid=erp;pwd=123456";
         public static readonly string FSDBConnstr = "server=192.168.8.11;database=FSDB;uid=xym;pwd=xym-123+-*/";
         public static readonly string TestFSDBConnstr = "server=192.168.8.12;database=FSDB;uid=xym;pwd=xym-123";
-
-        public static readonly string FSDBMRConnstr = "server=192.168.8.11;database=fsdbmr;uid=xym;pwd=xym-123+-*/";
-        public static readonly string TestFSDBMRConnstr = "server=192.168.8.51;database=fsdbtr;uid=program;pwd=program";
-
-        public static readonly string oledbconnstrFSDBMR = "Provider=SQLOLEDB.1;Persist Security Info=True;Use Procedure for Prepare=1;Auto Translate=false;Data Source=192.168.8.11;Initial Catalog=fsdbmr;uid=xym;pwd=xym-123+-*/";
+        //public static readonly string FSDBMRConnstr = "server=192.168.8.51;database=fsdbtr;uid=sa;pwd=ERPtest321";//测试
+        public static readonly string FSDBMRConnstr = "server=192.168.8.11;database=fsdbmr;uid=xym;pwd=xym-123+-*/";//正式
+        public static readonly string TestFSDBMRConnstr = "server=192.168.8.51;database=fsdbtr;uid=program;pwd=program";//测试
+        public static readonly string TestoledbconnstrFSDBMR = "Provider=SQLOLEDB.1;Persist Security Info=True;Use Procedure for Prepare=1;Auto Translate=false;Data Source=192.168.8.51;Initial Catalog=fsdbtr;User ID=sa;Password=ERPtest321";//测试
+        public static readonly string oledbconnstrFSDBMR = "Provider=SQLOLEDB.1;Persist Security Info=True;Use Procedure for Prepare=1;Auto Translate=false;Data Source=192.168.8.11;Initial Catalog=fsdbmr;uid=xym;pwd=xym-123+-*/";//正式
         public static readonly string oledbconnstrFSDB = "Provider=SQLOLEDB.1;Persist Security Info=True;Use Procedure for Prepare=1;Auto Translate=false;Data Source=192.168.8.11;Initial Catalog=fsdb;User ID=xym;Password=xym-123+-*/";
       //  public static readonly string connstrBPM = "server=192.168.8.67;database=UltimusBusiness;uid=fs;pwd=ERP1075+-*/";
         public static readonly string connstrBPM = "server=192.168.8.28;database=BPMDBRY;uid=workflow;pwd=workflow";

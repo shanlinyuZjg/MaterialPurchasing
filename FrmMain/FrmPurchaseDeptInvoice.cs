@@ -15,12 +15,16 @@ namespace Global
     {
         string fsUserID = string.Empty;
         string fsUserName = string.Empty;
-        public FrmPurchaseDeptInvoice(string id,string name)
+        public FrmPurchaseDeptInvoice(string id,string name,string loginID)
         {
             this.EnableGlass = false;
             MessageBoxEx.EnableGlass = false;
             InitializeComponent();
-            fsUserID = id;
+            if (id.Trim() == "CX" || string.IsNullOrWhiteSpace(id))
+            { fsUserID = loginID; }
+            else
+            { fsUserID = id; }
+            
             fsUserName = name;
         }
 
@@ -39,6 +43,12 @@ namespace Global
             Purchase.POInvoice poi = new Purchase.POInvoice();
             CommonOperate.BindFormToTabControl(tabCtrlForm, poi, btniPOItemConfirm.Name, btniPOItemConfirm.Text);
 
+        }
+
+        private void buttonItem1_Click(object sender, EventArgs e)
+        {
+            Purchase.POInvoice poi = new Purchase.POInvoice();
+            CommonOperate.BindFormToTabControl(tabCtrlForm, poi, btniPOItemConfirm.Name, btniPOItemConfirm.Text);
         }
     }
 }

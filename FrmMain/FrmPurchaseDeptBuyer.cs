@@ -266,11 +266,13 @@ namespace Global
             DeptItemRequirement dir = new DeptItemRequirement();
             CommonOperate.BindFormToTabControl(tabCtrlForm, dir, btniDeptItemRequirement.Name, btniDeptItemRequirement.Text);
         }
-
+        
         private void btniItemRequirMakeOrder_Click(object sender, EventArgs e)
         {
-            DeptItemRequirementPlaceOrder dirpo = new DeptItemRequirementPlaceOrder(PONumberStartNumber, PONumberEndNumber, PurchaseUser.UserID);
-            CommonOperate.BindFormToTabControl(tabCtrlForm, dirpo, btniItemRequirMakeOrder.Name, btniItemRequirMakeOrder.Text);
+            //DeptItemRequirementPlaceOrder dirpo = new DeptItemRequirementPlaceOrder(PONumberStartNumber, PONumberEndNumber, PurchaseUser.UserID);
+            //CommonOperate.BindFormToTabControl(tabCtrlForm, dirpo, btniItemRequirMakeOrder.Name, btniItemRequirMakeOrder.Text);
+            POInvoice_MR dirpo1 = new POInvoice_MR( PurchaseUser.UserID,PurchaseUser.UserName); 
+            CommonOperate.BindFormToTabControl(tabCtrlForm, dirpo1, btniItemRequirMakeOrder.Name, btniItemRequirMakeOrder.Text);
         }
     }
 }

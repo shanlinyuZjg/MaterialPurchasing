@@ -1,6 +1,6 @@
 ﻿namespace Global
 {
-    partial class FrmPurchaseDeptInvoiceFinance
+    partial class FrmPurchaseDeptInvoiceAudit
     {
         /// <summary>
         /// Required designer variable.
@@ -141,7 +141,7 @@
             this.btniPOItemConfirm.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
             this.btniPOItemConfirm.Name = "btniPOItemConfirm";
             this.btniPOItemConfirm.SubItemsExpandWidth = 14;
-            this.btniPOItemConfirm.Text = "发票核销";
+            this.btniPOItemConfirm.Text = "发票审核";
             this.btniPOItemConfirm.Click += new System.EventHandler(this.btniPOItemConfirm_Click);
             // 
             // ribbonTabItem1
@@ -203,7 +203,7 @@
             this.tssl.Spring = true;
             this.tssl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // FrmPurchaseDeptInvoiceFinance
+            // FrmPurchaseDeptInvoiceAudit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -211,9 +211,9 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabCtrlForm);
             this.Controls.Add(this.ribbonControl1);
-            this.Name = "FrmPurchaseDeptInvoiceFinance";
+            this.Name = "FrmPurchaseDeptInvoiceAudit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "瑞阳制药股份有限公司发票在线核销系统";
+            this.Text = "瑞阳制药股份有限公司发票在线审核系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmPurchaseDeptConfirmer_Load);
             this.ribbonControl1.ResumeLayout(false);
