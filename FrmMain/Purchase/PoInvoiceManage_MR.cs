@@ -84,10 +84,10 @@ namespace Global.Purchase
 	                                                PurchaseOrderInvoiceRecordMRByCMF where VendorNumber ='{DGV1["供应商码", RowIndex].Value.ToString()}' and InvoiceNumberS='{TbInvoiceNumberS.Text}'";
             DGV2.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
 
-            for (int i = 0; i < DGV2.Columns.Count; i++)
-            {
-                DGV2.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
+            //for (int i = 0; i < DGV2.Columns.Count; i++)
+            //{
+            //    DGV2.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+            //}
             decimal RukuAmount = 0;
             for (int i = 0; i < DGV2.Rows.Count; i++)
             {

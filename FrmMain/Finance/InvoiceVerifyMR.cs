@@ -126,10 +126,10 @@ namespace Global.Finance
             TbTax.Text = DGV2["总税额", 0].Value.ToString();
             TbInvoiceAmount.Text = DGV2["不含税发票总额", 0].Value.ToString();
 
-            for (int i = 0; i < DGV2.Columns.Count; i++)
-            {
-                DGV2.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
+            //for (int i = 0; i < DGV2.Columns.Count; i++)
+            //{
+            //    DGV2.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+            //}
         }
 
         private void TbTax_TextChanged(object sender, EventArgs e)

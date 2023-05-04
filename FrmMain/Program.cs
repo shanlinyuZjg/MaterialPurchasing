@@ -124,7 +124,7 @@ namespace Global
             //Application.Run(new FrmPurchaseDeptInvoice("CX", "张琴琴", "PM03"));
             //Application.Run(new FrmPurchaseDeptInvoice("DJB", "丁计宝"));
             //Application.Run(new FrmMain("P02", "123123", "唐守艳", "PPP"));
-            //Application.Run(new FrmPurchaseDeptInvoiceAudit("", "左进国", "ZJG"));
+            //Application.Run(new FrmPurchaseDeptInvoiceAudit("CX", "王汝艳", "WANGRUYAN"));
             //Application.Run(new FrmPurchaseDeptInvoiceFinance("ZJG", "123456", "左进国"));
             //Application.Run(new Global.Purchase.POInvoice_MR( "ZJG", "左进国"));
             //Application.Run(new Global.Finance.InvoiceVerifyMR("左进国","ZJG","123456"));

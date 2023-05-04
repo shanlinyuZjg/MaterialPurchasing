@@ -84,7 +84,7 @@ namespace Global.Purchase
 
             for (int i = 0; i < DGV2.Columns.Count; i++)
             {
-                DGV2.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                //DGV2.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
         }
 

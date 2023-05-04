@@ -67,7 +67,7 @@ namespace Global.Purchase
             string sqlSelect = $@"SELECT 
 	InvoiceNumberS 发票号,
     ForeignNumber 联系单号,
-	ReceiveDate 入库日期, 
+	cast(ReceiveDate as date) 入库日期, 
 	PONumber 采购单号, 
 	LineNumber 行号,  
 	ItemNumber 物料编码, 
@@ -82,7 +82,7 @@ namespace Global.Purchase
     Buyer 采购员,
     Stockkeeper 库管员,
 	ManufacturerID 生产商码, 
-	ManufacturerName 生厂商名,
+	ManufacturerName 生产商名,
     AllAmount 入库总金额,
     InvoiceNumber 四班票号,
     InvoiceTaxedAmount 总税额,
@@ -96,7 +96,7 @@ namespace Global.Purchase
 
             for (int i = 0; i < DGV2.Columns.Count; i++)
             {
-                DGV2.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                //DGV2.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
         }
     }

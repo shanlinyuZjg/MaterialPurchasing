@@ -73,23 +73,23 @@ namespace Global.Audit
 
             string sqlSelect = $@"SELECT 
 	InvoiceNumberS 发票号,
-    ForeignNumber 联系单号,
-	ReceiveDate 入库日期, 
-	PONumber 采购单号, 
-	LineNumber 行号,  
+	cast(ReceiveDate as date) 入库日期, 
+	PONumber 采购单号,  
 	ItemNumber 物料编码, 
 	ItemDescription 物料描述, 
-	UM 单位,  
     OrderQuantity 订单量,
 	ReceiveQuantity 入库量,
 	UnitPrice 单价, 
 	Amount 总价,
-    LotNumber 厂家批号,
-    InnerLotNumber 公司批号,   
+    ForeignNumber 联系单号,
+    InnerLotNumber 公司批号,
+    LotNumber 厂家批号,  
+	LineNumber 行号,  
+	UM 单位,  
     Buyer 采购员,
     Stockkeeper 库管员,
 	ManufacturerID 生产商码, 
-	ManufacturerName 生厂商名,
+	ManufacturerName 生产商名,
     AllAmount 入库总金额,
     InvoiceNumber 四班票号,
     InvoiceTaxedAmount 总税额,
@@ -104,7 +104,7 @@ namespace Global.Audit
             if (DGV2.Rows.Count > 0) TBstorageAmount.Text = DGV2["入库总金额", 0].Value.ToString();
             for (int i = 0; i < DGV2.Columns.Count; i++)
             {
-                DGV2.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                //DGV2.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
         }
 

@@ -104,7 +104,7 @@ namespace Global.Purchase
             Dgv1.DataSource = dt;
             for (int i = 0; i < this.Dgv1.Columns.Count; i++)
             {
-                this.Dgv1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                //this.Dgv1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
             TbAmount.Text = string.Empty;
 
@@ -318,7 +318,7 @@ namespace Global.Purchase
             Dgv2.DataSource = dt1;
             for (int i = 0; i < this.Dgv2.Columns.Count; i++)
             {
-                this.Dgv2.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                //this.Dgv2.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
             BtnGet.Tag = TbVendorNameRO.Text+" "+TbAmount.Text;
 
