@@ -80,7 +80,7 @@ namespace Global.Finance
         private void BtnAll_Click(object sender, EventArgs e)
         {
             string sqlSelect = @"SELECT
-                                                    distinct VendorNumber 供应商码,  VendorName 供应商名, InvoiceNumberS 发票号
+                                                    distinct VendorNumber 供应商码,  VendorName 供应商名, InvoiceNumberS 发票号,Buyer 采购员, Operator 操作员
                                                 FROM
 	                                                PurchaseOrderInvoiceRecordMRByCMF where Status=2";
             DGV1.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
@@ -117,6 +117,8 @@ namespace Global.Finance
 	InvoiceMatchedQuantity 已匹配数量, 
 	ReceiveDate 入库日期, 
 	ForeignNumber 联系单号,
+    Buyer 采购员,
+    Operator 操作员,
 	APReceiptLineKey 
                                                 FROM
 	                                                PurchaseOrderInvoiceRecordMRByCMF where VendorNumber ='{VendorId}' and InvoiceNumberS='{TbInvoiceNumberS.Text}'";
@@ -514,7 +516,7 @@ namespace Global.Finance
         private void TbInvoiceSelect_KeyDown(object sender, KeyEventArgs e)
         {
             string sqlSelect = $@"SELECT
-                                                    distinct VendorNumber 供应商码,  VendorName 供应商名, InvoiceNumberS 发票号
+                                                    distinct VendorNumber 供应商码,  VendorName 供应商名, InvoiceNumberS 发票号,Buyer 采购员, Operator 操作员
                                                 FROM
 	                                                PurchaseOrderInvoiceRecordMRByCMF where Status=2 and InvoiceNumberS like '%{TbInvoiceSelect.Text.Trim()}%'";
             DGV1.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);

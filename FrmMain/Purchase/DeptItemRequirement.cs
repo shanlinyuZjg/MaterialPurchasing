@@ -150,6 +150,11 @@ namespace Global.Purchase
             {
                 if (Convert.ToBoolean(dgv.Rows[i].Cells["Check"].Value))
                 {
+                    if (string.IsNullOrWhiteSpace(dgv["需求日期", i].Value.ToString()))
+                    {
+                        dgv.Rows[i].DefaultCellStyle.ForeColor = Color.Red;
+                        return false; 
+                    }
                     string sqlSelect = @"Select  ItemDescription,ItemUM,IsInspectionRequired,PreferredStockroom,PreferredBin,IsLotTraced From _NoLock_FS_Item Where ItemNumber='" + dgv["物料代码", i].Value.ToString() + "'";
                     DataTable dtTemp = SQLHelper.GetDataTableOleDb(GlobalSpace.oledbconnstrFSDBMR, sqlSelect);
                     if (dtTemp.Rows.Count == 1)
@@ -293,7 +298,7 @@ namespace Global.Purchase
             #region
             if (!CheckCodeUnit(dgvItemRequirement))
             {
-                MessageBoxEx.Show("物料代码或单位不准确或需求数量小于等于零，已红色标示！");
+                MessageBoxEx.Show("物料代码或单位不准确、需求数量小于等于零、无需求日期，已红色标示！");
                 return;
             }
             #endregion
