@@ -348,6 +348,14 @@ namespace Global.Purchase
             DataTable dt = ((DataTable)Dgv2.DataSource).Copy();
             
             dt.Columns.Remove("序号");
+            dt.Columns.Remove("订单量");
+            dt.Columns.Remove("公司批号");
+            dt.Columns.Remove("厂家批号");
+            dt.Columns.Remove("采购员");
+            dt.Columns.Remove("库管员");
+            dt.Columns.Remove("生产商码");
+            dt.Columns.Remove("生产商名");
+            dt.Columns.Remove("已匹配数量");
             string filePath = filename;
             string sheetname = BtnGet.Tag.ToString().Split(' ')[2];
 
