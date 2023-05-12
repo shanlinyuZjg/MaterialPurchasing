@@ -485,6 +485,12 @@
     <Compile Include="Purchase\POInvoice.Designer.cs">
       <DependentUpon>POInvoice.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchase\POInvoice_MRrowIndex.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\POInvoice_MRrowIndex.Designer.cs">
+      <DependentUpon>POInvoice_MRrowIndex.cs</DependentUpon>
+    </Compile>
     <Compile Include="Purchase\PoWuInvoiceManage_MR.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -915,6 +921,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\POInvoice.resx">
       <DependentUpon>POInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\POInvoice_MRrowIndex.resx">
+      <DependentUpon>POInvoice_MRrowIndex.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\PoWuInvoiceManage_MR.resx">
       <DependentUpon>PoWuInvoiceManage_MR.cs</DependentUpon>

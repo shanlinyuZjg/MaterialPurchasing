@@ -126,6 +126,8 @@ namespace Global.Purchase
             this.Dgv2.RowTemplate.Height = 23;
             this.Dgv2.Size = new System.Drawing.Size(1085, 285);
             this.Dgv2.TabIndex = 5;
+            this.Dgv2.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Dgv2_CellDoubleClick);
+            this.Dgv2.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.Dgv2_RowPostPaint);
             // 
             // BtnGet
             // 

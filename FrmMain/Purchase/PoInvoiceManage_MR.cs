@@ -47,11 +47,12 @@ namespace Global.Purchase
                 DGV1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
         }
-
+        private int DGV1rowIndex = -1;
         private void DGV1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int RowIndex = e.RowIndex;
             if (RowIndex < 0) return;
+            DGV1rowIndex=RowIndex;
             TbVendor.Text= DGV1["供应商码", RowIndex].Value.ToString()+" "+ DGV1["供应商名", RowIndex].Value.ToString();
             TbInvoiceNumberS.Text = DGV1["发票号", RowIndex].Value.ToString();
 
@@ -112,7 +113,7 @@ namespace Global.Purchase
             if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
             {
                 MessageBox.Show("退回无票成功");
-                DGV1.DataSource = null;
+                DGV1.Rows.RemoveAt(DGV1rowIndex);
                 DGV2.DataSource = null;
                 TbVendor.Text = string.Empty;
                 TbInvoiceNumberS.Text = string.Empty;
@@ -133,7 +134,7 @@ namespace Global.Purchase
             if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
             {
                 MessageBox.Show("提交成功");
-                DGV1.DataSource = null;
+                DGV1.Rows.RemoveAt(DGV1rowIndex);
                 DGV2.DataSource = null;
                 TbVendor.Text = string.Empty;
                 TbInvoiceNumberS.Text = string.Empty;

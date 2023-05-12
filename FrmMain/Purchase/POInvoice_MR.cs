@@ -495,5 +495,50 @@ namespace Global.Purchase
             PoWuInvoiceManage_MR PWIM = new PoWuInvoiceManage_MR(UserID,UserName);
             PWIM.ShowDialog();
         }
+
+        private void Dgv2_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, ((DataGridView)sender).RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), ((DataGridView)sender).RowHeadersDefaultCellStyle.Font, rectangle, ((DataGridView)sender).RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
+
+        private void Dgv2_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            POInvoice_MRrowIndex DGV2index = new POInvoice_MRrowIndex();
+            DGV2index.ShowDialog();
+            int rowIndex0 = e.RowIndex;
+            if (DGV2index.DialogResult == DialogResult.OK)
+            {
+                int rowIndex1 = -1;
+                if (int.TryParse(DGV2index.Tag.ToString(), out rowIndex1))
+                {
+                    rowIndex1--;
+                    if (rowIndex1 == rowIndex0 || rowIndex1 < 0 || rowIndex1 > Dgv2.RowCount)
+                    { MessageBox.Show("输入的行号不符合要求"); }
+                    else
+                    {
+                        DataTable dt = (DataTable)Dgv2.DataSource;
+                        DataRow dr = dt.NewRow();
+                        dr.ItemArray = dt.Rows[rowIndex0].ItemArray;
+                        dt.Rows.InsertAt(dr, rowIndex1);
+                        //dt.Rows.Remove(dr);
+                        if (rowIndex1 < rowIndex0)
+                        {
+                            dt.Rows.RemoveAt(rowIndex0+1);
+                        }
+                        if (rowIndex1 > rowIndex0)
+                        {
+                            dt.Rows.RemoveAt(rowIndex0);
+                        }
+                        //Dgv2.DataSource = dt;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("请输入数字！");
+                }
+            }
+        }
     }
 }

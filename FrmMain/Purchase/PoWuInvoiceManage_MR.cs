@@ -47,12 +47,17 @@ namespace Global.Purchase
                 DGV1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
         }
-
+        private int DGV1rowIndex = -1;
         private void DGV1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int RowIndex = e.RowIndex;
             if (RowIndex < 0) return;
+            GetDGV2(RowIndex);
+            DGV1rowIndex = RowIndex;
 
+        }
+        private void GetDGV2(int RowIndex)
+        {
             string sqlSelect = $@"SELECT 
     Remarks 备注, 
     ForeignNumber 联系单号,
@@ -81,13 +86,9 @@ namespace Global.Purchase
                                                 FROM
 	                                                PurchaseOrderInvoiceRecordMRByCMF where VendorNumber ='{DGV1["供应商码", RowIndex].Value.ToString()}' and Sequence='{DGV1["顺序", RowIndex].Value.ToString()}' and Status=0 and (InvoiceNumberS is null or InvoiceNumberS ='')";
             DGV2.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
-
-            for (int i = 0; i < DGV2.Columns.Count; i++)
-            {
-                //DGV2.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
+            TbAmount.Text = string.Empty;
+            TbInvoiceNumberS.Text = string.Empty;
         }
-
         private void BtnDel_Click(object sender, EventArgs e)
         {
             if (DGV2.Rows.Count == 0) { MessageBox.Show("无信息"); return; }
@@ -108,8 +109,7 @@ namespace Global.Purchase
             if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlDel))
             {
                 MessageBox.Show("删除成功");
-                DGV1.DataSource = null;
-                DGV2.DataSource = null;
+                GetDGV2(DGV1rowIndex);
                 TbAmount.Text = string.Empty;
                 TbInvoiceNumberS.Text = string.Empty;
             }
@@ -151,10 +151,9 @@ namespace Global.Purchase
             if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
             {
                 MessageBox.Show("有票确认成功");
-                DGV1.DataSource = null;
-                DGV2.DataSource = null;
                 TbAmount.Text = string.Empty;
                 TbInvoiceNumberS.Text = string.Empty;
+                GetDGV2(DGV1rowIndex);
             }
             else
             {
