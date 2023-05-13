@@ -161,7 +161,9 @@ namespace Global.Purchase
             if (SQLHelper.BatchExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlList))
             {
                 MessageBox.Show("无票确认成功！", "提示");
+                Dgv1.DataSource = null;
                 Dgv2.DataSource = null;
+                TbAmount.Text = string.Empty;
             }
             else
             {
