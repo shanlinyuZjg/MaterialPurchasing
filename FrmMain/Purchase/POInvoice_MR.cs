@@ -99,17 +99,18 @@ namespace Global.Purchase
             string APReceiptLineKeys = "SELECT APReceiptLineKey FROM FSDB.[dbo].[PurchaseOrderInvoiceRecordMRByCMF] where status != 3";
             DataTable dtItems = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, APReceiptLineKeys);
             List<string> Lists = (from r in dtItems.AsEnumerable() select r.Field<string>("APReceiptLineKey")).ToList<string>();
-            string sqlstr = $"SELECT '' AS 联系单号,t1.POReceiptDate 入库日期, t1.PONumber as 采购单号, t1.POReceiptSequenceNumber 序号,  t1.POLineNumber 行号,   t1.InvoiceMatchedQuantity 已匹配数量,  t1.LineItemNumber 物料编码,t2.ItemDescription as 物料描述, t1.LineItemUM 单位, t1.POReceiptQuantity as 入库量,t1.POReceiptLocalUnitCost 单价,t1.POReceiptLocalExtendedCost 合计, t1.APReceiptLineKey as [KEY] FROM  _NoLock_FS_APReceiptLine as t1 inner join _NoLock_FS_Item as t2 on t1.ItemKey=t2.ItemKey where t1.VendorKey={VendorKEY}  and t1.InvoiceMatchedQuantity !=t1.POReceiptQuantity and t1.APReceiptLineKey not in ('{string.Join("','",Lists)}') order by t1.POReceiptDate";
+            //string sqlstr = $"SELECT '' AS 联系单号,t1.POReceiptDate 入库日期, t1.PONumber as 采购单号, t1.POReceiptSequenceNumber 序号,  t1.POLineNumber 行号,   t1.InvoiceMatchedQuantity 已匹配数量,  t1.LineItemNumber 物料编码,t2.ItemDescription as 物料描述, t1.LineItemUM 单位, t1.POReceiptQuantity as 入库量,t1.POReceiptLocalUnitCost 单价,t1.POReceiptLocalExtendedCost 合计, t1.APReceiptLineKey as [KEY] FROM  _NoLock_FS_APReceiptLine as t1 inner join _NoLock_FS_Item as t2 on t1.ItemKey=t2.ItemKey where t1.VendorKey={VendorKEY}  and t1.InvoiceMatchedQuantity !=t1.POReceiptQuantity and t1.APReceiptLineKey not in ('{string.Join("','", Lists)}') order by t1.POReceiptDate";
+            string sqlstr = $"SELECT '' AS 联系单号,t1.POReceiptDate 入库日期, t1.PONumber as 采购单号, t1.POReceiptSequenceNumber 序号,  t1.POLineNumber 行号,   t1.InvoiceMatchedQuantity 已匹配数量,  t1.LineItemNumber 物料编码,t2.ItemDescription as 物料描述, t1.LineItemUM 单位, t1.POReceiptQuantity as 入库量,t1.POReceiptLocalUnitCost 单价,t1.POReceiptLocalExtendedCost 合计, t1.APReceiptLineKey as [KEY] FROM  _NoLock_FS_APReceiptLine as t1 inner join _NoLock_FS_Item as t2 on t1.ItemKey=t2.ItemKey where t1.VendorKey={VendorKEY}  and t1.InvoiceMatchedQuantity !=t1.POReceiptQuantity  order by t1.POReceiptDate";
             DataTable dt = SQLHelper.GetDataTableOleDb(GlobalSpace.oledbconnstrFSDBMR, sqlstr);
-            Dgv1.DataSource = dt;
-            for (int i = 0; i < this.Dgv1.Columns.Count; i++)
+            for (int i = dt.Rows.Count - 1; i > -1; i--)
             {
-                //this.Dgv1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                if (Lists.Contains(dt.Rows[i]["KEY"].ToString()))
+                {
+                    dt.Rows.RemoveAt(i);
+                }
             }
+            Dgv1.DataSource = dt;
             TbAmount.Text = string.Empty;
-
-          
-            
         }
 
         private void BtnInvoiceConfrim_Click(object sender, EventArgs e)

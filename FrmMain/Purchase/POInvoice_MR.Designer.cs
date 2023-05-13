@@ -260,7 +260,7 @@ namespace Global.Purchase
             // 
             // BtnInvoiceSelect
             // 
-            this.BtnInvoiceSelect.Location = new System.Drawing.Point(1022, 12);
+            this.BtnInvoiceSelect.Location = new System.Drawing.Point(1017, 12);
             this.BtnInvoiceSelect.Name = "BtnInvoiceSelect";
             this.BtnInvoiceSelect.Size = new System.Drawing.Size(75, 23);
             this.BtnInvoiceSelect.TabIndex = 21;

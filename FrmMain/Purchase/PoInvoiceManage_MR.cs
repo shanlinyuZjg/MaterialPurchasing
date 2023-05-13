@@ -1,4 +1,5 @@
 ﻿using Global.Helper;
+using gregn6Lib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -59,7 +60,7 @@ namespace Global.Purchase
             string sqlSelect = $@"SELECT 
     Remarks 备注, 
     ForeignNumber 联系单号,
-	ReceiveDate 入库日期, 
+	cast(ReceiveDate as date) 入库日期, 
 	PONumber 采购单号, 
 	LineNumber 行号,  
 	ItemNumber 物料编码, 
@@ -79,6 +80,10 @@ namespace Global.Purchase
 	InvoiceMatchedQuantity 已匹配数量, 
 	VendorNumber 供应商码, 
 	VendorName 供应商名,
+    Buyer 采购员,
+    Stockkeeper 库管员,
+    ManufacturerID 生产商码,
+    ManufacturerName 生产商名,
 	SequenceNumber 序号,
 	Id,APReceiptLineKey 
                                                 FROM
@@ -149,6 +154,80 @@ namespace Global.Purchase
         private void PoInvoiceManage_MR_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void BtnPrint_Click(object sender, EventArgs e)
+        {
+            if (DGV2.Rows.Count == 0) return;
+            Print();
+        }
+        GridppReport Report = new GridppReport();
+        public void Print()
+        {
+            Report = new GridppReport();
+            Report.LoadFromFile(".\\应付发票入库单.grf");
+            //设置与数据源的连接串，因为在设计时指定的数据库路径是绝对路径。
+            Report.DetailGrid.Recordset.ConnectionString = "";
+            Report.FetchRecord += new _IGridppReportEvents_FetchRecordEventHandler(ReportFetchRecord);
+            //连接报表事件
+            Report.Initialize += new _IGridppReportEvents_InitializeEventHandler(ReportInitialize);
+            Report.PrintPreview(true);
+        }
+        private void ReportFetchRecord()
+        {
+            FillRecordToReport(Report, (DataTable)(DGV2.DataSource));
+        }
+        private void ReportInitialize()
+        {
+            //Report.DetailGrid.PrintAdaptFitText = true;
+            Report.ParameterByName("Vendor").AsString =  TbVendor.Text;
+            Report.ParameterByName("InvoiceNumbers").AsString = TbInvoiceNumberS.Text;
+            Report.ParameterByName("ReceiveAmount").AsString = TbRukuAmount.Text;
+            Report.ParameterByName("TaxPreAmount").AsString = TbAmount.Text.Trim();
+            Report.ParameterByName("TaxAmount").AsString = TbTax.Text.Trim();
+            Report.ParameterByName("FSinvoiceNumber").AsString = "";
+
+        }
+        private struct MatchFieldPairType
+        {
+            public IGRField grField;
+            public int MatchColumnIndex;
+        }
+        // 将 DataTable 的数据转储到 Grid++Report 的数据集中
+        public static void FillRecordToReport(IGridppReport Report, DataTable dt)
+        {
+            MatchFieldPairType[] MatchFieldPairs = new MatchFieldPairType[Math.Min(Report.DetailGrid.Recordset.Fields.Count, dt.Columns.Count)];
+
+            //根据字段名称与列名称进行匹配，建立DataReader字段与Grid++Report记录集的字段之间的对应关系
+            int MatchFieldCount = 0;
+            for (int i = 0; i < dt.Columns.Count; ++i)
+            {
+                foreach (IGRField fld in Report.DetailGrid.Recordset.Fields)
+                {
+                    if (String.Compare(fld.Name, dt.Columns[i].ColumnName, true) == 0)
+                    {
+                        MatchFieldPairs[MatchFieldCount].grField = fld;
+                        MatchFieldPairs[MatchFieldCount].MatchColumnIndex = i;
+                        ++MatchFieldCount;
+                        break;
+                    }
+                }
+            }
+
+
+            // 将 DataTable 中的每一条记录转储到 Grid++Report 的数据集中去
+            foreach (DataRow dr in dt.Rows)
+            {
+                Report.DetailGrid.Recordset.Append();
+
+                for (int i = 0; i < MatchFieldCount; ++i)
+                {
+                    if (!dr.IsNull(MatchFieldPairs[i].MatchColumnIndex))
+                        MatchFieldPairs[i].grField.Value = dr[MatchFieldPairs[i].MatchColumnIndex];
+                }
+
+                Report.DetailGrid.Recordset.Post();
+            }
         }
     }
 }

@@ -46,13 +46,14 @@ namespace Global.Purchase
             this.label5 = new System.Windows.Forms.Label();
             this.TbRukuAmount = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.BtnPrint = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV1)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnSubmit
             // 
-            this.BtnSubmit.Location = new System.Drawing.Point(982, 37);
+            this.BtnSubmit.Location = new System.Drawing.Point(1082, 38);
             this.BtnSubmit.Name = "BtnSubmit";
             this.BtnSubmit.Size = new System.Drawing.Size(90, 23);
             this.BtnSubmit.TabIndex = 38;
@@ -165,7 +166,7 @@ namespace Global.Purchase
             // 
             // TbAmount
             // 
-            this.TbAmount.Location = new System.Drawing.Point(634, 38);
+            this.TbAmount.Location = new System.Drawing.Point(634, 39);
             this.TbAmount.Name = "TbAmount";
             this.TbAmount.Size = new System.Drawing.Size(123, 21);
             this.TbAmount.TabIndex = 47;
@@ -173,7 +174,7 @@ namespace Global.Purchase
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(527, 42);
+            this.label4.Location = new System.Drawing.Point(527, 43);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(101, 12);
             this.label4.TabIndex = 46;
@@ -181,7 +182,7 @@ namespace Global.Purchase
             // 
             // TbTax
             // 
-            this.TbTax.Location = new System.Drawing.Point(393, 38);
+            this.TbTax.Location = new System.Drawing.Point(393, 39);
             this.TbTax.Name = "TbTax";
             this.TbTax.Size = new System.Drawing.Size(130, 21);
             this.TbTax.TabIndex = 45;
@@ -189,7 +190,7 @@ namespace Global.Purchase
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(357, 42);
+            this.label5.Location = new System.Drawing.Point(357, 43);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 44;
@@ -197,7 +198,7 @@ namespace Global.Purchase
             // 
             // TbRukuAmount
             // 
-            this.TbRukuAmount.Location = new System.Drawing.Point(839, 38);
+            this.TbRukuAmount.Location = new System.Drawing.Point(839, 39);
             this.TbRukuAmount.Name = "TbRukuAmount";
             this.TbRukuAmount.ReadOnly = true;
             this.TbRukuAmount.Size = new System.Drawing.Size(130, 21);
@@ -206,17 +207,28 @@ namespace Global.Purchase
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(765, 42);
+            this.label6.Location = new System.Drawing.Point(765, 43);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 12);
             this.label6.TabIndex = 48;
             this.label6.Text = "入库总金额";
+            // 
+            // BtnPrint
+            // 
+            this.BtnPrint.Location = new System.Drawing.Point(975, 38);
+            this.BtnPrint.Name = "BtnPrint";
+            this.BtnPrint.Size = new System.Drawing.Size(90, 23);
+            this.BtnPrint.TabIndex = 50;
+            this.BtnPrint.Text = "打印";
+            this.BtnPrint.UseVisualStyleBackColor = true;
+            this.BtnPrint.Click += new System.EventHandler(this.BtnPrint_Click);
             // 
             // PoInvoiceManage_MR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1203, 567);
+            this.Controls.Add(this.BtnPrint);
             this.Controls.Add(this.TbRukuAmount);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.TbAmount);
@@ -263,5 +275,6 @@ namespace Global.Purchase
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox TbRukuAmount;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button BtnPrint;
     }
 }

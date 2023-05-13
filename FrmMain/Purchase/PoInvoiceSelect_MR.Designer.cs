@@ -42,13 +42,14 @@ namespace Global.Purchase
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.BtnPrint = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV1)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnSelect
             // 
-            this.BtnSelect.Location = new System.Drawing.Point(1033, 16);
+            this.BtnSelect.Location = new System.Drawing.Point(886, 16);
             this.BtnSelect.Name = "BtnSelect";
             this.BtnSelect.Size = new System.Drawing.Size(112, 23);
             this.BtnSelect.TabIndex = 53;
@@ -60,7 +61,7 @@ namespace Global.Purchase
             // 
             this.TbInvoiceS.Location = new System.Drawing.Point(381, 17);
             this.TbInvoiceS.Name = "TbInvoiceS";
-            this.TbInvoiceS.Size = new System.Drawing.Size(154, 21);
+            this.TbInvoiceS.Size = new System.Drawing.Size(121, 21);
             this.TbInvoiceS.TabIndex = 48;
             // 
             // label1
@@ -106,15 +107,15 @@ namespace Global.Purchase
             // 
             // TbVendorNumber
             // 
-            this.TbVendorNumber.Location = new System.Drawing.Point(609, 17);
+            this.TbVendorNumber.Location = new System.Drawing.Point(568, 17);
             this.TbVendorNumber.Name = "TbVendorNumber";
-            this.TbVendorNumber.Size = new System.Drawing.Size(154, 21);
+            this.TbVendorNumber.Size = new System.Drawing.Size(98, 21);
             this.TbVendorNumber.TabIndex = 55;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(552, 21);
+            this.label2.Location = new System.Drawing.Point(510, 21);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 54;
@@ -122,15 +123,15 @@ namespace Global.Purchase
             // 
             // TbVendorName
             // 
-            this.TbVendorName.Location = new System.Drawing.Point(839, 17);
+            this.TbVendorName.Location = new System.Drawing.Point(731, 17);
             this.TbVendorName.Name = "TbVendorName";
-            this.TbVendorName.Size = new System.Drawing.Size(180, 21);
+            this.TbVendorName.Size = new System.Drawing.Size(144, 21);
             this.TbVendorName.TabIndex = 57;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(780, 21);
+            this.label3.Location = new System.Drawing.Point(672, 21);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 56;
@@ -168,11 +169,22 @@ namespace Global.Purchase
             this.label5.TabIndex = 61;
             this.label5.Text = "至";
             // 
+            // BtnPrint
+            // 
+            this.BtnPrint.Location = new System.Drawing.Point(1027, 17);
+            this.BtnPrint.Name = "BtnPrint";
+            this.BtnPrint.Size = new System.Drawing.Size(90, 23);
+            this.BtnPrint.TabIndex = 62;
+            this.BtnPrint.Text = "打印";
+            this.BtnPrint.UseVisualStyleBackColor = true;
+            this.BtnPrint.Click += new System.EventHandler(this.BtnPrint_Click);
+            // 
             // PoInvoiceSelect_MR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1210, 591);
+            this.Controls.Add(this.BtnPrint);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dateTimePicker2);
@@ -211,5 +223,6 @@ namespace Global.Purchase
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button BtnPrint;
     }
 }
