@@ -34,8 +34,8 @@ namespace Global.Finance
             tbYear.Text = DateTime.Now.ToString("yy");
             tbMonth.Text = DateTime.Now.ToString("MM");
             cbbTaxType.SelectedIndex = 0;
-            tbTaxCode.Text = "0";
-            GetTaxRate(tbTaxCode.Text);
+            //tbTaxCode.Text = "0";
+            //GetTaxRate(tbTaxCode.Text);
             BtnAll_Click(null, null);
         }
 
@@ -80,7 +80,7 @@ namespace Global.Finance
         private void BtnAll_Click(object sender, EventArgs e)
         {
             string sqlSelect = @"SELECT
-                                                    distinct VendorNumber 供应商码,  VendorName 供应商名, InvoiceNumberS 发票号,Buyer 采购员, Operator 操作员
+                                                    distinct VendorNumber 供应商码,  VendorName 供应商名, InvoiceNumberS 发票号, Operator 操作员
                                                 FROM
 	                                                PurchaseOrderInvoiceRecordMRByCMF where Status=2";
             DGV1.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
@@ -96,8 +96,11 @@ namespace Global.Finance
             if (RowIndex < 0) return;
             VendorId = DGV1["供应商码", RowIndex].Value.ToString();
             VendorName = DGV1["供应商名", RowIndex].Value.ToString();
-            TbInvoiceNumberS.Text = DGV1["发票号", RowIndex].Value.ToString();
-
+            TbInvoiceNumberS.Text = DGV1["发票号", RowIndex].Value.ToString().Trim();
+            if (TbInvoiceNumberS.Text.Length >= 4)
+            {
+                TbInvoiceNumber.Text = "IA" + TbInvoiceNumberS.Text.Substring(TbInvoiceNumberS.Text.Length-4);
+            }
             string sqlSelect = $@"SELECT VendorNumber 供应商码, 
 	VendorName 供应商名, 
 	PONumber 采购单号, 
@@ -124,7 +127,7 @@ namespace Global.Finance
 	                                                PurchaseOrderInvoiceRecordMRByCMF where VendorNumber ='{VendorId}' and InvoiceNumberS='{TbInvoiceNumberS.Text}'";
             DGV2.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
             TBstorageAmount.Text = DGV2["入库总金额", 0].Value.ToString();
-            TbInvoiceNumber.Text = DGV2["四班票号", 0].Value.ToString();
+            //TbInvoiceNumber.Text = DGV2["四班票号", 0].Value.ToString();
             TbTax.Text = DGV2["总税额", 0].Value.ToString();
             TbInvoiceAmount.Text = DGV2["不含税发票总额", 0].Value.ToString();
 
@@ -324,6 +327,9 @@ namespace Global.Finance
                     TbInvoiceNumber.Text = string.Empty;
                     TbTax.Text = string.Empty;
                     TbInvoiceAmount.Text = string.Empty;
+                    tbVATRate.Text = string.Empty;
+                    TbInvoiceAllAmount.Text = string.Empty;
+
                 }
                 else
                 {
@@ -516,7 +522,7 @@ namespace Global.Finance
         private void TbInvoiceSelect_KeyDown(object sender, KeyEventArgs e)
         {
             string sqlSelect = $@"SELECT
-                                                    distinct VendorNumber 供应商码,  VendorName 供应商名, InvoiceNumberS 发票号,Buyer 采购员, Operator 操作员
+                                                    distinct VendorNumber 供应商码,  VendorName 供应商名, InvoiceNumberS 发票号,Operator 操作员
                                                 FROM
 	                                                PurchaseOrderInvoiceRecordMRByCMF where Status=2 and InvoiceNumberS like '%{TbInvoiceSelect.Text.Trim()}%'";
             DGV1.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);

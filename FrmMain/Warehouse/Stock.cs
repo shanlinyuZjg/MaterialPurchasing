@@ -1200,17 +1200,22 @@ namespace Global.Warehouse
             if (dr["LotNumberAssign"].ToString() == "C" || dr["物料代码"].ToString().Contains("M"))
             {
                 porv01.LotNumberAssignmentPolicy.Value = "C";
-                if (dr["厂家批号"] == DBNull.Value || string.IsNullOrEmpty(dr["厂家批号"].ToString()))
+                if (dr["公司批号"] == DBNull.Value || string.IsNullOrEmpty(dr["公司批号"].ToString()))
                 {
-                    porv01.LotNumberDefault.Value = "";
-                    porv01.LotNumber.Value = "";
+                    porv01.LotNumberDefault.Value = dr["厂家批号"].ToString().ToUpper();
+                    porv01.LotNumber.Value = dr["厂家批号"].ToString().ToUpper();
+                }
+                else if (dr["厂家批号"] == DBNull.Value || string.IsNullOrEmpty(dr["厂家批号"].ToString()))
+                {
+                    porv01.LotNumberDefault.Value = dr["公司批号"].ToString().ToUpper();
+                    porv01.LotNumber.Value = dr["公司批号"].ToString().ToUpper();
                 }
                 else
                 {
                     porv01.LotNumberDefault.Value = dr["厂家批号"].ToString().ToUpper();
                     porv01.LotNumber.Value = dr["厂家批号"].ToString().ToUpper();
                 }
-
+                porv01.VendorLotNumber.Value = dr["公司批号"].ToString().ToUpper().Trim();
                 string mName = dr["生产商名"].ToString().Trim();
                 if (regEnglish.IsMatch(mName))
                 {
