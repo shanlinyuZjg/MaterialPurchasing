@@ -111,6 +111,16 @@ namespace Global.Purchase
             }
             Dgv1.DataSource = dt;
             TbAmount.Text = string.Empty;
+
+            for (int i = 0; i < this.Dgv1.Rows.Count; i++)
+            {
+                string selectPO = $@"Select ForeignNumber,PONumber,LineNumber From PurchaseOrderRecordByCMF Where VendorNumber='{TbVendorNameRO.Text.Split(' ')[0]} '   And PONumber ='{Dgv1["采购单号", i].Value.ToString()}' and LineNumber ='{Dgv1["行号", i].Value.ToString()}'";
+                DataTable dtPO = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, selectPO);
+                if (dtPO.Rows.Count == 1)
+                {
+                    Dgv1["联系单号", i].Value = dtPO.Rows[0]["ForeignNumber"].ToString();
+                }
+            }
         }
 
         private void BtnInvoiceConfrim_Click(object sender, EventArgs e)
@@ -325,15 +335,15 @@ namespace Global.Purchase
             }
             BtnGet.Tag = TbVendorNameRO.Text+" "+TbAmount.Text;
 
-            for (int i = 0; i < this.Dgv2.Rows.Count; i++)
-            {
-                string selectPO = $@"Select ForeignNumber,PONumber,LineNumber From PurchaseOrderRecordByCMF Where VendorNumber='{TbVendorNameRO.Text.Split(' ')[0]} '   And PONumber ='{Dgv2["采购单号",i].Value.ToString()}' and LineNumber ='{Dgv2["行号", i].Value.ToString()}'";
-                DataTable dtPO = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, selectPO);
-                if (dtPO.Rows.Count == 1)
-                {
-                    Dgv2["联系单号", i].Value = dtPO.Rows[0]["ForeignNumber"].ToString();
-                }
-            }
+            //for (int i = 0; i < this.Dgv2.Rows.Count; i++)
+            //{
+            //    string selectPO = $@"Select ForeignNumber,PONumber,LineNumber From PurchaseOrderRecordByCMF Where VendorNumber='{TbVendorNameRO.Text.Split(' ')[0]} '   And PONumber ='{Dgv2["采购单号",i].Value.ToString()}' and LineNumber ='{Dgv2["行号", i].Value.ToString()}'";
+            //    DataTable dtPO = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, selectPO);
+            //    if (dtPO.Rows.Count == 1)
+            //    {
+            //        Dgv2["联系单号", i].Value = dtPO.Rows[0]["ForeignNumber"].ToString();
+            //    }
+            //}
         }
 
         private void BtnExcelExport_Click(object sender, EventArgs e)

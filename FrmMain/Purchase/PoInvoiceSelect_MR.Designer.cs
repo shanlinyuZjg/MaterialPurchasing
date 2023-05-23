@@ -43,15 +43,21 @@ namespace Global.Purchase
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.BtnPrint = new System.Windows.Forms.Button();
+            this.TbLineNumber = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.TbPONumber = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.TbItemNumber = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DGV2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV1)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnSelect
             // 
-            this.BtnSelect.Location = new System.Drawing.Point(886, 16);
+            this.BtnSelect.Location = new System.Drawing.Point(723, 16);
             this.BtnSelect.Name = "BtnSelect";
-            this.BtnSelect.Size = new System.Drawing.Size(112, 23);
+            this.BtnSelect.Size = new System.Drawing.Size(59, 23);
             this.BtnSelect.TabIndex = 53;
             this.BtnSelect.Text = "查找";
             this.BtnSelect.UseVisualStyleBackColor = true;
@@ -59,15 +65,15 @@ namespace Global.Purchase
             // 
             // TbInvoiceS
             // 
-            this.TbInvoiceS.Location = new System.Drawing.Point(381, 17);
+            this.TbInvoiceS.Location = new System.Drawing.Point(367, 17);
             this.TbInvoiceS.Name = "TbInvoiceS";
-            this.TbInvoiceS.Size = new System.Drawing.Size(121, 21);
+            this.TbInvoiceS.Size = new System.Drawing.Size(75, 21);
             this.TbInvoiceS.TabIndex = 48;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(335, 21);
+            this.label1.Location = new System.Drawing.Point(324, 21);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 47;
@@ -82,11 +88,11 @@ namespace Global.Purchase
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DGV2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DGV2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGV2.Location = new System.Drawing.Point(362, 47);
+            this.DGV2.Location = new System.Drawing.Point(362, 81);
             this.DGV2.Name = "DGV2";
             this.DGV2.ReadOnly = true;
             this.DGV2.RowTemplate.Height = 23;
-            this.DGV2.Size = new System.Drawing.Size(832, 523);
+            this.DGV2.Size = new System.Drawing.Size(832, 489);
             this.DGV2.TabIndex = 45;
             // 
             // DGV1
@@ -107,15 +113,15 @@ namespace Global.Purchase
             // 
             // TbVendorNumber
             // 
-            this.TbVendorNumber.Location = new System.Drawing.Point(568, 17);
+            this.TbVendorNumber.Location = new System.Drawing.Point(504, 17);
             this.TbVendorNumber.Name = "TbVendorNumber";
-            this.TbVendorNumber.Size = new System.Drawing.Size(98, 21);
+            this.TbVendorNumber.Size = new System.Drawing.Size(69, 21);
             this.TbVendorNumber.TabIndex = 55;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(510, 21);
+            this.label2.Location = new System.Drawing.Point(446, 21);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 54;
@@ -123,15 +129,15 @@ namespace Global.Purchase
             // 
             // TbVendorName
             // 
-            this.TbVendorName.Location = new System.Drawing.Point(731, 17);
+            this.TbVendorName.Location = new System.Drawing.Point(633, 17);
             this.TbVendorName.Name = "TbVendorName";
-            this.TbVendorName.Size = new System.Drawing.Size(144, 21);
+            this.TbVendorName.Size = new System.Drawing.Size(85, 21);
             this.TbVendorName.TabIndex = 57;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(672, 21);
+            this.label3.Location = new System.Drawing.Point(576, 21);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 56;
@@ -171,19 +177,76 @@ namespace Global.Purchase
             // 
             // BtnPrint
             // 
-            this.BtnPrint.Location = new System.Drawing.Point(1027, 17);
+            this.BtnPrint.Location = new System.Drawing.Point(788, 17);
             this.BtnPrint.Name = "BtnPrint";
-            this.BtnPrint.Size = new System.Drawing.Size(90, 23);
+            this.BtnPrint.Size = new System.Drawing.Size(59, 23);
             this.BtnPrint.TabIndex = 62;
             this.BtnPrint.Text = "打印";
             this.BtnPrint.UseVisualStyleBackColor = true;
             this.BtnPrint.Click += new System.EventHandler(this.BtnPrint_Click);
+            // 
+            // TbLineNumber
+            // 
+            this.TbLineNumber.Location = new System.Drawing.Point(754, 54);
+            this.TbLineNumber.Name = "TbLineNumber";
+            this.TbLineNumber.Size = new System.Drawing.Size(58, 21);
+            this.TbLineNumber.TabIndex = 68;
+            this.TbLineNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbLineNumber_KeyDown);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(722, 58);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(29, 12);
+            this.label6.TabIndex = 67;
+            this.label6.Text = "行号";
+            // 
+            // TbPONumber
+            // 
+            this.TbPONumber.Location = new System.Drawing.Point(581, 54);
+            this.TbPONumber.Name = "TbPONumber";
+            this.TbPONumber.Size = new System.Drawing.Size(117, 21);
+            this.TbPONumber.TabIndex = 66;
+            this.TbPONumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbPONumber_KeyDown);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(523, 58);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.TabIndex = 65;
+            this.label7.Text = "采购单号";
+            // 
+            // TbItemNumber
+            // 
+            this.TbItemNumber.Location = new System.Drawing.Point(425, 54);
+            this.TbItemNumber.Name = "TbItemNumber";
+            this.TbItemNumber.Size = new System.Drawing.Size(75, 21);
+            this.TbItemNumber.TabIndex = 64;
+            this.TbItemNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbItemNumber_KeyDown);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(368, 58);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 12);
+            this.label8.TabIndex = 63;
+            this.label8.Text = "物料编码";
             // 
             // PoInvoiceSelect_MR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1210, 591);
+            this.Controls.Add(this.TbLineNumber);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.TbPONumber);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.TbItemNumber);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.BtnPrint);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -224,5 +287,11 @@ namespace Global.Purchase
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button BtnPrint;
+        private System.Windows.Forms.TextBox TbLineNumber;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox TbPONumber;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox TbItemNumber;
+        private System.Windows.Forms.Label label8;
     }
 }

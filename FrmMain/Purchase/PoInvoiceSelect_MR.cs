@@ -176,5 +176,120 @@ namespace Global.Purchase
                 Report.DetailGrid.Recordset.Post();
             }
         }
+
+        private void TbItemNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+
+            string sqlSelect = $@"SELECT 
+	Remarks 备注, 
+    ForeignNumber 联系单号,
+	cast(ReceiveDate as date) 入库日期, 
+	PONumber 采购单号, 
+	LineNumber 行号,  
+	ItemNumber 物料编码, 
+	ItemDescription 物料描述, 
+	UM 单位, 
+	ReceiveQuantity 入库量, 
+    OrderQuantity 订单量,
+    LotNumber 厂家批号,
+    InnerLotNumber 公司批号,
+	UnitPrice 单价, 
+	Amount 总价, 
+	InvoiceNumberS 发票号, 
+    AllAmount 入库总金额,
+    InvoiceNumber 四班票号,
+    InvoiceTaxedAmount 总税额,
+    InvoiceAmount 不含税发票总额,
+	InvoiceMatchedQuantity 已匹配数量, 
+	VendorNumber 供应商码, 
+	VendorName 供应商名,
+    Buyer 采购员,
+    Stockkeeper 库管员,
+    ManufacturerID 生产商码,
+    ManufacturerName 生产商名,
+	SequenceNumber 序号,Status,
+	Id,APReceiptLineKey 
+                                                FROM
+	                                                PurchaseOrderInvoiceRecordMRByCMF where ItemNumber ='{TbItemNumber.Text.Trim().ToUpper()}' order by Id desc";
+            DGV2.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
+
+        }
+
+        private void TbPONumber_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+
+            string sqlSelect = $@"SELECT 
+	Remarks 备注, 
+    ForeignNumber 联系单号,
+	cast(ReceiveDate as date) 入库日期, 
+	PONumber 采购单号, 
+	LineNumber 行号,  
+	ItemNumber 物料编码, 
+	ItemDescription 物料描述, 
+	UM 单位, 
+	ReceiveQuantity 入库量, 
+    OrderQuantity 订单量,
+    LotNumber 厂家批号,
+    InnerLotNumber 公司批号,
+	UnitPrice 单价, 
+	Amount 总价, 
+	InvoiceNumberS 发票号, 
+    AllAmount 入库总金额,
+    InvoiceNumber 四班票号,
+    InvoiceTaxedAmount 总税额,
+    InvoiceAmount 不含税发票总额,
+	InvoiceMatchedQuantity 已匹配数量, 
+	VendorNumber 供应商码, 
+	VendorName 供应商名,
+    Buyer 采购员,
+    Stockkeeper 库管员,
+    ManufacturerID 生产商码,
+    ManufacturerName 生产商名,
+	SequenceNumber 序号,Status,
+	Id,APReceiptLineKey 
+                                                FROM
+	                                                PurchaseOrderInvoiceRecordMRByCMF where PONumber ='{TbPONumber.Text.Trim().ToUpper()}' order by Id desc";
+            DGV2.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
+        }
+
+        private void TbLineNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+
+            string sqlSelect = $@"SELECT 
+	Remarks 备注, 
+    ForeignNumber 联系单号,
+	cast(ReceiveDate as date) 入库日期, 
+	PONumber 采购单号, 
+	LineNumber 行号,  
+	ItemNumber 物料编码, 
+	ItemDescription 物料描述, 
+	UM 单位, 
+	ReceiveQuantity 入库量, 
+    OrderQuantity 订单量,
+    LotNumber 厂家批号,
+    InnerLotNumber 公司批号,
+	UnitPrice 单价, 
+	Amount 总价, 
+	InvoiceNumberS 发票号, 
+    AllAmount 入库总金额,
+    InvoiceNumber 四班票号,
+    InvoiceTaxedAmount 总税额,
+    InvoiceAmount 不含税发票总额,
+	InvoiceMatchedQuantity 已匹配数量, 
+	VendorNumber 供应商码, 
+	VendorName 供应商名,
+    Buyer 采购员,
+    Stockkeeper 库管员,
+    ManufacturerID 生产商码,
+    ManufacturerName 生产商名,
+	SequenceNumber 序号,Status,
+	Id,APReceiptLineKey 
+                                                FROM
+	                                                PurchaseOrderInvoiceRecordMRByCMF where PONumber ='{TbPONumber.Text.Trim().ToUpper()}' and LineNumber ='{TbLineNumber.Text.Trim().ToUpper()}' order by Id desc";
+            DGV2.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
+        }
     }
 }
