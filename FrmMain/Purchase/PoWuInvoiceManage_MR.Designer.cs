@@ -47,13 +47,14 @@ namespace Global.Purchase
             this.label7 = new System.Windows.Forms.Label();
             this.BtnAllSelect = new System.Windows.Forms.Button();
             this.TbAmount = new System.Windows.Forms.TextBox();
+            this.TBoperator = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DGV2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV1)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnSubmit
             // 
-            this.BtnSubmit.Location = new System.Drawing.Point(999, 6);
+            this.BtnSubmit.Location = new System.Drawing.Point(999, 7);
             this.BtnSubmit.Name = "BtnSubmit";
             this.BtnSubmit.Size = new System.Drawing.Size(90, 23);
             this.BtnSubmit.TabIndex = 38;
@@ -63,7 +64,7 @@ namespace Global.Purchase
             // 
             // TbVendorID
             // 
-            this.TbVendorID.Location = new System.Drawing.Point(148, 7);
+            this.TbVendorID.Location = new System.Drawing.Point(200, 8);
             this.TbVendorID.Name = "TbVendorID";
             this.TbVendorID.Size = new System.Drawing.Size(62, 21);
             this.TbVendorID.TabIndex = 31;
@@ -72,7 +73,7 @@ namespace Global.Purchase
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(90, 11);
+            this.label1.Location = new System.Drawing.Point(142, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 30;
@@ -80,7 +81,7 @@ namespace Global.Purchase
             // 
             // BtnAll
             // 
-            this.BtnAll.Location = new System.Drawing.Point(12, 6);
+            this.BtnAll.Location = new System.Drawing.Point(12, 7);
             this.BtnAll.Name = "BtnAll";
             this.BtnAll.Size = new System.Drawing.Size(75, 23);
             this.BtnAll.TabIndex = 29;
@@ -134,16 +135,16 @@ namespace Global.Purchase
             // 
             // TbVendorName
             // 
-            this.TbVendorName.Location = new System.Drawing.Point(272, 7);
+            this.TbVendorName.Location = new System.Drawing.Point(326, 8);
             this.TbVendorName.Name = "TbVendorName";
-            this.TbVendorName.Size = new System.Drawing.Size(80, 21);
+            this.TbVendorName.Size = new System.Drawing.Size(77, 21);
             this.TbVendorName.TabIndex = 40;
             this.TbVendorName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbVendorName_KeyDown);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(213, 11);
+            this.label2.Location = new System.Drawing.Point(267, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 39;
@@ -151,15 +152,15 @@ namespace Global.Purchase
             // 
             // TbInvoiceNumberS
             // 
-            this.TbInvoiceNumberS.Location = new System.Drawing.Point(409, 7);
+            this.TbInvoiceNumberS.Location = new System.Drawing.Point(455, 8);
             this.TbInvoiceNumberS.Name = "TbInvoiceNumberS";
-            this.TbInvoiceNumberS.Size = new System.Drawing.Size(205, 21);
+            this.TbInvoiceNumberS.Size = new System.Drawing.Size(172, 21);
             this.TbInvoiceNumberS.TabIndex = 42;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(362, 11);
+            this.label3.Location = new System.Drawing.Point(409, 12);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 41;
@@ -167,7 +168,7 @@ namespace Global.Purchase
             // 
             // BtnDel
             // 
-            this.BtnDel.Location = new System.Drawing.Point(1105, 6);
+            this.BtnDel.Location = new System.Drawing.Point(1105, 7);
             this.BtnDel.Name = "BtnDel";
             this.BtnDel.Size = new System.Drawing.Size(45, 23);
             this.BtnDel.TabIndex = 43;
@@ -177,7 +178,7 @@ namespace Global.Purchase
             // 
             // RowStart
             // 
-            this.RowStart.Location = new System.Drawing.Point(737, 7);
+            this.RowStart.Location = new System.Drawing.Point(738, 8);
             this.RowStart.Name = "RowStart";
             this.RowStart.Size = new System.Drawing.Size(46, 21);
             this.RowStart.TabIndex = 47;
@@ -185,7 +186,7 @@ namespace Global.Purchase
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(694, 11);
+            this.label6.Location = new System.Drawing.Point(694, 12);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 12);
             this.label6.TabIndex = 46;
@@ -193,7 +194,7 @@ namespace Global.Purchase
             // 
             // RowEnd
             // 
-            this.RowEnd.Location = new System.Drawing.Point(834, 7);
+            this.RowEnd.Location = new System.Drawing.Point(837, 8);
             this.RowEnd.Name = "RowEnd";
             this.RowEnd.Size = new System.Drawing.Size(46, 21);
             this.RowEnd.TabIndex = 48;
@@ -202,7 +203,7 @@ namespace Global.Purchase
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(790, 11);
+            this.label7.Location = new System.Drawing.Point(791, 12);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 12);
             this.label7.TabIndex = 45;
@@ -210,7 +211,7 @@ namespace Global.Purchase
             // 
             // BtnAllSelect
             // 
-            this.BtnAllSelect.Location = new System.Drawing.Point(619, 6);
+            this.BtnAllSelect.Location = new System.Drawing.Point(633, 7);
             this.BtnAllSelect.Name = "BtnAllSelect";
             this.BtnAllSelect.Size = new System.Drawing.Size(57, 23);
             this.BtnAllSelect.TabIndex = 44;
@@ -220,17 +221,25 @@ namespace Global.Purchase
             // 
             // TbAmount
             // 
-            this.TbAmount.Location = new System.Drawing.Point(886, 7);
+            this.TbAmount.Location = new System.Drawing.Point(886, 8);
             this.TbAmount.Name = "TbAmount";
             this.TbAmount.ReadOnly = true;
             this.TbAmount.Size = new System.Drawing.Size(97, 21);
             this.TbAmount.TabIndex = 49;
+            // 
+            // TBoperator
+            // 
+            this.TBoperator.Location = new System.Drawing.Point(93, 8);
+            this.TBoperator.Name = "TBoperator";
+            this.TBoperator.Size = new System.Drawing.Size(44, 21);
+            this.TBoperator.TabIndex = 50;
             // 
             // PoWuInvoiceManage_MR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1203, 567);
+            this.Controls.Add(this.TBoperator);
             this.Controls.Add(this.TbAmount);
             this.Controls.Add(this.RowStart);
             this.Controls.Add(this.label6);
@@ -278,5 +287,6 @@ namespace Global.Purchase
         private System.Windows.Forms.Button BtnAllSelect;
         private System.Windows.Forms.TextBox TbAmount;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Check;
+        private System.Windows.Forms.TextBox TBoperator;
     }
 }

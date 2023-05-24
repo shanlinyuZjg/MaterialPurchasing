@@ -26,7 +26,7 @@ namespace Global.Purchase
             string sqlSelect = $@"SELECT
                                                     distinct VendorNumber 供应商码,  VendorName 供应商名, Sequence 顺序
                                                 FROM
-	                                                PurchaseOrderInvoiceRecordMRByCMF where Status =0 and Operator ='{UserID}' and (InvoiceNumberS is null or InvoiceNumberS ='')";
+	                                                PurchaseOrderInvoiceRecordMRByCMF where Status =0 and (Operator ='{UserID}' or Operator ='{TBoperator.Text.Trim()}') and (InvoiceNumberS is null or InvoiceNumberS ='')";
             DGV1.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
             for (int i = 0; i < DGV1.Columns.Count; i++)
             {
@@ -36,11 +36,11 @@ namespace Global.Purchase
 
         private void TbVendorID_KeyDown(object sender, KeyEventArgs e)
         {
-           
+            if (e.KeyCode != Keys.Enter) return;
             string sqlSelect = $@"SELECT
                                                     distinct VendorNumber 供应商码,  VendorName 供应商名, Sequence 顺序
                                                 FROM
-	                                                PurchaseOrderInvoiceRecordMRByCMF where Status =0 and Operator ='{UserID}' and (InvoiceNumberS is null or InvoiceNumberS ='') and VendorNumber ='{TbVendorID.Text.Trim()}'";
+	                                                PurchaseOrderInvoiceRecordMRByCMF where Status =0 and (Operator ='{UserID}' or Operator ='{TBoperator.Text.Trim()}') and (InvoiceNumberS is null or InvoiceNumberS ='') and VendorNumber ='{TbVendorID.Text.Trim()}'";
             DGV1.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
             for (int i = 0; i < DGV1.Columns.Count; i++)
             {
@@ -145,7 +145,7 @@ namespace Global.Purchase
             }
             //DialogResult dr = MessageBox.Show("是否确认删除？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             //if (dr == DialogResult.Cancel) return;
-            string sqlUpdate = $@"update PurchaseOrderInvoiceRecordMRByCMF set InvoiceNumberS='{TbInvoiceNumberS.Text.Trim()}' WHERE  Id in ({string.Join(",", Lists)}) and Status = 0";
+            string sqlUpdate = $@"update PurchaseOrderInvoiceRecordMRByCMF set Operator ='{UserID}', InvoiceNumberS='{TbInvoiceNumberS.Text.Trim()}' WHERE  Id in ({string.Join(",", Lists)}) and Status = 0";
 
 
             if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
@@ -227,10 +227,11 @@ namespace Global.Purchase
 
         private void TbVendorName_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode != Keys.Enter) return;
             string sqlSelect = $@"SELECT
                                                     distinct VendorNumber 供应商码,  VendorName 供应商名, Sequence 顺序
                                                 FROM
-	                                                PurchaseOrderInvoiceRecordMRByCMF where Status =0 and Operator ='{UserID}' and (InvoiceNumberS is null or InvoiceNumberS ='') and VendorName like '%{TbVendorName.Text.Trim()}%'";
+	                                                PurchaseOrderInvoiceRecordMRByCMF where Status =0 and (Operator ='{UserID}' or Operator ='{TBoperator.Text.Trim()}') and (InvoiceNumberS is null or InvoiceNumberS ='') and VendorName like '%{TbVendorName.Text.Trim()}%'";
             DGV1.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
             for (int i = 0; i < DGV1.Columns.Count; i++)
             {

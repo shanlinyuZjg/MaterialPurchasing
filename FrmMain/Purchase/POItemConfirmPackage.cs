@@ -65,7 +65,8 @@ namespace Global.Purchase
                                                         when '5' then '已入库' 
                                                  end     
                                                 ) as 状态 ,
-                                                T1.AccumulatedActualReceiveQuantity AS 累计数量 
+                                                T1.AccumulatedActualReceiveQuantity AS 累计数量  ,
+                                                T1.Comment1 AS 备注
                                         FROM
 	                                        PurchaseOrderRecordByCMF T1
                                         WHERE  ";
@@ -466,7 +467,8 @@ namespace Global.Purchase
                                                         when '66' then '部分入库' 
                                                  end     
                                                 ) as 状态 ,
-                                                T1.AccumulatedActualReceiveQuantity AS 累计数量 
+                                                T1.AccumulatedActualReceiveQuantity AS 累计数量 ,
+                                                T1.Comment1 AS 备注
                                         FROM
 	                                        PurchaseOrderRecordByCMF T1
                                         WHERE  T1.PONumber = '" + strValue + "' And (T1.POStatus = 3 OR T1.POStatus = 66) ";
@@ -586,7 +588,7 @@ namespace Global.Purchase
 	                                                            Quantity AS 数量,
 	                                                            SpecificationDescription AS 说明,
 	                                                            TotalAmount AS 总金额,
-	                                                            Requirements AS 要求
+	                                                            Requirements AS 要求 
                                                             FROM
 	                                                            PurchaseDepartmentForeignOrderItemByCMF  Where IsValid = 1 And Status = 3  And ItemNumber  IN (Select ItemNumber From PurchaseDepartmentForeignOrderItemNotInByCMF)   ";
                 sqlCriteria = " And VendorName like '%" + VendorName + "%'  ";
