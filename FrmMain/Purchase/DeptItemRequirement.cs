@@ -355,6 +355,7 @@ namespace Global.Purchase
 "	SolidBuyList_Handle.ForeignNumber, \n" +
 "	SolidBuyList_Handle.WorkCenter, \n" +
 "	SolidBuyList_Handle.PlanRemark, \n" +
+"	SolidBuyList_Handle.Remark, \n" +
 "	SolidBuyList_Handle.SYBFlag,TaxRate) SELECT " +
                     "  convert(nvarchar(255),SolidBuyList.ID),\n" +
 "	rtrim(ltrim(SolidBuyList.ItemNumber)),\n" +
@@ -372,6 +373,7 @@ namespace Global.Purchase
 "	SolidBuyList.ReceiveQuantity,\n" +
 "	rtrim(ltrim(SolidBuyList.ForeignNumber)),\n" +
 "	rtrim(ltrim(SolidBuyList.WorkCenter)),\n" +
+"	rtrim(ltrim(SolidBuyList.Remark)),\n" +
 "	rtrim(ltrim(SolidBuyList.Remark)),\n" +
 "	SolidBuyList.SYBFlag,0.13 " +
                     " FROM SolidBuyList where ID in (" + string.Join(",", lint.ToArray()) + ")";
