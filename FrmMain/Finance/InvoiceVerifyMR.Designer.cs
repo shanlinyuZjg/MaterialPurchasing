@@ -61,8 +61,18 @@ namespace Global.Finance
             this.BtnHistory = new System.Windows.Forms.Button();
             this.BtnError = new System.Windows.Forms.Button();
             this.BtnManualAPID = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tbVATRate1 = new System.Windows.Forms.TextBox();
+            this.tbTaxCode1 = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.TbTax1 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DGV1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV2)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // DGV1
@@ -74,7 +84,7 @@ namespace Global.Finance
             this.DGV1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DGV1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV1.Location = new System.Drawing.Point(11, 89);
-            this.DGV1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DGV1.Margin = new System.Windows.Forms.Padding(4);
             this.DGV1.Name = "DGV1";
             this.DGV1.ReadOnly = true;
             this.DGV1.RowTemplate.Height = 23;
@@ -91,18 +101,18 @@ namespace Global.Finance
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DGV2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DGV2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGV2.Location = new System.Drawing.Point(468, 89);
-            this.DGV2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DGV2.Location = new System.Drawing.Point(468, 151);
+            this.DGV2.Margin = new System.Windows.Forms.Padding(4);
             this.DGV2.Name = "DGV2";
             this.DGV2.ReadOnly = true;
             this.DGV2.RowTemplate.Height = 23;
-            this.DGV2.Size = new System.Drawing.Size(1128, 487);
+            this.DGV2.Size = new System.Drawing.Size(1128, 425);
             this.DGV2.TabIndex = 1;
             // 
             // BtnAll
             // 
             this.BtnAll.Location = new System.Drawing.Point(17, 53);
-            this.BtnAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnAll.Margin = new System.Windows.Forms.Padding(4);
             this.BtnAll.Name = "BtnAll";
             this.BtnAll.Size = new System.Drawing.Size(100, 31);
             this.BtnAll.TabIndex = 2;
@@ -123,7 +133,7 @@ namespace Global.Finance
             // TbInvoiceSelect
             // 
             this.TbInvoiceSelect.Location = new System.Drawing.Point(215, 55);
-            this.TbInvoiceSelect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TbInvoiceSelect.Margin = new System.Windows.Forms.Padding(4);
             this.TbInvoiceSelect.Name = "TbInvoiceSelect";
             this.TbInvoiceSelect.Size = new System.Drawing.Size(161, 26);
             this.TbInvoiceSelect.TabIndex = 4;
@@ -132,7 +142,7 @@ namespace Global.Finance
             // BtnInvoiceVerify
             // 
             this.BtnInvoiceVerify.Location = new System.Drawing.Point(1376, 53);
-            this.BtnInvoiceVerify.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnInvoiceVerify.Margin = new System.Windows.Forms.Padding(4);
             this.BtnInvoiceVerify.Name = "BtnInvoiceVerify";
             this.BtnInvoiceVerify.Size = new System.Drawing.Size(100, 31);
             this.BtnInvoiceVerify.TabIndex = 21;
@@ -143,7 +153,7 @@ namespace Global.Finance
             // TbInvoiceAmount
             // 
             this.TbInvoiceAmount.Location = new System.Drawing.Point(972, 55);
-            this.TbInvoiceAmount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TbInvoiceAmount.Margin = new System.Windows.Forms.Padding(4);
             this.TbInvoiceAmount.Name = "TbInvoiceAmount";
             this.TbInvoiceAmount.Size = new System.Drawing.Size(156, 26);
             this.TbInvoiceAmount.TabIndex = 20;
@@ -162,7 +172,7 @@ namespace Global.Finance
             // TbTax
             // 
             this.TbTax.Location = new System.Drawing.Point(681, 55);
-            this.TbTax.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TbTax.Margin = new System.Windows.Forms.Padding(4);
             this.TbTax.Name = "TbTax";
             this.TbTax.Size = new System.Drawing.Size(147, 26);
             this.TbTax.TabIndex = 18;
@@ -181,7 +191,7 @@ namespace Global.Finance
             // TbInvoiceNumber
             // 
             this.TbInvoiceNumber.Location = new System.Drawing.Point(454, 55);
-            this.TbInvoiceNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TbInvoiceNumber.Margin = new System.Windows.Forms.Padding(4);
             this.TbInvoiceNumber.Name = "TbInvoiceNumber";
             this.TbInvoiceNumber.Size = new System.Drawing.Size(160, 26);
             this.TbInvoiceNumber.TabIndex = 16;
@@ -199,7 +209,7 @@ namespace Global.Finance
             // TbInvoiceNumberS
             // 
             this.TbInvoiceNumberS.Location = new System.Drawing.Point(714, 13);
-            this.TbInvoiceNumberS.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TbInvoiceNumberS.Margin = new System.Windows.Forms.Padding(4);
             this.TbInvoiceNumberS.Name = "TbInvoiceNumberS";
             this.TbInvoiceNumberS.ReadOnly = true;
             this.TbInvoiceNumberS.Size = new System.Drawing.Size(232, 26);
@@ -218,7 +228,7 @@ namespace Global.Finance
             // TBstorageAmount
             // 
             this.TBstorageAmount.Location = new System.Drawing.Point(1058, 13);
-            this.TBstorageAmount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TBstorageAmount.Margin = new System.Windows.Forms.Padding(4);
             this.TBstorageAmount.Name = "TBstorageAmount";
             this.TBstorageAmount.ReadOnly = true;
             this.TBstorageAmount.Size = new System.Drawing.Size(193, 26);
@@ -237,7 +247,7 @@ namespace Global.Finance
             // TbInvoiceAllAmount
             // 
             this.TbInvoiceAllAmount.Location = new System.Drawing.Point(1228, 55);
-            this.TbInvoiceAllAmount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TbInvoiceAllAmount.Margin = new System.Windows.Forms.Padding(4);
             this.TbInvoiceAllAmount.Name = "TbInvoiceAllAmount";
             this.TbInvoiceAllAmount.ReadOnly = true;
             this.TbInvoiceAllAmount.Size = new System.Drawing.Size(144, 26);
@@ -246,7 +256,7 @@ namespace Global.Finance
             // tbYear
             // 
             this.tbYear.Location = new System.Drawing.Point(95, 13);
-            this.tbYear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbYear.Margin = new System.Windows.Forms.Padding(4);
             this.tbYear.Name = "tbYear";
             this.tbYear.Size = new System.Drawing.Size(81, 26);
             this.tbYear.TabIndex = 28;
@@ -264,7 +274,7 @@ namespace Global.Finance
             // tbMonth
             // 
             this.tbMonth.Location = new System.Drawing.Point(200, 13);
-            this.tbMonth.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbMonth.Margin = new System.Windows.Forms.Padding(4);
             this.tbMonth.Name = "tbMonth";
             this.tbMonth.Size = new System.Drawing.Size(79, 26);
             this.tbMonth.TabIndex = 29;
@@ -297,7 +307,7 @@ namespace Global.Finance
             "I",
             "D"});
             this.cbbTaxType.Location = new System.Drawing.Point(345, 13);
-            this.cbbTaxType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbbTaxType.Margin = new System.Windows.Forms.Padding(4);
             this.cbbTaxType.Name = "cbbTaxType";
             this.cbbTaxType.Size = new System.Drawing.Size(53, 24);
             this.cbbTaxType.TabIndex = 32;
@@ -315,7 +325,7 @@ namespace Global.Finance
             // tbVATRate
             // 
             this.tbVATRate.Location = new System.Drawing.Point(566, 13);
-            this.tbVATRate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbVATRate.Margin = new System.Windows.Forms.Padding(4);
             this.tbVATRate.Name = "tbVATRate";
             this.tbVATRate.ReadOnly = true;
             this.tbVATRate.Size = new System.Drawing.Size(79, 26);
@@ -324,7 +334,7 @@ namespace Global.Finance
             // tbTaxCode
             // 
             this.tbTaxCode.Location = new System.Drawing.Point(460, 13);
-            this.tbTaxCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbTaxCode.Margin = new System.Windows.Forms.Padding(4);
             this.tbTaxCode.Name = "tbTaxCode";
             this.tbTaxCode.Size = new System.Drawing.Size(55, 26);
             this.tbTaxCode.TabIndex = 34;
@@ -343,7 +353,7 @@ namespace Global.Finance
             // BtnReturn
             // 
             this.BtnReturn.Location = new System.Drawing.Point(1259, 12);
-            this.BtnReturn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnReturn.Margin = new System.Windows.Forms.Padding(4);
             this.BtnReturn.Name = "BtnReturn";
             this.BtnReturn.Size = new System.Drawing.Size(100, 31);
             this.BtnReturn.TabIndex = 44;
@@ -364,7 +374,7 @@ namespace Global.Finance
             // BtnHistory
             // 
             this.BtnHistory.Location = new System.Drawing.Point(1366, 12);
-            this.BtnHistory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnHistory.Margin = new System.Windows.Forms.Padding(4);
             this.BtnHistory.Name = "BtnHistory";
             this.BtnHistory.Size = new System.Drawing.Size(100, 31);
             this.BtnHistory.TabIndex = 46;
@@ -375,7 +385,7 @@ namespace Global.Finance
             // BtnError
             // 
             this.BtnError.Location = new System.Drawing.Point(1474, 11);
-            this.BtnError.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnError.Margin = new System.Windows.Forms.Padding(4);
             this.BtnError.Name = "BtnError";
             this.BtnError.Size = new System.Drawing.Size(100, 31);
             this.BtnError.TabIndex = 47;
@@ -386,7 +396,7 @@ namespace Global.Finance
             // BtnManualAPID
             // 
             this.BtnManualAPID.Location = new System.Drawing.Point(1493, 53);
-            this.BtnManualAPID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnManualAPID.Margin = new System.Windows.Forms.Padding(4);
             this.BtnManualAPID.Name = "BtnManualAPID";
             this.BtnManualAPID.Size = new System.Drawing.Size(89, 31);
             this.BtnManualAPID.TabIndex = 48;
@@ -394,11 +404,106 @@ namespace Global.Finance
             this.BtnManualAPID.UseVisualStyleBackColor = true;
             this.BtnManualAPID.Click += new System.EventHandler(this.button1_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label16);
+            this.groupBox1.Controls.Add(this.TbTax1);
+            this.groupBox1.Controls.Add(this.label15);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.tbVATRate1);
+            this.groupBox1.Controls.Add(this.tbTaxCode1);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Location = new System.Drawing.Point(468, 88);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1114, 56);
+            this.groupBox1.TabIndex = 49;
+            this.groupBox1.TabStop = false;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(7, 23);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(91, 20);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "加计扣除";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(226, 25);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(40, 16);
+            this.label13.TabIndex = 53;
+            this.label13.Text = "税率";
+            // 
+            // tbVATRate1
+            // 
+            this.tbVATRate1.Location = new System.Drawing.Point(270, 20);
+            this.tbVATRate1.Margin = new System.Windows.Forms.Padding(4);
+            this.tbVATRate1.Name = "tbVATRate1";
+            this.tbVATRate1.ReadOnly = true;
+            this.tbVATRate1.Size = new System.Drawing.Size(79, 26);
+            this.tbVATRate1.TabIndex = 52;
+            // 
+            // tbTaxCode1
+            // 
+            this.tbTaxCode1.Location = new System.Drawing.Point(164, 20);
+            this.tbTaxCode1.Margin = new System.Windows.Forms.Padding(4);
+            this.tbTaxCode1.Name = "tbTaxCode1";
+            this.tbTaxCode1.Size = new System.Drawing.Size(55, 26);
+            this.tbTaxCode1.TabIndex = 51;
+            this.tbTaxCode1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbTaxCode1_KeyPress);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(116, 25);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(48, 16);
+            this.label14.TabIndex = 50;
+            this.label14.Text = "VAT码";
+            // 
+            // TbTax1
+            // 
+            this.TbTax1.Location = new System.Drawing.Point(456, 20);
+            this.TbTax1.Margin = new System.Windows.Forms.Padding(4);
+            this.TbTax1.Name = "TbTax1";
+            this.TbTax1.ReadOnly = true;
+            this.TbTax1.Size = new System.Drawing.Size(147, 26);
+            this.TbTax1.TabIndex = 51;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(394, 25);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(56, 16);
+            this.label15.TabIndex = 50;
+            this.label15.Text = "总税额";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label16.Location = new System.Drawing.Point(625, 27);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(376, 16);
+            this.label16.TabIndex = 54;
+            this.label16.Text = "请先输入不含税发票总金额，再操作加计扣除相关。";
+            // 
             // InvoiceVerifyMR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1612, 608);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.BtnManualAPID);
             this.Controls.Add(this.BtnError);
             this.Controls.Add(this.BtnHistory);
@@ -432,12 +537,14 @@ namespace Global.Finance
             this.Controls.Add(this.DGV2);
             this.Controls.Add(this.DGV1);
             this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "InvoiceVerifyMR";
             this.Text = "InvoiceVerifyMR";
             this.Load += new System.EventHandler(this.InvoiceVerifyMR_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DGV1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV2)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -477,5 +584,14 @@ namespace Global.Finance
         private System.Windows.Forms.Button BtnHistory;
         private System.Windows.Forms.Button BtnError;
         private System.Windows.Forms.Button BtnManualAPID;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox TbTax1;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TextBox tbVATRate1;
+        private System.Windows.Forms.TextBox tbTaxCode1;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label16;
     }
 }

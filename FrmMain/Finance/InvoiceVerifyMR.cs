@@ -161,11 +161,7 @@ namespace Global.Finance
                 MessageBox.Show("无信息", "提示");
                 return;
             }
-            if (string.IsNullOrWhiteSpace(tbVATRate.Text))
-            {
-                MessageBox.Show("当前税码或税率为空！", "提示");
-                return;
-            }
+           
             TbInvoiceNumber.Text = TbInvoiceNumber.Text.Trim();
             if (string.IsNullOrWhiteSpace(TbInvoiceNumber.Text))
             {
@@ -173,12 +169,13 @@ namespace Global.Finance
                 return;
             }
             //税额 发票金额数据检查
-            decimal Tax, InvoiceAmount, StorageAmount = 0;
+            decimal Tax,Tax1=0, InvoiceAmount, StorageAmount = 0;
             if (!decimal.TryParse(TbTax.Text, out Tax))
             {
                 MessageBox.Show("总税额转换失败请检查！", "提示");
                 return;
             }
+            
             if (!decimal.TryParse(TbInvoiceAmount.Text, out InvoiceAmount))
             {
                 MessageBox.Show("不含税发票总金额转换失败请检查！", "提示");
@@ -188,6 +185,24 @@ namespace Global.Finance
             {
                 MessageBox.Show("入库总金额转换失败请检查！", "提示");
                 return;
+            }
+            if (string.IsNullOrWhiteSpace(tbVATRate.Text) && InvoiceAmount>0)
+            {
+                MessageBox.Show("当前税码或税率为空！", "提示");
+                return;
+            }
+            if (InvoiceAmount > 0 && checkBox1.Checked)//加计扣除
+            {
+                if (!decimal.TryParse(TbTax1.Text, out Tax1))
+                {
+                    MessageBox.Show("加计扣除总税额转换失败请检查！", "提示");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(tbVATRate.Text))
+                {
+                    MessageBox.Show("加计扣除当前税码或税率为空！", "提示");
+                    return;
+                }
             }
             //判断该供应商的发票是否已经存在
             string sqlExist = $@"Select Count(VendorID) From FS_APInvoiceHeader Where InvoiceNumber = '{ TbInvoiceNumber.Text }'  AND VendorID ='{ VendorId }'";
@@ -225,123 +240,372 @@ namespace Global.Finance
                 MessageBox.Show("四班登录失败！", "提示");
                 return;
             }
-            
-            //增加发票信息
-            if (AddAPInvoiceInfo(TbInvoiceNumber.Text.Trim(), VendorId, StorageAmount, InvoiceAmount, cbbTaxType.Text, tbTaxCode.Tag.ToString(), Tax, tbYear.Text, tbMonth.Text))
+            if (InvoiceAmount > 0)
             {
-
-
-                for (int j = 0; j < DGV2.Rows.Count; j++)
+                if (cbbTaxType.Text != "I")
                 {
-                    //将发票核销到PO
-                    APID03 myAPID03 = new APID03();
+                    MessageBox.Show("当前为正票，发票类型应为I,请检查");
+                    return;
+                }
+                if (!checkBox1.Checked)
+                {
+                    //增加发票信息
+                    if (AddAPInvoiceInfo(TbInvoiceNumber.Text.Trim(), VendorId, StorageAmount, InvoiceAmount, cbbTaxType.Text, tbTaxCode.Tag.ToString(), Tax, tbYear.Text, tbMonth.Text))
+                    {
 
-                    myAPID03.VendorID.Value = VendorId;
-                    myAPID03.InvoiceNumber.Value = TbInvoiceNumber.Text;
-                    myAPID03.PONumber.Value = DGV2.Rows[j].Cells["采购单号"].Value.ToString().Trim();
-                    myAPID03.POReceiptSequenceNumber.Value = DGV2.Rows[j].Cells["序号"].Value.ToString();
-                    myAPID03.PONumberReceiptSequenceNumber.Value = DGV2.Rows[j].Cells["采购单号"].Value.ToString() + "-" + DGV2.Rows[j].Cells["序号"].Value.ToString();
-                    myAPID03.LineItemNumber.Value = DGV2.Rows[j].Cells["行号"].Value.ToString();
-                    myAPID03.ItemAccountMoCo.Value = DGV2.Rows[j].Cells["物料编码"].Value.ToString();
-                    if (DGV2.Rows[j].Cells["入库量"].Value.ToString().Contains("-"))
-                    {
-                        myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "") + "-";
-                        myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "") + "-";
-                    }
-                    else
-                    {
-                        myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString();
-                        myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString();
-                    }
 
-                    myAPID03.InvoiceMatchedQuantity.Value = DGV2.Rows[j].Cells["已匹配数量"].Value.ToString();
-
-                    myAPID03.LineItemUM.Value = DGV2.Rows[j].Cells["单位"].Value.ToString();
-                    //myAPID03.InvoiceControllingUnitCost.Value = (Math.Round(leftAmount / Convert.ToDecimal(dt.Rows[0]["入库数量"]), 8)).ToString().Replace("-", "");//dt.Rows[0]["匹配单价"].ToString();
-                    decimal lastAmount = 0;
-                    if (j == DGV2.Rows.Count - 1)
-                    {
-                        lastAmount = Convert.ToDecimal(DGV2.Rows[j].Cells["总价"].Value.ToString()) - StorageAmount + InvoiceAmount;
-                    }
-                    else
-                    {
-                        lastAmount = Convert.ToDecimal(DGV2.Rows[j].Cells["总价"].Value.ToString());
-                    }
-
-                    if (lastAmount.ToString().Contains("-"))
-                    {
-                        myAPID03.InvoiceControllingExtendedCost.Value = lastAmount.ToString().Replace("-", "") + "-";
-                    }
-                    else
-                    {
-                        myAPID03.InvoiceControllingExtendedCost.Value = lastAmount.ToString();
-                    }
-                    try
-                    {
-                        if (!FSFunctionLib.fstiClient.ProcessId(myAPID03, null))
+                        for (int j = 0; j < DGV2.Rows.Count; j++)
                         {
-                            FSTIError error = FSFunctionLib.fstiClient.TransactionError;
-                            //  CommonOperate.WriteFSErrorLog("APID03", myAPID03, error, FSID, myAPID03.VendorID.Value + " " + myAPID03.InvoiceNumber.Value + " " + myAPID03.PONumber.Value+" "+ myAPID03.LineItemNumber.Value+" 入库数量："+ myAPID03.POReceiptQuantity.Value);
-                            CommonOperate.WriteFSErrorLog("APID03", myAPID03, error, FSID);
-                            //       MessageBox.Show("将发票核销到采购订单APID03失败！", "提示");
+                            //将发票核销到PO
+                            APID03 myAPID03 = new APID03();
 
-                            //            string TXT = (GB2312.GetString(ISO88591.GetBytes(error.Description)));
-                            MessageBox.Show("APID03: " + error.Description);
-                            //                 MessageBox.Show("APID10_1 " + TXT);
-                            return;
+                            myAPID03.VendorID.Value = VendorId;
+                            myAPID03.InvoiceNumber.Value = TbInvoiceNumber.Text;
+                            myAPID03.PONumber.Value = DGV2.Rows[j].Cells["采购单号"].Value.ToString().Trim();
+                            myAPID03.POReceiptSequenceNumber.Value = DGV2.Rows[j].Cells["序号"].Value.ToString();
+                            myAPID03.PONumberReceiptSequenceNumber.Value = DGV2.Rows[j].Cells["采购单号"].Value.ToString() + "-" + DGV2.Rows[j].Cells["序号"].Value.ToString();
+                            myAPID03.LineItemNumber.Value = DGV2.Rows[j].Cells["行号"].Value.ToString();
+                            myAPID03.ItemAccountMoCo.Value = DGV2.Rows[j].Cells["物料编码"].Value.ToString();
+                            if (DGV2.Rows[j].Cells["入库量"].Value.ToString().Contains("-"))
+                            {
+                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "") + "-";
+                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "") + "-";
+                            }
+                            else
+                            {
+                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString();
+                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString();
+                            }
+
+                            myAPID03.InvoiceMatchedQuantity.Value = DGV2.Rows[j].Cells["已匹配数量"].Value.ToString();
+
+                            myAPID03.LineItemUM.Value = DGV2.Rows[j].Cells["单位"].Value.ToString();
+                            //myAPID03.InvoiceControllingUnitCost.Value = (Math.Round(leftAmount / Convert.ToDecimal(dt.Rows[0]["入库数量"]), 8)).ToString().Replace("-", "");//dt.Rows[0]["匹配单价"].ToString();
+                            decimal lastAmount = 0;
+                            if (j == DGV2.Rows.Count - 1)
+                            {
+                                lastAmount = Convert.ToDecimal(DGV2.Rows[j].Cells["总价"].Value.ToString()) - StorageAmount + InvoiceAmount;
+                            }
+                            else
+                            {
+                                lastAmount = Convert.ToDecimal(DGV2.Rows[j].Cells["总价"].Value.ToString());
+                            }
+
+                            if (lastAmount.ToString().Contains("-"))
+                            {
+                                myAPID03.InvoiceControllingExtendedCost.Value = lastAmount.ToString().Replace("-", "") + "-";
+                            }
+                            else
+                            {
+                                myAPID03.InvoiceControllingExtendedCost.Value = lastAmount.ToString();
+                            }
+                            try
+                            {
+                                if (!FSFunctionLib.fstiClient.ProcessId(myAPID03, null))
+                                {
+                                    FSTIError error = FSFunctionLib.fstiClient.TransactionError;
+                                    //  CommonOperate.WriteFSErrorLog("APID03", myAPID03, error, FSID, myAPID03.VendorID.Value + " " + myAPID03.InvoiceNumber.Value + " " + myAPID03.PONumber.Value+" "+ myAPID03.LineItemNumber.Value+" 入库数量："+ myAPID03.POReceiptQuantity.Value);
+                                    CommonOperate.WriteFSErrorLog("APID03", myAPID03, error, FSID);
+                                    //       MessageBox.Show("将发票核销到采购订单APID03失败！", "提示");
+
+                                    //            string TXT = (GB2312.GetString(ISO88591.GetBytes(error.Description)));
+                                    MessageBox.Show("APID03: " + error.Description);
+                                    //                 MessageBox.Show("APID10_1 " + TXT);
+                                    return;
+                                }
+
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("异常：将发票核销到采购订单APID03失败！" + ex.Message, "提示");
+                                return;
+                            }
+
+
+
                         }
 
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("异常：将发票核销到采购订单APID03失败！" + ex.Message, "提示");
-                        return;
-                    }
+
+                        //过账
+                        if (PostAccount(Tax, StorageAmount, InvoiceAmount, VendorId, TbInvoiceNumber.Text.Trim()))
+                        {
+                            string sqlUpdate = $@"UPDATE PurchaseOrderInvoiceRecordMRByCMF SET Status = 3,FinanceUpdateDateTime= getdate(),InvoiceNumber='{TbInvoiceNumber.Text.Trim()}',InvoiceTaxedAmount={TbTax.Text.Trim()},InvoiceAmount={TbInvoiceAmount.Text.Trim()},OperateFinance='{FSID}' WHERE VendorNumber ='{VendorId}' and  InvoiceNumberS='{TbInvoiceNumberS.Text}'";
 
 
+                            if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
+                            {
 
-                }
-                
+                                MessageBox.Show("过账完成！", "提示");
+                            }
+                            else
+                            {
+                                MessageBox.Show("四班过账完成，更新发票记录状态失败！", "提示");
+                            }
+                            DGV1.DataSource = null;
+                            DGV2.DataSource = null;
+                            VendorId = string.Empty;
+                            VendorName = string.Empty;
+                            TbInvoiceNumberS.Text = string.Empty;
+                            TBstorageAmount.Text = string.Empty;
+                            TbInvoiceNumber.Text = string.Empty;
+                            TbTax.Text = string.Empty;
+                            TbInvoiceAmount.Text = string.Empty;
+                            tbVATRate.Text = string.Empty;
+                            TbInvoiceAllAmount.Text = string.Empty;
 
-                //过账
-                if (PostAccount(Tax, StorageAmount, InvoiceAmount, VendorId, TbInvoiceNumber.Text.Trim()))
-                {
-                    string sqlUpdate = $@"UPDATE PurchaseOrderInvoiceRecordMRByCMF SET Status = 3,FinanceUpdateDateTime= getdate(),InvoiceNumber='{TbInvoiceNumber.Text.Trim()}',InvoiceTaxedAmount={TbTax.Text.Trim()},InvoiceAmount={TbInvoiceAmount.Text.Trim()},OperateFinance='{FSID}' WHERE VendorNumber ='{VendorId}' and  InvoiceNumberS='{TbInvoiceNumberS.Text}'";
-
-
-                    if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
-                    {
-                        
-                        MessageBox.Show("过账完成！", "提示");
+                        }
+                        else
+                        {
+                            MessageBox.Show("过账失败！", "提示");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("四班过账完成，更新发票记录状态失败！", "提示");
+                        MessageBox.Show("核销失败！", "提示");
                     }
-                    DGV1.DataSource = null;
-                    DGV2.DataSource = null;
-                    VendorId = string.Empty;
-                    VendorName = string.Empty;
-                    TbInvoiceNumberS.Text = string.Empty;
-                    TBstorageAmount.Text = string.Empty;
-                    TbInvoiceNumber.Text = string.Empty;
-                    TbTax.Text = string.Empty;
-                    TbInvoiceAmount.Text = string.Empty;
-                    tbVATRate.Text = string.Empty;
-                    TbInvoiceAllAmount.Text = string.Empty;
-
                 }
                 else
                 {
-                    MessageBox.Show("过账失败！", "提示");
+                    //增加发票信息
+                    if (AddAPInvoiceInfo(TbInvoiceNumber.Text.Trim(), VendorId, StorageAmount, InvoiceAmount, cbbTaxType.Text, tbTaxCode.Tag.ToString(), Tax, tbYear.Text, tbMonth.Text, tbTaxCode1.Tag.ToString(), Tax1))
+                    {
+
+
+                        for (int j = 0; j < DGV2.Rows.Count; j++)
+                        {
+                            //将发票核销到PO
+                            APID03 myAPID03 = new APID03();
+
+                            myAPID03.VendorID.Value = VendorId;
+                            myAPID03.InvoiceNumber.Value = TbInvoiceNumber.Text;
+                            myAPID03.PONumber.Value = DGV2.Rows[j].Cells["采购单号"].Value.ToString().Trim();
+                            myAPID03.POReceiptSequenceNumber.Value = DGV2.Rows[j].Cells["序号"].Value.ToString();
+                            myAPID03.PONumberReceiptSequenceNumber.Value = DGV2.Rows[j].Cells["采购单号"].Value.ToString() + "-" + DGV2.Rows[j].Cells["序号"].Value.ToString();
+                            myAPID03.LineItemNumber.Value = DGV2.Rows[j].Cells["行号"].Value.ToString();
+                            myAPID03.ItemAccountMoCo.Value = DGV2.Rows[j].Cells["物料编码"].Value.ToString();
+                            if (DGV2.Rows[j].Cells["入库量"].Value.ToString().Contains("-"))
+                            {
+                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "") + "-";
+                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "") + "-";
+                            }
+                            else
+                            {
+                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString();
+                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString();
+                            }
+
+                            myAPID03.InvoiceMatchedQuantity.Value = DGV2.Rows[j].Cells["已匹配数量"].Value.ToString();
+
+                            myAPID03.LineItemUM.Value = DGV2.Rows[j].Cells["单位"].Value.ToString();
+                            //myAPID03.InvoiceControllingUnitCost.Value = (Math.Round(leftAmount / Convert.ToDecimal(dt.Rows[0]["入库数量"]), 8)).ToString().Replace("-", "");//dt.Rows[0]["匹配单价"].ToString();
+                            decimal lastAmount = 0;
+                            if (j == DGV2.Rows.Count - 1)
+                            {
+                                lastAmount = Convert.ToDecimal(DGV2.Rows[j].Cells["总价"].Value.ToString()) - StorageAmount + InvoiceAmount- Tax1;
+                            }
+                            else
+                            {
+                                lastAmount = Convert.ToDecimal(DGV2.Rows[j].Cells["总价"].Value.ToString());
+                            }
+
+                            if (lastAmount.ToString().Contains("-"))
+                            {
+                                myAPID03.InvoiceControllingExtendedCost.Value = lastAmount.ToString().Replace("-", "") + "-";
+                            }
+                            else
+                            {
+                                myAPID03.InvoiceControllingExtendedCost.Value = lastAmount.ToString();
+                            }
+                            try
+                            {
+                                if (!FSFunctionLib.fstiClient.ProcessId(myAPID03, null))
+                                {
+                                    FSTIError error = FSFunctionLib.fstiClient.TransactionError;
+                                    //  CommonOperate.WriteFSErrorLog("APID03", myAPID03, error, FSID, myAPID03.VendorID.Value + " " + myAPID03.InvoiceNumber.Value + " " + myAPID03.PONumber.Value+" "+ myAPID03.LineItemNumber.Value+" 入库数量："+ myAPID03.POReceiptQuantity.Value);
+                                    CommonOperate.WriteFSErrorLog("APID03", myAPID03, error, FSID);
+                                    //       MessageBox.Show("将发票核销到采购订单APID03失败！", "提示");
+
+                                    //            string TXT = (GB2312.GetString(ISO88591.GetBytes(error.Description)));
+                                    MessageBox.Show("APID03: " + error.Description);
+                                    //                 MessageBox.Show("APID10_1 " + TXT);
+                                    return;
+                                }
+
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("异常：将发票核销到采购订单APID03失败！" + ex.Message, "提示");
+                                return;
+                            }
+
+
+
+                        }
+
+
+                        //过账
+                        if (PostAccount(Tax,Tax1, StorageAmount, InvoiceAmount, VendorId, TbInvoiceNumber.Text.Trim()))
+                        {
+                            string sqlUpdate = $@"UPDATE PurchaseOrderInvoiceRecordMRByCMF SET Status = 3,FinanceUpdateDateTime= getdate(),InvoiceNumber='{TbInvoiceNumber.Text.Trim()}',InvoiceTaxedAmount={TbTax.Text.Trim()},InvoiceAmount={TbInvoiceAmount.Text.Trim()},OperateFinance='{FSID}' WHERE VendorNumber ='{VendorId}' and  InvoiceNumberS='{TbInvoiceNumberS.Text}'";
+
+
+                            if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
+                            {
+
+                                MessageBox.Show("过账完成！", "提示");
+                            }
+                            else
+                            {
+                                MessageBox.Show("四班过账完成，更新发票记录状态失败！", "提示");
+                            }
+                            DGV1.DataSource = null;
+                            DGV2.DataSource = null;
+                            VendorId = string.Empty;
+                            VendorName = string.Empty;
+                            TbInvoiceNumberS.Text = string.Empty;
+                            TBstorageAmount.Text = string.Empty;
+                            TbInvoiceNumber.Text = string.Empty;
+                            TbTax.Text = string.Empty;
+                            TbInvoiceAmount.Text = string.Empty;
+                            tbVATRate.Text = string.Empty;
+                            TbInvoiceAllAmount.Text = string.Empty;
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("过账失败！", "提示");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("核销失败！", "提示");
+                    }
                 }
+                FSFunctionLib.FSExit();
             }
-            else
+            if (InvoiceAmount < 0)
             {
-                MessageBox.Show("核销失败！", "提示");
+                if (cbbTaxType.Text != "D")
+                {
+                    MessageBox.Show("当前为负票，发票类型应为D,请检查");
+                    return;
+                }
+                //增加发票信息
+                if (AddAPInvoiceInfo_fu(TbInvoiceNumber.Text.Trim(), VendorId, StorageAmount, InvoiceAmount, cbbTaxType.Text,  Tax, tbYear.Text, tbMonth.Text))
+                {
+
+
+                    for (int j = 0; j < DGV2.Rows.Count; j++)
+                    {
+                        //将发票核销到PO
+                        APID03 myAPID03 = new APID03();
+
+                        myAPID03.VendorID.Value = VendorId;
+                        myAPID03.InvoiceNumber.Value = TbInvoiceNumber.Text;
+                        myAPID03.PONumber.Value = DGV2.Rows[j].Cells["采购单号"].Value.ToString().Trim();
+                        myAPID03.POReceiptSequenceNumber.Value = DGV2.Rows[j].Cells["序号"].Value.ToString();
+                        myAPID03.PONumberReceiptSequenceNumber.Value = DGV2.Rows[j].Cells["采购单号"].Value.ToString() + "-" + DGV2.Rows[j].Cells["序号"].Value.ToString();
+                        myAPID03.LineItemNumber.Value = DGV2.Rows[j].Cells["行号"].Value.ToString();
+                        myAPID03.ItemAccountMoCo.Value = DGV2.Rows[j].Cells["物料编码"].Value.ToString();
+                        if (DGV2.Rows[j].Cells["入库量"].Value.ToString().Contains("-"))
+                        {
+                            myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "") + "-";
+                            myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "") + "-";
+                        }
+                        else
+                        {
+                            myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString();
+                            myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString();
+                        }
+
+                        myAPID03.InvoiceMatchedQuantity.Value = DGV2.Rows[j].Cells["已匹配数量"].Value.ToString();
+
+                        myAPID03.LineItemUM.Value = DGV2.Rows[j].Cells["单位"].Value.ToString();
+                        //myAPID03.InvoiceControllingUnitCost.Value = (Math.Round(leftAmount / Convert.ToDecimal(dt.Rows[0]["入库数量"]), 8)).ToString().Replace("-", "");//dt.Rows[0]["匹配单价"].ToString();
+                        decimal lastAmount = 0;
+                        if (j == DGV2.Rows.Count - 1)
+                        {
+                            lastAmount = Convert.ToDecimal(DGV2.Rows[j].Cells["总价"].Value.ToString()) - StorageAmount + InvoiceAmount;
+                        }
+                        else
+                        {
+                            lastAmount = Convert.ToDecimal(DGV2.Rows[j].Cells["总价"].Value.ToString());
+                        }
+
+                        if (lastAmount.ToString().Contains("-"))
+                        {
+                            myAPID03.InvoiceControllingExtendedCost.Value = lastAmount.ToString().Replace("-", "") + "-";
+                        }
+                        else
+                        {
+                            myAPID03.InvoiceControllingExtendedCost.Value = lastAmount.ToString();
+                        }
+                        try
+                        {
+                            if (!FSFunctionLib.fstiClient.ProcessId(myAPID03, null))
+                            {
+                                FSTIError error = FSFunctionLib.fstiClient.TransactionError;
+                                //  CommonOperate.WriteFSErrorLog("APID03", myAPID03, error, FSID, myAPID03.VendorID.Value + " " + myAPID03.InvoiceNumber.Value + " " + myAPID03.PONumber.Value+" "+ myAPID03.LineItemNumber.Value+" 入库数量："+ myAPID03.POReceiptQuantity.Value);
+                                CommonOperate.WriteFSErrorLog("APID03", myAPID03, error, FSID);
+                                //       MessageBox.Show("将发票核销到采购订单APID03失败！", "提示");
+
+                                //            string TXT = (GB2312.GetString(ISO88591.GetBytes(error.Description)));
+                                MessageBox.Show("APID03: " + error.Description);
+                                //                 MessageBox.Show("APID10_1 " + TXT);
+                                return;
+                            }
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("异常：将发票核销到采购订单APID03失败！" + ex.Message, "提示");
+                            return;
+                        }
+
+
+
+                    }
+
+
+                    //过账
+                    if (PostAccount(Tax, StorageAmount, InvoiceAmount, VendorId, TbInvoiceNumber.Text.Trim()))
+                    {
+                        string sqlUpdate = $@"UPDATE PurchaseOrderInvoiceRecordMRByCMF SET Status = 3,FinanceUpdateDateTime= getdate(),InvoiceNumber='{TbInvoiceNumber.Text.Trim()}',InvoiceTaxedAmount={TbTax.Text.Trim()},InvoiceAmount={TbInvoiceAmount.Text.Trim()},OperateFinance='{FSID}' WHERE VendorNumber ='{VendorId}' and  InvoiceNumberS='{TbInvoiceNumberS.Text}'";
+
+
+                        if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
+                        {
+
+                            MessageBox.Show("过账完成！", "提示");
+                        }
+                        else
+                        {
+                            MessageBox.Show("四班过账完成，更新发票记录状态失败！", "提示");
+                        }
+                        DGV1.DataSource = null;
+                        DGV2.DataSource = null;
+                        VendorId = string.Empty;
+                        VendorName = string.Empty;
+                        TbInvoiceNumberS.Text = string.Empty;
+                        TBstorageAmount.Text = string.Empty;
+                        TbInvoiceNumber.Text = string.Empty;
+                        TbTax.Text = string.Empty;
+                        TbInvoiceAmount.Text = string.Empty;
+                        tbVATRate.Text = string.Empty;
+                        TbInvoiceAllAmount.Text = string.Empty;
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("过账失败！", "提示");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("核销失败！", "提示");
+                }
+                FSFunctionLib.FSExit();
             }
-            FSFunctionLib.FSExit();
-            
         }
 
 
@@ -374,15 +638,82 @@ namespace Global.Finance
                     return false;
                 }
             }
+            if (amountInvoiced > 0)
+            {
+                if (APID10(myAPID10, vendorNumber, invoiceNumber, UnvoucheredAccount, "0", amountChecked.ToString()))
+                {
+                    if (APID10(myAPID10, vendorNumber, invoiceNumber, tbVATRate.Tag.ToString(), "0", amountTax.ToString()))
+                    {
+                        if (APID10(myAPID10, vendorNumber, invoiceNumber, VoucheredAccount, (amountInvoiced + amountTax).ToString(), "0"))
+                        {
+                            if (APID12(myAPID12, vendorNumber, invoiceNumber))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            if (amountInvoiced < 0)
+            {
+                if (APID10(myAPID10, vendorNumber, invoiceNumber, UnvoucheredAccount, "0", amountChecked.ToString()))
+                {
+                    if (APID10(myAPID10, vendorNumber, invoiceNumber, "1000-00-000-217113", "0", amountTax.ToString()))
+                    {
+                        if (APID10(myAPID10, vendorNumber, invoiceNumber, VoucheredAccount, (amountInvoiced + amountTax).ToString(), "0"))
+                        {
+                            if (APID12(myAPID12, vendorNumber, invoiceNumber))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+        //加计扣除
+        private bool PostAccount(decimal amountTax, decimal amountTax1, decimal amountChecked, decimal amountInvoiced, string vendorNumber, string invoiceNumber)
+        {
+            Decimal s = amountInvoiced - amountTax1 - amountChecked;
+            APID10 myAPID10 = new APID10();
+            APID12 myAPID12 = new APID12();
+            if (s > 0)//发票金额>订单金额  差异在借方
+            {
+                if (APID10(myAPID10, vendorNumber, invoiceNumber, "1000-00-000-123300", "0", s.ToString()))
+                {
+
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else if (s < 0)//发票金额<订单金额 差异在贷方
+            {
+                s = (-1) * s;
+                if (APID10(myAPID10, vendorNumber, invoiceNumber, "1000-00-000-123300", s.ToString(), "0"))
+                {
+
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
             if (APID10(myAPID10, vendorNumber, invoiceNumber, UnvoucheredAccount, "0", amountChecked.ToString()))
             {
                 if (APID10(myAPID10, vendorNumber, invoiceNumber, tbVATRate.Tag.ToString(), "0", amountTax.ToString()))
                 {
-                    if (APID10(myAPID10, vendorNumber, invoiceNumber, VoucheredAccount, (amountInvoiced + amountTax).ToString(), "0"))
+                    if (APID10(myAPID10, vendorNumber, invoiceNumber, tbVATRate1.Tag.ToString(), "0", amountTax1.ToString()))
                     {
-                        if (APID12(myAPID12, vendorNumber, invoiceNumber))
+                        if (APID10(myAPID10, vendorNumber, invoiceNumber, VoucheredAccount, (amountInvoiced + amountTax).ToString(), "0"))
                         {
-                            return true;
+                            if (APID12(myAPID12, vendorNumber, invoiceNumber))
+                            {
+                                return true;
+                            }
                         }
                     }
                 }
@@ -417,9 +748,16 @@ namespace Global.Finance
             myAPID10.VendorID.Value = VendorID;
             myAPID10.InvoiceNumber.Value = InvoiceNumber;
             myAPID10.TransactionAccount.Value = TransactionAccount;
-            myAPID10.TransactionAmountCredit.Value = TransactionAmountCredit;//贷方
-            myAPID10.TransactionAmountDebit.Value = TransactionAmountDebit;//借方
-
+            if (Convert.ToDecimal(TransactionAmountCredit) >= 0 && Convert.ToDecimal(TransactionAmountDebit) >= 0)
+            {
+                myAPID10.TransactionAmountCredit.Value = TransactionAmountCredit;//贷方
+                myAPID10.TransactionAmountDebit.Value = TransactionAmountDebit;//借方
+            }
+            if (Convert.ToDecimal(TransactionAmountCredit) < 0 || Convert.ToDecimal(TransactionAmountDebit) < 0)
+            {
+                myAPID10.TransactionAmountCredit.Value = TransactionAmountDebit.Replace("-","");//贷方
+                myAPID10.TransactionAmountDebit.Value = TransactionAmountCredit.Replace("-", "");//借方
+            }
             //myAPID10.VendorID.Value = "370739";
             //myAPID10.InvoiceNumber.Value = "IA2001";
             //myAPID10.TransactionAccount.Value = "1AP3-70-739-212100";
@@ -479,7 +817,98 @@ namespace Global.Finance
             }
             return false;
         }
+        private bool AddAPInvoiceInfo(string invoiceNumber, string vendorID, decimal vatBaseAmount, decimal poReceiptAoumt, string invoiceType, string taxCode, decimal taxAmount, string year, string period, string taxCode1, decimal taxAmount1)
+        {
+            string poNumber = string.Empty;
+            string lineNumber = string.Empty;
 
+            APID00 myAPID00 = new APID00();
+            myAPID00.VendorID.Value = vendorID;//供应商代码
+            myAPID00.InvoiceNumber.Value = invoiceNumber;//发票号                                                 
+            myAPID00.InvoiceType.Value = invoiceType;// cbbTaxType.Text;//发票类型                                                     
+            myAPID00.POReceiptControllingAmount.Value = (poReceiptAoumt- taxAmount1).ToString();// (Convert.ToDouble(dtInvoice.Rows[0]["入库数量"]) * Convert.ToDouble(dtInvoice.Rows[0]["采购单价"])).ToString();
+            myAPID00.TaxCode.Value = taxCode; // cbbTaxCode.Text;
+            myAPID00.VATBaseControllingAmount.Value = poReceiptAoumt.ToString();// (Convert.ToDouble(dtInvoice.Rows[0]["入库数量"]) * Convert.ToDouble(dtInvoice.Rows[0]["采购单价"])).ToString();
+            myAPID00.VATControllingAmount.Value = taxAmount.ToString(); // tbTaxAmount.Text;
+            myAPID00.AccountingPeriod.Value = period; // tbMonth.Text;
+            myAPID00.AccountingYear.Value = year; //tbYear.Text;
+
+            try
+            {
+                if (FSFunctionLib.fstiClient.ProcessId(myAPID00, null))
+                {
+                    //return true;
+                    APID09 myAPID09 = new APID09();
+                    myAPID09.VendorID.Value = vendorID;
+                    myAPID09.InvoiceNumber.Value = invoiceNumber;//发票号
+                    myAPID09.InvoiceType.Value = invoiceType;// cbbTaxType.Text;//发票类型  
+                    myAPID09.ActionType.Value = "A";
+                    myAPID09.InvoiceDate.Value = DateTime.Now.ToString("MMddyy");
+                    myAPID09.DisplayedCurrency.Value = "L";
+                    myAPID09.TaxCode.Value = taxCode1; // cbbTaxCode.Text;
+                    myAPID09.VATBaseControllingAmount.Value = poReceiptAoumt.ToString();
+                    myAPID09.VATControllingAmount.Value = taxAmount1.ToString();
+                    if (FSFunctionLib.fstiClient.ProcessId(myAPID00, null))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        FSTIError error = FSFunctionLib.fstiClient.TransactionError;
+                        CommonOperate.WriteFSErrorLog("APID09", myAPID09, error, FSID);
+                        MessageBox.Show("增加应付发票APID09失败！" + error.Description, "提示");
+                    }
+                }
+                else
+                {
+
+                    FSTIError error = FSFunctionLib.fstiClient.TransactionError;
+                    CommonOperate.WriteFSErrorLog("APID00", myAPID00, error, FSID);
+                    MessageBox.Show("增加应付发票APID00失败！" + error.Description, "提示");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("异常：增加应付发票APID00失败!" + ex.Message, "提示");
+            }
+            return false;
+        }
+        private bool AddAPInvoiceInfo_fu(string invoiceNumber, string vendorID, decimal vatBaseAmount, decimal poReceiptAoumt, string invoiceType,  decimal taxAmount, string year, string period)
+        {
+            string poNumber = string.Empty;
+            string lineNumber = string.Empty;
+
+            APID00 myAPID00 = new APID00();
+            myAPID00.VendorID.Value = vendorID;//供应商代码
+            myAPID00.InvoiceNumber.Value = invoiceNumber;//发票号                                                 
+            myAPID00.InvoiceType.Value = invoiceType;// cbbTaxType.Text;//发票类型                                                     
+            myAPID00.POReceiptControllingAmount.Value = poReceiptAoumt.ToString().Replace("-","")+"-";// (Convert.ToDouble(dtInvoice.Rows[0]["入库数量"]) * Convert.ToDouble(dtInvoice.Rows[0]["采购单价"])).ToString();
+            //myAPID00.TaxCode.Value = taxCode; // cbbTaxCode.Text;
+            //myAPID00.VATBaseControllingAmount.Value = vatBaseAmount.ToString();// (Convert.ToDouble(dtInvoice.Rows[0]["入库数量"]) * Convert.ToDouble(dtInvoice.Rows[0]["采购单价"])).ToString();
+            myAPID00.OtherControllingAmount.Value = taxAmount.ToString().Replace("-", "") + "-"; // tbTaxAmount.Text;
+            myAPID00.AccountingPeriod.Value = period; // tbMonth.Text;
+            myAPID00.AccountingYear.Value = year; //tbYear.Text;
+
+            try
+            {
+                if (FSFunctionLib.fstiClient.ProcessId(myAPID00, null))
+                {
+                    return true;
+                }
+                else
+                {
+
+                    FSTIError error = FSFunctionLib.fstiClient.TransactionError;
+                    CommonOperate.WriteFSErrorLog("APID00", myAPID00, error, FSID);
+                    MessageBox.Show("增加应付发票APID00失败！" + error.Description, "提示");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("异常：增加应付发票APID00失败!" + ex.Message, "提示");
+            }
+            return false;
+        }
         private void BtnReturn_Click(object sender, EventArgs e)
         {
             if (DGV2.Rows.Count == 0) { MessageBox.Show("无信息"); return; }
@@ -739,6 +1168,52 @@ namespace Global.Finance
             }
             FSFunctionLib.FSExit();
             */
+        }
+
+        private void tbTaxCode1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                decimal InvoiceAmount;
+                if (!decimal.TryParse(TbInvoiceAmount.Text, out InvoiceAmount))
+                {
+                    MessageBox.Show("不含税发票总金额转换失败请检查！", "提示");
+                    return;
+                }
+
+                tbTaxCode1.Text = tbTaxCode1.Text.Trim();
+                if (!string.IsNullOrEmpty(tbTaxCode1.Text))
+                {
+                    GetTaxRate1(tbTaxCode1.Text, InvoiceAmount);
+                }
+                else
+                {
+                    MessageBox.Show("当前税码不能为空！", "提示");
+                }
+            }
+        }
+        private void GetTaxRate1(string taxCode,decimal InvoiceAmount)
+        {
+            tbVATRate1.Text = string.Empty;
+            tbTaxCode1.Tag = string.Empty;//vat账号
+            string sqlSelect = @"SELECT 
+                             [TaxCode] 税金代码
+                             ,[TaxRate] 税率
+                             ,[TaxAccrualAccount] 应付税金账号
+                           FROM [FS_TaxCode] where [TaxCode]='" + taxCode + "'";
+            DataTable dt = SQLHelper.GetDataTable(GlobalSpace.FSDBMRConnstr, sqlSelect);
+
+            if (dt.Rows.Count > 0)
+            {
+                tbVATRate1.Text = dt.Rows[0]["税率"].ToString();
+                tbVATRate1.Tag = dt.Rows[0]["应付税金账号"].ToString();//vat账号
+                tbTaxCode1.Tag = taxCode;//税金代码
+                TbTax1.Text = Math.Round(InvoiceAmount * Convert.ToDecimal(tbVATRate1.Text) / 100,2).ToString();
+            }
+            else
+            {
+                MessageBox.Show("未查到该税码对应的税率！", "提示");
+            }
         }
     }
 }
