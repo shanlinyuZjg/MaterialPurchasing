@@ -163,6 +163,11 @@ namespace Global.Finance
             }
            
             TbInvoiceNumber.Text = TbInvoiceNumber.Text.Trim();
+            if (TbInvoiceNumber.Text.Length > 20)
+            {
+                MessageBox.Show("四班票号最长20位字符");
+                return;
+            }
             if (string.IsNullOrWhiteSpace(TbInvoiceNumber.Text))
             {
                 MessageBox.Show("请输入四班票号！", "提示");
@@ -268,13 +273,13 @@ namespace Global.Finance
                             myAPID03.ItemAccountMoCo.Value = DGV2.Rows[j].Cells["物料编码"].Value.ToString();
                             if (DGV2.Rows[j].Cells["入库量"].Value.ToString().Contains("-"))
                             {
-                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "") + "-";
-                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "") + "-";
+                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "").Trim('0') + "-";
+                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "").Trim('0') + "-";
                             }
                             else
                             {
-                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString();
-                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString();
+                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Trim('0');
+                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Trim('0');
                             }
 
                             myAPID03.InvoiceMatchedQuantity.Value = DGV2.Rows[j].Cells["已匹配数量"].Value.ToString();
@@ -390,13 +395,13 @@ namespace Global.Finance
                             myAPID03.ItemAccountMoCo.Value = DGV2.Rows[j].Cells["物料编码"].Value.ToString();
                             if (DGV2.Rows[j].Cells["入库量"].Value.ToString().Contains("-"))
                             {
-                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "") + "-";
-                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "") + "-";
+                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "").Trim('0') + "-";
+                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "").Trim('0') + "-";
                             }
                             else
                             {
-                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString();
-                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString();
+                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Trim('0');
+                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Trim('0');
                             }
 
                             myAPID03.InvoiceMatchedQuantity.Value = DGV2.Rows[j].Cells["已匹配数量"].Value.ToString();
@@ -520,13 +525,13 @@ namespace Global.Finance
                         myAPID03.ItemAccountMoCo.Value = DGV2.Rows[j].Cells["物料编码"].Value.ToString();
                         if (DGV2.Rows[j].Cells["入库量"].Value.ToString().Contains("-"))
                         {
-                            myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "") + "-";
-                            myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "") + "-";
+                            myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "").Trim('0') + "-";
+                            myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "").Trim('0') + "-";
                         }
                         else
                         {
-                            myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString();
-                            myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString();
+                            myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Trim('0');
+                            myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Trim('0');
                         }
 
                         myAPID03.InvoiceMatchedQuantity.Value = DGV2.Rows[j].Cells["已匹配数量"].Value.ToString();
@@ -1012,32 +1017,33 @@ namespace Global.Finance
                 MessageBox.Show("入库总金额转换失败请检查！", "提示");
                 return;
             }
-            //判断该供应商的发票是否已经存在
-            string sqlExist = $@"Select Count(VendorID) From FS_APInvoiceHeader Where InvoiceNumber = '{ TbInvoiceNumber.Text }'  AND VendorID ='{ VendorId }'";
-            if (SQLHelper.Exist(GlobalSpace.FSDBMRConnstr, sqlExist))
-            {
-                MessageBox.Show("该供应商的四班票号码已存在！", "提示");
-                return;
-            }
-            string sqlSelectVendor = @"SELECT	                              
-	                                 UnvoucheredAccount AS 无票账号
-	                                 ,[VoucheredAccount] AS 有票账号 
-                                   FROM  [_NoLock_FS_Vendor] 
-                                   WHERE
-	                               [VendorID] = '" + VendorId + "' AND [VendorStatus] = 'A'";
+            //判断该供应商的发票是否已经存在  手工核销 四班票号必存在
+            //string sqlExist = $@"Select Count(VendorID) From FS_APInvoiceHeader Where InvoiceNumber = '{ TbInvoiceNumber.Text }'  AND VendorID ='{ VendorId }' ";
+            //if (SQLHelper.Exist(GlobalSpace.FSDBMRConnstr, sqlExist))
+            //{
+            //    MessageBox.Show("该供应商的四班票号码已存在！", "提示");
+            //    return;
+            //}
+            
+            //string sqlSelectVendor = @"SELECT	                              
+	           //                      UnvoucheredAccount AS 无票账号
+	           //                      ,[VoucheredAccount] AS 有票账号 
+            //                       FROM  [_NoLock_FS_Vendor] 
+            //                       WHERE
+	           //                    [VendorID] = '" + VendorId + "' AND [VendorStatus] = 'A'";
 
-            DataTable dt = SQLHelper.GetDataTable(GlobalSpace.FSDBMRConnstr, sqlSelectVendor);
+            //DataTable dt = SQLHelper.GetDataTable(GlobalSpace.FSDBMRConnstr, sqlSelectVendor);
 
-            if (dt.Rows.Count == 0)
-            {
-                MessageBox.Show("未查到该供应商信息或供应商已停用！", "提示");
-                return;
-            }
-            else
-            {
-                UnvoucheredAccount = dt.Rows[0]["无票账号"].ToString();//无票
-                VoucheredAccount = dt.Rows[0]["有票账号"].ToString();//有票
-            }
+            //if (dt.Rows.Count == 0)
+            //{
+            //    MessageBox.Show("未查到该供应商信息或供应商已停用！", "提示");
+            //    return;
+            //}
+            //else
+            //{
+            //    UnvoucheredAccount = dt.Rows[0]["无票账号"].ToString();//无票
+            //    VoucheredAccount = dt.Rows[0]["有票账号"].ToString();//有票
+            //}
             string sqlUpdate0 = $@"UPDATE PurchaseOrderInvoiceRecordMRByCMF SET  InvoiceNumber='{TbInvoiceNumber.Text.Trim()}',InvoiceTaxedAmount='{TbTax.Text.Trim()}',InvoiceAmount='{TbInvoiceAmount.Text.Trim()}',OperateFinance='{FSID}' WHERE VendorNumber ='{VendorId}' and  InvoiceNumberS='{TbInvoiceNumberS.Text}'";
 
 
@@ -1058,6 +1064,13 @@ namespace Global.Finance
                 TbInvoiceNumber.Text = string.Empty;
                 TbTax.Text = string.Empty;
                 TbInvoiceAmount.Text = string.Empty;
+                TbInvoiceAllAmount.Text = string.Empty;
+                tbTaxCode.Text = string.Empty;
+
+                checkBox1.Checked = false;
+                tbTaxCode1.Text = string.Empty;
+                tbVATRate1.Text = string.Empty;
+                TbTax1.Text = string.Empty;
             }
             else
             {
