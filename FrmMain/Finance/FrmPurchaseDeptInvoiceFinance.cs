@@ -28,10 +28,10 @@ namespace Global
 
         private void FrmPurchaseDeptConfirmer_Load(object sender, EventArgs e)
         {
-            tssl.Text = "登录账号：" + fsUserID + " 姓名：" + fsUserName + " IP地址：" + GetHostInfo.GetIPAddress() + "  主机：" + GetHostInfo.strHostName;
+            
             CommonOperate.SyncServerTime();
             Version ver = new Version(Application.ProductVersion);
-            this.Text = this.Text + " 版本："+ver.Major.ToString()+"."+ver.Minor.ToString()+"."+ver.Build.ToString();
+            tssl.Text = "登录账号：" + fsUserID + " 姓名：" + fsUserName + " IP地址：" + GetHostInfo.GetIPAddress() + "  主机：" + GetHostInfo.strHostName + "  版本：" + ver.Major.ToString() + "." + ver.Minor.ToString() + "." + ver.Build.ToString();
         }
 
         private void btniPOItemConfirm_Click(object sender, EventArgs e)

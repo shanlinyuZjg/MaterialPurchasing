@@ -352,7 +352,12 @@ namespace Global.Finance
                             TbInvoiceAmount.Text = string.Empty;
                             tbVATRate.Text = string.Empty;
                             TbInvoiceAllAmount.Text = string.Empty;
+                            tbTaxCode.Text = string.Empty;
 
+                            checkBox1.Checked = false;
+                            tbTaxCode1.Text = string.Empty;
+                            tbVATRate1.Text = string.Empty;
+                            TbTax1.Text = string.Empty;
                         }
                         else
                         {
@@ -446,7 +451,8 @@ namespace Global.Finance
                         //过账
                         if (PostAccount(Tax,Tax1, StorageAmount, InvoiceAmount, VendorId, TbInvoiceNumber.Text.Trim()))
                         {
-                            string sqlUpdate = $@"UPDATE PurchaseOrderInvoiceRecordMRByCMF SET Status = 3,FinanceUpdateDateTime= getdate(),InvoiceNumber='{TbInvoiceNumber.Text.Trim()}',InvoiceTaxedAmount={TbTax.Text.Trim()},InvoiceAmount={TbInvoiceAmount.Text.Trim()},OperateFinance='{FSID}' WHERE VendorNumber ='{VendorId}' and  InvoiceNumberS='{TbInvoiceNumberS.Text}'";
+                            string jiajikouchu = tbTaxCode1.Tag.ToString() + ";" + tbVATRate1.Text + ";" + tbVATRate1.Tag + ";" + Tax1;
+                            string sqlUpdate = $@"UPDATE PurchaseOrderInvoiceRecordMRByCMF SET Status = 3,FinanceUpdateDateTime= getdate(),InvoiceNumber='{TbInvoiceNumber.Text.Trim()}',InvoiceTaxedAmount={TbTax.Text.Trim()},InvoiceAmount={TbInvoiceAmount.Text.Trim()},OperateFinance='{FSID}',jiajikouchu='{jiajikouchu}' WHERE VendorNumber ='{VendorId}' and  InvoiceNumberS='{TbInvoiceNumberS.Text}'";
 
 
                             if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
@@ -469,7 +475,12 @@ namespace Global.Finance
                             TbInvoiceAmount.Text = string.Empty;
                             tbVATRate.Text = string.Empty;
                             TbInvoiceAllAmount.Text = string.Empty;
+                            tbTaxCode.Text = string.Empty;
 
+                            checkBox1.Checked = false;
+                            tbTaxCode1.Text = string.Empty;
+                            tbVATRate1.Text = string.Empty;
+                            TbTax1.Text = string.Empty;
                         }
                         else
                         {
@@ -593,7 +604,12 @@ namespace Global.Finance
                         TbInvoiceAmount.Text = string.Empty;
                         tbVATRate.Text = string.Empty;
                         TbInvoiceAllAmount.Text = string.Empty;
+                        tbTaxCode.Text = string.Empty;
 
+                        checkBox1.Checked = false;
+                        tbTaxCode1.Text = string.Empty;
+                        tbVATRate1.Text = string.Empty;
+                        TbTax1.Text = string.Empty;
                     }
                     else
                     {
