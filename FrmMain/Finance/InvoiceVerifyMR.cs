@@ -273,13 +273,13 @@ namespace Global.Finance
                             myAPID03.ItemAccountMoCo.Value = DGV2.Rows[j].Cells["物料编码"].Value.ToString();
                             if (DGV2.Rows[j].Cells["入库量"].Value.ToString().Contains("-"))
                             {
-                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "").Trim('0') + "-";
-                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "").Trim('0') + "-";
+                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "").TrimStart('0') + "-";
+                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "").TrimStart('0') + "-";
                             }
                             else
                             {
-                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Trim('0');
-                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Trim('0');
+                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().TrimStart('0');
+                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().TrimStart('0');
                             }
 
                             myAPID03.InvoiceMatchedQuantity.Value = DGV2.Rows[j].Cells["已匹配数量"].Value.ToString();
@@ -395,13 +395,13 @@ namespace Global.Finance
                             myAPID03.ItemAccountMoCo.Value = DGV2.Rows[j].Cells["物料编码"].Value.ToString();
                             if (DGV2.Rows[j].Cells["入库量"].Value.ToString().Contains("-"))
                             {
-                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "").Trim('0') + "-";
-                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "").Trim('0') + "-";
+                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "").TrimStart('0') + "-";
+                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "").TrimStart('0') + "-";
                             }
                             else
                             {
-                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Trim('0');
-                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Trim('0');
+                                myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().TrimStart('0');
+                                myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().TrimStart('0');
                             }
 
                             myAPID03.InvoiceMatchedQuantity.Value = DGV2.Rows[j].Cells["已匹配数量"].Value.ToString();
@@ -525,13 +525,13 @@ namespace Global.Finance
                         myAPID03.ItemAccountMoCo.Value = DGV2.Rows[j].Cells["物料编码"].Value.ToString();
                         if (DGV2.Rows[j].Cells["入库量"].Value.ToString().Contains("-"))
                         {
-                            myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "").Trim('0') + "-";
-                            myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "").Trim('0') + "-";
+                            myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "").TrimStart('0') + "-";
+                            myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Replace("-", "").TrimStart('0') + "-";
                         }
                         else
                         {
-                            myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Trim('0');
-                            myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().Trim('0');
+                            myAPID03.POReceiptQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().TrimStart('0');
+                            myAPID03.InvoiceQuantity.Value = DGV2.Rows[j].Cells["入库量"].Value.ToString().TrimStart('0');
                         }
 
                         myAPID03.InvoiceMatchedQuantity.Value = DGV2.Rows[j].Cells["已匹配数量"].Value.ToString();
