@@ -813,7 +813,7 @@ namespace Global.Finance
             myAPID00.InvoiceType.Value = invoiceType;// cbbTaxType.Text;//发票类型                                                     
             myAPID00.POReceiptControllingAmount.Value = poReceiptAoumt.ToString();// (Convert.ToDouble(dtInvoice.Rows[0]["入库数量"]) * Convert.ToDouble(dtInvoice.Rows[0]["采购单价"])).ToString();
             myAPID00.TaxCode.Value = taxCode; // cbbTaxCode.Text;
-            myAPID00.VATBaseControllingAmount.Value = vatBaseAmount.ToString();// (Convert.ToDouble(dtInvoice.Rows[0]["入库数量"]) * Convert.ToDouble(dtInvoice.Rows[0]["采购单价"])).ToString();
+            myAPID00.VATBaseControllingAmount.Value = poReceiptAoumt.ToString();// (Convert.ToDouble(dtInvoice.Rows[0]["入库数量"]) * Convert.ToDouble(dtInvoice.Rows[0]["采购单价"])).ToString();
             myAPID00.VATControllingAmount.Value = taxAmount.ToString(); // tbTaxAmount.Text;
             myAPID00.AccountingPeriod.Value = period; // tbMonth.Text;
             myAPID00.AccountingYear.Value = year; //tbYear.Text;
@@ -860,17 +860,19 @@ namespace Global.Finance
                 {
                     //return true;
                     APID09 myAPID09 = new APID09();
-                    myAPID09.VendorID.Value = vendorID;
-                    myAPID09.InvoiceNumber.Value = invoiceNumber;//发票号
-                    myAPID09.InvoiceType.Value = invoiceType;// cbbTaxType.Text;//发票类型  
+                    myAPID09.VendorID.Value = vendorID;//370888
+                    myAPID09.InvoiceNumber.Value = invoiceNumber;//发票号//IA2293H57863
+                    myAPID09.InvoiceType.Value = invoiceType;// cbbTaxType.Text;//发票类型  //I
                     myAPID09.ActionType.Value = "A";
                     myAPID09.InvoiceDate.Value = DateTime.Now.ToString("MMddyy");
-                    myAPID09.DisplayedCurrency.Value = "L";
-                    myAPID09.TaxCode.Value = taxCode1; // cbbTaxCode.Text;
+                    //myAPID09.DisplayedCurrency.Value = "L";
+                    myAPID09.TaxCode.Value = taxCode1; // cbbTaxCode.Text;//01
                     myAPID09.VATBaseControllingAmount.Value = poReceiptAoumt.ToString();
                     myAPID09.VATControllingAmount.Value = taxAmount1.ToString();
-                    if (FSFunctionLib.fstiClient.ProcessId(myAPID00, null))
+                    //myAPID09.TaxAuthority.Value = "1";
+                    if (FSFunctionLib.fstiClient.ProcessId(myAPID09, null))
                     {
+                        //MessageBox.Show("APID09成功");
                         return true;
                     }
                     else
@@ -969,18 +971,6 @@ namespace Global.Finance
             fSerror.ShowDialog();
         }
 
-        private void TbInvoiceSelect_KeyDown(object sender, KeyEventArgs e)
-        {
-            string sqlSelect = $@"SELECT
-                                                    distinct VendorNumber 供应商码,  VendorName 供应商名, InvoiceNumberS 发票号,Operator 操作员
-                                                FROM
-	                                                PurchaseOrderInvoiceRecordMRByCMF where Status=2 and InvoiceNumberS like '%{TbInvoiceSelect.Text.Trim()}%'";
-            DGV1.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
-            for (int i = 0; i < DGV1.Columns.Count; i++)
-            {
-                DGV1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -1242,6 +1232,19 @@ namespace Global.Finance
             else
             {
                 MessageBox.Show("未查到该税码对应的税率！", "提示");
+            }
+        }
+
+        private void TbInvoiceSelect_KeyUp(object sender, KeyEventArgs e)
+        {
+            string sqlSelect = $@"SELECT
+                                                    distinct VendorNumber 供应商码,  VendorName 供应商名, InvoiceNumberS 发票号,Operator 操作员
+                                                FROM
+	                                                PurchaseOrderInvoiceRecordMRByCMF where Status=2 and InvoiceNumberS like '%{TbInvoiceSelect.Text.Trim()}%'";
+            DGV1.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
+            for (int i = 0; i < DGV1.Columns.Count; i++)
+            {
+                DGV1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
         }
     }

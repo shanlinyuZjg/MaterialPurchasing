@@ -62,14 +62,14 @@ namespace Global.Finance
             this.BtnError = new System.Windows.Forms.Button();
             this.BtnManualAPID = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.TbTax1 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tbVATRate1 = new System.Windows.Forms.TextBox();
             this.tbTaxCode1 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.TbTax1 = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DGV1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV2)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -137,7 +137,7 @@ namespace Global.Finance
             this.TbInvoiceSelect.Name = "TbInvoiceSelect";
             this.TbInvoiceSelect.Size = new System.Drawing.Size(161, 26);
             this.TbInvoiceSelect.TabIndex = 4;
-            this.TbInvoiceSelect.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbInvoiceSelect_KeyDown);
+            this.TbInvoiceSelect.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbInvoiceSelect_KeyUp);
             // 
             // BtnInvoiceVerify
             // 
@@ -420,15 +420,35 @@ namespace Global.Finance
             this.groupBox1.TabIndex = 49;
             this.groupBox1.TabStop = false;
             // 
-            // checkBox1
+            // label16
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(7, 23);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(91, 20);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "加计扣除";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.label16.AutoSize = true;
+            this.label16.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label16.Location = new System.Drawing.Point(625, 27);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(376, 16);
+            this.label16.TabIndex = 54;
+            this.label16.Text = "请先输入不含税发票总金额，再操作加计扣除相关。";
+            // 
+            // TbTax1
+            // 
+            this.TbTax1.Location = new System.Drawing.Point(456, 20);
+            this.TbTax1.Margin = new System.Windows.Forms.Padding(4);
+            this.TbTax1.Name = "TbTax1";
+            this.TbTax1.ReadOnly = true;
+            this.TbTax1.Size = new System.Drawing.Size(147, 26);
+            this.TbTax1.TabIndex = 51;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(394, 25);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(56, 16);
+            this.label15.TabIndex = 50;
+            this.label15.Text = "总税额";
             // 
             // label13
             // 
@@ -439,6 +459,16 @@ namespace Global.Finance
             this.label13.Size = new System.Drawing.Size(40, 16);
             this.label13.TabIndex = 53;
             this.label13.Text = "税率";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(7, 23);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(91, 20);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "加计扣除";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // tbVATRate1
             // 
@@ -467,36 +497,6 @@ namespace Global.Finance
             this.label14.Size = new System.Drawing.Size(48, 16);
             this.label14.TabIndex = 50;
             this.label14.Text = "VAT码";
-            // 
-            // TbTax1
-            // 
-            this.TbTax1.Location = new System.Drawing.Point(456, 20);
-            this.TbTax1.Margin = new System.Windows.Forms.Padding(4);
-            this.TbTax1.Name = "TbTax1";
-            this.TbTax1.ReadOnly = true;
-            this.TbTax1.Size = new System.Drawing.Size(147, 26);
-            this.TbTax1.TabIndex = 51;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(394, 25);
-            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(56, 16);
-            this.label15.TabIndex = 50;
-            this.label15.Text = "总税额";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label16.Location = new System.Drawing.Point(625, 27);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(376, 16);
-            this.label16.TabIndex = 54;
-            this.label16.Text = "请先输入不含税发票总金额，再操作加计扣除相关。";
             // 
             // InvoiceVerifyMR
             // 
