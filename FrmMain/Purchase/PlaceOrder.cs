@@ -1172,6 +1172,7 @@ namespace Global.Purchase
 
             if(tbItemNumber.Text.Substring(0,2)=="MJ")
             {
+                GlobalSpace.ShouCeNumber = string.Empty;
                 Cusotoms c = new Cusotoms();
                 c.ShowDialog();
                 if(string.IsNullOrWhiteSpace(GlobalSpace.ShouCeNumber))
@@ -4437,7 +4438,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
 
                 if (sequenceNumber == 0)
                 {
-                        strReturn = PONumberStartNumber.ToString();
+                        strReturn = PONumberStartNumber.ToString().PadLeft(3,'0');
                 }
                 else
                 {

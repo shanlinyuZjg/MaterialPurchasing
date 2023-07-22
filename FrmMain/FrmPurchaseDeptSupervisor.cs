@@ -76,7 +76,7 @@ namespace Global
 
         private void buttonItem1_Click(object sender, EventArgs e)
         {
-            DeptItemRequirement dir = new DeptItemRequirement();
+            DeptItemRequirement dir = new DeptItemRequirement(userID, userName,0);
             CommonOperate.BindFormToTabControl(tabCtrlForm, dir, btniDeptItemRequirement.Name, btniDeptItemRequirement.Text);
         }
 

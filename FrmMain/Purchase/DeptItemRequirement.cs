@@ -24,11 +24,17 @@ namespace Global.Purchase
         //字符集，此处用于供应商名字模糊查询供应商时使用
         Encoding GB2312 = Encoding.GetEncoding("gb2312");
         Encoding ISO88591 = Encoding.GetEncoding("iso-8859-1");
-        public DeptItemRequirement()
+        private string UserID = string.Empty;
+        private string UserName = string.Empty;
+        private int StartNumber = 0;
+        public DeptItemRequirement(string userID, string userName,int startNumber)
         {
             InitializeComponent();
             this.EnableGlass = false;
             MessageBoxEx.EnableGlass = false;
+            UserID = userID;
+            UserName = userName;
+            StartNumber = startNumber;
         }
 
         private void btnRefreshPO_Click(object sender, EventArgs e)
@@ -101,6 +107,7 @@ namespace Global.Purchase
        
         private void DeptItemRequirement_Load(object sender, EventArgs e)
         {
+            TbUserID.Text = UserID;
             GetRequireItem();
             if (!string.IsNullOrWhiteSpace(PurchaseUser.PurchaseType)&&PurchaseUser.PurchaseType.Contains("P"))
             {
@@ -160,6 +167,11 @@ namespace Global.Purchase
                     if (dtTemp.Rows.Count == 1)
                     {
                         if (dgv["单位", i].Value.ToString() != dtTemp.Rows[0]["ItemUM"].ToString())
+                        {
+                            dgv.Rows[i].DefaultCellStyle.ForeColor = Color.Red;
+                            bl = false;
+                        }
+                        if (dgv["物料描述", i].Value.ToString() != dtTemp.Rows[0]["ItemDescription"].ToString())
                         {
                             dgv.Rows[i].DefaultCellStyle.ForeColor = Color.Red;
                             bl = false;
@@ -298,7 +310,7 @@ namespace Global.Purchase
             #region
             if (!CheckCodeUnit(dgvItemRequirement))
             {
-                MessageBoxEx.Show("物料代码或单位不准确、需求数量小于等于零、无需求日期，已红色标示！");
+                MessageBoxEx.Show("物料代码或物料描述或单位不准确、需求数量小于等于零、无需求日期，已红色标示！");
                 return;
             }
             #endregion
@@ -335,8 +347,8 @@ namespace Global.Purchase
             cmd.Transaction = tran;
             try
             {
-
-                cmd.CommandText = "update  [dbo].[SolidBuyList] set Flag=1,ExtractTime=GETDATE(),FSTITime=GETDATE()  where ID in (" + string.Join(",", lint.ToArray()) + ")";
+                string str = $@"update  [dbo].[SolidBuyList] set Flag=1,ExtractTime=GETDATE(),FSTITime=GETDATE(),PlanReceiverID='{UserID}',PlanReceiverName='{UserName}'  where ID in ({string.Join(",", lint.ToArray()) }) and Flag=0";
+                cmd.CommandText = str;
                 cmd.ExecuteNonQuery();
                 cmd.CommandText = "INSERT INTO SolidBuyList_Handle ( SolidBuyList_Handle.PlanID, \n" +
 "	SolidBuyList_Handle.ItemNumber, \n" +
@@ -356,7 +368,7 @@ namespace Global.Purchase
 "	SolidBuyList_Handle.WorkCenter, \n" +
 "	SolidBuyList_Handle.PlanRemark, \n" +
 "	SolidBuyList_Handle.Remark, \n" +
-"	SolidBuyList_Handle.SYBFlag,TaxRate) SELECT " +
+"	SolidBuyList_Handle.SYBFlag,TaxRate,Purchaser,PlanBuyQuantity) SELECT " +
                     "  convert(nvarchar(255),SolidBuyList.ID),\n" +
 "	rtrim(ltrim(SolidBuyList.ItemNumber)),\n" +
 "	rtrim(ltrim(SolidBuyList.ItemDescription)),\n" +
@@ -375,7 +387,8 @@ namespace Global.Purchase
 "	rtrim(ltrim(SolidBuyList.WorkCenter)),\n" +
 "	rtrim(ltrim(SolidBuyList.Remark)),\n" +
 "	rtrim(ltrim(SolidBuyList.Remark)),\n" +
-"	SolidBuyList.SYBFlag,0.13 " +
+"	SolidBuyList.SYBFlag,0.13, '" +string.Concat(UserID,"|",UserName)+
+"'   ,SolidBuyList.BuyQuantity" +
                     " FROM SolidBuyList where ID in (" + string.Join(",", lint.ToArray()) + ")";
                 cmd.ExecuteNonQuery();
 
@@ -476,7 +489,7 @@ dt.Rows[i].Cells["需求日期"].Value.ToString().Trim() + "','" +
         }
         private void btnExtractRefresh_Click(object sender, EventArgs e)
         {
-            string sqlSelect = @"SELECT
+            string sqlSelect = $@"SELECT
 	                                                    ID,PlanID AS 提报序号,
 	                                                    rtrim(ltrim(ItemNumber)) AS 物料代码,
 	                                                    rtrim(ltrim(ItemDescription)) AS 物料描述,
@@ -491,7 +504,7 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
                                                         case when  SYBFlag=0 then '固水'  when  SYBFlag=1 then '粉针' when  SYBFlag=2 then '原料' when  SYBFlag=3 then '大客户' else '其他' end  AS 事业部,rtrim(ltrim(WorkCenter)) AS 需求车间,State,OperateTime AS 提报日期
                                                     FROM
 	                                                    dbo.SolidBuyList_Handle 
-                                                    WHERE
+                                                    WHERE   Purchaser like '{UserID}|%' and
 	                                                    Flag = 0 order by rtrim(ltrim(ItemNumber))";
             dgvEdit.DataSource = SQLHelper.GetDataTable(GlobalSpace.RYData, sqlSelect);
             dgvEdit.Columns["ID"].Visible = false;
@@ -573,32 +586,35 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
                             MessageBoxEx.Show("合并的事业部不同！"); return;
                         }
                     }
-                    if (PlanID == string.Empty)
+
+                    if (string.IsNullOrWhiteSpace(Item))
                     {
-                        PlanID = Item;
+                        PlanNo = true;
                     }
                     else
                     {
-                        if (string.IsNullOrWhiteSpace(Item))
+                        if (PlanID == string.Empty)
                         {
-                            PlanNo = true;
+                            PlanID = Item;
                         }
                         else
                         {
                             PlanID += "|" + Item;
-                            PlanYes = true;
+                            
                         }
+                        PlanYes = true;
                     }
                     PlanQuantity += Convert.ToDecimal(dgvEdit["需求数量", i].Value.ToString());
                     ID.Add(Convert.ToInt32(dgvEdit["ID", i].Value.ToString()));
+                    count++;
+
                 }
-                count++;
             }
             if (PlanNo && PlanYes)
             {
                 MessageBoxEx.Show("导入计划跟提取计划不能合并！"); return;
             }
-            if (count == 0)
+            if (count <= 1)
             {
                 MessageBoxEx.Show("请至少选择2条信息！"); return;
             }
@@ -701,6 +717,8 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
 "	SolidBuyList_Handle.TaxRate,\n" +
 "	SolidBuyList_Handle.Confirmer,\n" +
 "	SolidBuyList_Handle.Remark \n" +
+"	SolidBuyList_Handle.Purchaser, \n" +
+"	SolidBuyList_Handle.PlanBuyQuantity" +
                     ") SELECT\n" +
 "	SolidBuyList_Handle.PlanID,\n" +
 "	SolidBuyList_Handle.ItemNumber,\n" +
@@ -721,7 +739,7 @@ CfQuantity +
 "	SolidBuyList_Handle.PlanRemark,\n" +
 "	SolidBuyList_Handle.Flag,\n" +
 "	SolidBuyList_Handle.SYBFlag,\n" +
-"	SolidBuyList_Handle.State,\n" +
+"	'拆分',\n" +
 "	SolidBuyList_Handle.VendorNumber,\n" +
 "	SolidBuyList_Handle.VendorName,\n" +
 "	SolidBuyList_Handle.ManufacturerNumber,\n" +
@@ -730,6 +748,8 @@ CfQuantity +
 "	SolidBuyList_Handle.TaxRate,\n" +
 "	SolidBuyList_Handle.Confirmer,\n" +
 "	SolidBuyList_Handle.Remark \n" +
+"	SolidBuyList_Handle.Purchaser, \n" +
+"	SolidBuyList_Handle.PlanBuyQuantity"+
 "FROM\n" +
 "	dbo.SolidBuyList_Handle where ID = " + dgvEdit["ID", RowIndex].Value.ToString();
                 cmd.ExecuteNonQuery();
@@ -920,11 +940,11 @@ CfQuantity +
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            string sqlSelect = @"SELECT  ItemNumber
+            string sqlSelect = $@"SELECT  ItemNumber
                                                     FROM
 	                                                    dbo.SolidBuyList_Handle 
                                                     WHERE
-	                                                    (VendorNumber is null or ltrim(rtrim(VendorNumber)) ='' or VendorName is null or ltrim(rtrim(VendorName)) ='' or ManufacturerNumber is null or ltrim(rtrim(ManufacturerNumber)) ='' or ManufacturerName is null or ltrim(rtrim(ManufacturerName)) ='' or Confirmer is null or ltrim(rtrim(Confirmer)) ='' or PricePreTax is null or TaxRate is null or PricePreTax <0 or TaxRate <0) and Flag = 0 ";
+	                                                    (VendorNumber is null or ltrim(rtrim(VendorNumber)) ='' or VendorName is null or ltrim(rtrim(VendorName)) ='' or ManufacturerNumber is null or ltrim(rtrim(ManufacturerNumber)) ='' or ManufacturerName is null or ltrim(rtrim(ManufacturerName)) ='' or Confirmer is null or ltrim(rtrim(Confirmer)) ='' or PricePreTax is null or TaxRate is null or PricePreTax <0 or TaxRate <0) and Flag = 0 and Purchaser like '{UserID}|%'";
             DataTable dt = SQLHelper.GetDataTable(GlobalSpace.RYData, sqlSelect);
             if (dt.Rows.Count > 0)
             {
@@ -932,7 +952,7 @@ CfQuantity +
                 MessageBoxEx.Show("以下物料信息不完整不能提交" + String.Join(",", lstr));
                 return;
             }
-            if (SQLHelper.ExecuteNonQuery(GlobalSpace.RYData, "Update dbo.SolidBuyList_Handle set Flag = 1,PricePostTax=PricePreTax/(1+TaxRate) where Flag = 0"))
+            if (SQLHelper.ExecuteNonQuery(GlobalSpace.RYData, $"Update dbo.SolidBuyList_Handle set Flag = 1,PricePostTax=PricePreTax/(1+TaxRate) where Flag = 0 and Purchaser like '{UserID}|%'"))
             {
                 MessageBoxEx.Show("提交完成");
                 btnExtractRefresh_Click(sender, e);
@@ -945,7 +965,7 @@ CfQuantity +
 
         private void btnEditedRefresh_Click(object sender, EventArgs e)
         {
-            string sqlSelect = @"SELECT
+            string sqlSelect = $@"SELECT
 	                                                    ID,PlanID AS 提报序号,
 	                                                    rtrim(ltrim(ItemNumber)) AS 物料代码,
 	                                                    rtrim(ltrim(ItemDescription)) AS 物料描述,
@@ -961,7 +981,7 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
                                                     FROM
 	                                                    dbo.SolidBuyList_Handle 
                                                     WHERE
-	                                                    Flag = 1 order by rtrim(ltrim(ItemNumber))";
+	                                                    Flag = 1 and Purchaser like '{UserID}|%' order by rtrim(ltrim(ItemNumber))";
             DgvEdited.DataSource = SQLHelper.GetDataTable(GlobalSpace.RYData, sqlSelect);
             DgvEdited.Columns["ID"].Visible = false;
             for (int i = 0; i < this.DgvEdited.Columns.Count; i++)
@@ -970,20 +990,20 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
             }
 
             tbPOMiddle.Text = DateTime.Now.ToString("MMddyy");
-            tbPOHeader.Text = "P" + PurchaseUser.PurchaseType.Substring(0, 1);
+            tbPOHeader.Text = "P" + PurchaseUser.PurchaseType.Substring(0, 1).ToUpper();
             tbPOPostfix.Text = GeneratePONumberSequenceNumber(tbPOHeader.Text, PurchaseUser.UserID);
 
         }
 
         private string GeneratePONumberSequenceNumber(string poType, string UserID)
         {
-            string sqlSelect = @"Select TOP 1 PONumber From PurchaseOrderRecordByCMF Where Buyer = '" + UserID + "' And Left(PONumber,2) = '" + poType + "' And POItemPlacedDate = '" + DateTime.Now.ToString("yyyy-MM-dd") + "'  AND IsPurePO = 1 ORDER BY Id DESC";
-            string sqlSelectFS = @" SELECT
+            string sqlSelect = $@"Select TOP 1 PONumber From PurchaseOrderRecordByCMF Where Buyer = '{UserID}' And PONumber like '{poType}-{DateTime.Now.ToString("MMddyy")}-%'  AND IsPurePO = 1 ORDER BY PONumber DESC";
+            string sqlSelectFS = $@" SELECT
 	                            T1.PONumber
                             FROM
 	                            _NoLock_FS_POHeader T1
                             WHERE                               
-                                T1.Buyer ='" + UserID + "' AND T1.PONumber LIKE '%" + DateTime.Now.ToString("MMddyy") + "%'  ORDER BY T1.PONumber DESC";
+                                T1.Buyer ='{ UserID }' AND T1.PONumber LIKE '{poType}-{DateTime.Now.ToString("MMddyy")}-%'  ORDER BY T1.PONumber DESC";
             DataTable dt = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
             DataTable dtLatestFS = SQLHelper.GetDataTable(GlobalSpace.FSDBMRConnstr, sqlSelectFS);
             int sequenceNumber = 0;
@@ -1001,7 +1021,7 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
             {
                 sequenceNumber = sequenceNumberFS;
             }
-            return sequenceNumber.ToString().PadLeft(3, '0');
+            return sequenceNumber==0? (StartNumber-1).ToString().PadLeft(3,'0'):sequenceNumber.ToString().PadLeft(3, '0');
 
         }
 
@@ -1031,10 +1051,10 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
             }
                 DataTable dtVendor = (DataTable)DgvEdited.DataSource;
                 DataTable dtItem = dtVendor.Copy();
-            if (CommonOperate.PlaceOrderWithItemDetail("PP", dtVendor, dtItem, PurchaseUser.UserName, PurchaseUser.UserID, PurchaseUser.SupervisorID, 1))
+            if (CommonOperate.PlaceOrderWithItemDetail("PP", dtVendor, dtItem, PurchaseUser.UserName, PurchaseUser.UserID, PurchaseUser.SupervisorID, 1,int.Parse(tbPOPostfix.Text)))
             {
                 Custom.MsgEx("订单已提交审核！");
-                if (!SQLHelper.ExecuteNonQuery(GlobalSpace.RYData, "Update dbo.SolidBuyList_Handle set Flag = 2,PlaceOrderTime=GETDATE() where Flag = 1"))
+                if (!SQLHelper.ExecuteNonQuery(GlobalSpace.RYData, $@"Update dbo.SolidBuyList_Handle set Flag = 2,PlaceOrderTime=GETDATE(),PlaceOrderPersonnel='{UserID}|{UserName}%' where Purchaser like '{UserID}|%' and  Flag = 1"))
                 {
                     MessageBoxEx.Show("订单已提交审核，计划状态更改失败，请联系软件服务处");
                 }
@@ -1388,7 +1408,7 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
             {
                 StrWhere = "ExtractTime >= '" + Dt.ToString("yyyy-MM-dd") + "' and ExtractTime<'" + Dt.AddDays(1).ToString("yyyy-MM-dd") + "'";
             }
-            string sqlSelect = @"SELECT
+            string sqlSelect = $@"SELECT
 	                                                    ID,OperateTime AS 提报日期,rtrim(ltrim(WorkCenter)) AS 需求车间,
 	                                                    rtrim(ltrim(ItemNumber)) AS 物料代码,
 	                                                    rtrim(ltrim(ItemDescription)) AS 物料描述,
@@ -1399,11 +1419,11 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
 	                                                    NeedTime AS 需求日期,
 	                                                    rtrim(ltrim(Remark)) AS 备注,
 	                                                    rtrim(ltrim(VendorName)) AS 指定供应商,
-                                                        case when  SYBFlag=0 then '固水'  when  SYBFlag=1 then '粉针' when  SYBFlag=2 then '原料' when  SYBFlag=3 then '大客户' else '其他' end  AS 事业部,ReceiveTime AS 到货日期,ReceiveQuantity AS 到货数量,ExtractTime AS 提取日期, case when  Flag=1 then '已处理' when  Flag=2 then '已到货' else '' end AS 状态
+                                                        case when  SYBFlag=0 then '固水'  when  SYBFlag=1 then '粉针' when  SYBFlag=2 then '原料' when  SYBFlag=3 then '大客户' else '其他' end  AS 事业部,ReceiveTime AS 到货日期,ReceiveQuantity AS 到货数量,ExtractTime AS 提取日期, case when  Flag=1 then '已处理' when  Flag=2 then '已到货' else '' end AS 状态,PlanReceiverID 账号,PlanReceiverName 姓名
                                                     FROM
 	                                                    dbo.SolidBuyList 
                                                     WHERE
-	                                                    Flag in(1,2) and " + StrWhere + " order by ID";
+	                                                    Flag in(1,2) and {StrWhere} and PlanReceiverID like'%{TbUserID.Text.Trim()}%' order by ID";
             DgvHistory.DataSource = SQLHelper.GetDataTable(GlobalSpace.RYData, sqlSelect);
         }
 

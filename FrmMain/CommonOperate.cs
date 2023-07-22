@@ -1408,7 +1408,7 @@ namespace Global
             }
             return sus;
         }
-        public static bool PlaceOrderWithItemDetail(string poType, DataTable dtVendorL, DataTable dtItem, string buyerName, string buyerID, string supervisorID, int poStatus)
+        public static bool PlaceOrderWithItemDetail(string poType, DataTable dtVendorL, DataTable dtItem, string buyerName, string buyerID, string supervisorID, int poStatus,int number)
         {
             List<string> sqlList = new List<string>();
             int sequenceNumber = 0;
@@ -1424,13 +1424,13 @@ namespace Global
 
             if (dtVendor.Rows.Count > 0)
             {
-                string sqlSelectLatest = @"Select Distinct Id,PONumber From PurchaseOrderRecordByCMF Where POItemPlacedDate='" + DateTime.Now.ToString("yyyy-MM-dd") + "' And Left(PONumber,2) = '" + poType + "' And Buyer = '" + buyerID + "' And IsPurePO = 1  Order By Id DESC";
-                string sqlSelectFSPO = @" SELECT
+                string sqlSelectLatest = $@"Select Distinct Id,PONumber From PurchaseOrderRecordByCMF Where  PONumber like '{poType}-{dateNow}-%' And Buyer = '{buyerID}' And IsPurePO = 1  Order By PONumber DESC";
+                string sqlSelectFSPO = $@" SELECT
 	                            T1.PONumber
                             FROM
 	                            _NoLock_FS_POHeader T1
                             WHERE                               
-                                T1.Buyer ='" + buyerID + "' AND T1.PONumber LIKE '%" + dateNow + "%'  ORDER BY T1.PONumber DESC";
+                                T1.Buyer ='{ buyerID }' AND T1.PONumber LIKE '{poType}-{dateNow}-%'  ORDER BY T1.PONumber DESC";
                 DataTable dtLatest = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelectLatest);
                 DataTable dtLatestFS = SQLHelper.GetDataTable(GlobalSpace.FSDBMRConnstr, sqlSelectFSPO);
                 if (dtLatest.Rows.Count > 0)
@@ -1451,7 +1451,10 @@ namespace Global
                 {
                     sequenceNumber = sequenceNumberFS;
                 }
-
+                if (number > sequenceNumber)
+                {
+                    sequenceNumber = number;
+                }
 
                 for (int i = 0; i < dtVendor.Rows.Count; i++)
                 {

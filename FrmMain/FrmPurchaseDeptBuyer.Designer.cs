@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.ribbonControl1 = new DevComponents.DotNetBar.RibbonControl();
             this.ribbonPanel1 = new DevComponents.DotNetBar.RibbonPanel();
+            this.ribbonBar19 = new DevComponents.DotNetBar.RibbonBar();
+            this.BtnItemDemand = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBar18 = new DevComponents.DotNetBar.RibbonBar();
             this.btniItemRequirMakeOrder = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBar17 = new DevComponents.DotNetBar.RibbonBar();
@@ -140,6 +142,7 @@
             // ribbonPanel1
             // 
             this.ribbonPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonPanel1.Controls.Add(this.ribbonBar19);
             this.ribbonPanel1.Controls.Add(this.ribbonBar18);
             this.ribbonPanel1.Controls.Add(this.ribbonBar17);
             this.ribbonPanel1.Controls.Add(this.ribbonBar16);
@@ -170,6 +173,45 @@
             // 
             this.ribbonPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.ribbonPanel1.TabIndex = 1;
+            // 
+            // ribbonBar19
+            // 
+            this.ribbonBar19.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBar19.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBar19.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBar19.ContainerControlProcessDialogKey = true;
+            this.ribbonBar19.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBar19.DragDropSupport = true;
+            this.ribbonBar19.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.BtnItemDemand});
+            this.ribbonBar19.Location = new System.Drawing.Point(978, 0);
+            this.ribbonBar19.Name = "ribbonBar19";
+            this.ribbonBar19.Size = new System.Drawing.Size(84, 79);
+            this.ribbonBar19.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBar19.TabIndex = 12;
+            // 
+            // 
+            // 
+            this.ribbonBar19.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBar19.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // BtnItemDemand
+            // 
+            this.BtnItemDemand.Image = global::Global.Properties.Resources.kenolaba;
+            this.BtnItemDemand.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.BtnItemDemand.Name = "BtnItemDemand";
+            this.BtnItemDemand.SubItemsExpandWidth = 14;
+            this.BtnItemDemand.Text = "物料计划\r\n原料";
+            this.BtnItemDemand.Click += new System.EventHandler(this.BtnItemDemand_Click);
             // 
             // ribbonBar18
             // 
@@ -247,7 +289,7 @@
             this.btniDeptItemRequirement.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
             this.btniDeptItemRequirement.Name = "btniDeptItemRequirement";
             this.btniDeptItemRequirement.SubItemsExpandWidth = 14;
-            this.btniDeptItemRequirement.Text = "物料需求\r\n计划";
+            this.btniDeptItemRequirement.Text = "物料计划\r\n包材";
             this.btniDeptItemRequirement.Click += new System.EventHandler(this.btniDeptItemRequirement_Click);
             // 
             // ribbonBar16
@@ -1020,7 +1062,7 @@
             // styleManager1
             // 
             this.styleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Blue;
-            this.styleManager1.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.Gray, System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(71)))), ((int)(((byte)(42))))));
+            this.styleManager1.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(71)))), ((int)(((byte)(42))))));
             // 
             // statusStrip1
             // 
@@ -1162,6 +1204,8 @@
         private DevComponents.DotNetBar.ButtonItem btniDeptItemRequirement;
         private DevComponents.DotNetBar.RibbonBar ribbonBar18;
         private DevComponents.DotNetBar.ButtonItem btniItemRequirMakeOrder;
+        private DevComponents.DotNetBar.RibbonBar ribbonBar19;
+        private DevComponents.DotNetBar.ButtonItem BtnItemDemand;
     }
 }
 

@@ -22,21 +22,19 @@ namespace Global.Purchase
 
         private void Cusotoms_Load(object sender, EventArgs e)
         {
-            string sqlSelect = @"SELECT ID, ManualNumber FROM CustomsManualNumber WHERE Status = 1";
+            string sqlSelect = @"SELECT ID, ManualNumber FROM CustomsManualNumber WHERE Status = 1 order by ID desc";
             DataTable dt = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
             CommonOperate.ComboBoxBindEx(cbbe, dt, "ManualNumber", "ID");
+            if (cbbe.Items.Count > 0) cbbe.SelectedIndex = 0;
         }
 
         private void btn_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(GlobalSpace.ShouCeNumber))
-            {
-                GlobalSpace.ShouCeNumber = string.Empty;
-            }
-
+            
             if(!string.IsNullOrWhiteSpace(cbbe.Text))
             {
                 GlobalSpace.ShouCeNumber = cbbe.Text;
+                this.DialogResult = DialogResult.OK;
             }
             else
             {

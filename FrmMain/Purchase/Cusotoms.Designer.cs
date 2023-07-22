@@ -50,11 +50,12 @@ namespace Global.Purchase
             // 
             this.cbbe.DisplayMember = "Text";
             this.cbbe.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbbe.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbe.FormattingEnabled = true;
-            this.cbbe.ItemHeight = 15;
+            this.cbbe.ItemHeight = 16;
             this.cbbe.Location = new System.Drawing.Point(56, 31);
             this.cbbe.Name = "cbbe";
-            this.cbbe.Size = new System.Drawing.Size(167, 21);
+            this.cbbe.Size = new System.Drawing.Size(167, 22);
             this.cbbe.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbbe.TabIndex = 1;
             // 

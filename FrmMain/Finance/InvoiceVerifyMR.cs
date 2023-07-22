@@ -1034,11 +1034,11 @@ namespace Global.Finance
             //    UnvoucheredAccount = dt.Rows[0]["无票账号"].ToString();//无票
             //    VoucheredAccount = dt.Rows[0]["有票账号"].ToString();//有票
             //}
-            string sqlUpdate0 = $@"UPDATE PurchaseOrderInvoiceRecordMRByCMF SET  InvoiceNumber='{TbInvoiceNumber.Text.Trim()}',InvoiceTaxedAmount='{TbTax.Text.Trim()}',InvoiceAmount='{TbInvoiceAmount.Text.Trim()}',OperateFinance='{FSID}' WHERE VendorNumber ='{VendorId}' and  InvoiceNumberS='{TbInvoiceNumberS.Text}'";
+            //string sqlUpdate0 = $@"UPDATE PurchaseOrderInvoiceRecordMRByCMF SET  InvoiceNumber='{TbInvoiceNumber.Text.Trim()}',InvoiceTaxedAmount='{TbTax.Text.Trim()}',InvoiceAmount='{TbInvoiceAmount.Text.Trim()}',OperateFinance='{FSID}' WHERE VendorNumber ='{VendorId}' and  InvoiceNumberS='{TbInvoiceNumberS.Text}'";
 
 
-            SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate0);
-            string sqlUpdate = $@"UPDATE PurchaseOrderInvoiceRecordMRByCMF SET Status = 3,FinanceUpdateDateTime= getdate(),InvoiceNumber='{TbInvoiceNumber.Text.Trim()}',InvoiceTaxedAmount={TbTax.Text.Trim()},InvoiceAmount={TbInvoiceAmount.Text.Trim()},OperateFinance='{FSID}' WHERE VendorNumber ='{VendorId}' and  InvoiceNumberS='{TbInvoiceNumberS.Text}'";
+            //SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate0);
+            string sqlUpdate = $@"UPDATE PurchaseOrderInvoiceRecordMRByCMF SET Status = 3,FinanceUpdateDateTime= getdate(),InvoiceNumber='{TbInvoiceNumber.Text.Trim()}',InvoiceTaxedAmount={TbTax.Text.Trim()},InvoiceAmount={TbInvoiceAmount.Text.Trim()},OperateFinance='{FSID}',Remarks=(case when Remarks is null THEN '' ELSE Remarks END)+';财务手工核销' WHERE VendorNumber ='{VendorId}' and  InvoiceNumberS='{TbInvoiceNumberS.Text}'";
 
 
             if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))

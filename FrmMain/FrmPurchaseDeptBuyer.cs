@@ -257,13 +257,15 @@ namespace Global
 
         private void btniInvoice_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("请用新版发票管理");
+            return;
             Purchase.POInvoice poi = new POInvoice();
             CommonOperate.BindFormToTabControl(tabCtrlForm, poi, btniInvoice.Name, btniInvoice.Text);
         }
 
         private void btniDeptItemRequirement_Click(object sender, EventArgs e)
         {
-            DeptItemRequirement dir = new DeptItemRequirement();
+            DeptItemRequirement dir = new DeptItemRequirement(PurchaseUser.UserID, PurchaseUser.UserName, PONumberStartNumber);
             CommonOperate.BindFormToTabControl(tabCtrlForm, dir, btniDeptItemRequirement.Name, btniDeptItemRequirement.Text);
         }
         
@@ -273,6 +275,14 @@ namespace Global
             //CommonOperate.BindFormToTabControl(tabCtrlForm, dirpo, btniItemRequirMakeOrder.Name, btniItemRequirMakeOrder.Text);
             POInvoice_MR dirpo1 = new POInvoice_MR( PurchaseUser.UserID,PurchaseUser.UserName); 
             CommonOperate.BindFormToTabControl(tabCtrlForm, dirpo1, btniItemRequirMakeOrder.Name, btniItemRequirMakeOrder.Text);
+        }
+
+        private void BtnItemDemand_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("暂未上线");
+            return;
+            ItemDemand dirpo1 = new ItemDemand( PurchaseUser.UserID,PurchaseUser.UserName); 
+            CommonOperate.BindFormToTabControl(tabCtrlForm, dirpo1, BtnItemDemand.Name, BtnItemDemand.Text);
         }
     }
 }

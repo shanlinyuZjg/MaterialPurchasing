@@ -165,7 +165,7 @@ namespace Global.Purchase
     Operator,OrderQuantity,LotNumber,InnerLotNumber,Buyer,Stockkeeper,ManufacturerID,ManufacturerName
                                                                             )
                                                                             VALUES
-	                                                                            ('{VendorID}','{VendorName}','{Dgv2["采购单号",i].Value}','{Dgv2["行号", i].Value}','{Dgv2["序号", i].Value}','{Dgv2["物料编码", i].Value}','{Dgv2["物料描述", i].Value}','{Dgv2["单位", i].Value}','{Dgv2["入库量", i].Value}','{Dgv2["已匹配数量", i].Value}','{Dgv2["入库日期", i].Value}','{Dgv2["联系单号", i].Value}','{Dgv2["单价", i].Value}','{Dgv2["合计", i].Value}','{Dgv2["KEY", i].Value}','{Sequence}','{UserID}','{Dgv2["订单量", i].Value}','{Dgv2["厂家批号", i].Value}','{Dgv2["公司批号", i].Value}','{Dgv2["采购员", i].Value}','{Dgv2["库管员", i].Value}','{Dgv2["生产商码", i].Value}','{Dgv2["生产商名", i].Value}')";
+	                                                                            ('{VendorID}','{VendorName}','{Dgv2["采购单号",i].Value}','{Dgv2["行号", i].Value}','{Dgv2["序号", i].Value}','{Dgv2["物料编码", i].Value}','{Dgv2["物料描述", i].Value.ToString().Replace("'","''")}','{Dgv2["单位", i].Value}','{Dgv2["入库量", i].Value}','{Dgv2["已匹配数量", i].Value}','{Dgv2["入库日期", i].Value}','{Dgv2["联系单号", i].Value}','{Dgv2["单价", i].Value}','{Dgv2["合计", i].Value}','{Dgv2["KEY", i].Value}','{Sequence}','{UserID}','{Dgv2["订单量", i].Value}','{Dgv2["厂家批号", i].Value}','{Dgv2["公司批号", i].Value}','{Dgv2["采购员", i].Value}','{Dgv2["库管员", i].Value}','{Dgv2["生产商码", i].Value}','{Dgv2["生产商名", i].Value}')";
                 sqlList.Add(sqlInsert);
             }
 
