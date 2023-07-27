@@ -437,7 +437,7 @@ namespace Global.Purchase
     "	SolidBuyList_Handle.ForeignNumber, \n" +
     "	SolidBuyList_Handle.WorkCenter, \n" +
     "	SolidBuyList_Handle.PlanRemark, \n" +
-    "	SolidBuyList_Handle.SYBFlag,TaxRate) values ('" +
+    "	SolidBuyList_Handle.SYBFlag,TaxRate,Purchaser,PlanBuyQuantity) values ('" +
     dt.Rows[i].Cells["物料代码"].Value.ToString().Trim() +"','"+
     dt.Rows[i].Cells["物料描述"].Value.ToString().Trim() + "','" +
    dt.Rows[i].Cells["单位"].Value.ToString().Trim() + "','" +
@@ -449,7 +449,8 @@ dt.Rows[i].Cells["需求日期"].Value.ToString().Trim() + "','" +
    dt.Rows[i].Cells["联系单号"].Value.ToString().Trim() + "','" +
    dt.Rows[i].Cells["需求车间"].Value.ToString().Trim() + "','" +
     dt.Rows[i].Cells["备注"].Value.ToString().Trim() + "'," +
-    sybInt +",0.13 )" );
+    sybInt + ",0.13, '" + string.Concat(UserID, "|", UserName) +
+"'   ,'" +dt.Rows[i].Cells["需求数量"].Value.ToString().Trim() + "')");
                 }
             }
             if (lint.Count == 0)
@@ -1054,7 +1055,7 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
             if (CommonOperate.PlaceOrderWithItemDetail("PP", dtVendor, dtItem, PurchaseUser.UserName, PurchaseUser.UserID, PurchaseUser.SupervisorID, 1,int.Parse(tbPOPostfix.Text)))
             {
                 Custom.MsgEx("订单已提交审核！");
-                if (!SQLHelper.ExecuteNonQuery(GlobalSpace.RYData, $@"Update dbo.SolidBuyList_Handle set Flag = 2,PlaceOrderTime=GETDATE(),PlaceOrderPersonnel='{UserID}|{UserName}%' where Purchaser like '{UserID}|%' and  Flag = 1"))
+                if (!SQLHelper.ExecuteNonQuery(GlobalSpace.RYData, $@"Update dbo.SolidBuyList_Handle set Flag = 2,PlaceOrderTime=GETDATE(),PlaceOrderPersonnel='{UserID}|{UserName}' where Purchaser like '{UserID}|%' and  Flag = 1"))
                 {
                     MessageBoxEx.Show("订单已提交审核，计划状态更改失败，请联系软件服务处");
                 }
