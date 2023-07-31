@@ -257,8 +257,8 @@ namespace Global
 
         private void btniInvoice_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("请用新版发票管理");
-            return;
+            //MessageBox.Show("请用新版发票管理");
+            //return;
             Purchase.POInvoice poi = new POInvoice();
             CommonOperate.BindFormToTabControl(tabCtrlForm, poi, btniInvoice.Name, btniInvoice.Text);
         }
