@@ -49,6 +49,14 @@ namespace Global.Purchase
             this.dgvItemRequirement = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.Check = new DevComponents.DotNetBar.Controls.DataGridViewCheckBoxXColumn();
             this.tabControl1 = new DevComponents.DotNetBar.TabControl();
+            this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
+            this.BtnItemImportTemplate = new DevComponents.DotNetBar.ButtonX();
+            this.Import = new System.Windows.Forms.RadioButton();
+            this.PLan = new System.Windows.Forms.RadioButton();
+            this.PlanImport = new DevComponents.DotNetBar.ButtonX();
+            this.btnExtract = new DevComponents.DotNetBar.ButtonX();
+            this.BtAllSelect = new DevComponents.DotNetBar.ButtonX();
+            this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel4 = new DevComponents.DotNetBar.TabControlPanel();
             this.TbUserID = new System.Windows.Forms.TextBox();
             this.Btn_MRP = new DevComponents.DotNetBar.ButtonX();
@@ -61,14 +69,6 @@ namespace Global.Purchase
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.btnHistorySelect = new DevComponents.DotNetBar.ButtonX();
             this.tabItem4 = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
-            this.BtnItemImportTemplate = new DevComponents.DotNetBar.ButtonX();
-            this.Import = new System.Windows.Forms.RadioButton();
-            this.PLan = new System.Windows.Forms.RadioButton();
-            this.PlanImport = new DevComponents.DotNetBar.ButtonX();
-            this.btnExtract = new DevComponents.DotNetBar.ButtonX();
-            this.BtAllSelect = new DevComponents.DotNetBar.ButtonX();
-            this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel3 = new DevComponents.DotNetBar.TabControlPanel();
             this.BtnTurnback = new DevComponents.DotNetBar.ButtonX();
             this.tbPOHeader = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -112,10 +112,10 @@ namespace Global.Purchase
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemRequirement)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
+            this.tabControlPanel1.SuspendLayout();
             this.tabControlPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvHistory)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.tabControlPanel1.SuspendLayout();
             this.tabControlPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvEdited)).BeginInit();
             this.tabControlPanel5.SuspendLayout();
@@ -224,6 +224,117 @@ namespace Global.Purchase
             this.tabControl1.Tabs.Add(this.tabItem4);
             this.tabControl1.Tabs.Add(this.tabItem5);
             this.tabControl1.Text = "tabControl1";
+            // 
+            // tabControlPanel1
+            // 
+            this.tabControlPanel1.Controls.Add(this.BtnItemImportTemplate);
+            this.tabControlPanel1.Controls.Add(this.Import);
+            this.tabControlPanel1.Controls.Add(this.PLan);
+            this.tabControlPanel1.Controls.Add(this.PlanImport);
+            this.tabControlPanel1.Controls.Add(this.btnExtract);
+            this.tabControlPanel1.Controls.Add(this.BtAllSelect);
+            this.tabControlPanel1.Controls.Add(this.dgvItemRequirement);
+            this.tabControlPanel1.Controls.Add(this.btnRefresh);
+            this.tabControlPanel1.DisabledBackColor = System.Drawing.Color.Empty;
+            this.tabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel1.Location = new System.Drawing.Point(0, 29);
+            this.tabControlPanel1.Margin = new System.Windows.Forms.Padding(4);
+            this.tabControlPanel1.Name = "tabControlPanel1";
+            this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanel1.Size = new System.Drawing.Size(1564, 895);
+            this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabControlPanel1.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel1.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabControlPanel1.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabControlPanel1.Style.GradientAngle = 90;
+            this.tabControlPanel1.TabIndex = 1;
+            this.tabControlPanel1.TabItem = this.tabItem1;
+            // 
+            // BtnItemImportTemplate
+            // 
+            this.BtnItemImportTemplate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.BtnItemImportTemplate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.BtnItemImportTemplate.Location = new System.Drawing.Point(640, 12);
+            this.BtnItemImportTemplate.Name = "BtnItemImportTemplate";
+            this.BtnItemImportTemplate.Size = new System.Drawing.Size(159, 31);
+            this.BtnItemImportTemplate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.BtnItemImportTemplate.TabIndex = 36;
+            this.BtnItemImportTemplate.Text = "计划导入模板下载";
+            this.BtnItemImportTemplate.Click += new System.EventHandler(this.BtnItemImportTemplate_Click);
+            // 
+            // Import
+            // 
+            this.Import.AutoSize = true;
+            this.Import.Enabled = false;
+            this.Import.Location = new System.Drawing.Point(399, 17);
+            this.Import.Margin = new System.Windows.Forms.Padding(4);
+            this.Import.Name = "Import";
+            this.Import.Size = new System.Drawing.Size(58, 20);
+            this.Import.TabIndex = 20;
+            this.Import.TabStop = true;
+            this.Import.Text = "导入";
+            this.Import.UseVisualStyleBackColor = true;
+            // 
+            // PLan
+            // 
+            this.PLan.AutoSize = true;
+            this.PLan.Enabled = false;
+            this.PLan.Location = new System.Drawing.Point(337, 17);
+            this.PLan.Margin = new System.Windows.Forms.Padding(4);
+            this.PLan.Name = "PLan";
+            this.PLan.Size = new System.Drawing.Size(58, 20);
+            this.PLan.TabIndex = 19;
+            this.PLan.TabStop = true;
+            this.PLan.Text = "计划";
+            this.PLan.UseVisualStyleBackColor = true;
+            // 
+            // PlanImport
+            // 
+            this.PlanImport.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.PlanImport.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.PlanImport.Location = new System.Drawing.Point(121, 12);
+            this.PlanImport.Margin = new System.Windows.Forms.Padding(4);
+            this.PlanImport.Name = "PlanImport";
+            this.PlanImport.Size = new System.Drawing.Size(71, 31);
+            this.PlanImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.PlanImport.TabIndex = 18;
+            this.PlanImport.Text = "导入";
+            this.PlanImport.Click += new System.EventHandler(this.PlanImport_Click);
+            // 
+            // btnExtract
+            // 
+            this.btnExtract.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnExtract.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnExtract.Location = new System.Drawing.Point(501, 12);
+            this.btnExtract.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExtract.Name = "btnExtract";
+            this.btnExtract.Size = new System.Drawing.Size(100, 31);
+            this.btnExtract.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnExtract.TabIndex = 17;
+            this.btnExtract.Text = "提取";
+            this.btnExtract.Click += new System.EventHandler(this.btnExtract_Click);
+            // 
+            // BtAllSelect
+            // 
+            this.BtAllSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.BtAllSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.BtAllSelect.Location = new System.Drawing.Point(213, 12);
+            this.BtAllSelect.Margin = new System.Windows.Forms.Padding(4);
+            this.BtAllSelect.Name = "BtAllSelect";
+            this.BtAllSelect.Size = new System.Drawing.Size(105, 31);
+            this.BtAllSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.BtAllSelect.TabIndex = 15;
+            this.BtAllSelect.Text = "全选/全不选";
+            this.BtAllSelect.Click += new System.EventHandler(this.BtAllSelect_Click);
+            // 
+            // tabItem1
+            // 
+            this.tabItem1.AttachedControl = this.tabControlPanel1;
+            this.tabItem1.Name = "tabItem1";
+            this.tabItem1.Text = "物料计划";
+            this.tabItem1.Click += new System.EventHandler(this.tabItem1_Click);
             // 
             // tabControlPanel4
             // 
@@ -404,117 +515,6 @@ namespace Global.Purchase
             this.tabItem4.AttachedControl = this.tabControlPanel4;
             this.tabItem4.Name = "tabItem4";
             this.tabItem4.Text = "操作历史查询";
-            // 
-            // tabControlPanel1
-            // 
-            this.tabControlPanel1.Controls.Add(this.BtnItemImportTemplate);
-            this.tabControlPanel1.Controls.Add(this.Import);
-            this.tabControlPanel1.Controls.Add(this.PLan);
-            this.tabControlPanel1.Controls.Add(this.PlanImport);
-            this.tabControlPanel1.Controls.Add(this.btnExtract);
-            this.tabControlPanel1.Controls.Add(this.BtAllSelect);
-            this.tabControlPanel1.Controls.Add(this.dgvItemRequirement);
-            this.tabControlPanel1.Controls.Add(this.btnRefresh);
-            this.tabControlPanel1.DisabledBackColor = System.Drawing.Color.Empty;
-            this.tabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPanel1.Location = new System.Drawing.Point(0, 29);
-            this.tabControlPanel1.Margin = new System.Windows.Forms.Padding(4);
-            this.tabControlPanel1.Name = "tabControlPanel1";
-            this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel1.Size = new System.Drawing.Size(1564, 895);
-            this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabControlPanel1.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanel1.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabControlPanel1.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
-            | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabControlPanel1.Style.GradientAngle = 90;
-            this.tabControlPanel1.TabIndex = 1;
-            this.tabControlPanel1.TabItem = this.tabItem1;
-            // 
-            // BtnItemImportTemplate
-            // 
-            this.BtnItemImportTemplate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.BtnItemImportTemplate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.BtnItemImportTemplate.Location = new System.Drawing.Point(640, 12);
-            this.BtnItemImportTemplate.Name = "BtnItemImportTemplate";
-            this.BtnItemImportTemplate.Size = new System.Drawing.Size(159, 31);
-            this.BtnItemImportTemplate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.BtnItemImportTemplate.TabIndex = 36;
-            this.BtnItemImportTemplate.Text = "计划导入模板下载";
-            this.BtnItemImportTemplate.Click += new System.EventHandler(this.BtnItemImportTemplate_Click);
-            // 
-            // Import
-            // 
-            this.Import.AutoSize = true;
-            this.Import.Enabled = false;
-            this.Import.Location = new System.Drawing.Point(399, 17);
-            this.Import.Margin = new System.Windows.Forms.Padding(4);
-            this.Import.Name = "Import";
-            this.Import.Size = new System.Drawing.Size(58, 20);
-            this.Import.TabIndex = 20;
-            this.Import.TabStop = true;
-            this.Import.Text = "导入";
-            this.Import.UseVisualStyleBackColor = true;
-            // 
-            // PLan
-            // 
-            this.PLan.AutoSize = true;
-            this.PLan.Enabled = false;
-            this.PLan.Location = new System.Drawing.Point(337, 17);
-            this.PLan.Margin = new System.Windows.Forms.Padding(4);
-            this.PLan.Name = "PLan";
-            this.PLan.Size = new System.Drawing.Size(58, 20);
-            this.PLan.TabIndex = 19;
-            this.PLan.TabStop = true;
-            this.PLan.Text = "计划";
-            this.PLan.UseVisualStyleBackColor = true;
-            // 
-            // PlanImport
-            // 
-            this.PlanImport.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.PlanImport.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.PlanImport.Location = new System.Drawing.Point(121, 12);
-            this.PlanImport.Margin = new System.Windows.Forms.Padding(4);
-            this.PlanImport.Name = "PlanImport";
-            this.PlanImport.Size = new System.Drawing.Size(71, 31);
-            this.PlanImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.PlanImport.TabIndex = 18;
-            this.PlanImport.Text = "导入";
-            this.PlanImport.Click += new System.EventHandler(this.PlanImport_Click);
-            // 
-            // btnExtract
-            // 
-            this.btnExtract.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnExtract.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnExtract.Location = new System.Drawing.Point(501, 12);
-            this.btnExtract.Margin = new System.Windows.Forms.Padding(4);
-            this.btnExtract.Name = "btnExtract";
-            this.btnExtract.Size = new System.Drawing.Size(100, 31);
-            this.btnExtract.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnExtract.TabIndex = 17;
-            this.btnExtract.Text = "提取";
-            this.btnExtract.Click += new System.EventHandler(this.btnExtract_Click);
-            // 
-            // BtAllSelect
-            // 
-            this.BtAllSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.BtAllSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.BtAllSelect.Location = new System.Drawing.Point(213, 12);
-            this.BtAllSelect.Margin = new System.Windows.Forms.Padding(4);
-            this.BtAllSelect.Name = "BtAllSelect";
-            this.BtAllSelect.Size = new System.Drawing.Size(105, 31);
-            this.BtAllSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.BtAllSelect.TabIndex = 15;
-            this.BtAllSelect.Text = "全选/全不选";
-            this.BtAllSelect.Click += new System.EventHandler(this.BtAllSelect_Click);
-            // 
-            // tabItem1
-            // 
-            this.tabItem1.AttachedControl = this.tabControlPanel1;
-            this.tabItem1.Name = "tabItem1";
-            this.tabItem1.Text = "物料计划";
-            this.tabItem1.Click += new System.EventHandler(this.tabItem1_Click);
             // 
             // tabControlPanel3
             // 
@@ -1127,26 +1127,26 @@ namespace Global.Purchase
             this.查找供应商ToolStripMenuItem,
             this.查找生产商ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 92);
             // 
             // 拆分ToolStripMenuItem
             // 
             this.拆分ToolStripMenuItem.Name = "拆分ToolStripMenuItem";
-            this.拆分ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.拆分ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.拆分ToolStripMenuItem.Text = "拆分";
             this.拆分ToolStripMenuItem.Click += new System.EventHandler(this.拆分ToolStripMenuItem_Click);
             // 
             // 查找供应商ToolStripMenuItem
             // 
             this.查找供应商ToolStripMenuItem.Name = "查找供应商ToolStripMenuItem";
-            this.查找供应商ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.查找供应商ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.查找供应商ToolStripMenuItem.Text = "查找供应商";
             this.查找供应商ToolStripMenuItem.Click += new System.EventHandler(this.查找供应商ToolStripMenuItem_Click);
             // 
             // 查找生产商ToolStripMenuItem
             // 
             this.查找生产商ToolStripMenuItem.Name = "查找生产商ToolStripMenuItem";
-            this.查找生产商ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.查找生产商ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.查找生产商ToolStripMenuItem.Text = "查找生产商";
             this.查找生产商ToolStripMenuItem.Click += new System.EventHandler(this.查找生产商ToolStripMenuItem_Click);
             // 
@@ -1165,13 +1165,13 @@ namespace Global.Purchase
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemRequirement)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            this.tabControlPanel1.ResumeLayout(false);
+            this.tabControlPanel1.PerformLayout();
             this.tabControlPanel4.ResumeLayout(false);
             this.tabControlPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvHistory)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.tabControlPanel1.ResumeLayout(false);
-            this.tabControlPanel1.PerformLayout();
             this.tabControlPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DgvEdited)).EndInit();
             this.tabControlPanel5.ResumeLayout(false);

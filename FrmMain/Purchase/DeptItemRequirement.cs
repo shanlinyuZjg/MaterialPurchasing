@@ -717,7 +717,7 @@ VendorNumber AS 供应商码,VendorName AS 供应商名,ManufacturerNumber AS �
 "	SolidBuyList_Handle.PricePreTax,\n" +
 "	SolidBuyList_Handle.TaxRate,\n" +
 "	SolidBuyList_Handle.Confirmer,\n" +
-"	SolidBuyList_Handle.Remark \n" +
+"	SolidBuyList_Handle.Remark, \n" +
 "	SolidBuyList_Handle.Purchaser, \n" +
 "	SolidBuyList_Handle.PlanBuyQuantity" +
                     ") SELECT\n" +
@@ -748,10 +748,10 @@ CfQuantity +
 "	SolidBuyList_Handle.PricePreTax,\n" +
 "	SolidBuyList_Handle.TaxRate,\n" +
 "	SolidBuyList_Handle.Confirmer,\n" +
-"	SolidBuyList_Handle.Remark \n" +
+"	SolidBuyList_Handle.Remark, \n" +
 "	SolidBuyList_Handle.Purchaser, \n" +
-"	SolidBuyList_Handle.PlanBuyQuantity"+
-"FROM\n" +
+"	SolidBuyList_Handle.PlanBuyQuantity\n"+
+"   FROM\n" +
 "	dbo.SolidBuyList_Handle where ID = " + dgvEdit["ID", RowIndex].Value.ToString();
                 cmd.ExecuteNonQuery();
 
