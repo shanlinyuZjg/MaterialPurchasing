@@ -457,6 +457,7 @@ namespace Global.Purchase
 	                                            T1.LineUM AS 单位,	                                         
 	                                            T1.UnitPrice AS 单价,
 	                                            T1.POItemQuantity AS 订购数量,
+                                                T1.QualityCheckStandard AS 请验标准,
 	                                            T1.DemandDeliveryDate AS 要求到货日,
 	                                            
                                                 T1.ActualDeliveryQuantity AS 实际到货数量,
@@ -879,8 +880,8 @@ namespace Global.Purchase
 
         private void tbQualityStandard_Click(object sender, EventArgs e)
         {
-            tbQualityStandard.Text = "";
-            tbQualityStandard.ForeColor = Color.Black;
+            //tbQualityStandard.Text = "";
+            //tbQualityStandard.ForeColor = Color.Black;
         }
 
         private void btnUpdateReceivedTotalQuantity_Click(object sender, EventArgs e)

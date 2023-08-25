@@ -46,6 +46,7 @@
             this.styleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);
             this.tabControl1 = new DevComponents.DotNetBar.TabControl();
             this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
+            this.btnUpdateReceivedTotalQuantity = new DevComponents.DotNetBar.ButtonX();
             this.tbQualityStandard = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbReceiveRecordQuantity = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX10 = new DevComponents.DotNetBar.LabelX();
@@ -77,7 +78,6 @@
             this.tabItem4 = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabItem3 = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabItem2 = new DevComponents.DotNetBar.TabItem(this.components);
-            this.btnUpdateReceivedTotalQuantity = new DevComponents.DotNetBar.ButtonX();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -345,6 +345,18 @@
             this.tabControlPanel1.TabIndex = 1;
             this.tabControlPanel1.TabItem = this.tabItem1;
             // 
+            // btnUpdateReceivedTotalQuantity
+            // 
+            this.btnUpdateReceivedTotalQuantity.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnUpdateReceivedTotalQuantity.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnUpdateReceivedTotalQuantity.Location = new System.Drawing.Point(796, 47);
+            this.btnUpdateReceivedTotalQuantity.Name = "btnUpdateReceivedTotalQuantity";
+            this.btnUpdateReceivedTotalQuantity.Size = new System.Drawing.Size(82, 23);
+            this.btnUpdateReceivedTotalQuantity.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnUpdateReceivedTotalQuantity.TabIndex = 53;
+            this.btnUpdateReceivedTotalQuantity.Text = "到货数量更新";
+            this.btnUpdateReceivedTotalQuantity.Click += new System.EventHandler(this.btnUpdateReceivedTotalQuantity_Click);
+            // 
             // tbQualityStandard
             // 
             // 
@@ -361,7 +373,6 @@
             this.tbQualityStandard.TabIndex = 25;
             this.tbQualityStandard.Click += new System.EventHandler(this.tbQualityStandard_Click);
             this.tbQualityStandard.TextChanged += new System.EventHandler(this.tbItemNumber_TextChanged);
-            this.tbQualityStandard.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbItemNumber_KeyPress);
             // 
             // tbReceiveRecordQuantity
             // 
@@ -748,18 +759,6 @@
             this.tabItem2.Name = "tabItem2";
             this.tabItem2.Text = "分批到货确认";
             this.tabItem2.Visible = false;
-            // 
-            // btnUpdateReceivedTotalQuantity
-            // 
-            this.btnUpdateReceivedTotalQuantity.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnUpdateReceivedTotalQuantity.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnUpdateReceivedTotalQuantity.Location = new System.Drawing.Point(796, 47);
-            this.btnUpdateReceivedTotalQuantity.Name = "btnUpdateReceivedTotalQuantity";
-            this.btnUpdateReceivedTotalQuantity.Size = new System.Drawing.Size(82, 23);
-            this.btnUpdateReceivedTotalQuantity.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnUpdateReceivedTotalQuantity.TabIndex = 53;
-            this.btnUpdateReceivedTotalQuantity.Text = "到货数量更新";
-            this.btnUpdateReceivedTotalQuantity.Click += new System.EventHandler(this.btnUpdateReceivedTotalQuantity_Click);
             // 
             // POItemConfirmAPIS
             // 

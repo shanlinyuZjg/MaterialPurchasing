@@ -302,7 +302,9 @@
             this.cbbTaxRate.FormattingEnabled = true;
             this.cbbTaxRate.Items.AddRange(new object[] {
             "0.13",
-            "0.16"});
+            "0.16",
+            "0",
+            "0.09"});
             this.cbbTaxRate.Location = new System.Drawing.Point(656, 34);
             this.cbbTaxRate.Name = "cbbTaxRate";
             this.cbbTaxRate.Size = new System.Drawing.Size(48, 20);

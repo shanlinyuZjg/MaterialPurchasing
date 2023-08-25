@@ -106,7 +106,7 @@ namespace Global
             // Application.Run(new Finance.RawMaterialInfo());
             //        Application.Run(new Purchase.OldRecord("P11"));//SO  SFS
             //Application.Run(new FrmWarehouseDeptStockKeeper("S13", "Zx789789", "张霞", "SFS"));
-            //Application.Run(new FrmWarehouseDeptStockKeeper("S32", "Zx234567", "吕继美", "SFS")); //
+            //Application.Run(new FrmWarehouseDeptStockKeeper("S32", "Zx555555", "张霞", "SFS")); 
             //Application.Run(new FrmWarehouseDeptStockKeeper("S95", "zmC11111", "朱梅翠", "SOFS"));
             //Application.Run(new FrmWarehouseDeptStockKeeper("S78", "zmC11111", "石娜", "SO"));
             //Application.Run(new FrmWarehouseDeptStockKeeper("S72", "zmC11111", "曹杰", "SOFS"));
