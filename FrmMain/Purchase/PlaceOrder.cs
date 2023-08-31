@@ -1194,22 +1194,12 @@ namespace Global.Purchase
                 Custom.MsgEx("税后价格不能为空或为0！");
                 return;
             }
-
-            if(tbItemNumber.Text.Trim().Substring(0,1) == "M")
+            if (string.IsNullOrWhiteSpace(tbRequireDept.Text) )
             {
-                if (string.IsNullOrWhiteSpace(tbRequireDept.Text) || tbRequireDept.Text == "多部门时，写明数量")
-                {
-                    Custom.MsgEx("请填写本次采购需求部门！");
-                    return;
-                }
+                Custom.MsgEx("请填写需求部门！");
+                return;
             }
-            else
-            {
-                if (string.IsNullOrWhiteSpace(tbRequireDept.Text) || tbRequireDept.Text == "多部门时，写明数量")
-                {
-                    tbRequireDept.Text = "";
-                }
-            }
+           
 
 
             if ((tbPONumberInDetail.Text.Substring(0,2) == "PF" &&(tbPONumberInDetail.Text.Substring(11, 1) == "1" || tbPONumberInDetail.Text.Substring(11,1) == "2" || tbPONumberInDetail.Text.Substring(11, 1) == "3")) || tbPONumberInDetail.Text.Substring(0, 2) == "PJ")
@@ -4672,11 +4662,6 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
             po.ShowDialog();
         }
 
-        private void tbRequireDept_Click(object sender, EventArgs e)
-        {
-            tbRequireDept.Text = "";
-        }
-
         private void 打开改行物料ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string poNumber = tbPONumberInDetail.Text.Trim();
@@ -4802,6 +4787,29 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
             else
             {
                 FSFunctionLib.FSErrorMsg("操作失败");
+            }
+        }
+
+        private void tbRequireDept_TextUpdate(object sender, EventArgs e)
+        {
+            tbRequireDept.Items.Clear();
+            string StrRequireDept = tbRequireDept.Text.Trim();
+            DataTable dt = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, $@"select RequireDept from [dbo].[PurchaseOrderRecordRequireDepts] where Status=1 and RequireDept like '%{StrRequireDept}%'");
+            foreach (DataRow dr in dt.Rows)
+            {
+                tbRequireDept.Items.Add(dr["RequireDept"].ToString().Trim());
+            }
+            this.tbRequireDept.SelectionStart = this.tbRequireDept.Text.Length;
+        }
+
+        private void tbRequireDept_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (tbRequireDept.Items.Count > 0)
+                    tbRequireDept.SelectedIndex = 0;
+
+                this.tbRequireDept.SelectionStart = this.tbRequireDept.Text.Length;
             }
         }
     }
