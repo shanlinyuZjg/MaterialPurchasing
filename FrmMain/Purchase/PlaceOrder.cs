@@ -1150,12 +1150,32 @@ namespace Global.Purchase
             if (e.KeyChar == (char)13)
             {
                 tbItemNumber.Focus();
+                int abc = 0;
+                if (tbForeignNumber.Text.Contains("A"))
+                {
+                    tbRequireDept.Text = "国际业务一部";
+                    abc++;
+                }
+                if (tbForeignNumber.Text.Contains("B"))
+                {
+                    tbRequireDept.Text = "国际业务二部";
+                    abc++;
+                }
+                if (tbForeignNumber.Text.Contains("C"))
+                {
+                    tbRequireDept.Text = "国际业务三部";
+                    abc++;
+                }
+                if (tbForeignNumber.Text == "0000" || abc > 1)
+                {
+                    tbRequireDept.Text = "国际业务部（公用）";
+                }
             }
         }
 
         private void tbItemNumber_TextChanged(object sender, EventArgs e)
         {
-            tbItemNumber.Text = tbItemNumber.Text.ToUpper();
+            tbItemNumber.Text = tbItemNumber.Text.Trim().ToUpper();
             tbItemNumber.SelectionStart = tbItemNumber.Text.Length;//避免光标在输入字母的前面
         }
 
@@ -1194,14 +1214,11 @@ namespace Global.Purchase
                 Custom.MsgEx("税后价格不能为空或为0！");
                 return;
             }
-            if (string.IsNullOrWhiteSpace(tbRequireDept.Text) )
+            if (string.IsNullOrWhiteSpace(tbRequireDept.Text) && ((tbUM.Tag.ToString() == "Y" && tbItemNumber.Text.StartsWith("A"))|| !tbItemNumber.Text.StartsWith("A")))
             {
                 Custom.MsgEx("请填写需求部门！");
                 return;
             }
-           
-
-
             if ((tbPONumberInDetail.Text.Substring(0,2) == "PF" &&(tbPONumberInDetail.Text.Substring(11, 1) == "1" || tbPONumberInDetail.Text.Substring(11,1) == "2" || tbPONumberInDetail.Text.Substring(11, 1) == "3")) || tbPONumberInDetail.Text.Substring(0, 2) == "PJ")
             {
                 isDirectFOOrder = 1;
