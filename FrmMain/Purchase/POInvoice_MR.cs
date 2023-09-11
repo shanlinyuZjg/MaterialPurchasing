@@ -288,6 +288,24 @@ namespace Global.Purchase
             {
                 if (Convert.ToBoolean(Dgv1["Check", i].Value))
                 {
+                    #region 当采购单号、行号、数量、单价 完全一致时，四班默认按照APReceiptLineKey从小到大核销，无法精确核销；最小key检查。
+                    for (int a = 0; a < Dgv1.Rows.Count; a++)
+                    {
+                        if (!Convert.ToBoolean(Dgv1["Check", a].Value))
+                        {
+                            if (Dgv1["采购单号", a].Value.ToString()== Dgv1["采购单号", i].Value.ToString() && Dgv1["行号", a].Value.ToString() == Dgv1["行号", i].Value.ToString() && Dgv1["入库量", a].Value.ToString() == Dgv1["入库量", i].Value.ToString() && Dgv1["单价", a].Value.ToString() == Dgv1["单价", i].Value.ToString())
+                            {
+                                if (Convert.ToInt64(Dgv1["KEY", a].Value) < Convert.ToInt64(Dgv1["KEY", i].Value))
+                                {
+                                    MessageBox.Show("当采购单号、行号、数量、单价 完全一致时,请选择KEY小的行,已红色标识。");
+                                    Dgv1.Rows[i].DefaultCellStyle.ForeColor = Color.Red;
+                                    Dgv1.Rows[a].DefaultCellStyle.ForeColor = Color.Red;
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                    #endregion
                     dt1.Rows.Add((Dgv1.Rows[i].DataBoundItem as DataRowView).Row.ItemArray);
                 }
             }
