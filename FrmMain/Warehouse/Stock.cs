@@ -2731,7 +2731,7 @@ namespace Global.Warehouse
                         dtTemp.Rows[i]["公司批号"] = dtTemp.Rows[i]["物料代码"].ToString().Substring(0, 1) + dtpLotNumber.Value.ToString("yyMMdd") + sequenceNumber + StockUser.Number;
                     }
                 }
-                else if (dtTemp.Rows[i]["物料代码"].ToString().ToUpper().Substring(1, 1) == "X" || dtTemp.Rows[i]["物料代码"].ToString().ToUpper().Substring(1, 1) == "Y")
+                else if (dtTemp.Rows[i]["物料代码"].ToString().ToUpper().Substring(1, 1) == "X" || dtTemp.Rows[i]["物料代码"].ToString().ToUpper().Substring(1, 1) == "Y" || dtTemp.Rows[i]["物料代码"].ToString().ToUpper().Substring(1, 1) == "B")
                 {
                     dtTemp.Rows[i]["公司批号"] = dtTemp.Rows[i]["物料代码"].ToString().Substring(0, 1) + dtpLotNumber.Value.ToString("yyMMdd") + sequenceNumber + StockUser.Number;
                 }
