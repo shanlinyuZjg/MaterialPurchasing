@@ -983,32 +983,39 @@ namespace Global.Warehouse
                 string guid = dr["Guid"].ToString();
 
                 //GUID STATUS=1 确认
-                if (SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, "Select *  From PurchaseOrderRecordHistoryByCMF Where Guid='" + guid + "' and Status = 1").Rows.Count != 1)
+                if (SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, "Select *  From PurchaseOrderRecordHistoryByCMF Where Guid='" + guid + "' and Status = 1 and PORVfs = 0").Rows.Count != 1)
+                {
                     continue;
+                }
+                //PORVfs +1后再操作四班入库
+                if (!SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, $@"update PurchaseOrderRecordHistoryByCMF set PORVfs=PORVfs+1 Where Guid='{guid}' and Status = 1 and PORVfs = 0"))
+                {
+                    continue;
+                }
                 //如果是五金辅助材料的库管员
                 if (StockUser.Type == "A")
                 {
                     if (PORVA(dr, out strReturn))
                     {
                         //更新订单中物料状态为已入库
-                        string sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set Status = 2,FSOperateDateTime = '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "',FSOperateDate='" + DateTime.Now.ToString("yyyy-MM-dd") + "',FSOperator='" + StockUser.UserID + "' Where Guid='" + guid + "'";
+                        string sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set Status = 2,FSOperateDateTime = '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "',FSOperateDate='" + DateTime.Now.ToString("yyyy-MM-dd") + "',FSOperator='" + StockUser.UserID + "',SubmitPORVlog=SubmitPORVlog+'PORVA:" + StockUser.UserID + "," + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ";' Where Guid='" + guid + "' and Status = 1 and PORVfs = 1";
                         try
                         {
                             if (!SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
                             {
-                                dgvPODetailFS.DataSource = GetReceivedRecordByStatus(1);
-                                dgvPODetailFS.Columns["Guid"].Visible = false;
-                                dgvPODetailFS.Columns["Status"].Visible = false;
+                                MessageBox.Show($@"采购单号:{dr["采购单号"].ToString()}行号:{dr["行号"].ToString()}四班已入库，但本程序内更改状态失败，请联系软件服务处！");
+                                //dgvFSRefresh();
+                                //return;
                             }
                             else
-                            {
-                                dgvPODetailFS.DataSource = GetReceivedRecordByStatus(1);
-                                dgvPODetailFS.Columns["Guid"].Visible = false;
-                                dgvPODetailFS.Columns["Status"].Visible = false;
+                            {                             
                             }
+                            //dgvPODetailFS.DataSource = GetReceivedRecordByStatus(1);
+                            //dgvPODetailFS.Columns["Guid"].Visible = false;
+                            //dgvPODetailFS.Columns["Status"].Visible = false;
                         }
                         catch (Exception ex)
-                        {
+                        {                           
                             Custom.MsgEx(ex.Message);
                         }
                         try
@@ -1024,6 +1031,7 @@ namespace Global.Warehouse
                     }
                     else
                     {
+                        SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, $@"update PurchaseOrderRecordHistoryByCMF set PORVfs=PORVfs-1 Where Guid='{guid}' and Status = 1 and PORVfs = 1");
                         if (!string.IsNullOrEmpty(strReturn))
                         {
                             errorList.Add(strReturn);
@@ -1035,20 +1043,18 @@ namespace Global.Warehouse
                     if (PORVM(dr, out strReturn))
                     {
                         //更新订单中物料状态为已入库
-                        string sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set Status = 2,FSOperateDateTime = '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "',FSOperateDate='" + DateTime.Now.ToString("yyyy-MM-dd") + "',FSOperator='" + StockUser.UserID + "' Where Guid='" + guid + "'";
+                        string sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set Status = 2,FSOperateDateTime = '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "',FSOperateDate='" + DateTime.Now.ToString("yyyy-MM-dd") + "',FSOperator='" + StockUser.UserID + "',SubmitPORVlog=SubmitPORVlog+'PORVM:" + StockUser.UserID + "," + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ";' Where Guid='" + guid + "' and Status = 1 and PORVfs = 1";
                         try
                         {
                             if (!SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
                             {
-                                dgvPODetailFS.DataSource = GetReceivedRecordByStatus(1);
-                                dgvPODetailFS.Columns["Guid"].Visible = false;
-                                dgvPODetailFS.Columns["Status"].Visible = false;
+                                MessageBox.Show($@"采购单号:{dr["采购单号"].ToString()}行号:{dr["行号"].ToString()}四班已入库，但本程序内更改状态失败，请联系软件服务处！");
                             }
                             else
                             {
-                                dgvPODetailFS.DataSource = GetReceivedRecordByStatus(1);
-                                dgvPODetailFS.Columns["Guid"].Visible = false;
-                                dgvPODetailFS.Columns["Status"].Visible = false;
+                                //dgvPODetailFS.DataSource = GetReceivedRecordByStatus(1);
+                                //dgvPODetailFS.Columns["Guid"].Visible = false;
+                                //dgvPODetailFS.Columns["Status"].Visible = false;
                             }
                         }
                         catch (Exception ex)
@@ -1066,6 +1072,7 @@ namespace Global.Warehouse
                     }
                     else
                     {
+                        SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, $@"update PurchaseOrderRecordHistoryByCMF set PORVfs=PORVfs-1 Where Guid='{guid}' and Status = 1 and PORVfs = 1");
                         if (!string.IsNullOrEmpty(strReturn))
                         {
                             errorList.Add(strReturn);
@@ -1077,20 +1084,18 @@ namespace Global.Warehouse
                     if (PORV(dr, out strReturn))
                     {
                         //更新订单中物料状态为已入库
-                        string sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set Status = 2,FSOperateDateTime = '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "',FSOperateDate='" + DateTime.Now.ToString("yyyy-MM-dd") + "',FSOperator='" + StockUser.UserID + "' Where Guid='" + guid + "'";
+                        string sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set Status = 2,FSOperateDateTime = '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "',FSOperateDate='" + DateTime.Now.ToString("yyyy-MM-dd") + "',FSOperator='" + StockUser.UserID + "',SubmitPORVlog=SubmitPORVlog+'PORV:" + StockUser.UserID + "," + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ";' Where Guid='" + guid + "' and Status = 1 and PORVfs = 1";
                         try
                         {
                             if (!SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
                             {
-                                dgvPODetailFS.DataSource = GetReceivedRecordByStatus(1);
-                                dgvPODetailFS.Columns["Guid"].Visible = false;
-                                dgvPODetailFS.Columns["Status"].Visible = false;
+                                MessageBox.Show($@"采购单号:{dr["采购单号"].ToString()}行号:{dr["行号"].ToString()}四班已入库，但本程序内更改状态失败，请联系软件服务处！");
                             }
                             else
                             {
-                                dgvPODetailFS.DataSource = GetReceivedRecordByStatus(1);
-                                dgvPODetailFS.Columns["Guid"].Visible = false;
-                                dgvPODetailFS.Columns["Status"].Visible = false;
+                                //dgvPODetailFS.DataSource = GetReceivedRecordByStatus(1);
+                                //dgvPODetailFS.Columns["Guid"].Visible = false;
+                                //dgvPODetailFS.Columns["Status"].Visible = false;
                             }
                         }
                         catch (Exception ex)
@@ -1108,6 +1113,7 @@ namespace Global.Warehouse
                     }
                     else
                     {
+                        SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, $@"update PurchaseOrderRecordHistoryByCMF set PORVfs=PORVfs-1 Where Guid='{guid}' and Status = 1 and PORVfs = 1");
                         if (!string.IsNullOrEmpty(strReturn))
                         {
                             errorList.Add(strReturn);
@@ -1118,6 +1124,7 @@ namespace Global.Warehouse
             }
 
             FSFunctionLib.FSExit();
+            dgvFSRefresh();
             if (errorList.Count > 0)
             {
                 Custom.MsgEx("四班写入出现报错，请查看报错内容！");
@@ -2545,7 +2552,7 @@ namespace Global.Warehouse
                     {
                         itemType = StockUser.Type;
                     }
-                    string sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set Status = 1,SubmitOperateDateTime='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "',ItemReceiveType ='" + itemType + "'     Where Guid = '" + dtTemp.Rows[i]["Guid"].ToString() + "' and Status = 0";
+                    string sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set Status = 1,SubmitOperateDateTime='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "',ItemReceiveType ='" + itemType + "',SubmitPORVlog=SubmitPORVlog+'Submit:" + StockUser.UserID + "," + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ";' Where Guid = '" + dtTemp.Rows[i]["Guid"].ToString() + "' and Status = 0";
 
                     sqlList.Add(sqlUpdate);
                 }
@@ -2915,11 +2922,11 @@ namespace Global.Warehouse
                         //A类表示五金类物料
                         if(dgvr.Cells["ItemReceiveType"].Value.ToString() == "A")
                         {
-                            sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set Status =9  Where Guid='" + dgvr.Cells["Guid"].Value.ToString() + "' and Status =1";
+                            sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set Status =9,SubmitPORVlog=SubmitPORVlog+'退回库管:" + StockUser.UserID + "," + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ";'  Where Guid='" + dgvr.Cells["Guid"].Value.ToString() + "' and Status =1 and PORVfs=0";
                         }
                         else
                         {
-                            sqlUpdate =@"Update PurchaseOrderRecordHistoryByCMF Set Status =0  Where Guid='" + dgvr.Cells["Guid"].Value.ToString() + "' and Status =1";
+                            sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set Status =0,SubmitPORVlog=SubmitPORVlog+'退回库管:" + StockUser.UserID + "," + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ";'  Where Guid='" + dgvr.Cells["Guid"].Value.ToString() + "' and Status =1 and PORVfs=0";
                         }
                             
                         sqlList.Add(sqlUpdate);
@@ -2936,14 +2943,15 @@ namespace Global.Warehouse
             if (SQLHelper.BatchExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlList))
             {
                 Custom.MsgEx("更新成功！");
-                dgvPODetailFS.DataSource = GetReceivedRecordByStatus(1);
-                dgvPODetailFS.Columns["Guid"].Visible = false;
-                dgvPODetailFS.Columns["Status"].Visible = false;
+                //dgvPODetailFS.DataSource = GetReceivedRecordByStatus(1);
+                //dgvPODetailFS.Columns["Guid"].Visible = false;
+                //dgvPODetailFS.Columns["Status"].Visible = false;
             }
             else
             {
                 Custom.MsgEx("更新失败！");
             }
+            dgvFSRefresh();
         }
 
 
@@ -3975,7 +3983,7 @@ namespace Global.Warehouse
                 {
                     if (dgvr.Cells["Status"].Value.ToString() == "1")
                     {
-                        string sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set Status = 2,FSOperateDateTime = '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "',FSOperateDate='" + DateTime.Now.ToString("yyyy-MM-dd") + "',FSOperator='" + StockUser.UserID + "|手工' Where Guid='" + dgvr.Cells["Guid"].Value.ToString() + "' and Status = 1";
+                        string sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set Status = 2,FSOperateDateTime = '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "',FSOperateDate='" + DateTime.Now.ToString("yyyy-MM-dd") + "',FSOperator='" + StockUser.UserID + "|手工',SubmitPORVlog=SubmitPORVlog+'手工PORV:" + StockUser.UserID + "," + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ";' Where Guid='" + dgvr.Cells["Guid"].Value.ToString() + "' and Status = 1";
                         //string sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set Status =2,FSOperateDateTime='"+DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+"'  Where Guid='" + dgvr.Cells["Guid"].Value.ToString() + "'";
                         sqlList.Add(sqlUpdate);
                     }
@@ -4006,14 +4014,15 @@ namespace Global.Warehouse
                     MessageBoxEx.Show("物料计划：" + ex2.Message);
                 }
                 Custom.MsgEx("更新成功！");
-                dgvPODetailFS.DataSource = GetReceivedRecordByStatus(1);
-                dgvPODetailFS.Columns["Guid"].Visible = false;
-                dgvPODetailFS.Columns["Status"].Visible = false;
+                //dgvPODetailFS.DataSource = GetReceivedRecordByStatus(1);
+                //dgvPODetailFS.Columns["Guid"].Visible = false;
+                //dgvPODetailFS.Columns["Status"].Visible = false;
             }
             else
             {
                 Custom.MsgEx("更新失败！");
             }
+            dgvFSRefresh();
         }
 
             private void dgvVialsDetail_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -4211,6 +4220,7 @@ namespace Global.Warehouse
                 {
                     sqlCriteria = " And 1 =1";
                 }
+            sqlCriteria += "order by CreatedDateTime";
                 return SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect + sqlCriteria);
             }
             private void btnFSMakeAllCheck_Click(object sender, EventArgs e)
@@ -4260,7 +4270,7 @@ namespace Global.Warehouse
                 {
                     if (Convert.ToBoolean(dgvr.Cells["ACheck"].Value))
                     {
-                        string sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set ReceiveQuantity=" + Convert.ToDouble(dgvr.Cells["入库量"].Value) + ",ReceiveDate='" + DateTime.Now.ToString("yyyy-MM-dd") + "',SubmitOperateDateTime='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "',Operator='" + StockUser.UserID + "',IsDirectERP=1,Status = 1 Where Guid = '" + dgvr.Cells["Guid"].Value.ToString() + "'";
+                        string sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set ReceiveQuantity=" + Convert.ToDouble(dgvr.Cells["入库量"].Value) + ",ReceiveDate='" + DateTime.Now.ToString("yyyy-MM-dd") + "',SubmitOperateDateTime='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "',Operator='" + StockUser.UserID + "',IsDirectERP=1,Status = 1,SubmitPORVlog=SubmitPORVlog+'Submit:" + StockUser.UserID+","+ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ";'  Where Guid = '" + dgvr.Cells["Guid"].Value.ToString() + "' and Status = 9";
                         sqlList.Add(sqlUpdate);
                     }
                 }
@@ -6283,7 +6293,7 @@ namespace Global.Warehouse
             {
                 if (Convert.ToBoolean(dgvr.Cells["ACheck"].Value))
                 {
-                    string sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set ReceiveQuantity=" + Convert.ToDouble(dgvr.Cells["入库量"].Value) + ",ReceiveDate='" + DateTime.Now.ToString("yyyy-MM-dd") + "',SubmitOperateDateTime='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "',Operator='" + StockUser.UserID + "',IsDirectERP=1,Status = 0 Where Guid = '" + dgvr.Cells["Guid"].Value.ToString() + "'";
+                    string sqlUpdate = @"Update PurchaseOrderRecordHistoryByCMF Set ReceiveQuantity=" + Convert.ToDouble(dgvr.Cells["入库量"].Value) + ",ReceiveDate='" + DateTime.Now.ToString("yyyy-MM-dd") + "',SubmitOperateDateTime='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "',Operator='" + StockUser.UserID + "',IsDirectERP=1,Status = 0 Where Guid = '" + dgvr.Cells["Guid"].Value.ToString() + "' and Status = 9";
                     sqlList.Add(sqlUpdate);
                 }
             }

@@ -128,6 +128,7 @@ namespace Global.Purchase
             {
                 Custom.MsgEx("订单提交失败");
             }
+            btnViewAllItems_Click(sender,e);
         }
 
         private void AssistantItems_Load(object sender, EventArgs e)
