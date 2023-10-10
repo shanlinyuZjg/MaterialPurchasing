@@ -550,20 +550,20 @@ namespace Global.Warehouse
             int IsRequireCleanBJ = 0;
             if (DR["IsRequireClean"] == DBNull.Value)
             {
-                Report.ParameterByName("IsRequireClean").AsString = "外包装是否需要清洁\r\n（□是   □否）";
+                Report.ParameterByName("IsRequireClean").AsString = "外包装是否清洁\r\n（□是   □否）";
             }
             else if (DR["IsRequireClean"].ToString() == "是")
             {
-                Report.ParameterByName("IsRequireClean").AsString = "外包装是否需要清洁\r\n（☑是   □否）";
+                Report.ParameterByName("IsRequireClean").AsString = "外包装是否清洁\r\n（☑是   □否）";
             }
             else if (DR["IsRequireClean"].ToString() == "否")
             {
-                Report.ParameterByName("IsRequireClean").AsString = "外包装是否需要清洁\r\n（□是   ☑否）";
+                Report.ParameterByName("IsRequireClean").AsString = "外包装是否清洁\r\n（□是   ☑否）";
                 IsRequireCleanBJ = 1;
             }
             else
             {
-                Report.ParameterByName("IsRequireClean").AsString = "外包装是否需要清洁\r\n（□是   □否）";
+                Report.ParameterByName("IsRequireClean").AsString = "外包装是否清洁\r\n（□是   □否）";
             }
             if (IsRequireCleanBJ == 1)
             {
