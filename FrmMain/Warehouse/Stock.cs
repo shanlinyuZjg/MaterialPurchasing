@@ -1189,115 +1189,125 @@ namespace Global.Warehouse
         //原辅料特殊物料：A类试剂、鑫泉生产的原料，库管员操作入库，只走账
         private bool PORVM(DataRow dr, out string strError)
         {
-            strError = "";
-            PORV01 porv01 = new PORV01();
-            porv01.PONumber.Value = dr["采购单号"].ToString();
-            porv01.POLineNumber.Value = dr["行号"].ToString();
-            porv01.POLineUM.Value = dr["单位"].ToString();
-            porv01.POReceiptActionType.Value = "R";
-            porv01.Stockroom1.Value = dr["库"].ToString();
-            porv01.Bin1.Value = dr["位"].ToString();
-            porv01.InventoryCategory1.Value = "O";
-            porv01.InspectionCode1.Value = "G";//;
-            porv01.ReceiptQuantityMove1.Value = dr["入库数量"].ToString();
-            porv01.POLineType.Value = "P";
-            porv01.ItemNumber.Value = dr["物料代码"].ToString();
-            porv01.PromisedDate.Value = dr["承诺交货日"].ToString();
-            porv01.NewLot.Value = "Y";
-            if (dr["LotNumberAssign"].ToString() == "C" || dr["物料代码"].ToString().Contains("M"))
+            try
             {
-                porv01.LotNumberAssignmentPolicy.Value = "C";
-                if (dr["公司批号"] == DBNull.Value || string.IsNullOrEmpty(dr["公司批号"].ToString()))
+                strError = "";
+                PORV01 porv01 = new PORV01();
+                porv01.PONumber.Value = dr["采购单号"].ToString();
+                porv01.POLineNumber.Value = dr["行号"].ToString();
+                porv01.POLineUM.Value = dr["单位"].ToString();
+                porv01.POReceiptActionType.Value = "R";
+                porv01.Stockroom1.Value = dr["库"].ToString();
+                porv01.Bin1.Value = dr["位"].ToString();
+                porv01.InventoryCategory1.Value = "O";
+                porv01.InspectionCode1.Value = "G";//;
+                porv01.ReceiptQuantityMove1.Value = dr["入库数量"].ToString();
+                porv01.POLineType.Value = "P";
+                porv01.ItemNumber.Value = dr["物料代码"].ToString();
+                porv01.PromisedDate.Value = dr["承诺交货日"].ToString();
+                porv01.NewLot.Value = "Y";
+                if (dr["LotNumberAssign"].ToString() == "C" || dr["物料代码"].ToString().Contains("M"))
                 {
-                    porv01.LotNumberDefault.Value = dr["厂家批号"].ToString().ToUpper();
-                    porv01.LotNumber.Value = dr["厂家批号"].ToString().ToUpper();
-                }
-                else if (dr["厂家批号"] == DBNull.Value || string.IsNullOrEmpty(dr["厂家批号"].ToString()))
-                {
-                    porv01.LotNumberDefault.Value = dr["公司批号"].ToString().ToUpper();
-                    porv01.LotNumber.Value = dr["公司批号"].ToString().ToUpper();
-                }
-                else
-                {
-                    porv01.LotNumberDefault.Value = dr["厂家批号"].ToString().ToUpper();
-                    porv01.LotNumber.Value = dr["厂家批号"].ToString().ToUpper();
-                }
-                porv01.VendorLotNumber.Value = dr["公司批号"].ToString().ToUpper().Trim();
-                string mName = dr["生产商名"].ToString().Trim();
-                if (regEnglish.IsMatch(mName))
-                {
-                    if (mName.Length > 34)
+                    porv01.LotNumberAssignmentPolicy.Value = "C";
+                    if (dr["公司批号"] == DBNull.Value || string.IsNullOrEmpty(dr["公司批号"].ToString()))
                     {
-                        porv01.LotDescription.Value = mName.Substring(0, 34).Replace(" ", "");
+                        porv01.LotNumberDefault.Value = dr["厂家批号"].ToString().ToUpper();
+                        porv01.LotNumber.Value = dr["厂家批号"].ToString().ToUpper();
+                    }
+                    else if (dr["厂家批号"] == DBNull.Value || string.IsNullOrEmpty(dr["厂家批号"].ToString()))
+                    {
+                        porv01.LotNumberDefault.Value = dr["公司批号"].ToString().ToUpper();
+                        porv01.LotNumber.Value = dr["公司批号"].ToString().ToUpper();
                     }
                     else
                     {
-                        porv01.LotDescription.Value = mName.Replace(" ", "");
+                        porv01.LotNumberDefault.Value = dr["厂家批号"].ToString().ToUpper();
+                        porv01.LotNumber.Value = dr["厂家批号"].ToString().ToUpper();
+                    }
+                    porv01.VendorLotNumber.Value = dr["公司批号"].ToString().ToUpper().Trim();
+                    string mName = dr["生产商名"].ToString().Trim();
+                    if (regEnglish.IsMatch(mName))
+                    {
+                        if (mName.Length > 34)
+                        {
+                            porv01.LotDescription.Value = mName.Substring(0, 34).Replace(" ", "");
+                        }
+                        else
+                        {
+                            porv01.LotDescription.Value = mName.Replace(" ", "");
+                        }
+                    }
+                    else
+                    {
+                        if (mName.Length > 17)
+                        {
+                            porv01.LotDescription.Value = mName.Substring(0, 17);
+                        }
+                        else
+                        {
+                            porv01.LotDescription.Value = mName;
+                        }
+                    }
+
+                    porv01.LotUserDefined5.Value = dr["生产商码"].ToString();
+
+
+                    if (dr["到期日期"] != DBNull.Value && !string.IsNullOrWhiteSpace(dr["到期日期"].ToString()))
+                    {
+                        string expiredDate = dr["到期日期"].ToString();
+                        if (expiredDate.Length == 8)//20200527格式
+                        {
+                            porv01.LotExpirationDate.Value = expiredDate.Substring(4, 4) + expiredDate.Substring(2, 2);
+                        }
+                        else if (expiredDate.Length == 10)//2020.05.27格式
+                        {
+                            porv01.LotExpirationDate.Value = expiredDate.Substring(5, 2) + expiredDate.Substring(8, 2) + expiredDate.Substring(2, 2);
+                        }
+                        else
+                        {
+                            //此处的日期格式不符合要求，故意赋值，在写入四班时会报错，用以提示具体报错问题
+                            porv01.LotExpirationDate.Value = expiredDate;
+                        }
+                    }
+                    else
+                    {
+                        porv01.LotExpirationDate.Value = DateTime.Now.AddYears(2).ToString("MMddyy");
                     }
                 }
                 else
                 {
-                    if (mName.Length > 17)
-                    {
-                        porv01.LotDescription.Value = mName.Substring(0, 17);
-                    }
-                    else
-                    {
-                        porv01.LotDescription.Value = mName;
-                    }
+                    porv01.LotNumberAssignmentPolicy.Value = "N";
                 }
+                porv01.POReceiptDate.Value = DateTime.Now.ToString("MMddyy");
 
-                porv01.LotUserDefined5.Value = dr["生产商码"].ToString();
+                //GB2312.GetString(ISO88591.GetBytes(myDR["CustomerName"].ToString()));
+                string transactionString = porv01.GetString(TransactionStringFormat.fsCDF);
+                string str = GB2312.GetString(ISO88591.GetBytes(transactionString));
+                //        MessageBox.Show(str);
+
+                tbTest.Text = str;
 
 
-                if (dr["到期日期"] != DBNull.Value && !string.IsNullOrWhiteSpace(dr["到期日期"].ToString()))
+                strError = "111";
+                //         return false;
+                if (FSFunctionLib.fstiClient.ProcessId(porv01, null))
                 {
-                    string expiredDate = dr["到期日期"].ToString();
-                    if (expiredDate.Length == 8)//20200527格式
-                    {
-                        porv01.LotExpirationDate.Value = expiredDate.Substring(4, 4) + expiredDate.Substring(2, 2);
-                    }
-                    else if (expiredDate.Length == 10)//2020.05.27格式
-                    {
-                        porv01.LotExpirationDate.Value = expiredDate.Substring(5, 2) + expiredDate.Substring(8, 2) + expiredDate.Substring(2, 2);
-                    }
-                    else
-                    {
-                        //此处的日期格式不符合要求，故意赋值，在写入四班时会报错，用以提示具体报错问题
-                        porv01.LotExpirationDate.Value = expiredDate;
-                    }
+                    return true;
                 }
-                else
-                {
-                    porv01.LotExpirationDate.Value = DateTime.Now.AddYears(2).ToString("MMddyy");
-                }
+
+                FSTIError error = FSFunctionLib.fstiClient.TransactionError;
+                DumpErrorObject(porv01, error, listResult);
+                CommonOperate.WriteFSErrorLog("PORVM", porv01, error, FSUserID, dr["采购单号"].ToString() + " " + dr["行号"].ToString());
+                strError = dr["采购单号"].ToString() + " " + dr["行号"].ToString() + " ";
+                return false;
             }
-            else
+            catch (Exception ex)
             {
-                porv01.LotNumberAssignmentPolicy.Value = "N";
+                strError = dr["采购单号"].ToString() + " " + dr["行号"].ToString() + " " + ex.Message;
+                string sqlInsert = @"Insert Into FSErrorLogByCMF (Type,ErrorContent,Operator) Values ('PORVM','" + strError + "','" + FSUserID + "')";
+                SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlInsert);
+                return false;
             }
-            porv01.POReceiptDate.Value = DateTime.Now.ToString("MMddyy");
-
-            //GB2312.GetString(ISO88591.GetBytes(myDR["CustomerName"].ToString()));
-            string transactionString = porv01.GetString(TransactionStringFormat.fsCDF);
-            string str = GB2312.GetString(ISO88591.GetBytes(transactionString));
-            //        MessageBox.Show(str);
-
-            tbTest.Text = str;
-
-
-            strError = "111";
-            //         return false;
-            if (FSFunctionLib.fstiClient.ProcessId(porv01, null))
-            {
-                return true;
-            }
-
-            FSTIError error = FSFunctionLib.fstiClient.TransactionError;
-            DumpErrorObject(porv01, error, listResult);
-            CommonOperate.WriteFSErrorLog("PORV", porv01, error, FSUserID, dr["采购单号"].ToString() + " " + dr["行号"].ToString());
-            strError = dr["采购单号"].ToString() + " " + dr["行号"].ToString() + " ";
-            return false;
         }
         private bool PORVMM(DataRow dr, out string strError)
         {
@@ -1425,259 +1435,280 @@ namespace Global.Warehouse
         //五金库管员操作入库
         private bool PORVA(DataRow dr, out string strError)
         {
-            strError = "";
-            PORV01 porv01 = new PORV01();
-            porv01.PONumber.Value = dr["采购单号"].ToString();
-            porv01.POLineNumber.Value = dr["行号"].ToString();
-            porv01.POLineUM.Value = dr["单位"].ToString();
-            porv01.POReceiptActionType.Value = "R";
-            porv01.Stockroom1.Value = dr["库"].ToString();
-            porv01.Bin1.Value = dr["位"].ToString();
-            //porv01.InventoryCategory1.Value = "O";
-            porv01.ReceiptQuantityMove1.Value = dr["入库数量"].ToString();
-            porv01.POLineType.Value = "P";
-            porv01.ItemNumber.Value = dr["物料代码"].ToString();
-            porv01.PromisedDate.Value = dr["承诺交货日"].ToString();
+            try
+            {
+                strError = "";
+                PORV01 porv01 = new PORV01();
+                porv01.PONumber.Value = dr["采购单号"].ToString();
+                porv01.POLineNumber.Value = dr["行号"].ToString();
+                porv01.POLineUM.Value = dr["单位"].ToString();
+                porv01.POReceiptActionType.Value = "R";
+                porv01.Stockroom1.Value = dr["库"].ToString();
+                porv01.Bin1.Value = dr["位"].ToString();
+                //porv01.InventoryCategory1.Value = "O";
+                porv01.ReceiptQuantityMove1.Value = dr["入库数量"].ToString();
+                porv01.POLineType.Value = "P";
+                porv01.ItemNumber.Value = dr["物料代码"].ToString();
+                porv01.PromisedDate.Value = dr["承诺交货日"].ToString();
 
-            if (dr["检验"].ToString().ToUpper() == "Y")
-            {
-                porv01.InventoryCategory1.Value = "I";
-                porv01.InspectionCode1.Value = "N";//;
-            }
-            else
-            {
-                porv01.InventoryCategory1.Value = "O";
-                porv01.InspectionCode1.Value = "G";//;
-            }
-            
-            if (dr["LotNumberAssign"].ToString() == "C")
-            {
-                porv01.LotNumberAssignmentPolicy.Value = "C";
-                porv01.NewLot.Value = "Y";
-                if (dr["公司批号"] == DBNull.Value || string.IsNullOrEmpty(dr["公司批号"].ToString()))
+                if (dr["检验"].ToString().ToUpper() == "Y")
                 {
-                    porv01.LotNumberDefault.Value = dr["厂家批号"].ToString().ToUpper();
-                    porv01.LotNumber.Value = dr["厂家批号"].ToString().ToUpper();
-                }
-                else if (dr["厂家批号"] == DBNull.Value || string.IsNullOrEmpty(dr["厂家批号"].ToString()))
-                {
-                    porv01.LotNumberDefault.Value = dr["公司批号"].ToString().ToUpper();
-                    porv01.LotNumber.Value = dr["公司批号"].ToString().ToUpper();
+                    porv01.InventoryCategory1.Value = "I";
+                    porv01.InspectionCode1.Value = "N";//;
                 }
                 else
                 {
-                    porv01.LotNumberDefault.Value = dr["厂家批号"].ToString().ToUpper();
-                    porv01.LotNumber.Value = dr["厂家批号"].ToString().ToUpper();
+                    porv01.InventoryCategory1.Value = "O";
+                    porv01.InspectionCode1.Value = "G";//;
                 }
-                porv01.VendorLotNumber.Value = dr["公司批号"].ToString().ToUpper().Trim();
-                string mName = dr["生产商名"].ToString().Trim();
-                if (regEnglish.IsMatch(mName))
+
+                if (dr["LotNumberAssign"].ToString() == "C")
                 {
-                    if (mName.Length > 34)
+                    porv01.LotNumberAssignmentPolicy.Value = "C";
+                    porv01.NewLot.Value = "Y";
+                    if (dr["公司批号"] == DBNull.Value || string.IsNullOrEmpty(dr["公司批号"].ToString()))
                     {
-                        porv01.LotDescription.Value = mName.Substring(0, 34).Replace(" ", "");
+                        porv01.LotNumberDefault.Value = dr["厂家批号"].ToString().ToUpper();
+                        porv01.LotNumber.Value = dr["厂家批号"].ToString().ToUpper();
+                    }
+                    else if (dr["厂家批号"] == DBNull.Value || string.IsNullOrEmpty(dr["厂家批号"].ToString()))
+                    {
+                        porv01.LotNumberDefault.Value = dr["公司批号"].ToString().ToUpper();
+                        porv01.LotNumber.Value = dr["公司批号"].ToString().ToUpper();
                     }
                     else
                     {
-                        porv01.LotDescription.Value = mName.Replace(" ", "");
+                        porv01.LotNumberDefault.Value = dr["厂家批号"].ToString().ToUpper();
+                        porv01.LotNumber.Value = dr["厂家批号"].ToString().ToUpper();
                     }
-                }
-                else
-                {
-                    if (mName.Length > 17)
+                    porv01.VendorLotNumber.Value = dr["公司批号"].ToString().ToUpper().Trim();
+                    string mName = dr["生产商名"].ToString().Trim();
+                    if (regEnglish.IsMatch(mName))
                     {
-                        porv01.LotDescription.Value = mName.Substring(0, 17);
-                    }
-                    else
-                    {
-                        porv01.LotDescription.Value = mName;
-                    }
-                }
-                porv01.LotUserDefined5.Value = dr["生产商码"].ToString();
-
-                string expiredDate = dr["到期日期"].ToString();
-                if (expiredDate.Length == 8)//20200527格式
-                {
-                    porv01.LotExpirationDate.Value = expiredDate.Substring(4, 4) + expiredDate.Substring(2, 2);
-                }
-                else if (expiredDate.Length == 10)//2020.05.27格式
-                {
-                    porv01.LotExpirationDate.Value = expiredDate.Substring(5, 2) + expiredDate.Substring(8, 2) + expiredDate.Substring(2, 2);
-                }
-                else
-                {
-                    //此处的日期格式不符合要求，故意赋值，在写入四班时会报错，用以提示具体报错问题
-                    porv01.LotExpirationDate.Value = expiredDate;
-                }
-            }
-            else
-            {
-                porv01.LotNumberAssignmentPolicy.Value = "N";
-            }
-
-            //  MessageBox.Show(porv01.ReceiptQuantityMove1.Value.ToString());
-            //    MessageBox.Show(porv01.LotDescription.Value.ToString()+"-Length:"+ porv01.LotDescription.Value.Length);
-
-            //GB2312.GetString(ISO88591.GetBytes(myDR["CustomerName"].ToString()));
-            /*   string transactionString = porv01.GetString(TransactionStringFormat.fsCDF);
-               string str = GB2312.GetString(ISO88591.GetBytes(transactionString));
-               MessageBox.Show(str);
-
-               tbTest.Text = str;*/
-
-
-            /* strError = "111";
-             return false;*/
-            if (FSFunctionLib.fstiClient.ProcessId(porv01, null))
-            {
-                /*
-                listResult.Items.Add("Success:");
-                listResult.Items.Add("");
-                listResult.Items.Add(FSFunctionLib.fstiClient.CDFResponse);
-                */
-                return true;
-            }
-
-            FSTIError error = FSFunctionLib.fstiClient.TransactionError;
-            DumpErrorObject(porv01, error, listResult);
-            CommonOperate.WriteFSErrorLog("PORV", porv01, error, FSUserID, dr["采购单号"].ToString() + " " + dr["行号"].ToString());
-            strError = dr["采购单号"].ToString() + " " + dr["行号"].ToString() + " ";
-            return false;
-        }
-        //库管员操作入库
-        private bool PORV(DataRow dr, out string strError)
-        {
-            //            MessageBox.Show("AAA");
-            strError = "";
-            PORV01 porv01 = new PORV01();
-            porv01.PONumber.Value = dr["采购单号"].ToString();
-            porv01.POLineNumber.Value = dr["行号"].ToString();
-            porv01.POLineUM.Value = dr["单位"].ToString();
-            porv01.POReceiptActionType.Value = "R";
-            porv01.Stockroom1.Value = dr["库"].ToString();
-            porv01.Bin1.Value = dr["位"].ToString();
-            if (dr["检验"].ToString().ToUpper() == "Y")
-            {
-                porv01.InventoryCategory1.Value = "I";
-                //          porv01.InspectionCode1.Value = "N";//;
-            }
-            else
-            {
-                porv01.InventoryCategory1.Value = "O";
-
-            }
-            porv01.ReceiptQuantityMove1.Value = dr["入库数量"].ToString();
-            porv01.POLineType.Value = "P";
-            porv01.ItemNumber.Value = dr["物料代码"].ToString();
-            porv01.NewLot.Value = "Y";
-            if (dr["LotNumberAssign"].ToString() == "C" || dr["物料代码"].ToString().Contains("P") || dr["物料代码"].ToString().Contains("M"))
-            {
-                porv01.LotNumberAssignmentPolicy.Value = "C";
-                if (dr["公司批号"] == DBNull.Value || string.IsNullOrEmpty(dr["公司批号"].ToString()))
-                {
-                    porv01.LotNumberDefault.Value = dr["厂家批号"].ToString().ToUpper();
-                    porv01.LotNumber.Value = dr["厂家批号"].ToString().ToUpper();
-                }
-                else if (dr["厂家批号"] == DBNull.Value || string.IsNullOrEmpty(dr["厂家批号"].ToString()))
-                {
-                    porv01.LotNumberDefault.Value = dr["公司批号"].ToString().ToUpper();
-                    porv01.LotNumber.Value = dr["公司批号"].ToString().ToUpper();
-                }
-                else
-                {
-                    porv01.LotNumberDefault.Value = dr["厂家批号"].ToString().ToUpper();
-                    porv01.LotNumber.Value = dr["厂家批号"].ToString().ToUpper();
-                }
-                porv01.VendorLotNumber.Value = dr["公司批号"].ToString().ToUpper();
-                string mName = dr["生产商名"].ToString().Trim();
-                if (regEnglish.IsMatch(mName))
-                {
-                    if (mName.Length > 34)
-                    {
-                        porv01.LotDescription.Value = mName.Substring(0, 34).Replace(" ", "");
+                        if (mName.Length > 34)
+                        {
+                            porv01.LotDescription.Value = mName.Substring(0, 34).Replace(" ", "");
+                        }
+                        else
+                        {
+                            porv01.LotDescription.Value = mName.Replace(" ", "");
+                        }
                     }
                     else
                     {
-                        porv01.LotDescription.Value = mName.Replace(" ", "");
+                        if (mName.Length > 17)
+                        {
+                            porv01.LotDescription.Value = mName.Substring(0, 17);
+                        }
+                        else
+                        {
+                            porv01.LotDescription.Value = mName;
+                        }
                     }
-                }
-                else
-                {
-                    if (mName.Length > 17)
-                    {
-                        porv01.LotDescription.Value = mName.Substring(0, 17);
-                    }
-                    else
-                    {
-                        porv01.LotDescription.Value = mName;
-                    }
-                }
+                    porv01.LotUserDefined5.Value = dr["生产商码"].ToString();
 
-                porv01.LotUserDefined5.Value = dr["生产商码"].ToString();
-                //       porv01.POReceiptDate.Value = DateTime.Now.ToString("MMddyy");//此处不确定
-                if (dr["重测日期"] != DBNull.Value && !string.IsNullOrWhiteSpace(dr["重测日期"].ToString()))
-                {
-                    string RetestDate = dr["重测日期"].ToString().Trim();
-                    if (RetestDate.Length == 8)//20200527格式
+                    string expiredDate = dr["到期日期"].ToString();
+                    if (expiredDate.Length == 8)//20200527格式
                     {
-                        porv01.LotExpirationDate.Value = RetestDate.Substring(4, 4) + RetestDate.Substring(2, 2);
+                        porv01.LotExpirationDate.Value = expiredDate.Substring(4, 4) + expiredDate.Substring(2, 2);
                     }
-                    else if (RetestDate.Length == 10)//2020.05.27格式
+                    else if (expiredDate.Length == 10)//2020.05.27格式
                     {
-                        porv01.LotExpirationDate.Value = RetestDate.Substring(5, 2) + RetestDate.Substring(8, 2) + RetestDate.Substring(2, 2);
+                        porv01.LotExpirationDate.Value = expiredDate.Substring(5, 2) + expiredDate.Substring(8, 2) + expiredDate.Substring(2, 2);
                     }
                     else
                     {
                         //此处的日期格式不符合要求，故意赋值，在写入四班时会报错，用以提示具体报错问题
-                        porv01.RetestDate.Value = RetestDate;
+                        porv01.LotExpirationDate.Value = expiredDate;
                     }
-                    
-                }
-                string expiredDate = dr["到期日期"].ToString();
-                if (expiredDate.Length == 8)//20200527格式
-                {
-                    porv01.LotExpirationDate.Value = expiredDate.Substring(4, 4) + expiredDate.Substring(2, 2);
-                }
-                else if (expiredDate.Length == 10)//2020.05.27格式
-                {
-                    porv01.LotExpirationDate.Value = expiredDate.Substring(5, 2) + expiredDate.Substring(8, 2) + expiredDate.Substring(2, 2);
                 }
                 else
                 {
-                    //此处的日期格式不符合要求，故意赋值，在写入四班时会报错，用以提示具体报错问题
-                    porv01.LotExpirationDate.Value = expiredDate;
+                    porv01.LotNumberAssignmentPolicy.Value = "N";
                 }
+
+                //  MessageBox.Show(porv01.ReceiptQuantityMove1.Value.ToString());
+                //    MessageBox.Show(porv01.LotDescription.Value.ToString()+"-Length:"+ porv01.LotDescription.Value.Length);
+
+                //GB2312.GetString(ISO88591.GetBytes(myDR["CustomerName"].ToString()));
+                /*   string transactionString = porv01.GetString(TransactionStringFormat.fsCDF);
+                   string str = GB2312.GetString(ISO88591.GetBytes(transactionString));
+                   MessageBox.Show(str);
+
+                   tbTest.Text = str;*/
+
+
+                /* strError = "111";
+                 return false;*/
+                if (FSFunctionLib.fstiClient.ProcessId(porv01, null))
+                {
+                    /*
+                    listResult.Items.Add("Success:");
+                    listResult.Items.Add("");
+                    listResult.Items.Add(FSFunctionLib.fstiClient.CDFResponse);
+                    */
+                    return true;
+                }
+
+                FSTIError error = FSFunctionLib.fstiClient.TransactionError;
+                DumpErrorObject(porv01, error, listResult);
+                CommonOperate.WriteFSErrorLog("PORVA", porv01, error, FSUserID, dr["采购单号"].ToString() + " " + dr["行号"].ToString());
+                strError = dr["采购单号"].ToString() + " " + dr["行号"].ToString() + " ";
+                return false;
             }
-            else
+            catch (Exception ex)
             {
-                porv01.LotNumberAssignmentPolicy.Value = "N";
+                strError = dr["采购单号"].ToString() + " " + dr["行号"].ToString() + " " + ex.Message;
+                string sqlInsert = @"Insert Into FSErrorLogByCMF (Type,ErrorContent,Operator) Values ('PORVA','" + strError + "','" + FSUserID + "')";
+                SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlInsert);
+                return false;
             }
-            porv01.PromisedDate.Value = dr["承诺交货日"].ToString();
-            porv01.POReceiptDate.Value = DateTime.Now.ToString("MMddyy");
-            //  MessageBox.Show(porv01.ReceiptQuantityMove1.Value.ToString());
-            //    MessageBox.Show(porv01.LotDescription.Value.ToString()+"-Length:"+ porv01.LotDescription.Value.Length);
-
-
-            string transactionString = porv01.GetString(TransactionStringFormat.fsCDF);
-            //        MessageBox.Show(transactionString);
-
-            tbTest.Text = tbTest.Text + " | " + transactionString;
-            strError = "111";
-            //  return false;
-            if (FSFunctionLib.fstiClient.ProcessId(porv01, null))
+        }
+        //库管员操作入库
+        private bool PORV(DataRow dr, out string strError)
+        {
+            try
             {
-                /*
-                listResult.Items.Add("Success:");
-                listResult.Items.Add("");
-                listResult.Items.Add(FSFunctionLib.fstiClient.CDFResponse);
-                */
-                return true;
+                //            MessageBox.Show("AAA");
+                strError = "";
+                PORV01 porv01 = new PORV01();
+                porv01.PONumber.Value = dr["采购单号"].ToString();
+                porv01.POLineNumber.Value = dr["行号"].ToString();
+                porv01.POLineUM.Value = dr["单位"].ToString();
+                porv01.POReceiptActionType.Value = "R";
+                porv01.Stockroom1.Value = dr["库"].ToString();
+                porv01.Bin1.Value = dr["位"].ToString();
+                if (dr["检验"].ToString().ToUpper() == "Y")
+                {
+                    porv01.InventoryCategory1.Value = "I";
+                    //          porv01.InspectionCode1.Value = "N";//;
+                }
+                else
+                {
+                    porv01.InventoryCategory1.Value = "O";
+
+                }
+                porv01.ReceiptQuantityMove1.Value = dr["入库数量"].ToString();
+                porv01.POLineType.Value = "P";
+                porv01.ItemNumber.Value = dr["物料代码"].ToString();
+                porv01.NewLot.Value = "Y";
+                if (dr["LotNumberAssign"].ToString() == "C" || dr["物料代码"].ToString().Contains("P") || dr["物料代码"].ToString().Contains("M"))
+                {
+                    porv01.LotNumberAssignmentPolicy.Value = "C";
+                    if (dr["公司批号"] == DBNull.Value || string.IsNullOrEmpty(dr["公司批号"].ToString()))
+                    {
+                        porv01.LotNumberDefault.Value = dr["厂家批号"].ToString().ToUpper();
+                        porv01.LotNumber.Value = dr["厂家批号"].ToString().ToUpper();
+                    }
+                    else if (dr["厂家批号"] == DBNull.Value || string.IsNullOrEmpty(dr["厂家批号"].ToString()))
+                    {
+                        porv01.LotNumberDefault.Value = dr["公司批号"].ToString().ToUpper();
+                        porv01.LotNumber.Value = dr["公司批号"].ToString().ToUpper();
+                    }
+                    else
+                    {
+                        porv01.LotNumberDefault.Value = dr["厂家批号"].ToString().ToUpper();
+                        porv01.LotNumber.Value = dr["厂家批号"].ToString().ToUpper();
+                    }
+                    porv01.VendorLotNumber.Value = dr["公司批号"].ToString().ToUpper();
+                    string mName = dr["生产商名"].ToString().Trim();
+                    if (regEnglish.IsMatch(mName))
+                    {
+                        if (mName.Length > 34)
+                        {
+                            porv01.LotDescription.Value = mName.Substring(0, 34).Replace(" ", "");
+                        }
+                        else
+                        {
+                            porv01.LotDescription.Value = mName.Replace(" ", "");
+                        }
+                    }
+                    else
+                    {
+                        if (mName.Length > 17)
+                        {
+                            porv01.LotDescription.Value = mName.Substring(0, 17);
+                        }
+                        else
+                        {
+                            porv01.LotDescription.Value = mName;
+                        }
+                    }
+
+                    porv01.LotUserDefined5.Value = dr["生产商码"].ToString();
+                    //       porv01.POReceiptDate.Value = DateTime.Now.ToString("MMddyy");//此处不确定
+                    if (dr["重测日期"] != DBNull.Value && !string.IsNullOrWhiteSpace(dr["重测日期"].ToString()))
+                    {
+                        string RetestDate = dr["重测日期"].ToString().Trim();
+                        if (RetestDate.Length == 8)//20200527格式
+                        {
+                            porv01.LotExpirationDate.Value = RetestDate.Substring(4, 4) + RetestDate.Substring(2, 2);
+                        }
+                        else if (RetestDate.Length == 10)//2020.05.27格式
+                        {
+                            porv01.LotExpirationDate.Value = RetestDate.Substring(5, 2) + RetestDate.Substring(8, 2) + RetestDate.Substring(2, 2);
+                        }
+                        else
+                        {
+                            //此处的日期格式不符合要求，故意赋值，在写入四班时会报错，用以提示具体报错问题
+                            porv01.RetestDate.Value = RetestDate;
+                        }
+
+                    }
+                    string expiredDate = dr["到期日期"].ToString();
+                    if (expiredDate.Length == 8)//20200527格式
+                    {
+                        porv01.LotExpirationDate.Value = expiredDate.Substring(4, 4) + expiredDate.Substring(2, 2);
+                    }
+                    else if (expiredDate.Length == 10)//2020.05.27格式
+                    {
+                        porv01.LotExpirationDate.Value = expiredDate.Substring(5, 2) + expiredDate.Substring(8, 2) + expiredDate.Substring(2, 2);
+                    }
+                    else
+                    {
+                        //此处的日期格式不符合要求，故意赋值，在写入四班时会报错，用以提示具体报错问题
+                        porv01.LotExpirationDate.Value = expiredDate;
+                    }
+                }
+                else
+                {
+                    porv01.LotNumberAssignmentPolicy.Value = "N";
+                }
+                porv01.PromisedDate.Value = dr["承诺交货日"].ToString();
+                porv01.POReceiptDate.Value = DateTime.Now.ToString("MMddyy");
+                //  MessageBox.Show(porv01.ReceiptQuantityMove1.Value.ToString());
+                //    MessageBox.Show(porv01.LotDescription.Value.ToString()+"-Length:"+ porv01.LotDescription.Value.Length);
+
+
+                string transactionString = porv01.GetString(TransactionStringFormat.fsCDF);
+                //        MessageBox.Show(transactionString);
+
+                tbTest.Text = tbTest.Text + " | " + transactionString;
+                strError = "111";
+                //  return false;
+                if (FSFunctionLib.fstiClient.ProcessId(porv01, null))
+                {
+                    /*
+                    listResult.Items.Add("Success:");
+                    listResult.Items.Add("");
+                    listResult.Items.Add(FSFunctionLib.fstiClient.CDFResponse);
+                    */
+                    return true;
+                }
+                FSTIError error = FSFunctionLib.fstiClient.TransactionError;
+                DumpErrorObject(porv01, error, listResult);
+                CommonOperate.WriteFSErrorLog("PORV", porv01, error, FSUserID, dr["采购单号"].ToString() + " " + dr["行号"].ToString());
+                strError = dr["采购单号"].ToString() + " " + dr["行号"].ToString() + " ";
+                return false;
             }
-            FSTIError error = FSFunctionLib.fstiClient.TransactionError;
-            DumpErrorObject(porv01, error, listResult);
-            CommonOperate.WriteFSErrorLog("PORV", porv01, error, FSUserID, dr["采购单号"].ToString() + " " + dr["行号"].ToString());
-            strError = dr["采购单号"].ToString() + " " + dr["行号"].ToString() + " ";
-            return false;
+            catch (Exception ex)
+            {
+                strError = dr["采购单号"].ToString() + " " + dr["行号"].ToString() + " "+ex.Message;
+                string sqlInsert = @"Insert Into FSErrorLogByCMF (Type,ErrorContent,Operator) Values ('PORV','" + strError + "','" + FSUserID + "')";
+                SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlInsert);
+                
+                return false;
+            }
         }
         //库管员操作入库
         private bool PORVTest(DataRow dr, out string strError)
