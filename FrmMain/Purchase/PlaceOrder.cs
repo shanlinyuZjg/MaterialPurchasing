@@ -1238,32 +1238,33 @@ namespace Global.Purchase
             List<SqlParameter> paraListPriceRecord = new List<SqlParameter>();
             bool isNeedRecord = false;
             List<string> itemNotComparePriceList = GetItemNotComparePriceList();
-
-            if (PurchaseUser.PriceCompare == 0)
+            if (!(tbItemNumber.Text.StartsWith("FF")))
             {
-                double fPrice = Convert.ToDouble(tbPricePostTax.Text);
-                double standardPrice = Convert.ToDouble(lblFSItemPrice.Text);
-                //>0.1|<-0.1，>0.05 |<-0.05
-                string rate = CommonOperate.CompareItemPriceToStandardPrice(fPrice, standardPrice);
-
-                if (Convert.ToDouble(rate) >= 0.1 )
+                if (PurchaseUser.PriceCompare == 0)
                 {
-                    Custom.MsgEx("该物料下达价格与标准价格相差超出10%，无法下达订单！请先修改物料标准成本");
-                    return;
-                }
-                else if (rate == "0.05")
-                {
-                    Custom.MsgEx("该物料下达价格与标准价格相差超出5%，请及时修改物料标准成本！");
-                    paraListPriceRecord.Add(new SqlParameter("@Range", rate));
-                    isNeedRecord = true;
-                }
+                    double fPrice = Convert.ToDouble(tbPricePostTax.Text);
+                    double standardPrice = Convert.ToDouble(lblFSItemPrice.Text);
+                    //>0.1|<-0.1，>0.05 |<-0.05
+                    string rate = CommonOperate.CompareItemPriceToStandardPrice(fPrice, standardPrice);
 
-              
-            }
-            else if (PurchaseUser.PriceCompare == 1 || PurchaseUser.PriceCompare == 2)
-            {   
-                //if(!WithoutRestrictItemList.Contains(tbItemNumber.Text))
-                //{
+                    if (Convert.ToDouble(rate) >= 0.1)
+                    {
+                        Custom.MsgEx("该物料下达价格与标准价格相差超出10%，无法下达订单！请先修改物料标准成本");
+                        return;
+                    }
+                    else if (rate == "0.05")
+                    {
+                        Custom.MsgEx("该物料下达价格与标准价格相差超出5%，请及时修改物料标准成本！");
+                        paraListPriceRecord.Add(new SqlParameter("@Range", rate));
+                        isNeedRecord = true;
+                    }
+
+
+                }
+                else if (PurchaseUser.PriceCompare == 1 || PurchaseUser.PriceCompare == 2)
+                {
+                    //if(!WithoutRestrictItemList.Contains(tbItemNumber.Text))
+                    //{
                     double fPrice = Convert.ToDouble(tbPricePostTax.Text);
                     double standardPrice = Convert.ToDouble(lblFSItemPrice.Text);
                     //>0.1|<-0.1，>0.05 |<-0.05
@@ -1273,40 +1274,40 @@ namespace Global.Purchase
                         MessageBoxEx.Show("当前采购价格与四班标准成本相差超过5倍！无法下达订单，请先修改成本。", "提示");
                         return;
                     }
-                //}              
-            }
-            else if (PurchaseUser.PriceCompare == 3)
-            {
-                double fPrice = Convert.ToDouble(tbPricePostTax.Text);
-                double standardPrice = Convert.ToDouble(lblFSItemPrice.Text);
-                //>0.1|<-0.1，>0.05 |<-0.05
-                string rate = CommonOperate.CompareItemPriceToStandardPrice(fPrice, standardPrice);
-  
-
-                if (itemNotComparePriceList.Contains(tbItemNumber.Text))
+                    //}              
+                }
+                else if (PurchaseUser.PriceCompare == 3)
                 {
-                    if (Convert.ToDouble(rate) >= 5)
+                    double fPrice = Convert.ToDouble(tbPricePostTax.Text);
+                    double standardPrice = Convert.ToDouble(lblFSItemPrice.Text);
+                    //>0.1|<-0.1，>0.05 |<-0.05
+                    string rate = CommonOperate.CompareItemPriceToStandardPrice(fPrice, standardPrice);
+
+
+                    if (itemNotComparePriceList.Contains(tbItemNumber.Text))
                     {
-                        MessageBoxEx.Show("当前采购价格与四班标准成本相差超过5倍！无法下达订单，请先修改成本。", "提示");
-                        return;
+                        if (Convert.ToDouble(rate) >= 5)
+                        {
+                            MessageBoxEx.Show("当前采购价格与四班标准成本相差超过5倍！无法下达订单，请先修改成本。", "提示");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if (Convert.ToDouble(rate) >= 0.15)
+                        {
+                            Custom.MsgEx("该物料下达价格与标准价格相差超出15%，无法下达订单！请先修改物料标准成本");
+                            return;
+                        }
+                        else if (rate == "0.1")
+                        {
+                            Custom.MsgEx("该物料下达价格与标准价格相差超出10%，请及时修改物料标准成本！");
+                            isNeedRecord = true;
+                            paraListPriceRecord.Add(new SqlParameter("@Range", rate));
+                        }
                     }
                 }
-                else
-                {
-                    if (Convert.ToDouble(rate) >= 0.15)
-                    {
-                        Custom.MsgEx("该物料下达价格与标准价格相差超出15%，无法下达订单！请先修改物料标准成本");
-                        return;
-                    }
-                    else if (rate == "0.1")
-                    {
-                        Custom.MsgEx("该物料下达价格与标准价格相差超出10%，请及时修改物料标准成本！");
-                        isNeedRecord = true;
-                        paraListPriceRecord.Add(new SqlParameter("@Range", rate));
-                    }
-                }
             }
-
 
             string itemKeeper = GetItemStockKeeper(tbItemNumber.Text.Trim());
                 string strInsert = @"INSERT INTO PurchaseOrderRecordByCMF (
