@@ -412,7 +412,7 @@ namespace Global.Purchase
 	                                                            [ItemReceiveType],
 	                                                            [Supervisor],
 	                                                            [ForeignNumber],
-	                                                            [BuyerID],Stock,Bin,ReceiveDate,Guid,UnitPrice,QualityCheckStandard,GSID
+	                                                            [BuyerID],Stock,Bin,ReceiveDate,Guid,UnitPrice,QualityCheckStandard,GSID,IsInvestigation
                                                         ) SELECT
 	                                                       	[PONumber],
 	                                                        [VendorNumber],
@@ -430,7 +430,7 @@ namespace Global.Purchase
 	                                                        [POItemQuantity],
 	                                                        [ItemReceiveType],
 	                                                        [Superior],
-	                                                        [ForeignNumber],Buyer,Stock,Bin,Left(ActualDeliveryDate,10),Replace(NEWID(),'-',''),[UnitPrice],'"+tbQualityStandard.Text+"',GSID  FROM   PurchaseOrderRecordByCMF  WHERE Guid = '" + guidList[i] + "'";
+	                                                        [ForeignNumber],Buyer,Stock,Bin,Left(ActualDeliveryDate,10),Replace(NEWID(),'-',''),[UnitPrice],'" + tbQualityStandard.Text+ "',GSID,IsInvestigation  FROM   PurchaseOrderRecordByCMF  WHERE Guid = '" + guidList[i] + "'";
          //       MessageBox.Show(sqlInsert);
                 sqlList.Add(sqlInsert);
             }

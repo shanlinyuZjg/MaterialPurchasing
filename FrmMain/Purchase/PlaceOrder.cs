@@ -1190,12 +1190,12 @@ namespace Global.Purchase
         {
             int isDirectFOOrder = 0;
 
-            if(tbItemNumber.Text.Substring(0,2)=="MJ")
+            if (tbItemNumber.Text.Substring(0, 2) == "MJ")
             {
                 GlobalSpace.ShouCeNumber = string.Empty;
                 Cusotoms c = new Cusotoms();
                 c.ShowDialog();
-                if(string.IsNullOrWhiteSpace(GlobalSpace.ShouCeNumber))
+                if (string.IsNullOrWhiteSpace(GlobalSpace.ShouCeNumber))
                 {
                     MessageBoxEx.Show("当前为进料加工物料，请选择手册号！", "提示");
                     return;
@@ -1209,32 +1209,32 @@ namespace Global.Purchase
                 return;
             }
 
-            if(string.IsNullOrWhiteSpace(tbPricePostTax.Text))
+            if (string.IsNullOrWhiteSpace(tbPricePostTax.Text))
             {
                 Custom.MsgEx("税后价格不能为空或为0！");
                 return;
             }
-            if (string.IsNullOrWhiteSpace(tbRequireDept.Text) && ((tbUM.Tag.ToString() == "Y" && tbItemNumber.Text.StartsWith("A"))|| !tbItemNumber.Text.StartsWith("A")))
+            if (string.IsNullOrWhiteSpace(tbRequireDept.Text) && ((tbUM.Tag.ToString() == "Y" && tbItemNumber.Text.StartsWith("A")) || !tbItemNumber.Text.StartsWith("A")))
             {
                 Custom.MsgEx("请填写需求部门！");
                 return;
             }
-            if ((tbPONumberInDetail.Text.Substring(0,2) == "PF" &&(tbPONumberInDetail.Text.Substring(11, 1) == "1" || tbPONumberInDetail.Text.Substring(11,1) == "2" || tbPONumberInDetail.Text.Substring(11, 1) == "3")) || tbPONumberInDetail.Text.Substring(0, 2) == "PJ")
+            if ((tbPONumberInDetail.Text.Substring(0, 2) == "PF" && (tbPONumberInDetail.Text.Substring(11, 1) == "1" || tbPONumberInDetail.Text.Substring(11, 1) == "2" || tbPONumberInDetail.Text.Substring(11, 1) == "3")) || tbPONumberInDetail.Text.Substring(0, 2) == "PJ")
             {
                 isDirectFOOrder = 1;
-              /*  if (MessageBoxEx.Show("当前采购订单为外贸部门直接采购物料，写入四班后是否直接产生入库记录？","提示",MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    isDirectFOOrder = 1;
-                }*/
+                /*  if (MessageBoxEx.Show("当前采购订单为外贸部门直接采购物料，写入四班后是否直接产生入库记录？","提示",MessageBoxButtons.YesNo) == DialogResult.Yes)
+                  {
+                      isDirectFOOrder = 1;
+                  }*/
             }
 
-            if((tbPONumberInDetail.Text.Trim().Substring(0,2) == "PF" || tbPONumberInDetail.Text.Trim().Substring(0, 2) == "PJ")&& string.IsNullOrEmpty(tbForeignNumber.Text))
+            if ((tbPONumberInDetail.Text.Trim().Substring(0, 2) == "PF" || tbPONumberInDetail.Text.Trim().Substring(0, 2) == "PJ") && string.IsNullOrEmpty(tbForeignNumber.Text))
             {
-                    Custom.Msg("外贸用原辅料请填写联系单号！多个联系单号请全部填写，使用横线“A1234-B3421-C1234”的格式区分；事业部未提供时，请计划员提供虚拟联系单号。");
-                    return;                
+                Custom.Msg("外贸用原辅料请填写联系单号！多个联系单号请全部填写，使用横线“A1234-B3421-C1234”的格式区分；事业部未提供时，请计划员提供虚拟联系单号。");
+                return;
             }
             //价格差异控制---财务要求
-            string sqlItemPriceCompareInsert = @"Insert Into PurchaseDepartmentPriceRestrictRecord (ItemNumber,ItemDescription,UserID,Range,UserName,StandardPrice,PlacedUnitPrice) Values ('" + tbItemNumber.Text + "','" + tbItemDescription.Text + "','" + fsuserid + "',@Range,'"+fsusername+"',@StandardPrice,@PlacedUnitPrice) ";
+            string sqlItemPriceCompareInsert = @"Insert Into PurchaseDepartmentPriceRestrictRecord (ItemNumber,ItemDescription,UserID,Range,UserName,StandardPrice,PlacedUnitPrice) Values ('" + tbItemNumber.Text + "','" + tbItemDescription.Text + "','" + fsuserid + "',@Range,'" + fsusername + "',@StandardPrice,@PlacedUnitPrice) ";
             List<SqlParameter> paraListPriceRecord = new List<SqlParameter>();
             bool isNeedRecord = false;
             List<string> itemNotComparePriceList = GetItemNotComparePriceList();
@@ -1310,7 +1310,7 @@ namespace Global.Purchase
             }
 
             string itemKeeper = GetItemStockKeeper(tbItemNumber.Text.Trim());
-                string strInsert = @"INSERT INTO PurchaseOrderRecordByCMF (
+            string strInsert = $@"INSERT INTO PurchaseOrderRecordByCMF (
 	                                                PONumber,
 	                                                VendorNumber,
 	                                                VendorName,
@@ -1335,32 +1335,32 @@ namespace Global.Purchase
                                                     POItemQuantity,
                                                     PricePreTax,
                                                     StockKeeper,
-Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveType,Comment1,LotNumberAssign,IsFOItem,IsDirectFOOrder,EditionQuantity,GSID,RequireDept,StandardPrice,ShouCeNumber)
+Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveType,Comment1,LotNumberAssign,IsFOItem,IsDirectFOOrder,EditionQuantity,GSID,RequireDept,StandardPrice,ShouCeNumber,IsInvestigation)
                                                 VALUES
 	                                                (
-	                                                '" + tbPONumberInDetail.Text.Trim() + "',@VendorNumber, @VendorName, @ManufacturerNumber, @ManufacturerName, @ItemNumber, @ItemDescription,@LineUM, @Buyer,  @BuyerName,@Superior,@DemandDeliveryDate,@ForeignNumber, @POStatus,@ItemUsedPoint, @QualityCheckStandard,@UnitPrice,@LineType,@LineStatus,                                               @NeededDate,@PromisedDate, @POItemQuantity,@PricePreTax,@StockKeeper,@Stock,@Bin,@InspectionPeriod,@Guid,@TaxRate,@ParentGuid,@POItemConfirmer,@ItemReceiveType,@Comment1,@LotNumberAssign,@IsFOItem,@IsDirectFOOrder,@EditionQuantity,@GSID,@RequireDept,@StandardPrice,@ShouCeNumber)";
+	                                                '{tbPONumberInDetail.Text.Trim()}',@VendorNumber, @VendorName, @ManufacturerNumber, @ManufacturerName, @ItemNumber, @ItemDescription,@LineUM, @Buyer,  @BuyerName,@Superior,@DemandDeliveryDate,@ForeignNumber, @POStatus,@ItemUsedPoint, @QualityCheckStandard,@UnitPrice,@LineType,@LineStatus,                                               @NeededDate,@PromisedDate, @POItemQuantity,@PricePreTax,@StockKeeper,@Stock,@Bin,@InspectionPeriod,@Guid,@TaxRate,@ParentGuid,@POItemConfirmer,@ItemReceiveType,@Comment1,@LotNumberAssign,@IsFOItem,@IsDirectFOOrder,@EditionQuantity,@GSID,@RequireDept,@StandardPrice,@ShouCeNumber,{(CbIsInvestigation.Checked ? 1 : 0)})";
 
-                if (cbbManufacturerList.Text == "")
-                {
-                    MessageBoxEx.Show("该物料有多个生产商，请进行选择！");
-                }
-                else if (tbPONumberInDetail.Text == "" || tbItemNumber.Text == "" || tbOrderQuantity.Text == "" || tbPricePostTax.Text == "" || tbDeliveryDate.Text == "")
-                {
-                    MessageBoxEx.Show("订单号、物料代码、订购数量、税后价格和交货日期不能为空！", "提示");
-                }
-                else if(PurchaseUser.POItemOthersConfirm == 1 && string.IsNullOrEmpty(cbbConfirmPerson.Text))
-                {
-                    Custom.MsgEx("需要选择确认到货人员");
-                }
-                else
-                {
-                    string strDate = tbDeliveryDate.Text.Trim();
-                    string ponumber = tbPONumberInDetail.Text.Trim();
-             
+            if (cbbManufacturerList.Text == "")
+            {
+                MessageBoxEx.Show("该物料有多个生产商，请进行选择！");
+            }
+            else if (tbPONumberInDetail.Text == "" || tbItemNumber.Text == "" || tbOrderQuantity.Text == "" || tbPricePostTax.Text == "" || tbDeliveryDate.Text == "")
+            {
+                MessageBoxEx.Show("订单号、物料代码、订购数量、税后价格和交货日期不能为空！", "提示");
+            }
+            else if (PurchaseUser.POItemOthersConfirm == 1 && string.IsNullOrEmpty(cbbConfirmPerson.Text))
+            {
+                Custom.MsgEx("需要选择确认到货人员");
+            }
+            else
+            {
+                string strDate = tbDeliveryDate.Text.Trim();
+                string ponumber = tbPONumberInDetail.Text.Trim();
+
                 List<SqlParameter> sqlparaList = new List<SqlParameter>();
 
                 List<string> itemList = GetItemWithoutReviewList();
-                
+
                 sqlparaList.Add(new SqlParameter("@PONumber", ponumber));
                 sqlparaList.Add(new SqlParameter("@VendorNumber", cbbVendorList.Text.Substring(0, 6)));
                 sqlparaList.Add(new SqlParameter("@VendorName", cbbVendorList.Text.Substring(7)));
@@ -1374,18 +1374,18 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                 sqlparaList.Add(new SqlParameter("@Superior", PurchaseUser.SupervisorID));
                 sqlparaList.Add(new SqlParameter("@DemandDeliveryDate", strDate));
                 sqlparaList.Add(new SqlParameter("@ForeignNumber", tbForeignNumber.Text.Trim()));
-                sqlparaList.Add(new SqlParameter("@ItemUsedPoint ",""));
+                sqlparaList.Add(new SqlParameter("@ItemUsedPoint ", ""));
                 sqlparaList.Add(new SqlParameter("@QualityCheckStandard", tbQualityCheckStandard.Text.Trim()));
                 sqlparaList.Add(new SqlParameter("@UnitPrice", Convert.ToDouble(tbPricePostTax.Text.Trim())));
-                sqlparaList.Add(new SqlParameter("@LineType","P"));
-                sqlparaList.Add(new SqlParameter("@LineStatus","4"));
+                sqlparaList.Add(new SqlParameter("@LineType", "P"));
+                sqlparaList.Add(new SqlParameter("@LineStatus", "4"));
                 sqlparaList.Add(new SqlParameter("@NeededDate", strDate));
                 sqlparaList.Add(new SqlParameter("@PromisedDate", strDate));
                 sqlparaList.Add(new SqlParameter("@POItemQuantity", Convert.ToDouble(tbOrderQuantity.Text.Trim())));
-                sqlparaList.Add(new SqlParameter("@EditionQuantity",Convert.ToInt32(tbEditionQuantity.Text)));
+                sqlparaList.Add(new SqlParameter("@EditionQuantity", Convert.ToInt32(tbEditionQuantity.Text)));
                 sqlparaList.Add(new SqlParameter("@RequireDept", tbRequireDept.Text));
                 sqlparaList.Add(new SqlParameter("@StandardPrice", Convert.ToDouble(lblFSItemPrice.Text)));
-                sqlparaList.Add(new SqlParameter("@ShouCeNumber", GlobalSpace.ShouCeNumber+ ponumber.Substring(10,3)));
+                sqlparaList.Add(new SqlParameter("@ShouCeNumber", GlobalSpace.ShouCeNumber + ponumber.Substring(10, 3)));
 
                 if (StockSpecialItemList.Contains(tbItemNumber.Text.Trim()))
                 {
@@ -1402,17 +1402,17 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                 sqlparaList.Add(new SqlParameter("@TaxRate", cbbTaxRate.SelectedItem.ToString()));
                 sqlparaList.Add(new SqlParameter("@ParentGuid", tbPONumberInDetail.Tag.ToString()));
                 sqlparaList.Add(new SqlParameter("@POItemConfirmer", cbbConfirmPerson.Text.Split('|')[0].ToUpper()));
-                if(PurchaseUser.UserStatus == 2)
+                if (PurchaseUser.UserStatus == 2)
                 {
-                    sqlparaList.Add(new SqlParameter("@ItemReceiveType", tbItemNumber.Text.Substring(0,1)));
+                    sqlparaList.Add(new SqlParameter("@ItemReceiveType", tbItemNumber.Text.Substring(0, 1)));
                 }
                 else
                 {
                     sqlparaList.Add(new SqlParameter("@ItemReceiveType", PurchaseUser.ItemReceiveType));
-                }                
+                }
                 sqlparaList.Add(new SqlParameter("@Comment1", tbRemark.Text));
                 string lotNumberAssign = string.Empty;
-                if(tbUM.Tag.ToString() == "Y")
+                if (tbUM.Tag.ToString() == "Y")
                 {
                     lotNumberAssign = "C";
                 }
@@ -1421,7 +1421,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                     lotNumberAssign = "";
                 }
 
-                if(PurchaseUser.UserPOType == "F")
+                if (PurchaseUser.UserPOType == "F")
                 {
                     sqlparaList.Add(new SqlParameter("@IsFOItem", "1"));
                 }
@@ -1436,20 +1436,20 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                 //分为两大类：内销和外贸，外贸下单人员逐个下单的物料不需要审核；需要审核的人员里边部分物料可能是无需审核的
                 if (PurchaseUser.UserStatus == 1)
                 {
-                    if(itemList.Contains(tbItemNumber.Text.Trim()))
+                    if (itemList.Contains(tbItemNumber.Text.Trim()))
                     {
                         sqlparaList.Add(new SqlParameter("@POStatus", "2"));
                     }
                     else
                     {
                         sqlparaList.Add(new SqlParameter("@POStatus", "0"));
-                    }                  
+                    }
                 }
                 else if (PurchaseUser.UserStatus == 0)
                 {
                     sqlparaList.Add(new SqlParameter("@POStatus", "2"));
                 }
-                else if (PurchaseUser.UserStatus == 2|| PurchaseUser.UserStatus == 3)
+                else if (PurchaseUser.UserStatus == 2 || PurchaseUser.UserStatus == 3)
                 {
                     sqlparaList.Add(new SqlParameter("@POStatus", "2"));
                 }
@@ -1466,28 +1466,28 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                 SqlParameter[] sqlparams = sqlparaList.ToArray();
 
 
-                if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, strInsert, sqlparams) )
+                if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, strInsert, sqlparams))
                 {
                     MessageBoxEx.Show("物料添加成功", "提示");
 
-                if(isNeedRecord)
-                {
-                    paraListPriceRecord.Add(new SqlParameter("@StandardPrice", Convert.ToDouble(lblFSItemPrice.Text.Trim())));
-                    paraListPriceRecord.Add(new SqlParameter("@PlacedUnitPrice", Convert.ToDouble(tbPricePostTax.Text.Trim())));
-                    SqlParameter[] sqlparaPrice = paraListPriceRecord.ToArray();
-                    //需要修改物料标准成本的物料写入四班。
-                    if (!string.IsNullOrEmpty(sqlItemPriceCompareInsert))
+                    if (isNeedRecord)
                     {
-                        if (!SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlItemPriceCompareInsert, sqlparaPrice))
+                        paraListPriceRecord.Add(new SqlParameter("@StandardPrice", Convert.ToDouble(lblFSItemPrice.Text.Trim())));
+                        paraListPriceRecord.Add(new SqlParameter("@PlacedUnitPrice", Convert.ToDouble(tbPricePostTax.Text.Trim())));
+                        SqlParameter[] sqlparaPrice = paraListPriceRecord.ToArray();
+                        //需要修改物料标准成本的物料写入四班。
+                        if (!string.IsNullOrEmpty(sqlItemPriceCompareInsert))
                         {
-                            MessageBoxEx.Show("记录该物料信息时出错！", "提示");
-                            return;
+                            if (!SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlItemPriceCompareInsert, sqlparaPrice))
+                            {
+                                MessageBoxEx.Show("记录该物料信息时出错！", "提示");
+                                return;
+                            }
                         }
                     }
-                }
-                   
-                //清空外贸物料用的list
-                if (GlobalSpace.foItemInfoList != null)
+
+                    //清空外贸物料用的list
+                    if (GlobalSpace.foItemInfoList != null)
                     {
                         GlobalSpace.foItemInfoList.Clear();
                     }
@@ -1498,7 +1498,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                         if (SQLHelper.Exist(GlobalSpace.FSDBConnstr, sqlCheck))
                         {
                             string sqlUpdate = @"Update PurchaseDepartmentForeignOrderItemByCMF Set Status = 2 Where ForeignOrderNumber='" + tbForeignNumber.Text.Trim() + "' And ItemNumber = '" + tbItemNumber.Text.Trim() + "' And IsValid = 1";
-                            if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate) )
+                            if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
                             {
 
                             }
@@ -1514,13 +1514,13 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                     MessageBoxEx.Show("物料添加失败", "提示");
                 }
 
-                if(tbUM.Text.Trim() == "WA")
+                if (tbUM.Text.Trim() == "WA")
                 {
                     MessageBoxEx.Show("该物料单位为WA，请注意采购数量的准确性！", "提示");
                 }
 
-                    //additemtopo(tbponumber.text.trim());
-                    //showpoitemdetail(tbponumberindetail.text.trim());
+                //additemtopo(tbponumber.text.trim());
+                //showpoitemdetail(tbponumberindetail.text.trim());
 
                 if (cbbManufacturerList.Items.Count > 0)
                 {
@@ -1532,7 +1532,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                 }
                 ShowPOItemDetail(tbPONumberInDetail.Text.Trim());
 
-                if(Convert.ToInt32(btnAddItemToPO.Tag) != 0)
+                if (Convert.ToInt32(btnAddItemToPO.Tag) != 0)
                 {
                     string sqlUpdateGS = @"Update SolidBuyList Set PurChaseNumber='" + tbPONumberInDetail.Text + "',Flag=1 Where ID=" + Convert.ToInt32(btnAddItemToPO.Tag) + "";
 
@@ -1541,7 +1541,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                         MessageBoxEx.Show("该物料为固水事业部需求物料，更新状态失败，请联系管理员！", "提示");
                     }
                 }
-                
+
 
 
                 tbPricePostTax.Text = "";
@@ -1552,18 +1552,19 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                 tbItemDescription.Text = "";
                 tbUM.Text = "";
                 tbForeignNumber.Text = "";
-            
+
                 cbbManufacturerList.Text = "";
                 cbbVendorList.Text = "";
                 tbQualityCheckStandard.Text = "";
                 tbRemark.Text = "";
+                CbIsInvestigation.Checked = false;
                 tbForeignNumber.Focus();
-                      }
-          //  }
-//             else
-//             {
-//                 MessageBoxEx.Show("该订单状态（非已准备或已提交）不允许下达物料！", "提示");
-//             }
+            }
+            //  }
+            //             else
+            //             {
+            //                 MessageBoxEx.Show("该订单状态（非已准备或已提交）不允许下达物料！", "提示");
+            //             }
 
         }
         
@@ -1908,7 +1909,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
             DataTable dtTemp = null;
 
             //清空poList中元素
-            
+
             if (poList.Count > 0)
             {
                 poList.Clear();
@@ -1923,11 +1924,11 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
             {
                 try
                 {
-                    
+
                     foreach (DataGridViewRow dgvr in dgvPO.Rows)
                     {
                         string sqlSelectPOStatus = @"Select Count(Id) From PurchaseOrderRecordByCMF Where IsPurePO = 0 And PONumber = '" + dgvr.Cells["采购单号"].Value.ToString() + "' And POStatus = 2";
-                        if (Convert.ToBoolean(dgvr.Cells["dgvPOCheck"].Value) == true && SQLHelper.Exist(GlobalSpace.FSDBConnstr,sqlSelectPOStatus))
+                        if (Convert.ToBoolean(dgvr.Cells["dgvPOCheck"].Value) == true && SQLHelper.Exist(GlobalSpace.FSDBConnstr, sqlSelectPOStatus))
                         {
                             poItemGuidList.Add(dgvr.Cells["Guid"].Value.ToString());
                             poList.Add(dgvr.Cells["采购单号"].Value.ToString());
@@ -1940,11 +1941,11 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                                 else
                                 {
                                     icount++;
-                                }                               
+                                }
                             }
                             else
                             {
-                                MessageBoxEx.Show("订单号"+ dgvr.Cells["采购单号"].Value.ToString() + "已存在！","提示");                              
+                                MessageBoxEx.Show("订单号" + dgvr.Cells["采购单号"].Value.ToString() + "已存在！", "提示");
                             }
                         }
                     }
@@ -1958,7 +1959,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                     {
                         MessageBoxEx.Show("成功下达订单" + icount.ToString() + "个，失败" + poErrorList.Count.ToString() + "个!");
                         //遍历poList中所有订单信息，逐个按照订单信息进行物料添加
-                    
+
                         for (int i = 0; i < poList.Count; i++)
                         {
                             dtTemp = GetPODetail(poList[i]);//获取订单中的物料明细
@@ -1971,11 +1972,11 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                                         string lineNumberString = GetFSPOItemLineString(poList[i], dr["物料代码"].ToString());//查询物料在四班订单中下达后的行号
                                         if (string.IsNullOrEmpty(lineNumberString))
                                         {
-                                            Custom.MsgEx("未查到物料"+ dr["物料代码"].ToString() + "的行号，请联系管理员！");
+                                            Custom.MsgEx("未查到物料" + dr["物料代码"].ToString() + "的行号，请联系管理员！");
                                         }
-                                        if(PurchaseUser.UserStatus == 2 || PurchaseUser.UserStatus == 3 || dr["IsDirectPurchaseVial"].ToString() == "1"|| dr["IsDirectFOOrder"].ToString() == "1")//五金采购员和大客户，直接产生到货记录
+                                        if (PurchaseUser.UserStatus == 2 || PurchaseUser.UserStatus == 3 || dr["IsDirectPurchaseVial"].ToString() == "1" || dr["IsDirectFOOrder"].ToString() == "1")//五金采购员和大客户，直接产生到货记录
                                         {
-                                            strUpdate = @"Update PurchaseOrderRecordByCMF Set POStatus= 4,ActualDeliveryDate='"+DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")+"',LineNumber = '" + lineNumberString + "',FSadddt=GETDATE()  Where  Id='" + dr["Id"].ToString() + "'";
+                                            strUpdate = @"Update PurchaseOrderRecordByCMF Set POStatus= 4,ActualDeliveryDate='" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "',LineNumber = '" + lineNumberString + "',FSadddt=GETDATE()  Where  Id='" + dr["Id"].ToString() + "'";
                                             itemIdList.Add(dr["Id"].ToString());
                                         }
                                         else
@@ -1983,18 +1984,18 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                                             strUpdate = @"Update PurchaseOrderRecordByCMF Set POStatus= 3,LineNumber = '" + lineNumberString + "',FSadddt=GETDATE()  Where  Id='" + dr["Id"].ToString() + "'";
                                         }
                                         sqlList.Add(strUpdate);
-                                     //   UpdatePOItemStatus(poList[i], dr);
-                                    //    jcount++;
+                                        //   UpdatePOItemStatus(poList[i], dr);
+                                        //    jcount++;
                                     }
                                 }
                             }
                         }
                     }
-                    if (SQLHelper.BatchExecuteNonQuery(GlobalSpace.FSDBConnstr,sqlList))
+                    if (SQLHelper.BatchExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlList))
                     {
                         MessageBoxEx.Show("所有物料下达成功！", "提示");
-                       
-                        if(itemIdList.Count > 0)
+
+                        if (itemIdList.Count > 0)
                         {
                             if (!CreatePOItemReceiveHistory(itemIdList))
                             {
@@ -2002,7 +2003,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                             }
                         }
                     }
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -2042,8 +2043,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
 	                                                            [ItemReceiveType],
 	                                                            [Supervisor],
 	                                                            [ForeignNumber],
-	                                                            [BuyerID],Stock,Bin,ReceiveDate,Guid,UnitPrice,
-                                                                QualityCheckStandard
+	                                                            [BuyerID],Stock,Bin,ReceiveDate,Guid,UnitPrice,QualityCheckStandard,IsInvestigation
                                                         ) SELECT
 	                                                       	[PONumber],
 	                                                        [VendorNumber],
@@ -2061,7 +2061,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
 	                                                        [POItemQuantity],
 	                                                        [ItemReceiveType],
 	                                                        [Superior],
-                                                    [ForeignNumber],Buyer,Stock,Bin,'" + DateTime.Now.ToString("yyyy-MM-dd")+ "',Replace(NEWID(),'-',''),UnitPrice,QualityCheckStandard  FROM   PurchaseOrderRecordByCMF  WHERE Id = '" + idList[i] + "'";
+                                                    [ForeignNumber],Buyer,Stock,Bin,'" + DateTime.Now.ToString("yyyy-MM-dd")+ "',Replace(NEWID(),'-',''),UnitPrice,QualityCheckStandard,IsInvestigation  FROM   PurchaseOrderRecordByCMF  WHERE Id = '" + idList[i] + "'";
                   //     MessageBox.Show(sqlInsert);
                 sqlList.Add(sqlInsert);
             }

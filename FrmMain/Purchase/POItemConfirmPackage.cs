@@ -324,7 +324,7 @@ namespace Global.Purchase
             for (int i = 0; i < guidList.Count; i++)
             {
                 string guid = Guid.NewGuid().ToString("N");
-                string sqlInsert = @"INSERT INTO PurchaseOrderRecordHistoryByCMF (
+                string sqlInsert = $@"INSERT INTO PurchaseOrderRecordHistoryByCMF (
 	                                                        	[PONumber],
 	                                                            [VendorNumber],
 	                                                            [VendorName],
@@ -343,7 +343,7 @@ namespace Global.Purchase
 	                                                            [ItemReceiveType],
 	                                                            [Supervisor],
 	                                                            [ForeignNumber],
-	                                                            [BuyerID],Stock,Bin,ReceiveDate,Guid,IsFOItem,UnitPrice,GSID,QualityCheckStandard
+	                                                            [BuyerID],Stock,Bin,ReceiveDate,Guid,IsFOItem,UnitPrice,GSID,QualityCheckStandard,IsInvestigation
                                                         ) SELECT
 	                                                       	[PONumber],
 	                                                        [VendorNumber],
@@ -361,7 +361,7 @@ namespace Global.Purchase
 	                                                        [POItemQuantity],
 	                                                        [ItemReceiveType],
 	                                                        [Superior],
-	                                                        [ForeignNumber],Buyer,Stock,Bin,Left(ActualDeliveryDate,10),Replace(NEWID(),'-',''),IsFOItem,UnitPrice,GSID,'" + tbQualityStandard.Text + "'  FROM   PurchaseOrderRecordByCMF  WHERE Guid = '" + guidList[i] + "'";
+	                                                        [ForeignNumber],Buyer,Stock,Bin,Left(ActualDeliveryDate,10),Replace(NEWID(),'-',''),IsFOItem,UnitPrice,GSID,'{tbQualityStandard.Text.Trim()}',IsInvestigation  FROM   PurchaseOrderRecordByCMF  WHERE Guid = '{guidList[i]}'";
                 //       MessageBox.Show(sqlInsert);
                 sqlList.Add(sqlInsert);
             }
