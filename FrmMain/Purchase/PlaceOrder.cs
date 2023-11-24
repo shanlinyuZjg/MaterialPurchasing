@@ -292,12 +292,13 @@ namespace Global.Purchase
         //将PurchaseOrdersByCMF表已审核订单写入四班
         private bool PlaceFSPurchaseOrder(string poNumber, string buyer, string vendorId)
         {
-            POMT00 myPomt00 = new POMT00();
-            myPomt00.Buyer.Value = buyer;
-            myPomt00.PONumber.Value = poNumber;
-            myPomt00.VendorID.Value = vendorId;
             try
             {
+                POMT00 myPomt00 = new POMT00();
+                myPomt00.Buyer.Value = buyer;
+                myPomt00.PONumber.Value = poNumber;
+                myPomt00.VendorID.Value = vendorId;
+
                 if (FSFunctionLib.fstiClient.ProcessId(myPomt00, null))
                 {
                     return true;
@@ -648,7 +649,11 @@ namespace Global.Purchase
                                                 T1.ManufacturerName AS  生产商名,
                                                 T1.TaxRate           AS  税率,
 	                                            T1.LineType AS 类型,
-                                                T1.DemandDeliveryDate AS 需求日期旧
+                                                T1.DemandDeliveryDate AS 需求日期旧,
+                                                  (     case T1.IsInvestigation 
+                                                         when  1 then '是' else '否' 
+                                                end     
+                                                ) as 研发用物料 
                                         FROM
 	                                        PurchaseOrderRecordByCMF T1
                                         WHERE
@@ -704,6 +709,7 @@ namespace Global.Purchase
                 dgvPOItemDetail.Columns["生产商码"].ReadOnly = true;
                 dgvPOItemDetail.Columns["生产商名"].ReadOnly = true;
                 dgvPOItemDetail.Columns["税率"].ReadOnly = true;
+                dgvPOItemDetail.Columns["研发用物料"].ReadOnly = true;
                 dgvPOItemDetail.Columns["需求日期旧"].Visible = false; 
 
                 dgvPOItemDetail.Columns["单价"].DefaultCellStyle.BackColor = System.Drawing.Color.Coral;
@@ -1589,26 +1595,33 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
         //四班中添加物料到订单里
         private bool FSAddItemToPO(string poNumber, DataRow dr)
         {
-
-            POMT10 myPomt10 = new POMT10();
-            myPomt10.PONumber.Value = poNumber;
-            myPomt10.POLineUM.Value = dr["单位"].ToString();
-            myPomt10.POLineType.Value = dr["类型"].ToString();
-            myPomt10.POLineStatus.Value = dr["状态"].ToString();
-            myPomt10.ItemNumber.Value = dr["物料代码"].ToString();
-            myPomt10.PromisedDate.Value = dr["需求日期"].ToString();
-            myPomt10.LineItemOrderedQuantity.Value = dr["订购数量"].ToString();
-            myPomt10.NeededDate.Value = dr["需求日期"].ToString();
-            myPomt10.ItemUnitCost.Value = dr["单价"].ToString();
-
-            if (FSFunctionLib.fstiClient.ProcessId(myPomt10, null))
+            try
             {
-                //     string linenumber = SQLHelper.GetItemValue(GlobalSpace.connstr, "POLineNumberString", strSql);
-                //此处为写入自己的表的记录，需要好好实现
-                return true;
+                POMT10 myPomt10 = new POMT10();
+                myPomt10.PONumber.Value = poNumber;
+                myPomt10.POLineUM.Value = dr["单位"].ToString();
+                myPomt10.POLineType.Value = dr["类型"].ToString();
+                myPomt10.POLineStatus.Value = dr["状态"].ToString();
+                myPomt10.ItemNumber.Value = dr["物料代码"].ToString();
+                myPomt10.PromisedDate.Value = dr["需求日期"].ToString();
+                myPomt10.LineItemOrderedQuantity.Value = dr["订购数量"].ToString();
+                myPomt10.NeededDate.Value = dr["需求日期"].ToString();
+                myPomt10.ItemUnitCost.Value = dr["单价"].ToString();
+
+                if (FSFunctionLib.fstiClient.ProcessId(myPomt10, null))
+                {
+                    //     string linenumber = SQLHelper.GetItemValue(GlobalSpace.connstr, "POLineNumberString", strSql);
+                    //此处为写入自己的表的记录，需要好好实现
+                    return true;
+                }
+                FSFunctionLib.FSErrorMsg("物料添加到订单失败");
+                return false;
             }
-            FSFunctionLib.FSErrorMsg("物料添加到订单失败");
-            return false;
+            catch (Exception ex)
+            {
+                MessageBoxEx.Show($@"{poNumber+" "+dr["物料代码"].ToString()}采购订单行写入四班失败：{ex.Message}");
+                return false;
+            }
         }
 
         private void btnSearchPO_Click(object sender, EventArgs e)
@@ -1899,7 +1912,8 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
         private void btnWritePOToFS_Click(object sender, EventArgs e)
         {
             int icount = 0;
-            List<string> poItemGuidList = new List<string>();
+            //List<string> poItemGuidList = new List<string>();
+            List<string> ErrorVendorPONumbers = new List<string>();//程序内采购订单的供应商码跟四班不一致的采购订单号
             List<string> sqlList = new List<string>();
             List<string> itemIdList = new List<string>();
             List<string> sqlReceiveList = new List<string>();
@@ -1930,9 +1944,29 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                         string sqlSelectPOStatus = @"Select Count(Id) From PurchaseOrderRecordByCMF Where IsPurePO = 0 And PONumber = '" + dgvr.Cells["采购单号"].Value.ToString() + "' And POStatus = 2";
                         if (Convert.ToBoolean(dgvr.Cells["dgvPOCheck"].Value) == true && SQLHelper.Exist(GlobalSpace.FSDBConnstr, sqlSelectPOStatus))
                         {
-                            poItemGuidList.Add(dgvr.Cells["Guid"].Value.ToString());
-                            poList.Add(dgvr.Cells["采购单号"].Value.ToString());
-                            if (!IsPOExist(dgvr.Cells["采购单号"].Value.ToString()))
+                            string ponumber = dgvr.Cells["采购单号"].Value.ToString();
+                            string VenderNumber= dgvr.Cells["供应商码"].Value.ToString();
+                            //poItemGuidList.Add(dgvr.Cells["Guid"].Value.ToString());
+
+                            #region 检查采购订单号,若已写入四班,检查供应商码的一致性!
+                            string strSelect = @"Select VendorID From _NoLock_FS_POHeader Where PONumber = '" + ponumber + "'";
+                            DataTable DtPO= SQLHelper.GetDataTable(GlobalSpace.FSDBMRConnstr, strSelect);
+                            if (DtPO.Rows.Count >1)
+                            {
+                                ErrorVendorPONumbers.Add(ponumber);
+                            }
+                            else if (DtPO.Rows.Count == 1)
+                            {
+                                if (DtPO.Rows[0][0].ToString() == VenderNumber)
+                                {
+                                    poList.Add(ponumber);
+                                }
+                                else
+                                {
+                                    ErrorVendorPONumbers.Add(ponumber);
+                                }
+                            }
+                            else if (DtPO.Rows.Count == 0)   
                             {
                                 if (!PlaceFSPurchaseOrder(dgvr.Cells["采购单号"].Value.ToString(), fsuserid, dgvr.Cells["供应商码"].Value.ToString()))
                                 {
@@ -1940,16 +1974,14 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                                 }
                                 else
                                 {
+                                    poList.Add(ponumber);
                                     icount++;
                                 }
                             }
-                            else
-                            {
-                                MessageBoxEx.Show("订单号" + dgvr.Cells["采购单号"].Value.ToString() + "已存在！", "提示");
-                            }
+                            #endregion
                         }
                     }
-
+                    
                     if (poList.Count == 0)
                     {
                         MessageBoxEx.Show("无可用订单！", "提示");
@@ -1957,7 +1989,11 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                     }
                     else
                     {
-                        MessageBoxEx.Show("成功下达订单" + icount.ToString() + "个，失败" + poErrorList.Count.ToString() + "个!");
+                        MessageBoxEx.Show($@"成功下达订单头{icount.ToString()}个，失败{ poErrorList.Count.ToString() }个({string.Join(",",poErrorList)}),四班已存在{ (poList.Count-icount)}个!");
+                        if (ErrorVendorPONumbers.Count > 0)
+                        {
+                            MessageBoxEx.Show($@"以下采购订单号在四班中已存在且供应商码不一致({string.Join(",", ErrorVendorPONumbers)})!请点击确定继续，并检查是否在其它系统已下达此采购订单号！");
+                        }
                         //遍历poList中所有订单信息，逐个按照订单信息进行物料添加
 
                         for (int i = 0; i < poList.Count; i++)
@@ -1970,7 +2006,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                                     if (FSAddItemToPO(poList[i], dr))
                                     {
                                         string lineNumberString = GetFSPOItemLineString(poList[i], dr["物料代码"].ToString());//查询物料在四班订单中下达后的行号
-                                        if (string.IsNullOrEmpty(lineNumberString))
+                                        if (string.IsNullOrWhiteSpace(lineNumberString))
                                         {
                                             Custom.MsgEx("未查到物料" + dr["物料代码"].ToString() + "的行号，请联系管理员！");
                                         }
@@ -2015,7 +2051,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                 MessageBoxEx.Show("无订单！");
             }
             FSFunctionLib.FSExit();
-            ShowPOItemDetail(poList[0]);
+            ShowPOItemDetail(tbPONumberInDetail.Text);
         }
         //产生入库记录
         private bool CreatePOItemReceiveHistory(List<string> idList)
@@ -2074,7 +2110,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
         }
         //判断订单是否存在
         private bool IsPOExist(string ponumber)
-        {
+         {
             string strSelect = @"Select VendorID From _NoLock_FS_POHeader Where PONumber = '" + ponumber + "'";
             if (SQLHelper.Exist(GlobalSpace.FSDBMRConnstr, strSelect))
             {
@@ -4828,6 +4864,38 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
                     tbRequireDept.SelectedIndex = 0;
 
                 this.tbRequireDept.SelectionStart = this.tbRequireDept.Text.Length;
+            }
+        }
+
+        private void 研发用物料ToolStripMenuItem_Click(object sender, EventArgs e)
+        { 
+            string   strId = dgvPOItemDetail["Id", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString(); 
+                string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set  IsInvestigation=1 Where Id = '" + strId + "'";
+
+                if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
+                {
+                    Custom.MsgEx("已修改为研发用物料！");
+                    ShowPOItemDetail(tbPONumberInDetail.Text.Trim());
+                }
+                else
+                {
+                    Custom.MsgEx("修改失败！");
+                }
+        }
+
+        private void 非研发用物料ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string strId = dgvPOItemDetail["Id", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
+            string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set  IsInvestigation=0 Where Id = '" + strId + "'";
+
+            if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
+            {
+                Custom.MsgEx("已修改为非研发用物料！");
+                ShowPOItemDetail(tbPONumberInDetail.Text.Trim());
+            }
+            else
+            {
+                Custom.MsgEx("修改失败！");
             }
         }
     }
