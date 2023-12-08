@@ -3085,6 +3085,16 @@ namespace Global.Warehouse
                         MessageBoxEx.Show("生产日期不能有空项！", "提示");
                         return;
                     }
+                    if (dr4["生产日期"].ToString().Length !=7 && dr4["生产日期"].ToString().Length!=10)
+                    {
+                        MessageBoxEx.Show("生产日期不是7位或10位", "提示");
+                        return;
+                    }
+                    if (dr4["到期日期"].ToString().Length != 7 && dr4["到期日期"].ToString().Length != 10)
+                    {
+                        MessageBoxEx.Show("到期日期不是7位或10位", "提示");
+                        return;
+                    }
                     string sqlInsert = @"INSERT INTO [RYZY_YJM].[dbo].[FL_plan_IN] (
 	                                                                [VendorId],
 	                                                                [Vendor],
