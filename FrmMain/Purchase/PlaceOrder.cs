@@ -575,7 +575,7 @@ namespace Global.Purchase
                 {
                     tbForeignNumber.Focus();
                 }
-                    else
+                else
                 {
                     tbItemNumber.Focus();
                 }
@@ -650,6 +650,7 @@ namespace Global.Purchase
                                                 T1.TaxRate           AS  税率,
 	                                            T1.LineType AS 类型,
                                                 T1.DemandDeliveryDate AS 需求日期旧,
+                                                T1.RequireDept AS 提报部门,
                                                   (     case T1.IsInvestigation 
                                                          when  1 then '是' else '否' 
                                                 end     
@@ -710,6 +711,7 @@ namespace Global.Purchase
                 dgvPOItemDetail.Columns["生产商名"].ReadOnly = true;
                 dgvPOItemDetail.Columns["税率"].ReadOnly = true;
                 dgvPOItemDetail.Columns["研发用物料"].ReadOnly = true;
+                dgvPOItemDetail.Columns["提报部门"].ReadOnly = true;
                 dgvPOItemDetail.Columns["需求日期旧"].Visible = false; 
 
                 dgvPOItemDetail.Columns["单价"].DefaultCellStyle.BackColor = System.Drawing.Color.Coral;
@@ -4896,6 +4898,28 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
             else
             {
                 Custom.MsgEx("修改失败！");
+            }
+        }
+
+        private void 修改提报部门ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string RequireDept = tbRequireDept.Text.Trim();
+            if (string.IsNullOrWhiteSpace(RequireDept))
+            {
+                Custom.MsgEx("请输入选择提报部门！");
+                return;
+            }
+            string strId = dgvPOItemDetail["Id", dgvPOItemDetail.CurrentCell.RowIndex].Value.ToString();
+            string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set  RequireDept='"+ RequireDept + "' Where Id = '" + strId + "'";
+
+            if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
+            {
+                Custom.MsgEx("提报部门修改成功！");
+                ShowPOItemDetail(tbPONumberInDetail.Text.Trim());
+            }
+            else
+            {
+                Custom.MsgEx("提报部门修改失败！");
             }
         }
     }

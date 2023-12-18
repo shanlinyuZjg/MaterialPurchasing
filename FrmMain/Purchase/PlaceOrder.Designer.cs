@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
-            DevComponents.DotNetBar.Rendering.SuperTabColorTable superTabColorTable2 = new DevComponents.DotNetBar.Rendering.SuperTabColorTable();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle60 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            DevComponents.DotNetBar.Rendering.SuperTabColorTable superTabColorTable1 = new DevComponents.DotNetBar.Rendering.SuperTabColorTable();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelEx2 = new DevComponents.DotNetBar.PanelEx();
             this.labelX29 = new DevComponents.DotNetBar.LabelX();
             this.CbIsInvestigation = new System.Windows.Forms.CheckBox();
@@ -132,26 +132,6 @@
             this.btnCheckedByPassword = new DevComponents.DotNetBar.ButtonX();
             this.panelEx4 = new DevComponents.DotNetBar.PanelEx();
             this.superTabControl1 = new DevComponents.DotNetBar.SuperTabControl();
-            this.superTabControlPanel3 = new DevComponents.DotNetBar.SuperTabControlPanel();
-            this.btnConfirmPOItemGetInvoice = new DevComponents.DotNetBar.ButtonX();
-            this.btnEmptyInvoiceList = new DevComponents.DotNetBar.ButtonX();
-            this.btnAddToInvoiceList = new DevComponents.DotNetBar.ButtonX();
-            this.btnInvoiceViewByVendorNumber = new DevComponents.DotNetBar.ButtonX();
-            this.btnInvoiceViewByPONumber = new DevComponents.DotNetBar.ButtonX();
-            this.btnInvoiceAllUnchecked = new DevComponents.DotNetBar.ButtonX();
-            this.btnInvoiceAllChecked = new DevComponents.DotNetBar.ButtonX();
-            this.lblInvoiceTotalAmount = new DevComponents.DotNetBar.LabelX();
-            this.labelX24 = new DevComponents.DotNetBar.LabelX();
-            this.labelX23 = new DevComponents.DotNetBar.LabelX();
-            this.tbPONumberForInvoice = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbVendorNumberForInvoice = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.btnExportInvoiceToExcel = new DevComponents.DotNetBar.ButtonX();
-            this.btnPOInvoice = new DevComponents.DotNetBar.ButtonX();
-            this.btnSendVendorInvoiceEmail = new DevComponents.DotNetBar.ButtonX();
-            this.dgvPOItemsForInvoiceDetail = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.InvoiceCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dgvPONumberForInvoice = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.superTabItem3 = new DevComponents.DotNetBar.SuperTabItem();
             this.superTabControlPanel1 = new DevComponents.DotNetBar.SuperTabControlPanel();
             this.btnMakeProgress = new DevComponents.DotNetBar.ButtonX();
             this.dgvPO3 = new System.Windows.Forms.DataGridView();
@@ -186,16 +166,37 @@
             this.ManufacturerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ActualDeliveryQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.superTabItem1 = new DevComponents.DotNetBar.SuperTabItem();
+            this.superTabControlPanel3 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.btnConfirmPOItemGetInvoice = new DevComponents.DotNetBar.ButtonX();
+            this.btnEmptyInvoiceList = new DevComponents.DotNetBar.ButtonX();
+            this.btnAddToInvoiceList = new DevComponents.DotNetBar.ButtonX();
+            this.btnInvoiceViewByVendorNumber = new DevComponents.DotNetBar.ButtonX();
+            this.btnInvoiceViewByPONumber = new DevComponents.DotNetBar.ButtonX();
+            this.btnInvoiceAllUnchecked = new DevComponents.DotNetBar.ButtonX();
+            this.btnInvoiceAllChecked = new DevComponents.DotNetBar.ButtonX();
+            this.lblInvoiceTotalAmount = new DevComponents.DotNetBar.LabelX();
+            this.labelX24 = new DevComponents.DotNetBar.LabelX();
+            this.labelX23 = new DevComponents.DotNetBar.LabelX();
+            this.tbPONumberForInvoice = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbVendorNumberForInvoice = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.btnExportInvoiceToExcel = new DevComponents.DotNetBar.ButtonX();
+            this.btnPOInvoice = new DevComponents.DotNetBar.ButtonX();
+            this.btnSendVendorInvoiceEmail = new DevComponents.DotNetBar.ButtonX();
+            this.dgvPOItemsForInvoiceDetail = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.InvoiceCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dgvPONumberForInvoice = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.superTabItem3 = new DevComponents.DotNetBar.SuperTabItem();
             this.fbdSaveFile = new System.Windows.Forms.FolderBrowserDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.修改该行物料ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除该行物料ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.该订单行作废ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.打开该订单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.删除该订单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.研发用物料ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.非研发用物料ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.删除该订单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.修改提报部门ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelEx2.SuspendLayout();
             this.panelEx1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl2)).BeginInit();
@@ -209,13 +210,13 @@
             this.panelEx4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).BeginInit();
             this.superTabControl1.SuspendLayout();
-            this.superTabControlPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPOItemsForInvoiceDetail)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPONumberForInvoice)).BeginInit();
             this.superTabControlPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPO3)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPO2)).BeginInit();
+            this.superTabControlPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPOItemsForInvoiceDetail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPONumberForInvoice)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -832,37 +833,37 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvPO.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvPO.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle46.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle46.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle46.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle46.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle46.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle46.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPO.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle46;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPO.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPO.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvPOCheck});
-            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle47.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle47.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle47.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle47.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle47.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle47.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPO.DefaultCellStyle = dataGridViewCellStyle47;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPO.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvPO.EnableHeadersVisualStyles = false;
             this.dgvPO.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvPO.Location = new System.Drawing.Point(8, 148);
             this.dgvPO.Name = "dgvPO";
-            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle48.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle48.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle48.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle48.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle48.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle48.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPO.RowHeadersDefaultCellStyle = dataGridViewCellStyle48;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPO.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvPO.RowTemplate.Height = 23;
             this.dgvPO.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPO.Size = new System.Drawing.Size(434, 213);
@@ -980,35 +981,35 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPOItemDetail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvPOItemDetail.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle49.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle49.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle49.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle49.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle49.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle49.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPOItemDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle49;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPOItemDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvPOItemDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle50.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle50.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle50.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle50.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle50.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle50.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPOItemDetail.DefaultCellStyle = dataGridViewCellStyle50;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPOItemDetail.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvPOItemDetail.EnableHeadersVisualStyles = false;
             this.dgvPOItemDetail.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvPOItemDetail.Location = new System.Drawing.Point(495, 91);
             this.dgvPOItemDetail.Name = "dgvPOItemDetail";
-            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle51.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle51.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle51.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle51.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle51.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle51.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPOItemDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle51;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPOItemDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvPOItemDetail.RowTemplate.Height = 23;
             this.dgvPOItemDetail.Size = new System.Drawing.Size(999, 317);
             this.dgvPOItemDetail.TabIndex = 5;
@@ -1474,322 +1475,10 @@
             this.superTabControl1.Tabs.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.superTabItem1,
             this.superTabItem3});
-            superTabColorTable2.InnerBorder = System.Drawing.Color.White;
-            superTabColorTable2.OuterBorder = System.Drawing.Color.White;
-            this.superTabControl1.TabStripColor = superTabColorTable2;
+            superTabColorTable1.InnerBorder = System.Drawing.Color.White;
+            superTabColorTable1.OuterBorder = System.Drawing.Color.White;
+            this.superTabControl1.TabStripColor = superTabColorTable1;
             this.superTabControl1.Text = "superTabControl1";
-            // 
-            // superTabControlPanel3
-            // 
-            this.superTabControlPanel3.Controls.Add(this.btnConfirmPOItemGetInvoice);
-            this.superTabControlPanel3.Controls.Add(this.btnEmptyInvoiceList);
-            this.superTabControlPanel3.Controls.Add(this.btnAddToInvoiceList);
-            this.superTabControlPanel3.Controls.Add(this.btnInvoiceViewByVendorNumber);
-            this.superTabControlPanel3.Controls.Add(this.btnInvoiceViewByPONumber);
-            this.superTabControlPanel3.Controls.Add(this.btnInvoiceAllUnchecked);
-            this.superTabControlPanel3.Controls.Add(this.btnInvoiceAllChecked);
-            this.superTabControlPanel3.Controls.Add(this.lblInvoiceTotalAmount);
-            this.superTabControlPanel3.Controls.Add(this.labelX24);
-            this.superTabControlPanel3.Controls.Add(this.labelX23);
-            this.superTabControlPanel3.Controls.Add(this.tbPONumberForInvoice);
-            this.superTabControlPanel3.Controls.Add(this.tbVendorNumberForInvoice);
-            this.superTabControlPanel3.Controls.Add(this.btnExportInvoiceToExcel);
-            this.superTabControlPanel3.Controls.Add(this.btnPOInvoice);
-            this.superTabControlPanel3.Controls.Add(this.btnSendVendorInvoiceEmail);
-            this.superTabControlPanel3.Controls.Add(this.dgvPOItemsForInvoiceDetail);
-            this.superTabControlPanel3.Controls.Add(this.dgvPONumberForInvoice);
-            this.superTabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.superTabControlPanel3.Location = new System.Drawing.Point(0, 28);
-            this.superTabControlPanel3.Name = "superTabControlPanel3";
-            this.superTabControlPanel3.Size = new System.Drawing.Size(1491, 355);
-            this.superTabControlPanel3.TabIndex = 0;
-            this.superTabControlPanel3.TabItem = this.superTabItem3;
-            this.superTabControlPanel3.Click += new System.EventHandler(this.superTabControlPanel3_Click);
-            // 
-            // btnConfirmPOItemGetInvoice
-            // 
-            this.btnConfirmPOItemGetInvoice.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnConfirmPOItemGetInvoice.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnConfirmPOItemGetInvoice.Location = new System.Drawing.Point(1044, 6);
-            this.btnConfirmPOItemGetInvoice.Name = "btnConfirmPOItemGetInvoice";
-            this.btnConfirmPOItemGetInvoice.Size = new System.Drawing.Size(62, 23);
-            this.btnConfirmPOItemGetInvoice.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnConfirmPOItemGetInvoice.TabIndex = 36;
-            this.btnConfirmPOItemGetInvoice.Text = "开票确认";
-            this.btnConfirmPOItemGetInvoice.Click += new System.EventHandler(this.btnConfirmPOItemGetInvoice_Click);
-            // 
-            // btnEmptyInvoiceList
-            // 
-            this.btnEmptyInvoiceList.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnEmptyInvoiceList.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnEmptyInvoiceList.Location = new System.Drawing.Point(863, 6);
-            this.btnEmptyInvoiceList.Name = "btnEmptyInvoiceList";
-            this.btnEmptyInvoiceList.Size = new System.Drawing.Size(62, 23);
-            this.btnEmptyInvoiceList.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnEmptyInvoiceList.TabIndex = 37;
-            this.btnEmptyInvoiceList.Text = "待开清空";
-            this.btnEmptyInvoiceList.Click += new System.EventHandler(this.btnEmptyInvoiceList_Click);
-            // 
-            // btnAddToInvoiceList
-            // 
-            this.btnAddToInvoiceList.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnAddToInvoiceList.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnAddToInvoiceList.Location = new System.Drawing.Point(775, 6);
-            this.btnAddToInvoiceList.Name = "btnAddToInvoiceList";
-            this.btnAddToInvoiceList.Size = new System.Drawing.Size(62, 23);
-            this.btnAddToInvoiceList.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnAddToInvoiceList.TabIndex = 37;
-            this.btnAddToInvoiceList.Text = "加入待开";
-            this.btnAddToInvoiceList.Click += new System.EventHandler(this.btnAddToInvoiceList_Click);
-            // 
-            // btnInvoiceViewByVendorNumber
-            // 
-            this.btnInvoiceViewByVendorNumber.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnInvoiceViewByVendorNumber.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnInvoiceViewByVendorNumber.Location = new System.Drawing.Point(215, 4);
-            this.btnInvoiceViewByVendorNumber.Name = "btnInvoiceViewByVendorNumber";
-            this.btnInvoiceViewByVendorNumber.Size = new System.Drawing.Size(58, 23);
-            this.btnInvoiceViewByVendorNumber.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnInvoiceViewByVendorNumber.TabIndex = 28;
-            this.btnInvoiceViewByVendorNumber.Text = "查找";
-            this.btnInvoiceViewByVendorNumber.Click += new System.EventHandler(this.btnInvoiceViewByVendorNumber_Click);
-            // 
-            // btnInvoiceViewByPONumber
-            // 
-            this.btnInvoiceViewByPONumber.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnInvoiceViewByPONumber.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnInvoiceViewByPONumber.Location = new System.Drawing.Point(608, 6);
-            this.btnInvoiceViewByPONumber.Name = "btnInvoiceViewByPONumber";
-            this.btnInvoiceViewByPONumber.Size = new System.Drawing.Size(45, 23);
-            this.btnInvoiceViewByPONumber.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnInvoiceViewByPONumber.TabIndex = 34;
-            this.btnInvoiceViewByPONumber.Text = "查找";
-            this.btnInvoiceViewByPONumber.Click += new System.EventHandler(this.btnInvoiceViewByPONumber_Click);
-            // 
-            // btnInvoiceAllUnchecked
-            // 
-            this.btnInvoiceAllUnchecked.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnInvoiceAllUnchecked.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnInvoiceAllUnchecked.Location = new System.Drawing.Point(721, 6);
-            this.btnInvoiceAllUnchecked.Name = "btnInvoiceAllUnchecked";
-            this.btnInvoiceAllUnchecked.Size = new System.Drawing.Size(33, 23);
-            this.btnInvoiceAllUnchecked.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnInvoiceAllUnchecked.TabIndex = 35;
-            this.btnInvoiceAllUnchecked.Text = "全消";
-            this.btnInvoiceAllUnchecked.Click += new System.EventHandler(this.btnInvoiceAllUnchecked_Click);
-            // 
-            // btnInvoiceAllChecked
-            // 
-            this.btnInvoiceAllChecked.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnInvoiceAllChecked.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnInvoiceAllChecked.Location = new System.Drawing.Point(666, 6);
-            this.btnInvoiceAllChecked.Name = "btnInvoiceAllChecked";
-            this.btnInvoiceAllChecked.Size = new System.Drawing.Size(33, 23);
-            this.btnInvoiceAllChecked.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnInvoiceAllChecked.TabIndex = 35;
-            this.btnInvoiceAllChecked.Text = "全选";
-            this.btnInvoiceAllChecked.Click += new System.EventHandler(this.btnInvoiceAllChecked_Click);
-            // 
-            // lblInvoiceTotalAmount
-            // 
-            // 
-            // 
-            // 
-            this.lblInvoiceTotalAmount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblInvoiceTotalAmount.Location = new System.Drawing.Point(279, 6);
-            this.lblInvoiceTotalAmount.Name = "lblInvoiceTotalAmount";
-            this.lblInvoiceTotalAmount.Size = new System.Drawing.Size(124, 21);
-            this.lblInvoiceTotalAmount.TabIndex = 29;
-            // 
-            // labelX24
-            // 
-            // 
-            // 
-            // 
-            this.labelX24.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX24.Location = new System.Drawing.Point(413, 9);
-            this.labelX24.Name = "labelX24";
-            this.labelX24.Size = new System.Drawing.Size(54, 21);
-            this.labelX24.TabIndex = 29;
-            this.labelX24.Text = "采购单号";
-            // 
-            // labelX23
-            // 
-            // 
-            // 
-            // 
-            this.labelX23.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX23.Location = new System.Drawing.Point(8, 6);
-            this.labelX23.Name = "labelX23";
-            this.labelX23.Size = new System.Drawing.Size(54, 21);
-            this.labelX23.TabIndex = 30;
-            this.labelX23.Text = "供应商码";
-            // 
-            // tbPONumberForInvoice
-            // 
-            // 
-            // 
-            // 
-            this.tbPONumberForInvoice.Border.Class = "TextBoxBorder";
-            this.tbPONumberForInvoice.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbPONumberForInvoice.Location = new System.Drawing.Point(470, 8);
-            this.tbPONumberForInvoice.Name = "tbPONumberForInvoice";
-            this.tbPONumberForInvoice.PreventEnterBeep = true;
-            this.tbPONumberForInvoice.Size = new System.Drawing.Size(132, 21);
-            this.tbPONumberForInvoice.TabIndex = 31;
-            this.tbPONumberForInvoice.TextChanged += new System.EventHandler(this.tbPONumberForInvoice_TextChanged);
-            this.tbPONumberForInvoice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPONumberForInvoice_KeyPress);
-            // 
-            // tbVendorNumberForInvoice
-            // 
-            // 
-            // 
-            // 
-            this.tbVendorNumberForInvoice.Border.Class = "TextBoxBorder";
-            this.tbVendorNumberForInvoice.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbVendorNumberForInvoice.Location = new System.Drawing.Point(64, 6);
-            this.tbVendorNumberForInvoice.Name = "tbVendorNumberForInvoice";
-            this.tbVendorNumberForInvoice.PreventEnterBeep = true;
-            this.tbVendorNumberForInvoice.Size = new System.Drawing.Size(115, 21);
-            this.tbVendorNumberForInvoice.TabIndex = 32;
-            this.tbVendorNumberForInvoice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbVendorNumberForInvoice_KeyPress_1);
-            // 
-            // btnExportInvoiceToExcel
-            // 
-            this.btnExportInvoiceToExcel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnExportInvoiceToExcel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnExportInvoiceToExcel.Location = new System.Drawing.Point(954, 6);
-            this.btnExportInvoiceToExcel.Name = "btnExportInvoiceToExcel";
-            this.btnExportInvoiceToExcel.Size = new System.Drawing.Size(62, 23);
-            this.btnExportInvoiceToExcel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnExportInvoiceToExcel.TabIndex = 27;
-            this.btnExportInvoiceToExcel.Text = "导出明细";
-            this.btnExportInvoiceToExcel.Visible = false;
-            this.btnExportInvoiceToExcel.Click += new System.EventHandler(this.btnExportInvoiceToExcel_Click);
-            // 
-            // btnPOInvoice
-            // 
-            this.btnPOInvoice.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnPOInvoice.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnPOInvoice.Location = new System.Drawing.Point(1135, 6);
-            this.btnPOInvoice.Name = "btnPOInvoice";
-            this.btnPOInvoice.Size = new System.Drawing.Size(68, 23);
-            this.btnPOInvoice.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnPOInvoice.TabIndex = 27;
-            this.btnPOInvoice.Text = "打印";
-            this.btnPOInvoice.Click += new System.EventHandler(this.btnPOInvoice_Click);
-            // 
-            // btnSendVendorInvoiceEmail
-            // 
-            this.btnSendVendorInvoiceEmail.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnSendVendorInvoiceEmail.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSendVendorInvoiceEmail.Location = new System.Drawing.Point(1251, 7);
-            this.btnSendVendorInvoiceEmail.Name = "btnSendVendorInvoiceEmail";
-            this.btnSendVendorInvoiceEmail.Size = new System.Drawing.Size(68, 23);
-            this.btnSendVendorInvoiceEmail.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnSendVendorInvoiceEmail.TabIndex = 27;
-            this.btnSendVendorInvoiceEmail.Text = "发邮件";
-            this.btnSendVendorInvoiceEmail.Visible = false;
-            this.btnSendVendorInvoiceEmail.Click += new System.EventHandler(this.btnSendVendorInvoiceEmail_Click);
-            // 
-            // dgvPOItemsForInvoiceDetail
-            // 
-            this.dgvPOItemsForInvoiceDetail.AllowUserToAddRows = false;
-            this.dgvPOItemsForInvoiceDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvPOItemsForInvoiceDetail.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle55.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle55.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle55.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle55.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle55.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle55.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPOItemsForInvoiceDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle55;
-            this.dgvPOItemsForInvoiceDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPOItemsForInvoiceDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.InvoiceCheck});
-            dataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle56.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle56.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle56.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle56.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle56.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle56.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPOItemsForInvoiceDetail.DefaultCellStyle = dataGridViewCellStyle56;
-            this.dgvPOItemsForInvoiceDetail.EnableHeadersVisualStyles = false;
-            this.dgvPOItemsForInvoiceDetail.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvPOItemsForInvoiceDetail.Location = new System.Drawing.Point(279, 33);
-            this.dgvPOItemsForInvoiceDetail.Name = "dgvPOItemsForInvoiceDetail";
-            dataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle57.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle57.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle57.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle57.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle57.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle57.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPOItemsForInvoiceDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle57;
-            this.dgvPOItemsForInvoiceDetail.RowHeadersVisible = false;
-            this.dgvPOItemsForInvoiceDetail.RowTemplate.Height = 23;
-            this.dgvPOItemsForInvoiceDetail.Size = new System.Drawing.Size(1201, 306);
-            this.dgvPOItemsForInvoiceDetail.TabIndex = 26;
-            // 
-            // InvoiceCheck
-            // 
-            this.InvoiceCheck.HeaderText = "选择";
-            this.InvoiceCheck.Name = "InvoiceCheck";
-            this.InvoiceCheck.Width = 50;
-            // 
-            // dgvPONumberForInvoice
-            // 
-            this.dgvPONumberForInvoice.AllowUserToAddRows = false;
-            this.dgvPONumberForInvoice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.dgvPONumberForInvoice.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgvPONumberForInvoice.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle58.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle58.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle58.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle58.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle58.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle58.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPONumberForInvoice.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle58;
-            this.dgvPONumberForInvoice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle59.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle59.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle59.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle59.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle59.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle59.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPONumberForInvoice.DefaultCellStyle = dataGridViewCellStyle59;
-            this.dgvPONumberForInvoice.EnableHeadersVisualStyles = false;
-            this.dgvPONumberForInvoice.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvPONumberForInvoice.Location = new System.Drawing.Point(3, 34);
-            this.dgvPONumberForInvoice.Name = "dgvPONumberForInvoice";
-            dataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle60.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle60.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle60.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle60.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle60.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle60.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPONumberForInvoice.RowHeadersDefaultCellStyle = dataGridViewCellStyle60;
-            this.dgvPONumberForInvoice.RowTemplate.Height = 23;
-            this.dgvPONumberForInvoice.Size = new System.Drawing.Size(270, 307);
-            this.dgvPONumberForInvoice.TabIndex = 25;
-            this.dgvPONumberForInvoice.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPOForInvoice_CellContentDoubleClick);
-            this.dgvPONumberForInvoice.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPOForInvoice_CellDoubleClick);
-            // 
-            // superTabItem3
-            // 
-            this.superTabItem3.AttachedControl = this.superTabControlPanel3;
-            this.superTabItem3.GlobalItem = false;
-            this.superTabItem3.Name = "superTabItem3";
-            this.superTabItem3.Text = "无票明细表";
-            this.superTabItem3.Visible = false;
             // 
             // superTabControlPanel1
             // 
@@ -2027,14 +1716,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPO2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvPO2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle52.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle52.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle52.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle52.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle52.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle52.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPO2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle52;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPO2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvPO2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPO2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.GUID,
@@ -2052,26 +1741,26 @@
             this.ManufacturerNumber,
             this.ManufacturerName,
             this.ActualDeliveryQuantity});
-            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle53.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle53.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle53.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle53.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle53.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle53.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPO2.DefaultCellStyle = dataGridViewCellStyle53;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPO2.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvPO2.EnableHeadersVisualStyles = false;
             this.dgvPO2.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvPO2.Location = new System.Drawing.Point(233, 61);
             this.dgvPO2.Name = "dgvPO2";
-            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle54.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle54.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle54.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle54.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle54.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle54.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPO2.RowHeadersDefaultCellStyle = dataGridViewCellStyle54;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPO2.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvPO2.RowTemplate.Height = 23;
             this.dgvPO2.Size = new System.Drawing.Size(1254, 294);
             this.dgvPO2.TabIndex = 0;
@@ -2190,6 +1879,318 @@
             this.superTabItem1.Name = "superTabItem1";
             this.superTabItem1.Text = "订单进度表";
             // 
+            // superTabControlPanel3
+            // 
+            this.superTabControlPanel3.Controls.Add(this.btnConfirmPOItemGetInvoice);
+            this.superTabControlPanel3.Controls.Add(this.btnEmptyInvoiceList);
+            this.superTabControlPanel3.Controls.Add(this.btnAddToInvoiceList);
+            this.superTabControlPanel3.Controls.Add(this.btnInvoiceViewByVendorNumber);
+            this.superTabControlPanel3.Controls.Add(this.btnInvoiceViewByPONumber);
+            this.superTabControlPanel3.Controls.Add(this.btnInvoiceAllUnchecked);
+            this.superTabControlPanel3.Controls.Add(this.btnInvoiceAllChecked);
+            this.superTabControlPanel3.Controls.Add(this.lblInvoiceTotalAmount);
+            this.superTabControlPanel3.Controls.Add(this.labelX24);
+            this.superTabControlPanel3.Controls.Add(this.labelX23);
+            this.superTabControlPanel3.Controls.Add(this.tbPONumberForInvoice);
+            this.superTabControlPanel3.Controls.Add(this.tbVendorNumberForInvoice);
+            this.superTabControlPanel3.Controls.Add(this.btnExportInvoiceToExcel);
+            this.superTabControlPanel3.Controls.Add(this.btnPOInvoice);
+            this.superTabControlPanel3.Controls.Add(this.btnSendVendorInvoiceEmail);
+            this.superTabControlPanel3.Controls.Add(this.dgvPOItemsForInvoiceDetail);
+            this.superTabControlPanel3.Controls.Add(this.dgvPONumberForInvoice);
+            this.superTabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.superTabControlPanel3.Location = new System.Drawing.Point(0, 28);
+            this.superTabControlPanel3.Name = "superTabControlPanel3";
+            this.superTabControlPanel3.Size = new System.Drawing.Size(1491, 355);
+            this.superTabControlPanel3.TabIndex = 0;
+            this.superTabControlPanel3.TabItem = this.superTabItem3;
+            this.superTabControlPanel3.Click += new System.EventHandler(this.superTabControlPanel3_Click);
+            // 
+            // btnConfirmPOItemGetInvoice
+            // 
+            this.btnConfirmPOItemGetInvoice.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnConfirmPOItemGetInvoice.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnConfirmPOItemGetInvoice.Location = new System.Drawing.Point(1044, 6);
+            this.btnConfirmPOItemGetInvoice.Name = "btnConfirmPOItemGetInvoice";
+            this.btnConfirmPOItemGetInvoice.Size = new System.Drawing.Size(62, 23);
+            this.btnConfirmPOItemGetInvoice.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnConfirmPOItemGetInvoice.TabIndex = 36;
+            this.btnConfirmPOItemGetInvoice.Text = "开票确认";
+            this.btnConfirmPOItemGetInvoice.Click += new System.EventHandler(this.btnConfirmPOItemGetInvoice_Click);
+            // 
+            // btnEmptyInvoiceList
+            // 
+            this.btnEmptyInvoiceList.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnEmptyInvoiceList.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnEmptyInvoiceList.Location = new System.Drawing.Point(863, 6);
+            this.btnEmptyInvoiceList.Name = "btnEmptyInvoiceList";
+            this.btnEmptyInvoiceList.Size = new System.Drawing.Size(62, 23);
+            this.btnEmptyInvoiceList.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnEmptyInvoiceList.TabIndex = 37;
+            this.btnEmptyInvoiceList.Text = "待开清空";
+            this.btnEmptyInvoiceList.Click += new System.EventHandler(this.btnEmptyInvoiceList_Click);
+            // 
+            // btnAddToInvoiceList
+            // 
+            this.btnAddToInvoiceList.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnAddToInvoiceList.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnAddToInvoiceList.Location = new System.Drawing.Point(775, 6);
+            this.btnAddToInvoiceList.Name = "btnAddToInvoiceList";
+            this.btnAddToInvoiceList.Size = new System.Drawing.Size(62, 23);
+            this.btnAddToInvoiceList.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnAddToInvoiceList.TabIndex = 37;
+            this.btnAddToInvoiceList.Text = "加入待开";
+            this.btnAddToInvoiceList.Click += new System.EventHandler(this.btnAddToInvoiceList_Click);
+            // 
+            // btnInvoiceViewByVendorNumber
+            // 
+            this.btnInvoiceViewByVendorNumber.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnInvoiceViewByVendorNumber.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnInvoiceViewByVendorNumber.Location = new System.Drawing.Point(215, 4);
+            this.btnInvoiceViewByVendorNumber.Name = "btnInvoiceViewByVendorNumber";
+            this.btnInvoiceViewByVendorNumber.Size = new System.Drawing.Size(58, 23);
+            this.btnInvoiceViewByVendorNumber.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnInvoiceViewByVendorNumber.TabIndex = 28;
+            this.btnInvoiceViewByVendorNumber.Text = "查找";
+            this.btnInvoiceViewByVendorNumber.Click += new System.EventHandler(this.btnInvoiceViewByVendorNumber_Click);
+            // 
+            // btnInvoiceViewByPONumber
+            // 
+            this.btnInvoiceViewByPONumber.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnInvoiceViewByPONumber.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnInvoiceViewByPONumber.Location = new System.Drawing.Point(608, 6);
+            this.btnInvoiceViewByPONumber.Name = "btnInvoiceViewByPONumber";
+            this.btnInvoiceViewByPONumber.Size = new System.Drawing.Size(45, 23);
+            this.btnInvoiceViewByPONumber.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnInvoiceViewByPONumber.TabIndex = 34;
+            this.btnInvoiceViewByPONumber.Text = "查找";
+            this.btnInvoiceViewByPONumber.Click += new System.EventHandler(this.btnInvoiceViewByPONumber_Click);
+            // 
+            // btnInvoiceAllUnchecked
+            // 
+            this.btnInvoiceAllUnchecked.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnInvoiceAllUnchecked.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnInvoiceAllUnchecked.Location = new System.Drawing.Point(721, 6);
+            this.btnInvoiceAllUnchecked.Name = "btnInvoiceAllUnchecked";
+            this.btnInvoiceAllUnchecked.Size = new System.Drawing.Size(33, 23);
+            this.btnInvoiceAllUnchecked.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnInvoiceAllUnchecked.TabIndex = 35;
+            this.btnInvoiceAllUnchecked.Text = "全消";
+            this.btnInvoiceAllUnchecked.Click += new System.EventHandler(this.btnInvoiceAllUnchecked_Click);
+            // 
+            // btnInvoiceAllChecked
+            // 
+            this.btnInvoiceAllChecked.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnInvoiceAllChecked.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnInvoiceAllChecked.Location = new System.Drawing.Point(666, 6);
+            this.btnInvoiceAllChecked.Name = "btnInvoiceAllChecked";
+            this.btnInvoiceAllChecked.Size = new System.Drawing.Size(33, 23);
+            this.btnInvoiceAllChecked.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnInvoiceAllChecked.TabIndex = 35;
+            this.btnInvoiceAllChecked.Text = "全选";
+            this.btnInvoiceAllChecked.Click += new System.EventHandler(this.btnInvoiceAllChecked_Click);
+            // 
+            // lblInvoiceTotalAmount
+            // 
+            // 
+            // 
+            // 
+            this.lblInvoiceTotalAmount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblInvoiceTotalAmount.Location = new System.Drawing.Point(279, 6);
+            this.lblInvoiceTotalAmount.Name = "lblInvoiceTotalAmount";
+            this.lblInvoiceTotalAmount.Size = new System.Drawing.Size(124, 21);
+            this.lblInvoiceTotalAmount.TabIndex = 29;
+            // 
+            // labelX24
+            // 
+            // 
+            // 
+            // 
+            this.labelX24.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX24.Location = new System.Drawing.Point(413, 9);
+            this.labelX24.Name = "labelX24";
+            this.labelX24.Size = new System.Drawing.Size(54, 21);
+            this.labelX24.TabIndex = 29;
+            this.labelX24.Text = "采购单号";
+            // 
+            // labelX23
+            // 
+            // 
+            // 
+            // 
+            this.labelX23.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX23.Location = new System.Drawing.Point(8, 6);
+            this.labelX23.Name = "labelX23";
+            this.labelX23.Size = new System.Drawing.Size(54, 21);
+            this.labelX23.TabIndex = 30;
+            this.labelX23.Text = "供应商码";
+            // 
+            // tbPONumberForInvoice
+            // 
+            // 
+            // 
+            // 
+            this.tbPONumberForInvoice.Border.Class = "TextBoxBorder";
+            this.tbPONumberForInvoice.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbPONumberForInvoice.Location = new System.Drawing.Point(470, 8);
+            this.tbPONumberForInvoice.Name = "tbPONumberForInvoice";
+            this.tbPONumberForInvoice.PreventEnterBeep = true;
+            this.tbPONumberForInvoice.Size = new System.Drawing.Size(132, 21);
+            this.tbPONumberForInvoice.TabIndex = 31;
+            this.tbPONumberForInvoice.TextChanged += new System.EventHandler(this.tbPONumberForInvoice_TextChanged);
+            this.tbPONumberForInvoice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPONumberForInvoice_KeyPress);
+            // 
+            // tbVendorNumberForInvoice
+            // 
+            // 
+            // 
+            // 
+            this.tbVendorNumberForInvoice.Border.Class = "TextBoxBorder";
+            this.tbVendorNumberForInvoice.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbVendorNumberForInvoice.Location = new System.Drawing.Point(64, 6);
+            this.tbVendorNumberForInvoice.Name = "tbVendorNumberForInvoice";
+            this.tbVendorNumberForInvoice.PreventEnterBeep = true;
+            this.tbVendorNumberForInvoice.Size = new System.Drawing.Size(115, 21);
+            this.tbVendorNumberForInvoice.TabIndex = 32;
+            this.tbVendorNumberForInvoice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbVendorNumberForInvoice_KeyPress_1);
+            // 
+            // btnExportInvoiceToExcel
+            // 
+            this.btnExportInvoiceToExcel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnExportInvoiceToExcel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnExportInvoiceToExcel.Location = new System.Drawing.Point(954, 6);
+            this.btnExportInvoiceToExcel.Name = "btnExportInvoiceToExcel";
+            this.btnExportInvoiceToExcel.Size = new System.Drawing.Size(62, 23);
+            this.btnExportInvoiceToExcel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnExportInvoiceToExcel.TabIndex = 27;
+            this.btnExportInvoiceToExcel.Text = "导出明细";
+            this.btnExportInvoiceToExcel.Visible = false;
+            this.btnExportInvoiceToExcel.Click += new System.EventHandler(this.btnExportInvoiceToExcel_Click);
+            // 
+            // btnPOInvoice
+            // 
+            this.btnPOInvoice.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnPOInvoice.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnPOInvoice.Location = new System.Drawing.Point(1135, 6);
+            this.btnPOInvoice.Name = "btnPOInvoice";
+            this.btnPOInvoice.Size = new System.Drawing.Size(68, 23);
+            this.btnPOInvoice.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnPOInvoice.TabIndex = 27;
+            this.btnPOInvoice.Text = "打印";
+            this.btnPOInvoice.Click += new System.EventHandler(this.btnPOInvoice_Click);
+            // 
+            // btnSendVendorInvoiceEmail
+            // 
+            this.btnSendVendorInvoiceEmail.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnSendVendorInvoiceEmail.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnSendVendorInvoiceEmail.Location = new System.Drawing.Point(1251, 7);
+            this.btnSendVendorInvoiceEmail.Name = "btnSendVendorInvoiceEmail";
+            this.btnSendVendorInvoiceEmail.Size = new System.Drawing.Size(68, 23);
+            this.btnSendVendorInvoiceEmail.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnSendVendorInvoiceEmail.TabIndex = 27;
+            this.btnSendVendorInvoiceEmail.Text = "发邮件";
+            this.btnSendVendorInvoiceEmail.Visible = false;
+            this.btnSendVendorInvoiceEmail.Click += new System.EventHandler(this.btnSendVendorInvoiceEmail_Click);
+            // 
+            // dgvPOItemsForInvoiceDetail
+            // 
+            this.dgvPOItemsForInvoiceDetail.AllowUserToAddRows = false;
+            this.dgvPOItemsForInvoiceDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvPOItemsForInvoiceDetail.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPOItemsForInvoiceDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            this.dgvPOItemsForInvoiceDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPOItemsForInvoiceDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.InvoiceCheck});
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPOItemsForInvoiceDetail.DefaultCellStyle = dataGridViewCellStyle11;
+            this.dgvPOItemsForInvoiceDetail.EnableHeadersVisualStyles = false;
+            this.dgvPOItemsForInvoiceDetail.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvPOItemsForInvoiceDetail.Location = new System.Drawing.Point(279, 33);
+            this.dgvPOItemsForInvoiceDetail.Name = "dgvPOItemsForInvoiceDetail";
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPOItemsForInvoiceDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            this.dgvPOItemsForInvoiceDetail.RowHeadersVisible = false;
+            this.dgvPOItemsForInvoiceDetail.RowTemplate.Height = 23;
+            this.dgvPOItemsForInvoiceDetail.Size = new System.Drawing.Size(1201, 306);
+            this.dgvPOItemsForInvoiceDetail.TabIndex = 26;
+            // 
+            // InvoiceCheck
+            // 
+            this.InvoiceCheck.HeaderText = "选择";
+            this.InvoiceCheck.Name = "InvoiceCheck";
+            this.InvoiceCheck.Width = 50;
+            // 
+            // dgvPONumberForInvoice
+            // 
+            this.dgvPONumberForInvoice.AllowUserToAddRows = false;
+            this.dgvPONumberForInvoice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dgvPONumberForInvoice.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvPONumberForInvoice.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPONumberForInvoice.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            this.dgvPONumberForInvoice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPONumberForInvoice.DefaultCellStyle = dataGridViewCellStyle14;
+            this.dgvPONumberForInvoice.EnableHeadersVisualStyles = false;
+            this.dgvPONumberForInvoice.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvPONumberForInvoice.Location = new System.Drawing.Point(3, 34);
+            this.dgvPONumberForInvoice.Name = "dgvPONumberForInvoice";
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPONumberForInvoice.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            this.dgvPONumberForInvoice.RowTemplate.Height = 23;
+            this.dgvPONumberForInvoice.Size = new System.Drawing.Size(270, 307);
+            this.dgvPONumberForInvoice.TabIndex = 25;
+            this.dgvPONumberForInvoice.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPOForInvoice_CellContentDoubleClick);
+            this.dgvPONumberForInvoice.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPOForInvoice_CellDoubleClick);
+            // 
+            // superTabItem3
+            // 
+            this.superTabItem3.AttachedControl = this.superTabControlPanel3;
+            this.superTabItem3.GlobalItem = false;
+            this.superTabItem3.Name = "superTabItem3";
+            this.superTabItem3.Text = "无票明细表";
+            this.superTabItem3.Visible = false;
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -2198,9 +2199,10 @@
             this.该订单行作废ToolStripMenuItem,
             this.打开该订单ToolStripMenuItem,
             this.研发用物料ToolStripMenuItem,
-            this.非研发用物料ToolStripMenuItem});
+            this.非研发用物料ToolStripMenuItem,
+            this.修改提报部门ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(344, 158);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(344, 180);
             // 
             // 修改该行物料ToolStripMenuItem
             // 
@@ -2230,6 +2232,20 @@
             this.打开该订单ToolStripMenuItem.Text = "打开该订单(四班状态改为4，物料状态改为已下达)";
             this.打开该订单ToolStripMenuItem.Click += new System.EventHandler(this.打开该订单ToolStripMenuItem_Click);
             // 
+            // 研发用物料ToolStripMenuItem
+            // 
+            this.研发用物料ToolStripMenuItem.Name = "研发用物料ToolStripMenuItem";
+            this.研发用物料ToolStripMenuItem.Size = new System.Drawing.Size(343, 22);
+            this.研发用物料ToolStripMenuItem.Text = "研发用物料";
+            this.研发用物料ToolStripMenuItem.Click += new System.EventHandler(this.研发用物料ToolStripMenuItem_Click);
+            // 
+            // 非研发用物料ToolStripMenuItem
+            // 
+            this.非研发用物料ToolStripMenuItem.Name = "非研发用物料ToolStripMenuItem";
+            this.非研发用物料ToolStripMenuItem.Size = new System.Drawing.Size(343, 22);
+            this.非研发用物料ToolStripMenuItem.Text = "非研发用物料";
+            this.非研发用物料ToolStripMenuItem.Click += new System.EventHandler(this.非研发用物料ToolStripMenuItem_Click);
+            // 
             // contextMenuStrip2
             // 
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -2244,19 +2260,12 @@
             this.删除该订单ToolStripMenuItem.Text = "删除该订单";
             this.删除该订单ToolStripMenuItem.Click += new System.EventHandler(this.删除该订单ToolStripMenuItem_Click);
             // 
-            // 研发用物料ToolStripMenuItem
+            // 修改提报部门ToolStripMenuItem
             // 
-            this.研发用物料ToolStripMenuItem.Name = "研发用物料ToolStripMenuItem";
-            this.研发用物料ToolStripMenuItem.Size = new System.Drawing.Size(343, 22);
-            this.研发用物料ToolStripMenuItem.Text = "研发用物料";
-            this.研发用物料ToolStripMenuItem.Click += new System.EventHandler(this.研发用物料ToolStripMenuItem_Click);
-            // 
-            // 非研发用物料ToolStripMenuItem
-            // 
-            this.非研发用物料ToolStripMenuItem.Name = "非研发用物料ToolStripMenuItem";
-            this.非研发用物料ToolStripMenuItem.Size = new System.Drawing.Size(343, 22);
-            this.非研发用物料ToolStripMenuItem.Text = "非研发用物料";
-            this.非研发用物料ToolStripMenuItem.Click += new System.EventHandler(this.非研发用物料ToolStripMenuItem_Click);
+            this.修改提报部门ToolStripMenuItem.Name = "修改提报部门ToolStripMenuItem";
+            this.修改提报部门ToolStripMenuItem.Size = new System.Drawing.Size(343, 22);
+            this.修改提报部门ToolStripMenuItem.Text = "修改提报部门";
+            this.修改提报部门ToolStripMenuItem.Click += new System.EventHandler(this.修改提报部门ToolStripMenuItem_Click);
             // 
             // PlaceOrder
             // 
@@ -2288,13 +2297,13 @@
             this.panelEx4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).EndInit();
             this.superTabControl1.ResumeLayout(false);
-            this.superTabControlPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPOItemsForInvoiceDetail)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPONumberForInvoice)).EndInit();
             this.superTabControlPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPO3)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPO2)).EndInit();
+            this.superTabControlPanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPOItemsForInvoiceDetail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPONumberForInvoice)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -2453,5 +2462,6 @@
         private DevComponents.DotNetBar.LabelX labelX29;
         private System.Windows.Forms.ToolStripMenuItem 研发用物料ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 非研发用物料ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 修改提报部门ToolStripMenuItem;
     }
 }
