@@ -21,7 +21,7 @@ namespace Global.Purchase
             InitializeComponent();
             UserID = userID;
             UserName = userName;
-            Department = department;
+            Department = department;//供应 审计 财务
         }
 
         private void PoInvoiceSelect_MR_Load(object sender, EventArgs e)
@@ -46,7 +46,7 @@ namespace Global.Purchase
                                                 FROM
 	                                                PurchaseOrderInvoiceRecordMRByCMF where Status >0 and OperateAudit ='{UserID}' and AuditUpdateDateTime >='{dateTimePicker1.Value.ToString("yyyy-MM-dd")}' and AuditUpdateDateTime <'{dateTimePicker2.Value.AddDays(1).ToString("yyyy-MM-dd")}' and VendorNumber like '%{TbVendorNumber.Text.Trim()}%' and VendorName like '%{TbVendorName.Text.Trim()}%' and InvoiceNumberS like '%{TbInvoiceS.Text.Trim()}%'";
             }
-            else
+            else  //财务
             {
                 sqlSelect = $@"SELECT
                                                     distinct VendorNumber 供应商码,  VendorName 供应商名, InvoiceNumberS 发票号,Status
@@ -290,6 +290,38 @@ namespace Global.Purchase
                                                 FROM
 	                                                PurchaseOrderInvoiceRecordMRByCMF where PONumber ='{TbPONumber.Text.Trim().ToUpper()}' and LineNumber ='{TbLineNumber.Text.Trim().ToUpper()}' order by Id desc";
             DGV2.DataSource = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
+        }
+
+        private void DGV1_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (Department != "财务") return; //查询界面只有财务有此功能，不是财务的return
+            if (e.Button == MouseButtons.Right)
+            {
+                if (e.RowIndex >= 0)
+                {
+                    DGV1.ClearSelection();
+                    DGV1.Rows[e.RowIndex].Selected = true;
+                    //DGV1.CurrentCell = DGV1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    this.contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
+                }
+            }
+        }
+
+        private void 退回ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int rowIndex = DGV1.SelectedRows[0].Index;
+            string sqlUpdate = $@"UPDATE PurchaseOrderInvoiceRecordMRByCMF SET Status = 0,FinanceUpdateDateTime= getdate(),OperateFinance='{UserID}',Remarks='财务退回' WHERE VendorNumber ='{DGV1["供应商码",rowIndex].Value.ToString()}' and  InvoiceNumberS='{DGV1["发票号", rowIndex].Value.ToString()}' and Status = 3";
+
+
+            if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
+            {
+
+                MessageBox.Show("退回完成！", "提示");
+            }
+            else
+            {
+                MessageBox.Show("退回失败！", "提示");
+            }
         }
     }
 }

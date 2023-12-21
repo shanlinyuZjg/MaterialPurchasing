@@ -29,6 +29,7 @@ namespace Global.Purchase
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.BtnSelect = new System.Windows.Forms.Button();
             this.TbInvoiceS = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -49,8 +50,11 @@ namespace Global.Purchase
             this.label7 = new System.Windows.Forms.Label();
             this.TbItemNumber = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.退回ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DGV2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtnSelect
@@ -110,6 +114,7 @@ namespace Global.Purchase
             this.DGV1.Size = new System.Drawing.Size(348, 523);
             this.DGV1.TabIndex = 44;
             this.DGV1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV1_CellDoubleClick);
+            this.DGV1.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV1_CellMouseUp);
             // 
             // TbVendorNumber
             // 
@@ -236,6 +241,20 @@ namespace Global.Purchase
             this.label8.TabIndex = 63;
             this.label8.Text = "物料编码";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.退回ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            // 
+            // 退回ToolStripMenuItem
+            // 
+            this.退回ToolStripMenuItem.Name = "退回ToolStripMenuItem";
+            this.退回ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.退回ToolStripMenuItem.Text = "退回";
+            this.退回ToolStripMenuItem.Click += new System.EventHandler(this.退回ToolStripMenuItem_Click);
+            // 
             // PoInvoiceSelect_MR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -266,6 +285,7 @@ namespace Global.Purchase
             this.Load += new System.EventHandler(this.PoInvoiceSelect_MR_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DGV2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -293,5 +313,7 @@ namespace Global.Purchase
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox TbItemNumber;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 退回ToolStripMenuItem;
     }
 }
