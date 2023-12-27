@@ -468,7 +468,8 @@ namespace Global.Purchase
                                                         when '66' then '部分入库' 
                                                  end     
                                                 ) as 状态 ,
-                                                T1.AccumulatedActualReceiveQuantity AS 累计数量 ,
+                                                T1.AccumulatedActualReceiveQuantity AS 累计接收数量 ,
+                                                T1.POItemRemainedQuantity AS 剩余数量,
                                                 T1.Comment1 AS 备注
                                         FROM
 	                                        PurchaseOrderRecordByCMF T1
@@ -888,67 +889,72 @@ namespace Global.Purchase
         {
             List<string> guidList = new List<string>();
             List<string> sqlList = new List<string>();
-            int iCount = 0;
+            //int iCount = 0;
             string lineNumber = string.Empty;
-            string guid = string.Empty;
+            string Id = string.Empty;
             double orderQuantity = 0;
             double receivedQuantity = 0;
+            int rowIndex = -1;
             foreach (DataGridViewRow dgvr in dgvPODetail.Rows)
             {
                 if (Convert.ToBoolean(dgvr.Cells["PORVSeveralTimes"].Value))
                 {
-                    iCount++;
+                    //iCount++;
                     lineNumber = Convert.ToInt32(dgvr.Cells["行号"].Value).ToString();
-                    guid = dgvr.Cells["GUID"].Value.ToString();
+                    Id = dgvr.Cells["Id"].Value.ToString();
                     orderQuantity = Convert.ToDouble(dgvr.Cells["订购数量"].Value);
+                    rowIndex = dgvr.Index;
+                    //
+                    receivedQuantity = GetReceivedTotalQuantity(PONumber, lineNumber, GlobalSpace.FSDBMRConnstr);
+                    if (receivedQuantity == -1)
+                    {
+                        MessageBoxEx.Show($@"行号{lineNumber}未从四班查询到数据！", "提示");
+                        continue;
+                    }
+                    string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set POItemRemainedQuantity=" + (orderQuantity - receivedQuantity) + ", AccumulatedActualReceiveQuantity= " + receivedQuantity + " Where Id='" + Id + "'";
+                    if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
+                    {
+
+                        //if (lineNumber.Length == 1)
+                        //{
+                        //    lineNumber = "00" + lineNumber;
+                        //}
+                        //else if (lineNumber.Length == 2)
+                        //{
+                        //    lineNumber = "0" + lineNumber;
+                        //}
+                        //dgvPODetail.DataSource = GetVendorPOItemsDetail(PONumber, lineNumber);
+                        //dgvPODetail.Columns["GUID"].Visible = false;
+                        //dgvPODetail.Columns["Id"].Visible = false;
+                        //dgvPODetail.Columns["ParentGuid"].Visible = false;
+                        //MessageBox.Show(rowIndex.ToString());
+                        dgvPODetail["累计接收数量", rowIndex].Value = receivedQuantity;
+                        dgvPODetail["剩余数量", rowIndex].Value = orderQuantity - receivedQuantity;
+                        //MessageBoxEx.Show("更新成功！", "提示");
+                    }
+                    else
+                    {
+                        MessageBoxEx.Show($@"行号{lineNumber}更新失败！", "提示");
+                    }
                 }
             }
-            if (iCount > 1)
-            {
-                MessageBoxEx.Show("每次更新只能选择一条！", "提示");
-                return;
-            }
-            receivedQuantity = GetReceivedTotalQuantity(PONumber, lineNumber, GlobalSpace.FSDBMRConnstr);
-            string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set POItemRemainedQuantity=" + (orderQuantity - receivedQuantity) + " Where Guid='" + guid + "'";
-            if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
-            {
-                MessageBoxEx.Show("更新成功！", "提示");
-                if (lineNumber.Length == 1)
-                {
-                    lineNumber = "00" + lineNumber;
-                }
-                else if (lineNumber.Length == 2)
-                {
-                    lineNumber = "0" + lineNumber;
-                }
-                dgvPODetail.DataSource = GetVendorPOItemsDetail(PONumber, lineNumber);
-                dgvPODetail.Columns["GUID"].Visible = false;
-                dgvPODetail.Columns["Id"].Visible = false;
-                dgvPODetail.Columns["ParentGuid"].Visible = false;
-            }
-            else
-            {
-                MessageBoxEx.Show("更新失败！", "提示");
-            }
+            MessageBoxEx.Show("更新完成！", "提示");
+
         }
         //获取累计入库数量
         private double GetReceivedTotalQuantity(string poNumber, string lineNumber, string connStr)
         {
             double quantity = 0;
-            string sqlSelect = @"SELECT
-                                     TOP 1	TotalReceiptQuantity
-                                    FROM
-	                                    _NoLock_FS_HistoryPOReceipt
-                                    WHERE
-	                                    PONumber = '" + poNumber + "'  AND POLineNumber = '" + lineNumber + "' and TransactionDate >='" + DateTime.Now.AddYears(-2).ToString("yyyy-MM-dd") + "' ORDER BY HistoryPOReceiptKey DESC";
+            string sqlSelect = $@"SELECT B.ReceiptQuantity FROM [dbo].[_NoLock_FS_POLine] as B INNER JOIN [dbo].[_NoLock_FS_POHeader] as A on A.POHeaderKey=B.POHeaderKey  where A.PONumber ='{poNumber}' and B.POLineNumber = '{lineNumber}'";
             DataTable dt = SQLHelper.GetDataTable(connStr, sqlSelect);
             if (dt.Rows.Count == 1)
             {
-                quantity = Convert.ToDouble(dt.Rows[0]["TotalReceiptQuantity"]);
+                quantity = Convert.ToDouble(dt.Rows[0]["ReceiptQuantity"]);
             }
             else
             {
-                quantity = 0;
+                quantity = -1;
+                //-1表示未从四班查到数据！
             }
             return quantity;
         }

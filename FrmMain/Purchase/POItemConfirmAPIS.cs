@@ -20,7 +20,7 @@ namespace Global.Purchase
         List<string> ParentGuidList = new List<string>();
         private DataSet UpdateDs = new DataSet();
         private SqlDataAdapter UpdateSDA = new SqlDataAdapter();
-        string PONumber = string.Empty;
+        
         string PONumberTimes = string.Empty;
       
         public POItemConfirmAPIS(string id,string name)
@@ -53,8 +53,8 @@ namespace Global.Purchase
                                                 T1.QualityCheckStandard AS 请验标准,
 	                                            T1.DemandDeliveryDate AS 要求到货日,
 	                                            T1.ForeignNumber AS 外贸单号,
-                                                T1.ActualDeliveryQuantity AS 实际到货数量,
-                                                T1.POItemRemainedQuantity AS 剩余到货数量,
+                                                T1.AccumulatedActualReceiveQuantity AS 累计接收数量 ,
+                                                T1.POItemRemainedQuantity AS 剩余数量,
                                                 T1.StockKeeper AS 库管员,
                                                 (case T1.POStatus 
                                                           when  '3' then '已下达'  
@@ -62,6 +62,7 @@ namespace Global.Purchase
                                                         when '66' then '部分入库' 
                                                  end     
                                                 ) as 状态 ,
+                                               T1.Id ,
                                                T1.Guid
                                         FROM
 	                                        PurchaseOrderRecordByCMF T1
@@ -499,8 +500,8 @@ namespace Global.Purchase
                 {
     
                     dgvPODetail.DataSource = GetVendorPOItemsUnConfirmedDetail("ItemNumber", tbItemNumber.Text, PurchaseUser.UserID);
+                    dgvPODetail.Columns["Id"].Visible = false;
                     dgvPODetail.Columns["Guid"].Visible = false;
-              
                 }
             }
         }
@@ -512,6 +513,7 @@ namespace Global.Purchase
                 if (e.KeyChar == (char)13)
                 {
                    dgvPODetail.DataSource = GetVendorPOItemsUnConfirmedDetail("ItemDescription", tbItemDescription.Text, "HDH");//PurchaseUser.UserID
+                    dgvPODetail.Columns["Id"].Visible = false;
                     dgvPODetail.Columns["Guid"].Visible = false;
                     tbItemDescription.Text = "";
                 }
@@ -525,6 +527,7 @@ namespace Global.Purchase
                 if (e.KeyChar == (char)13)
                 {
                    dgvPODetail.DataSource =  GetVendorPOItemsUnConfirmedDetail("VendorNumber", tbVendorNumber.Text, PurchaseUser.UserID);
+                    dgvPODetail.Columns["Id"].Visible = false;
                     dgvPODetail.Columns["Guid"].Visible = false;
                     tbVendorNumber.Text = "";
                 }
@@ -544,6 +547,7 @@ namespace Global.Purchase
                 if (e.KeyChar == (char)13)
                 {
                   dgvPODetail.DataSource =  GetVendorPOItemsUnConfirmedDetail("PONumber", tbPONumber.Text, PurchaseUser.UserID);
+                    dgvPODetail.Columns["Id"].Visible = false;
                     dgvPODetail.Columns["Guid"].Visible = false;
                     tbPONumber.Text = "";
 
@@ -558,6 +562,7 @@ namespace Global.Purchase
                 if (e.KeyChar == (char)13)
                 {
                  dgvPODetail.DataSource =   GetVendorPOItemsUnConfirmedDetail("VendorName", tbVendorName.Text, PurchaseUser.UserID);
+                    dgvPODetail.Columns["Id"].Visible = false;
                     dgvPODetail.Columns["Guid"].Visible = false;
                     tbVendorName.Text = "";
                 }
@@ -773,6 +778,7 @@ namespace Global.Purchase
                 if (e.KeyChar == (char)13)
                 {
                     dgvPODetail.DataSource = GetVendorPOItemsUnConfirmedDetail("FONumber", tbFONumber.Text, PurchaseUser.UserID);
+                    dgvPODetail.Columns["Id"].Visible = false;
                     dgvPODetail.Columns["Guid"].Visible = false;
                     tbFONumber.Text = "";
                 }
@@ -823,55 +829,71 @@ namespace Global.Purchase
             List<string> guidList = new List<string>();
             List<string> sqlList = new List<string>();
             string lineNumber = string.Empty;
-            string guid = string.Empty;
+            string Id = string.Empty;
             double orderQuantity = 0;
             double receivedQuantity = 0;
+            int rowIndex = -1;
             foreach (DataGridViewRow dgvr in dgvPODetail.Rows)
             {
                 if (Convert.ToBoolean(dgvr.Cells["Check"].Value))
                 {
-                    PONumber= dgvr.Cells["采购单号"].Value.ToString().Trim().ToUpper();
                     lineNumber = Convert.ToInt32(dgvr.Cells["行号"].Value).ToString();
-                    guid = dgvr.Cells["GUID"].Value.ToString();
+                    Id = dgvr.Cells["Id"].Value.ToString();
                     orderQuantity = Convert.ToDouble(dgvr.Cells["订购数量"].Value);
-                    #region 更新主体
+                    rowIndex = dgvr.Index;
+                    string PONumber = dgvr.Cells["采购单号"].Value.ToString().Trim().ToUpper();
+                    //
                     receivedQuantity = GetReceivedTotalQuantity(PONumber, lineNumber, GlobalSpace.FSDBMRConnstr);
-                    string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set ActualReceiveQuantity = "+receivedQuantity+", POItemRemainedQuantity=" + (orderQuantity - receivedQuantity) + " Where Guid='" + guid + "'";
+
+                    receivedQuantity = GetReceivedTotalQuantity(PONumber, lineNumber, GlobalSpace.FSDBMRConnstr);
+                    if (receivedQuantity == -1)
+                    {
+                        MessageBoxEx.Show($@"采购订单{PONumber}行号{lineNumber}未从四班查询到数据！", "提示");
+                        continue;
+                    }
+                    string sqlUpdate = @"Update PurchaseOrderRecordByCMF Set POItemRemainedQuantity=" + (orderQuantity - receivedQuantity) + ", AccumulatedActualReceiveQuantity= " + receivedQuantity + " Where Id='" + Id + "'";
                     if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
                     {
-                        MessageBoxEx.Show("更新成功,只更新选中的第一条", "提示");
-                        dgvr.Cells["实际到货数量"].Value = receivedQuantity;
-                        dgvr.Cells["剩余到货数量"].Value = orderQuantity - receivedQuantity; 
+
+                        //if (lineNumber.Length == 1)
+                        //{
+                        //    lineNumber = "00" + lineNumber;
+                        //}
+                        //else if (lineNumber.Length == 2)
+                        //{
+                        //    lineNumber = "0" + lineNumber;
+                        //}
+                        //dgvPODetail.DataSource = GetVendorPOItemsDetail(PONumber, lineNumber);
+                        //dgvPODetail.Columns["GUID"].Visible = false;
+                        //dgvPODetail.Columns["Id"].Visible = false;
+                        //dgvPODetail.Columns["ParentGuid"].Visible = false;
+                        //MessageBox.Show(rowIndex.ToString());
+                        dgvPODetail["累计接收数量", rowIndex].Value = receivedQuantity;
+                        dgvPODetail["剩余数量", rowIndex].Value = orderQuantity - receivedQuantity;
+                        //MessageBoxEx.Show("更新成功！", "提示");
                     }
                     else
                     {
-                        MessageBoxEx.Show("更新失败！", "提示");
+                        MessageBoxEx.Show($@"采购订单{PONumber}行号{lineNumber}更新失败！", "提示");
                     }
-                    #endregion
-                    
-                    break;
                 }
             }
-            
+            MessageBoxEx.Show("更新完成！", "提示");
         }
         //获取累计入库数量
         private double GetReceivedTotalQuantity(string poNumber, string lineNumber, string connStr)
         {
             double quantity = 0;
-            string sqlSelect = @"SELECT
-                                     TOP 1	TotalReceiptQuantity
-                                    FROM
-	                                    _NoLock_FS_HistoryPOReceipt
-                                    WHERE
-	                                    PONumber = '" + poNumber + "'  AND POLineNumber = '" + lineNumber + "' and TransactionDate >='"+DateTime.Now.AddYears(-2).ToString("yyyy-MM-dd")+"' ORDER BY HistoryPOReceiptKey DESC";
+            string sqlSelect = $@"SELECT B.ReceiptQuantity FROM [dbo].[_NoLock_FS_POLine] as B INNER JOIN [dbo].[_NoLock_FS_POHeader] as A on A.POHeaderKey=B.POHeaderKey  where A.PONumber ='{poNumber}' and B.POLineNumber = '{lineNumber}'";
             DataTable dt = SQLHelper.GetDataTable(connStr, sqlSelect);
             if (dt.Rows.Count == 1)
             {
-                quantity = Convert.ToDouble(dt.Rows[0]["TotalReceiptQuantity"]);
+                quantity = Convert.ToDouble(dt.Rows[0]["ReceiptQuantity"]);
             }
             else
             {
-                quantity = 0;
+                quantity = -1;
+                //-1表示未从四班查到数据！
             }
             return quantity;
         }

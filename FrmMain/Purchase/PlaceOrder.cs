@@ -3711,7 +3711,7 @@ Stock,Bin,InspectionPeriod,Guid,TaxRate,ParentGuid,POItemConfirmer,ItemReceiveTy
 
             if (poStatus < 3)
             {
-                string sqlUpdate = @"Delete From  PurchaseOrderRecordByCMF  Where Guid = '" + guid + "'";
+                string sqlUpdate = @"Delete From  PurchaseOrderRecordByCMF  Where Id = '" + strId + "'";
                 if (SQLHelper.ExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdate))
                 {
                     Custom.MsgEx("删除成功！");
