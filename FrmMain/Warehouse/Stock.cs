@@ -977,11 +977,23 @@ namespace Global.Warehouse
             FSFunctionLib.FSConfigFileInitialize(GlobalSpace.fsconfigfilepath, FSUserID, FSUserPassword);
             List<string> errorList = new List<string>();
             List<string> specialItemList = SQLHelper.GetList(GlobalSpace.FSDBConnstr, "Select ItemNumber  From PurchaseDepartmentStockSpecialItem", "ItemNumber");
+            string LotnumberCheck = string.Empty;//检查批号是否有中文括号或者中文字符
             foreach (DataRow dr in dtTemp.Rows)
             {
                 string strReturn = string.Empty;
                 string guid = dr["Guid"].ToString();
-
+                //检查批号是否有中文括号或者中文字符
+                if (IsExistChineseBracket(dr["厂家批号"].ToString())|| IsChineseLetter(dr["厂家批号"].ToString()))
+                {
+                    LotnumberCheck += "厂家批号:"+dr["厂家批号"].ToString() + ";";
+                    continue;
+                }
+                //包含中文字符
+                if (IsExistChineseBracket(dr["公司批号"].ToString()) || IsChineseLetter(dr["公司批号"].ToString()))
+                {
+                    LotnumberCheck += "公司批号:" + dr["公司批号"].ToString() + ";";
+                    continue;
+                }
                 //GUID STATUS=1 确认
                 if (SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, "Select *  From PurchaseOrderRecordHistoryByCMF Where Guid='" + guid + "' and Status = 1 and PORVfs = 0").Rows.Count != 1)
                 {
@@ -1132,6 +1144,10 @@ namespace Global.Warehouse
             else
             {
                 Custom.MsgEx("四班写入成功！");
+            }
+            if (!string.IsNullOrWhiteSpace(LotnumberCheck))
+            {
+                MessageBox.Show("以下批号有中文括号或中文字符：\r\n"+ LotnumberCheck);
             }
         }
 
