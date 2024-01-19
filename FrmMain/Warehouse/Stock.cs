@@ -72,8 +72,6 @@ namespace Global.Warehouse
 
             if (FOItemKeeperList.Contains(StockUser.UserID))
             {
-                dtpFP.Visible = true;
-                btnFP.Visible = true;
                 btnPrintFOForBatchRecord.Visible = true;
                 btnPrintForLabel.Visible = false;
             }
@@ -252,14 +250,13 @@ namespace Global.Warehouse
         }
 
         //获取未处理到货记录NumberOfPackages AS 整件数,PackageUM AS 件单位,PackageOdd AS 零头,PackageSpecification AS 包装规格, T1.LotNumber AS 厂家批号,
-        private DataTable GetVendorPOItemsDetail(int status)
+        private DataTable GetVendorPOItemsDetail(int status,string DateStr)
         {
             string strSql = string.Empty;
-            if (StockUser.Type == "ALL")
-            {
-                strSql = @"SELECT
-	                                        T1.Guid,T1.ParentGuid,T1.ForeignNumber AS 外贸单号,
-			    
+            //if (StockUser.Type == "ALL")
+            //{
+                strSql = $@"SELECT
+	                                        T1.Guid,T1.ParentGuid,T1.ForeignNumber AS 外贸单号,		    
 	                                        T1.PONumber AS 采购单号,T1.VendorNumber AS 供应商码,T1.VendorName AS 供应商名,
 	                                        T1.ManufacturerNumber AS 生产商码,
 	                                        T1.ManufacturerName AS 生产商名,
@@ -273,7 +270,7 @@ namespace Global.Warehouse
 	                                        T1.ExpiredDate AS 到期日期,
 	                                        T1.Stock AS 库,
 	                                        T1.Bin AS 位,
-	                                        T1.RetestDate AS 重测日期,	                                        
+	                                        T1.RetestDate AS 重测日期,	         
 	                                        T1.InspectionPeriod,
 	                                        T1.StockKeeper,
 	                                        ItemReceiveType,VendorNumber,VendorName,UnitPrice,
@@ -281,48 +278,48 @@ namespace Global.Warehouse
                                         FROM
 	                                        PurchaseOrderRecordHistoryByCMF T1
                                         WHERE
-	                                        T1.Status = " + status + "     AND    SUBSTRING(StockKeeper,0,charindex('|', StockKeeper))= '" + StockUser.UserID + "'     ORDER BY     T1.CreatedDateTime DESC";
-            }
-            else
-            {
-                strSql = @"SELECT
-	                                        T1.Guid,T1.ParentGuid,T1.ForeignNumber AS 外贸单号,
-	                                        T1.PONumber AS 采购单号,T1.VendorNumber AS 供应商码,T1.VendorName AS 供应商名,
-	                                        T1.ManufacturerNumber AS 生产商码,
-	                                        T1.ManufacturerName AS 生产商名,
-	                                        T1.LineNumber AS 行号,
-	                                        T1.ItemNumber AS 物料代码,
-	                                        T1.ItemDescription AS 描述,
-	                                        T1.LineUM AS 单位,UnitPrice AS 单价,
-	                                        T1.OrderQuantity AS 订货量,T1.NumberOfPackages AS 整件数,T1.PackageUM AS 件单位,T1.PackageOdd AS 零头,T1.PackageSpecification AS 包装规格,
-	                                        T1.ReceiveQuantity AS 入库量,T1.LotNumber AS 厂家批号,
-	                                        T1.InternalLotNumber AS 公司批号,T1.ManufacturedDate AS 生产日期,        
-	                                        T1.ExpiredDate AS 到期日期,
-	                                        T1.Stock AS 库,
-	                                        T1.Bin AS 位,
-	                                        T1.RetestDate AS 重测日期,	                                        
-	                                        T1.InspectionPeriod,
-	                                        T1.StockKeeper,
-	                                        ItemReceiveType,VendorNumber,VendorName,
-                                            QualityCheckStandard AS 请验标准
-                                        FROM
-	                                        PurchaseOrderRecordHistoryByCMF T1
-                                        WHERE
-	                                        T1.Status = " + status + "     AND    SUBSTRING(StockKeeper,0,charindex('|', StockKeeper)) = '" + StockUser.UserID + "'   ORDER BY       T1.CreatedDateTime DESC";
-            }
+	                                        T1.Status = { status }     AND    SUBSTRING(StockKeeper,0,charindex('|', StockKeeper))= '{ StockUser.UserID }' {(string.IsNullOrWhiteSpace(DateStr) ? "" : string.Format(" and ReceiveDate='{0}'", DateStr))}    ORDER BY     T1.CreatedDateTime DESC";
+            //}
+            //else
+            //{
+            //    strSql = $@"SELECT
+	           //                             T1.Guid,T1.ParentGuid,T1.ForeignNumber AS 外贸单号,
+	           //                             T1.PONumber AS 采购单号,T1.VendorNumber AS 供应商码,T1.VendorName AS 供应商名,
+	           //                             T1.ManufacturerNumber AS 生产商码,
+	           //                             T1.ManufacturerName AS 生产商名,
+	           //                             T1.LineNumber AS 行号,
+	           //                             T1.ItemNumber AS 物料代码,
+	           //                             T1.ItemDescription AS 描述,
+	           //                             T1.LineUM AS 单位,UnitPrice AS 单价,
+	           //                             T1.OrderQuantity AS 订货量,T1.NumberOfPackages AS 整件数,T1.PackageUM AS 件单位,T1.PackageOdd AS 零头,T1.PackageSpecification AS 包装规格,
+	           //                             T1.ReceiveQuantity AS 入库量,T1.LotNumber AS 厂家批号,
+	           //                             T1.InternalLotNumber AS 公司批号,T1.ManufacturedDate AS 生产日期,        
+	           //                             T1.ExpiredDate AS 到期日期,
+	           //                             T1.Stock AS 库,
+	           //                             T1.Bin AS 位,
+	           //                             T1.RetestDate AS 重测日期,	                                        
+	           //                             T1.InspectionPeriod,
+	           //                             T1.StockKeeper,
+	           //                             ItemReceiveType,VendorNumber,VendorName,
+            //                                QualityCheckStandard AS 请验标准
+            //                            FROM
+	           //                             PurchaseOrderRecordHistoryByCMF T1
+            //                            WHERE
+	           //                             T1.Status = { status }     AND    SUBSTRING(StockKeeper,0,charindex('|', StockKeeper)) = '{ StockUser.UserID }' {(string.IsNullOrWhiteSpace(DateStr) ? "" : string.Format(" and ReceiveDate='{0}'", DateStr))}  ORDER BY       T1.CreatedDateTime DESC";
+            //}
             return SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, strSql);
         }
         //获取未处理到货记录
-        private DataTable GetVendorPOForeignItemsDetail(int status)
+        private DataTable GetVendorPOForeignItemsDetail(int status, string DateStr)
         {
-            string strSql = @"SELECT
+            string strSql = $@"SELECT
 	                                        T1.Guid,
 	                                        T1.ParentGuid,
 	                                        T1.ForeignNumber AS 外贸单号,
 	                                        T1.ItemNumber AS 物料代码,
 	                                        T1.VendorNumber AS 供应商码,T1.OrderQuantity AS 订货量,
-	                                        '' AS 入库量,
-	                                        '' AS 整件数,'件' AS 件单位,T1.PackageOdd AS 零头,T1.PackageSpecification AS 包装规格, T1.LotNumber AS 厂家批号,
+	                                        T1.ReceiveQuantity AS 入库量,
+	                                        T1.NumberOfPackages AS 整件数,'件' AS 件单位,T1.PackageOdd AS 零头,T1.PackageSpecification AS 包装规格, T1.LotNumber AS 厂家批号,
 	                                        T1.InternalLotNumber AS 公司批号,
 	                                        T1.ManufacturedDate AS 生产日期,
 	                                        T1.ExpiredDate AS 到期日期,
@@ -343,7 +340,7 @@ namespace Global.Warehouse
                                         FROM
 	                                        PurchaseOrderRecordHistoryByCMF T1
                                         WHERE
-	                                        T1.Status = " + status + "     AND    LEFT (T1.StockKeeper, 3) = '" + StockUser.UserID + "'      ORDER BY       T1.CreatedDateTime DESC";
+	                                        T1.Status = {status} AND    LEFT (T1.StockKeeper, 3) = '{ StockUser.UserID }'{(string.IsNullOrWhiteSpace(DateStr)?"":string.Format(" and ReceiveDate='{0}'", DateStr))}      ORDER BY       T1.CreatedDateTime DESC";
             //       MessageBox.Show(strSql);
             return SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, strSql);
         }
@@ -599,10 +596,6 @@ namespace Global.Warehouse
                 Custom.MsgEx("当前记录状态不允许重复提交！");
                 return;
             }
-
-
-
-
             List<string> sqlList = new List<string>();
             List<string> specialItemList = SQLHelper.GetList(GlobalSpace.FSDBConnstr, "Select ItemNumber  From PurchaseDepartmentStockSpecialItem Where ItemDescription Not  Like '%粗盐%'", "ItemNumber");
             List<string> specialItemDesList = SQLHelper.GetList(GlobalSpace.FSDBConnstr, "Select ItemNumber  From PurchaseDepartmentStockSpecialItem Where ItemDescription Like '%粗盐%'", "ItemNumber");
@@ -750,11 +743,9 @@ namespace Global.Warehouse
                 }
 
 
-                if (dtTemp.Columns.Contains("新行"))
+                if (dtTemp.Columns.Contains("新行") && !string.IsNullOrWhiteSpace(dtTemp.Rows[i]["新行"].ToString()))
                 {
-                    if (dtTemp.Rows[i]["新行"] != DBNull.Value && !string.IsNullOrWhiteSpace(dtTemp.Rows[i]["新行"].ToString()))
-                    {
-                        string sqlInsert = @"INSERT INTO PurchaseOrderRecordHistoryByCMF (
+                    string sqlInsert = @"INSERT INTO PurchaseOrderRecordHistoryByCMF (
 	                                                        	[PONumber],
 	                                                            [VendorNumber],
 	                                                            [VendorName],
@@ -772,7 +763,7 @@ namespace Global.Warehouse
 	                                                            [OrderQuantity],
 	                                                            [ItemReceiveType],
 	                                                            [Supervisor],
-	                                                            [ForeignNumber],	                                                            [BuyerID],ReceiveDate,Guid,Stock,Bin,InternalLotNumber,LotNumber,ManufacturedDate,ExpiredDate,RetestDate,Status,Operator,ReceiveQuantity,IsDirectERP,NumberOfPackages,PackageOdd,PackageSpecification,PackageUM,UnitPrice
+	                                                            [ForeignNumber],	                                                            [BuyerID],ReceiveDate,Guid,Stock,Bin,InternalLotNumber,LotNumber,ManufacturedDate,ExpiredDate,RetestDate,Status,Operator,ReceiveQuantity,IsDirectERP,NumberOfPackages,PackageOdd,PackageSpecification,PackageUM,UnitPrice,QualityCheckStandard,IsInvestigation
                                                         ) SELECT
 	                                                       	[PONumber],
 	                                                            [VendorNumber],
@@ -792,20 +783,15 @@ namespace Global.Warehouse
 	                                                            [ItemReceiveType],
 	                                                            [Supervisor],
 	                                                            [ForeignNumber],
-	                                                            [BuyerID],ReceiveDate,Replace(NEWID(),'-',''),'" + dtTemp.Rows[i]["库"].ToString() + "','" + dtTemp.Rows[i]["位"].ToString() + "','" + internalLotNumber + "','" + vendorLotNumber + "','" + mfgDate + "','" + expDate + "','" + dtTemp.Rows[i]["重测日期"].ToString() + "',0,'" + StockUser.UserID + "'," + receiveQuantity + "," + Convert.ToInt32(StockUser.IsDirectERP) + "," + packageQuantity + "," + packageOdd + ",'" + packageSpecification + "','" + packageUm + "',UnitPrice  FROM   PurchaseOrderRecordHistoryByCMF  WHERE Guid = '" + dtTemp.Rows[i]["ParentGuid"].ToString() + "'";
-                        sqlList.Add(sqlInsert);
-                    }
-                    else
-                    {
-                        string sqlUpdate = "Update PurchaseOrderRecordHistoryByCMF Set InternalLotNumber='" + internalLotNumber + "',LotNumber='" + vendorLotNumber + "',ManufacturedDate='" + mfgDate + "',ExpiredDate='" + expDate + "',Stock='" + dtTemp.Rows[i]["库"].ToString() + "',Bin='" + dtTemp.Rows[i]["位"].ToString() + "',Status=0,Operator='" + StockUser.UserID + "',ReceiveQuantity=" + receiveQuantity + ",NumberOfPackages=" + packageQuantity + ",IsDirectERP=" + Convert.ToInt32(StockUser.IsDirectERP) + ",PackageSpecification='" + packageSpecification + "',PackageOdd=" + packageOdd + ",PackageUM='" + packageUm + "'  Where Guid = '" + dtTemp.Rows[i]["Guid"].ToString() + "'";
-                        sqlList.Add(sqlUpdate);
-                    }
+	                                                            [BuyerID],ReceiveDate,Replace(NEWID(),'-',''),'" + dtTemp.Rows[i]["库"].ToString() + "','" + dtTemp.Rows[i]["位"].ToString() + "','" + internalLotNumber + "','" + vendorLotNumber + "','" + mfgDate + "','" + expDate + "','" + dtTemp.Rows[i]["重测日期"].ToString() + "',0,'" + StockUser.UserID + "'," + receiveQuantity + "," + Convert.ToInt32(StockUser.IsDirectERP) + "," + packageQuantity + "," + packageOdd + ",'" + packageSpecification + "','" + packageUm + "',UnitPrice,QualityCheckStandard,IsInvestigation  FROM   PurchaseOrderRecordHistoryByCMF  WHERE Guid = '" + dtTemp.Rows[i]["ParentGuid"].ToString() + "'";
+                    sqlList.Add(sqlInsert);
                 }
                 else
                 {
                     string sqlUpdate = "Update PurchaseOrderRecordHistoryByCMF Set InternalLotNumber='" + internalLotNumber + "',LotNumber='" + vendorLotNumber + "',ManufacturedDate='" + mfgDate + "',ExpiredDate='" + expDate + "',Stock='" + dtTemp.Rows[i]["库"].ToString() + "',Bin='" + dtTemp.Rows[i]["位"].ToString() + "',Status=0,Operator='" + StockUser.UserID + "',ReceiveQuantity=" + receiveQuantity + ",NumberOfPackages=" + packageQuantity + ",IsDirectERP=" + Convert.ToInt32(StockUser.IsDirectERP) + ",PackageSpecification='" + packageSpecification + "',PackageOdd=" + packageOdd + ",PackageUM='" + packageUm + "'  Where Guid = '" + dtTemp.Rows[i]["Guid"].ToString() + "'";
                     sqlList.Add(sqlUpdate);
                 }
+           
 
                 string itemNumber = dtTemp.Rows[i]["物料代码"].ToString();
                 //如果不是特殊物料，则对字段进行判断
@@ -859,14 +845,7 @@ namespace Global.Warehouse
             if (SQLHelper.BatchExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlList))
             {
                 Custom.MsgEx("提交成功！");
-                if (FOItemKeeperList.Contains(StockUser.UserID))
-                {
-                    dgvPODetail.DataSource = GetVendorPOForeignItemsDetail(9);
-                }
-                else
-                {
-                    dgvPODetail.DataSource = GetVendorPOItemsDetail(9);
-                }
+                btnRefresh_Click(null, null);
             }
             else
             {
@@ -1953,11 +1932,11 @@ namespace Global.Warehouse
             IsNeedToConfirm = true;
             if (FOItemKeeperList.Contains(StockUser.UserID))
             {
-                dgvPODetail.DataSource = GetVendorPOForeignItemsDetail(9);
+                dgvPODetail.DataSource = GetVendorPOForeignItemsDetail(9,CbDate.Checked? dtpFP.Value.ToString("yyyy-MM-dd"):"");
             }
             else
             {
-                dgvPODetail.DataSource = GetVendorPOItemsDetail(9);
+                dgvPODetail.DataSource = GetVendorPOItemsDetail(9,CbDate.Checked ? dtpFP.Value.ToString("yyyy-MM-dd") : "");
             }
 
             dgvPODetail.Columns["Guid"].Visible = false;
@@ -2351,45 +2330,6 @@ namespace Global.Warehouse
                                             FROM
 	                                            dbo.PurchaseOrderRecordHistoryByCMF  Where FSOperateDate='" + date + "' And (FSOperator='" + StockUser.UserID + "' or  FSOperator='" + StockUser.UserID + "|手工')  and Status =2";
             return SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
-        }
-        private void btnBatchesReceive_Click(object sender, EventArgs e)
-        {
-            int iIndex = dgvPODetail.SelectedCells[0].RowIndex;
-            int iCount = Convert.ToInt32(tbReceiveRecordQuantity.Text.Trim());
-            string strGuid = dgvPODetail.Rows[iIndex].Cells["Guid"].Value.ToString();
-
-            DataTable dtSource = (DataTable)dgvPODetail.DataSource;
-            if (!dtSource.Columns.Contains("新行"))
-            {
-                dtSource.Columns.Add("新行");
-            }
-
-
-            if (iCount == 1)
-            {
-                DataRow[] drs = dtSource.Select("Guid = '" + strGuid + "'");
-                DataRow dr = dtSource.NewRow();
-                dr.ItemArray = drs[0].ItemArray;
-                dr["新行"] = "1";
-                dr["Guid"] = Guid.NewGuid().ToString("N");
-                dr["ParentGuid"] = strGuid;
-                dtSource.Rows.InsertAt(dr, iIndex + 1);
-            }
-            else if (iCount > 1)
-            {
-                for (int i = 0; i < iCount; i++)
-                {
-                    DataRow[] drs = dtSource.Select("Guid = '" + strGuid + "'");
-                    DataRow dr = dtSource.NewRow();
-                    dr.ItemArray = drs[0].ItemArray;
-                    dr["新行"] = "1";
-                    dr["Guid"] = Guid.NewGuid().ToString("N");
-                    dr["ParentGuid"] = strGuid;
-                    dtSource.Rows.InsertAt(dr, iIndex + 1);
-                }
-
-            }
-
         }
 
         private void tbReceiveRecordQuantity_Click(object sender, EventArgs e)
@@ -3243,7 +3183,34 @@ namespace Global.Warehouse
             {
                 if (e.KeyChar == (char)13)
                 {
-                    btnBatchesReceive_Click(sender, e);
+                    
+                    int iIndex = dgvPODetail.SelectedCells[0].RowIndex;
+                    int iCount = Convert.ToInt32(tbReceiveRecordQuantity.Text.Trim());
+                    string strGuid = dgvPODetail.Rows[iIndex].Cells["Guid"].Value.ToString();
+
+                    DataTable dtSource = (DataTable)dgvPODetail.DataSource;
+                    if (!dtSource.Columns.Contains("新行"))
+                    {
+                        dtSource.Columns.Add("新行");
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrWhiteSpace(dgvPODetail.Rows[iIndex].Cells["新行"].Value.ToString()))
+                        {
+                            MessageBox.Show("请选择新行列内容为空的行增加行");
+                            return;
+                        }
+                    }
+                    for (int i = 0; i < iCount; i++)
+                    {
+                        DataRow[] drs = dtSource.Select("Guid = '" + strGuid + "'");
+                        DataRow dr = dtSource.NewRow();
+                        dr.ItemArray = drs[0].ItemArray;
+                        dr["新行"] = "1";
+                        dr["Guid"] = Guid.NewGuid().ToString("N");
+                        dr["ParentGuid"] = strGuid;
+                        dtSource.Rows.InsertAt(dr, iIndex + 1);
+                    }
                 }
             }
         }
@@ -3296,17 +3263,7 @@ namespace Global.Warehouse
                     {
                         Custom.MsgEx("删除成功！");
                         IsNeedToConfirm = true;
-                        dgvPODetail.DataSource = GetVendorPOItemsDetail(9);
-                        dgvPODetail.Columns["Guid"].Visible = false;
-                        dgvPODetail.Columns["InspectionPeriod"].Visible = false;
-                        dgvPODetail.Columns["StockKeeper"].Visible = false;
-                        dgvPODetail.Columns["ItemReceiveType"].Visible = false;
-                        dgvPODetail.Columns["VendorName"].Visible = false;
-                        dgvPODetail.Columns["VendorNumber"].Visible = false;
-                        dgvPODetail.Columns["入库量"].DefaultCellStyle.BackColor = Color.LightYellow;
-                        dgvPODetail.Columns["公司批号"].DefaultCellStyle.BackColor = Color.LightYellow;
-                        dgvPODetail.Columns["厂家批号"].DefaultCellStyle.BackColor = Color.LightYellow;
-                        dgvPODetail.Columns["到期日期"].DefaultCellStyle.BackColor = Color.LightYellow;
+                        btnRefresh_Click(null,null);
                     }
                     else
                     {
@@ -3379,125 +3336,7 @@ namespace Global.Warehouse
             tbPONumberView.SelectionStart = tbPONumberView.Text.Length;*/
         }
 
-        private void btnMultiplyStockReceive_Click(object sender, EventArgs e)
-        {
-            List<string> sqlList = new List<string>();
-            foreach (DataGridViewRow dgvr in dgvPODetail.Rows)
-            {
-                if (Convert.ToBoolean(dgvr.Cells["Checked"].Value) == true)
-                {
-                    string guid = dgvr.Cells["Guid"].Value.ToString();
-                    string sqlInsert = @"Insert Into PurchaseOrderRecordHistoryByCMF (PONumber,
-	                                                                                        VendorNumber,
-	                                                                                        VendorName,
-	                                                                                        ManufacturerNumber,
-	                                                                                        ManufacturerName,
-	                                                                                        LineNumber,
-	                                                                                        ItemNumber,
-	                                                                                        ItemDescription,
-	                                                                                        LineUM,
-	                                                                                        DemandDeliveryDate,
-	                                                                                        ReceiveQuantity,
-	                                                                                        Stock,
-	                                                                                        Bin,
-	                                                                                        InspectionPeriod,
-	                                                                                        LotNumber,
-	                                                                                        InternalLotNumber,
-	                                                                                        ExpiredDate,
-	                                                                                        Operator,
-	                                                                                        StockKeeper,
-	                                                                                        RetestDate,
-	                                                                                        LotNumberAssign,
-	                                                                                        OrderQuantity,
-	                                                                                        ItemReceiveType,
-	                                                                                        Supervisor,
-	                                                                                        ForeignNumber,
-	                                                                                        BuyerID,
-	                                                                                        FDAFlag,
-	                                                                                        Guid,
-	                                                                                        ParentGuid)  Select 	PONumber,
-	                                                                                        VendorNumber,
-	                                                                                        VendorName,
-	                                                                                        ManufacturerNumber,
-	                                                                                        ManufacturerName,
-	                                                                                        LineNumber,
-	                                                                                        ItemNumber,
-	                                                                                        ItemDescription,
-	                                                                                        LineUM,
-	                                                                                        DemandDeliveryDate,
-	                                                                                        ReceiveQuantity,
-	                                                                                        '" + dgvr.Cells["库"].ToString() + "','" + dgvr.Cells["位"].ToString() + "',";
-                    string sqlInsert2 = @"InspectionPeriod,
-                                                    LotNumber,
-                                                    InternalLotNumber,
-                                                    ExpiredDate,
-                                                    Operator,
-                                                    StockKeeper,
-                                                    RetestDate,
-                                                    LotNumberAssign,
-                                                    OrderQuantity,
-                                                    ItemReceiveType,
-                                                    Supervisor,
-                                                    ForeignNumber,
-                                                    BuyerID,
-                                                    FDAFlag,
-                                                    '" + Guid.NewGuid().ToString("N") + "',Guid FROM PurchaseOrderRecordHistoryByCMF WHERE Guid = '" + guid + "' ";
-                    sqlList.Add(sqlInsert + sqlInsert2);
-
-                    double orderQuantity = Convert.ToDouble(dgvr.Cells["订货量"].Value);
-                    double receiveQuantity = Convert.ToDouble(dgvr.Cells["入库量"].Value);
-                    string sqlUpdateStatus = string.Empty;
-                    string sqlUpdate = "Update PurchaseOrderRecordHistoryByCMF Set InternalLotNumber='" + dgvr.Cells["公司批号"].Value.ToString().ToUpper() + "',LotNumber='" + dgvr.Cells["厂家批号"].Value.ToString().ToUpper() + "',ExpiredDate='" + dgvr.Cells["到期日期"].Value.ToString() + "',Stock='" + dgvr.Cells["库"].Value.ToString().ToUpper() + "',Bin='" + dgvr.Cells["位"].Value.ToString().ToUpper() + "',RetestDate='" + dgvr.Cells["重测日期"].Value.ToString() + "',Status=0,Operator='" + StockUser.UserID + "',ReceiveQuantity=" + Convert.ToDouble(dgvr.Cells["入库量"].Value) + "  Where Guid = '" + dgvr.Cells["Guid"].Value.ToString() + "'";
-
-                    if (receiveQuantity / orderQuantity >= 1)
-                    {
-                        sqlUpdateStatus = @"Update [FSDB].[dbo].[PurchaseOrderRecordByCMF] Set POStatus = 5,AccumulatedActualReceiveQuantity=AccumulatedActualReceiveQuantity+" + receiveQuantity + ",Remark='" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "," + dgvr.Cells["采购单号"].Value.ToString() + "," + dgvr.Cells["行号"].Value.ToString() + "," + dgvr.Cells["物料代码"].Value.ToString() + "," + receiveQuantity.ToString() + "|" + "' Where Guid='" + guid + "'";
-                    }
-                    else
-                    {
-                        sqlUpdateStatus = @"Update [FSDB].[dbo].[PurchaseOrderRecordByCMF] Set POStatus = 66,AccumulatedActualReceiveQuantity=AccumulatedActualReceiveQuantity+" + receiveQuantity + ",Remark='" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "," + dgvr.Cells["采购单号"].Value.ToString() + "," + dgvr.Cells["行号"].Value.ToString() + "," + dgvr.Cells["物料代码"].Value.ToString() + "," + receiveQuantity.ToString() + "|" + "'   Where Guid='" + guid + "'";
-                    }
-                    sqlList.Add(sqlUpdate);
-                    sqlList.Add(sqlUpdateStatus);
-                }
-
-            }
-
-            if (sqlList.Count == 0)
-            {
-                MessageBoxEx.Show("只有选中的行才能执行多厂区入库操作！", "提示");
-            }
-            else
-            {
-                if (SQLHelper.BatchExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlList))
-                {
-                    MessageBoxEx.Show("提交成功！", "提示");
-                    if (FOItemKeeperList.Contains(StockUser.UserID))
-                    {
-                        dgvPODetail.DataSource = GetVendorPOForeignItemsDetail(9);
-                    }
-                    else
-                    {
-                        dgvPODetail.DataSource = GetVendorPOItemsDetail(9);
-                    }
-                    dgvPODetail.Columns["Guid"].Visible = false;
-                    dgvPODetail.Columns["ParentGuid"].Visible = false;
-                    dgvPODetail.Columns["InspectionPeriod"].Visible = false;
-                    dgvPODetail.Columns["StockKeeper"].Visible = false;
-                    dgvPODetail.Columns["ItemReceiveType"].Visible = false;
-                    dgvPODetail.Columns["VendorName"].Visible = false;
-                    dgvPODetail.Columns["VendorNumber"].Visible = false;
-                    dgvPODetail.Columns["入库量"].DefaultCellStyle.BackColor = Color.LightYellow;
-                    dgvPODetail.Columns["公司批号"].DefaultCellStyle.BackColor = Color.LightYellow;
-                    dgvPODetail.Columns["厂家批号"].DefaultCellStyle.BackColor = Color.LightYellow;
-                    dgvPODetail.Columns["到期日期"].DefaultCellStyle.BackColor = Color.LightYellow;
-                }
-                else
-                {
-                    MessageBoxEx.Show("提交失败，请联系管理员！", "提示");
-                }
-            }
-        }
+        
 
         private void superTabControlPanel1_Click(object sender, EventArgs e)
         {
@@ -3864,18 +3703,7 @@ namespace Global.Warehouse
                 dgvPublic.DataSource = GetPublicVendorPOItemsDetail(9, dtpPublic.Value.AddDays(-3).ToString("yyyy-MM-dd"));
                 dgvPublic.Columns["Guid"].Visible = false;
                 IsNeedToConfirm = true;
-                dgvPODetail.DataSource = GetVendorPOItemsDetail(9);
-                dgvPODetail.Columns["Guid"].Visible = false;
-                dgvPODetail.Columns["ParentGuid"].Visible = false;
-                dgvPODetail.Columns["InspectionPeriod"].Visible = false;
-                dgvPODetail.Columns["StockKeeper"].Visible = false;
-                dgvPODetail.Columns["ItemReceiveType"].Visible = false;
-                dgvPODetail.Columns["VendorName"].Visible = false;
-                dgvPODetail.Columns["VendorNumber"].Visible = false;
-                dgvPODetail.Columns["入库量"].DefaultCellStyle.BackColor = Color.LightYellow;
-                dgvPODetail.Columns["公司批号"].DefaultCellStyle.BackColor = Color.LightYellow;
-                dgvPODetail.Columns["厂家批号"].DefaultCellStyle.BackColor = Color.LightYellow;
-                dgvPODetail.Columns["到期日期"].DefaultCellStyle.BackColor = Color.LightYellow;
+                btnRefresh_Click(null, null);
             }
             else
             {
@@ -4472,23 +4300,7 @@ namespace Global.Warehouse
                 }
             }
 
-            private void btnFP_Click(object sender, EventArgs e)
-            {
-                IsNeedToConfirm = true;
-                dgvPODetail.DataSource = GetVendorPOForeignItemsDetail(dtpFP.Value.ToString("yyyy-MM-dd"));
-                dgvPODetail.Columns["Guid"].Visible = false;
-                dgvPODetail.Columns["ParentGuid"].Visible = false;
-                dgvPODetail.Columns["InspectionPeriod"].Visible = false;
-                dgvPODetail.Columns["StockKeeper"].Visible = false;
-                dgvPODetail.Columns["ItemReceiveType"].Visible = false;
-                dgvPODetail.Columns["VendorName"].Visible = false;
-                dgvPODetail.Columns["VendorNumber"].Visible = false;
-                dgvPODetail.Columns["入库量"].DefaultCellStyle.BackColor = Color.LightYellow;
-                dgvPODetail.Columns["公司批号"].DefaultCellStyle.BackColor = Color.LightYellow;
-                dgvPODetail.Columns["厂家批号"].DefaultCellStyle.BackColor = Color.LightYellow;
-                dgvPODetail.Columns["到期日期"].DefaultCellStyle.BackColor = Color.LightYellow;
-                dgvPODetail.Columns["整件数"].DefaultCellStyle.BackColor = Color.LightYellow;
-            }
+            
 
         /*   private void btnPrintBatchRecord_Click(object sender, EventArgs e)
            {

@@ -38,8 +38,9 @@
             // btnConfirm
             // 
             this.btnConfirm.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnConfirm.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnConfirm.Location = new System.Drawing.Point(626, 707);
+            this.btnConfirm.Location = new System.Drawing.Point(626, 642);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(54, 27);
             this.btnConfirm.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -49,18 +50,22 @@
             // 
             // axGRPrintViewer1
             // 
+            this.axGRPrintViewer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.axGRPrintViewer1.Enabled = true;
             this.axGRPrintViewer1.Location = new System.Drawing.Point(12, 12);
             this.axGRPrintViewer1.Name = "axGRPrintViewer1";
             this.axGRPrintViewer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axGRPrintViewer1.OcxState")));
-            this.axGRPrintViewer1.Size = new System.Drawing.Size(1131, 689);
+            this.axGRPrintViewer1.Size = new System.Drawing.Size(1242, 629);
             this.axGRPrintViewer1.TabIndex = 6;
             // 
             // btnNext
             // 
             this.btnNext.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnNext.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnNext.Location = new System.Drawing.Point(469, 707);
+            this.btnNext.Location = new System.Drawing.Point(469, 642);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(54, 27);
             this.btnNext.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -72,7 +77,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1156, 736);
+            this.ClientSize = new System.Drawing.Size(1266, 671);
             this.Controls.Add(this.axGRPrintViewer1);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnConfirm);
