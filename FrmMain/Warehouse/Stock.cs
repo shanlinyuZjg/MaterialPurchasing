@@ -2549,11 +2549,12 @@ namespace Global.Warehouse
                     if (SQLHelper.BatchExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlList))
                     {
                         Custom.MsgEx("提交成功！");
-                        dgvPOItemDetailView.DataSource = GetReceivedRecordByStatusAndUserID(0, StockUser.UserID);
-                        dgvPOItemDetailView.Columns["Guid"].Visible = false;
-                        dgvPOItemDetailView.Columns["Status"].Visible = false;
-                        dgvPOItemDetailView.Columns["BuyerID"].Visible = false;
-                        dgvPOItemDetailView.Columns["FDAFlag"].Visible = false;
+                        //dgvPOItemDetailView.DataSource = GetReceivedRecordByStatusAndUserID(0, StockUser.UserID);
+                        //dgvPOItemDetailView.Columns["Guid"].Visible = false;
+                        //dgvPOItemDetailView.Columns["Status"].Visible = false;
+                        //dgvPOItemDetailView.Columns["BuyerID"].Visible = false;
+                        //dgvPOItemDetailView.Columns["FDAFlag"].Visible = false;
+                        btnReceiveRefresh_Click(null,null);
 
                         /*                dgvPOItemDetailView.DataSource = GetReceivedRecordByStatus(1);
                                         dgvPOItemDetailView.Columns["Guid"].Visible = false;
@@ -2880,14 +2881,15 @@ namespace Global.Warehouse
             if (SQLHelper.BatchExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlList))
             {
                 Custom.MsgEx("修改成功！");
-                dgvPOItemDetailView.DataSource = GetReceivedRecordByStatusAndUserID(0, StockUser.UserID);
-                dgvPOItemDetailView.Columns["Guid"].Visible = false;
-                dgvPOItemDetailView.Columns["Status"].Visible = false;
-                dgvPOItemDetailView.Columns["BuyerID"].Visible = false;
-                dgvPOItemDetailView.Columns["FDAFlag"].Visible = false;
-                dgvPOItemDetailView.Columns["ItemReceiveType"].Visible = false;
-                dgvPOItemDetailView.Columns["StockKeeper"].Visible = false;
-                dgvPOItemDetailView.Columns["LotNumberAssign"].Visible = false;
+                //dgvPOItemDetailView.DataSource = GetReceivedRecordByStatusAndUserID(0, StockUser.UserID);
+                //dgvPOItemDetailView.Columns["Guid"].Visible = false;
+                //dgvPOItemDetailView.Columns["Status"].Visible = false;
+                //dgvPOItemDetailView.Columns["BuyerID"].Visible = false;
+                //dgvPOItemDetailView.Columns["FDAFlag"].Visible = false;
+                //dgvPOItemDetailView.Columns["ItemReceiveType"].Visible = false;
+                //dgvPOItemDetailView.Columns["StockKeeper"].Visible = false;
+                //dgvPOItemDetailView.Columns["LotNumberAssign"].Visible = false;
+                btnReceiveRefresh_Click(null, null);
             }
             else
             {
@@ -4211,14 +4213,15 @@ namespace Global.Warehouse
                     if (SQLHelper.BatchExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlList))
                     {
                         MessageBoxEx.Show("退回成功！", "提示");
-                    dgvPOItemDetailView.DataSource = GetReceivedRecordByStatusAndUserID(0, StockUser.UserID);
-                    dgvPOItemDetailView.Columns["Guid"].Visible = false;
-                    dgvPOItemDetailView.Columns["Status"].Visible = false;
-                    dgvPOItemDetailView.Columns["BuyerID"].Visible = false;
-                    dgvPOItemDetailView.Columns["FDAFlag"].Visible = false;
-                    dgvPOItemDetailView.Columns["ItemReceiveType"].Visible = false;
-                    dgvPOItemDetailView.Columns["StockKeeper"].Visible = false;
-                    dgvPOItemDetailView.Columns["LotNumberAssign"].Visible = false;
+                    //dgvPOItemDetailView.DataSource = GetReceivedRecordByStatusAndUserID(0, StockUser.UserID);
+                    //dgvPOItemDetailView.Columns["Guid"].Visible = false;
+                    //dgvPOItemDetailView.Columns["Status"].Visible = false;
+                    //dgvPOItemDetailView.Columns["BuyerID"].Visible = false;
+                    //dgvPOItemDetailView.Columns["FDAFlag"].Visible = false;
+                    //dgvPOItemDetailView.Columns["ItemReceiveType"].Visible = false;
+                    //dgvPOItemDetailView.Columns["StockKeeper"].Visible = false;
+                    //dgvPOItemDetailView.Columns["LotNumberAssign"].Visible = false;
+                    btnReceiveRefresh_Click(null,null);
                 }
                     else
                     {
@@ -4249,14 +4252,15 @@ namespace Global.Warehouse
                     if (SQLHelper.BatchExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlList))
                     {
                         MessageBoxEx.Show("删除成功！", "提示");
-                    dgvPOItemDetailView.DataSource = GetReceivedRecordByStatusAndUserID(0, StockUser.UserID);
-                    dgvPOItemDetailView.Columns["Guid"].Visible = false;
-                    dgvPOItemDetailView.Columns["Status"].Visible = false;
-                    dgvPOItemDetailView.Columns["BuyerID"].Visible = false;
-                    dgvPOItemDetailView.Columns["FDAFlag"].Visible = false;
-                    dgvPOItemDetailView.Columns["ItemReceiveType"].Visible = false;
-                    dgvPOItemDetailView.Columns["StockKeeper"].Visible = false;
-                    dgvPOItemDetailView.Columns["LotNumberAssign"].Visible = false;
+                    //dgvPOItemDetailView.DataSource = GetReceivedRecordByStatusAndUserID(0, StockUser.UserID);
+                    //dgvPOItemDetailView.Columns["Guid"].Visible = false;
+                    //dgvPOItemDetailView.Columns["Status"].Visible = false;
+                    //dgvPOItemDetailView.Columns["BuyerID"].Visible = false;
+                    //dgvPOItemDetailView.Columns["FDAFlag"].Visible = false;
+                    //dgvPOItemDetailView.Columns["ItemReceiveType"].Visible = false;
+                    //dgvPOItemDetailView.Columns["StockKeeper"].Visible = false;
+                    //dgvPOItemDetailView.Columns["LotNumberAssign"].Visible = false;
+                    btnReceiveRefresh_Click(null, null);
                 }
                     else
                     {
@@ -4814,24 +4818,32 @@ namespace Global.Warehouse
                             MessageBoxEx.Show("联系单号长度不正确！", "提示");
                             return;
                         }
+                        string Ffonumber = string.Empty;
+                        if (fonumber.Contains("F01") || fonumber.Contains("f01"))
+                        {
+                            Ffonumber = fonumber.Replace("F01", "").Replace("f01", "");
+                        }
+                        else
+                        { Ffonumber = fonumber; }
+                        dr["VendorLotNumber"] = lotnumber.Replace(Ffonumber, "");
+                        dr["FONumber"] = fonumber;
+                        //if (fonumber.Length == 3 || fonumber.Length == 5)
+                        //{
+                        //    dr["VendorLotNumber"] = lotnumber.Replace(fonumber, "");
+                        //    dr["FONumber"] = fonumber;
+                        //}
+                        //else if (fonumber.Length == 7)
+                        //{
+                        //    dr["VendorLotNumber"] = lotnumber.Substring(0, lotnumber.Length - 4);
+                        //    dr["FONumber"] = fonumber;
+                        //}
+                        //else if (fonumber.Length == 8)
+                        //{
+                        //    dr["VendorLotNumber"] = lotnumber.Substring(0, lotnumber.Length - 5);
+                        //    dr["FONumber"] = fonumber;
+                        //}
 
-                        if (fonumber.Length == 3 || fonumber.Length == 5)
-                        {
-                            dr["VendorLotNumber"] = lotnumber.Replace(fonumber, "");
-                            dr["FONumber"] = fonumber;
-                        }
-                        else if (fonumber.Length == 7)
-                        {
-                            dr["VendorLotNumber"] = lotnumber.Substring(0, lotnumber.Length - 4);
-                            dr["FONumber"] = fonumber;
-                        }
-                        else if (fonumber.Length == 8)
-                        {
-                            dr["VendorLotNumber"] = lotnumber.Substring(0, lotnumber.Length - 5);
-                            dr["FONumber"] = fonumber;
-                        }
-
-                        if(string.IsNullOrWhiteSpace(dr["VendorLotNumber"].ToString()))
+                        if (string.IsNullOrWhiteSpace(dr["VendorLotNumber"].ToString()))
                             dr["VendorLotNumber"] = lotnumber;
                     }
 
@@ -6024,22 +6036,30 @@ namespace Global.Warehouse
                             MessageBoxEx.Show("联系单号长度不正确！", "提示");
                             return;
                         }
-
-                        if (fonumber.Length == 3 || fonumber.Length == 5)
+                        string Ffonumber = string.Empty;
+                        if (fonumber.Contains("F01") || fonumber.Contains("f01"))
                         {
-                            dr["VendorLotNumber"] = lotnumber.Replace(fonumber, "");
-                            dr["FONumber"] = fonumber;
+                            Ffonumber = fonumber.Replace("F01", "").Replace("f01", "");
                         }
-                        else if (fonumber.Length == 7)
-                        {
-                            dr["VendorLotNumber"] = lotnumber.Substring(0, lotnumber.Length - 4);
-                            dr["FONumber"] = fonumber;
-                        }
-                        else if (fonumber.Length == 8)
-                        {
-                            dr["VendorLotNumber"] = lotnumber.Substring(0, lotnumber.Length - 5); ;
-                            dr["FONumber"] = fonumber;
-                        }
+                        else
+                        { Ffonumber = fonumber; }
+                        dr["VendorLotNumber"] = lotnumber.Replace(Ffonumber, "");
+                        dr["FONumber"] = fonumber;
+                        //if (fonumber.Length == 3 || fonumber.Length == 5)
+                        //{
+                        //    dr["VendorLotNumber"] = lotnumber.Replace(fonumber, "");
+                        //    dr["FONumber"] = fonumber;
+                        //}
+                        //else if (fonumber.Length == 7)
+                        //{
+                        //    dr["VendorLotNumber"] = lotnumber.Substring(0, lotnumber.Length - 4);
+                        //    dr["FONumber"] = fonumber;
+                        //}
+                        //else if (fonumber.Length == 8)
+                        //{
+                        //    dr["VendorLotNumber"] = lotnumber.Substring(0, lotnumber.Length - 5); ;
+                        //    dr["FONumber"] = fonumber;
+                        //}
                     }
 
                     dr["PackageUM"] = "件";
