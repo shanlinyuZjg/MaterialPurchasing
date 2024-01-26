@@ -2164,7 +2164,11 @@ namespace Global.Warehouse
 	                                            Operator AS 库管员,
 	                                            ReceiveDate AS 入库日期,NumberOfPackages AS 整件数,PackageOdd AS 零头,PackageSpecification AS 包装规格,PackageUM AS 件数单位,QualityCheckStandard AS 检验标准,Status,LotNumberAssign,BuyerID,FDAFlag,ItemReceiveType,StockKeeper,
                                             Checker as 复核人,Receiver as 接收请验人,Conclusion as 结论,ConclusionText as 结论其他内容,IsAnyDeviation as 物料验收过程是否出现偏差,DeviationNumber as 偏差编号,deviationIsClosed as 偏差是否已处理关闭,IsReport as 问题是否已报告,QualityManageIdea as 质量管理部门意见,Sign as 签名,SignDate as 签名日期,IsRequireClean as 是否需要清洁,PollutionSituation as 污染情况,CleanMethod as 清洁方式,IsComplete as 外包装是否完整,
-                              DamageSituation as 损坏情况,CauseInvestigation1 as 原因调查1,IsSealed as 外包装是否密封,UnsealedCondition as 不密封情况,CauseInvestigation2 as 原因调查2,IsAnyMaterialWithPollutionRisk as 运输工具内是否存在造成污染交叉污染的物料,IsAnyProblemAffectedMaterialQuality as 是否有其他可能影响物料质量的问题,Question as 问题,CauseInvestigation3 as 原因调查3,LotNumberType as 批号类型,IsApprovedVendor as 是否为质量管理部门批准的供应商,StorageCondition as 规定贮存条件,TransportTemperature as 运输条件检查结果,TransportCondition as 运输条件是否符合,TransportationControlRecord as 是否有运输条件控制记录,Shape as 形状是否一致,Colour as 颜色是否一致,Font as 字体是否一致,RoughWeight as 有无毛重,NetWeight as 有无净重,ApprovalNumber as 有无批准文号,ReportType as 报告类型,Report as 有无报告
+                              DamageSituation as 损坏情况,CauseInvestigation1 as 原因调查1,IsSealed as 外包装是否密封,UnsealedCondition as 不密封情况,CauseInvestigation2 as 原因调查2,IsAnyMaterialWithPollutionRisk as 运输工具内是否存在造成污染交叉污染的物料,IsAnyProblemAffectedMaterialQuality as 是否有其他可能影响物料质量的问题,Question as 问题,CauseInvestigation3 as 原因调查3,LotNumberType as 批号类型,IsApprovedVendor as 是否为质量管理部门批准的供应商,StorageCondition as 规定贮存条件,TransportTemperature as 运输条件检查结果,TransportCondition as 运输条件是否符合,TransportationControlRecord as 是否有运输条件控制记录,Shape as 形状是否一致,Colour as 颜色是否一致,Font as 字体是否一致,RoughWeight as 有无毛重,NetWeight as 有无净重,ApprovalNumber as 有无批准文号,ReportType as 报告类型,Report as 有无报告,
+                                                  (     case IsInvestigation 
+                                                         when  1 then '是' else '否' 
+                                                end     
+                                                ) as 研发用物料
                                             FROM
 	                                            dbo.PurchaseOrderRecordHistoryByCMF  Where Status=" + status + " And Operator = '" + StockUser.UserID + "'";
             // MessageBox.Show(StockUser.Type);//测试 _copy1
@@ -2297,7 +2301,11 @@ namespace Global.Warehouse
 	                                            Operator AS 库管员,
 	                                            ReceiveDate AS 入库日期,NumberOfPackages AS 整件数,PackageOdd AS 零头,PackageSpecification AS 包装规格,PackageUM AS 件数单位,QualityCheckStandard AS 检验标准,Status,LotNumberAssign,BuyerID,FDAFlag,ItemReceiveType,StockKeeper,
                                             Checker as 复核人,Receiver as 接收请验人,Conclusion as 结论,ConclusionText as 结论其他内容,IsAnyDeviation as 物料验收过程是否出现偏差,DeviationNumber as 偏差编号,deviationIsClosed as 偏差是否已处理关闭,IsReport as 问题是否已报告,QualityManageIdea as 质量管理部门意见,Sign as 签名,SignDate as 签名日期,IsRequireClean as 是否需要清洁,PollutionSituation as 污染情况,CleanMethod as 清洁方式,IsComplete as 外包装是否完整,
-                              DamageSituation as 损坏情况,CauseInvestigation1 as 原因调查1,IsSealed as 外包装是否密封,UnsealedCondition as 不密封情况,CauseInvestigation2 as 原因调查2,IsAnyMaterialWithPollutionRisk as 运输工具内是否存在造成污染交叉污染的物料,IsAnyProblemAffectedMaterialQuality as 是否有其他可能影响物料质量的问题,Question as 问题,CauseInvestigation3 as 原因调查3,LotNumberType as 批号类型,IsApprovedVendor as 是否为质量管理部门批准的供应商,StorageCondition as 规定贮存条件,TransportTemperature as 运输条件检查结果,TransportCondition as 运输条件是否符合,TransportationControlRecord as 是否有运输条件控制记录,Shape as 形状是否一致,Colour as 颜色是否一致,Font as 字体是否一致,RoughWeight as 有无毛重,NetWeight as 有无净重,ApprovalNumber as 有无批准文号,ReportType as 报告类型,Report as 有无报告
+                              DamageSituation as 损坏情况,CauseInvestigation1 as 原因调查1,IsSealed as 外包装是否密封,UnsealedCondition as 不密封情况,CauseInvestigation2 as 原因调查2,IsAnyMaterialWithPollutionRisk as 运输工具内是否存在造成污染交叉污染的物料,IsAnyProblemAffectedMaterialQuality as 是否有其他可能影响物料质量的问题,Question as 问题,CauseInvestigation3 as 原因调查3,LotNumberType as 批号类型,IsApprovedVendor as 是否为质量管理部门批准的供应商,StorageCondition as 规定贮存条件,TransportTemperature as 运输条件检查结果,TransportCondition as 运输条件是否符合,TransportationControlRecord as 是否有运输条件控制记录,Shape as 形状是否一致,Colour as 颜色是否一致,Font as 字体是否一致,RoughWeight as 有无毛重,NetWeight as 有无净重,ApprovalNumber as 有无批准文号,ReportType as 报告类型,Report as 有无报告,
+                                                  (     case IsInvestigation 
+                                                         when  1 then '是' else '否' 
+                                                end     
+                                                ) as 研发用物料
                                             FROM
 	                                            dbo.PurchaseOrderRecordHistoryByCMF  Where Operator='" + userID + "'  And Left(SubmitOperateDateTime,10) >='" + dtpFSHistory.Value.ToString("yyyy-MM-dd") + "' and Status in (1,2)";
             return SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect);
@@ -4800,60 +4808,41 @@ namespace Global.Warehouse
                 if (FOItemKeeperList.Contains(StockUser.UserID))
                 {
                     string lotnumber = drTemp["厂家批号"].ToString().Trim();
-                    string fonumber = string.Empty;
+                    string fonumber = drTemp["外贸单号"].ToString().Trim();
+                    dr["FONumber"] = fonumber;
 
-
-                    if (drTemp["外贸单号"] == DBNull.Value || drTemp["外贸单号"].ToString() == "")
+                    if (fonumber == "")
                     {
                         // MessageBoxEx.Show("联系单号不能为空！", "提示");
                         // return;
                         dr["VendorLotNumber"] = lotnumber;
-                        dr["FONumber"] = "";
                     }
                     else
                     {
-                        fonumber = drTemp["外贸单号"].ToString().Trim();
-                        if (fonumber.Length != 3 && fonumber.Length != 5 && fonumber.Length != 7 && fonumber.Length != 8)
+                        if (fonumber.Length == 5 || fonumber.Length == 7)
                         {
+                            dr["VendorLotNumber"] = lotnumber.Replace(fonumber, "");
+                        }
+                        else if (fonumber.Length == 8 || fonumber.Length == 10)
+                        {
+                            dr["VendorLotNumber"] = lotnumber.Replace(fonumber.Substring(0, fonumber.Length-3), "");
+                            
+                        }
+                        else
+                        {
+
                             MessageBoxEx.Show("联系单号长度不正确！", "提示");
                             return;
                         }
-                        string Ffonumber = string.Empty;
-                        if (fonumber.Contains("F01") || fonumber.Contains("f01"))
-                        {
-                            Ffonumber = fonumber.Replace("F01", "").Replace("f01", "");
-                        }
-                        else
-                        { Ffonumber = fonumber; }
-                        dr["VendorLotNumber"] = lotnumber.Replace(Ffonumber, "");
-                        dr["FONumber"] = fonumber;
-                        //if (fonumber.Length == 3 || fonumber.Length == 5)
-                        //{
-                        //    dr["VendorLotNumber"] = lotnumber.Replace(fonumber, "");
-                        //    dr["FONumber"] = fonumber;
-                        //}
-                        //else if (fonumber.Length == 7)
-                        //{
-                        //    dr["VendorLotNumber"] = lotnumber.Substring(0, lotnumber.Length - 4);
-                        //    dr["FONumber"] = fonumber;
-                        //}
-                        //else if (fonumber.Length == 8)
-                        //{
-                        //    dr["VendorLotNumber"] = lotnumber.Substring(0, lotnumber.Length - 5);
-                        //    dr["FONumber"] = fonumber;
-                        //}
-
-                        if (string.IsNullOrWhiteSpace(dr["VendorLotNumber"].ToString()))
-                            dr["VendorLotNumber"] = lotnumber;
                     }
-
-                    dr["PackageUM"] = "件";
                 }
                 else
                 {
                     dr["VendorLotNumber"] = drTemp["厂家批号"];
-                    dr["PackageUM"] = drTemp["件数单位"];
+                    if (drTemp["研发用物料"].ToString().Trim() == "是")
+                    { dr["FONumber"] = "研发用物料"; }
                 }
+                dr["PackageUM"] = drTemp["件数单位"];
                 dr["InternalLotNumber"] = drTemp["公司批号"].ToString().ToUpper();
                 dr["MfgName"] = drTemp["生产商名"];
                 dr["VendorName"] = drTemp["供应商名"];
@@ -6018,57 +6007,41 @@ namespace Global.Warehouse
                 if (FOItemKeeperList.Contains(StockUser.UserID))
                 {
                     string lotnumber = drTemp["厂家批号"].ToString().Trim();
-                    string fonumber = string.Empty;
+                    string fonumber = drTemp["外贸单号"].ToString().Trim();
+                    dr["FONumber"] = fonumber;
 
-
-                    if (drTemp["外贸单号"] == DBNull.Value || drTemp["外贸单号"].ToString() == "")
+                    if (fonumber == "")
                     {
                         // MessageBoxEx.Show("联系单号不能为空！", "提示");
                         // return;
                         dr["VendorLotNumber"] = lotnumber;
-                        dr["FONumber"] = "";
                     }
                     else
                     {
-                        fonumber = drTemp["外贸单号"].ToString().Trim();
-                        if (fonumber.Length != 3 && fonumber.Length != 5 && fonumber.Length != 7 && fonumber.Length != 8)
+                        if (fonumber.Length == 5 || fonumber.Length == 7)
                         {
+                            dr["VendorLotNumber"] = lotnumber.Replace(fonumber, "");
+                        }
+                        else if (fonumber.Length == 8 || fonumber.Length == 10)
+                        {
+                            dr["VendorLotNumber"] = lotnumber.Replace(fonumber.Substring(0, fonumber.Length-3), "");
+                            
+                        }
+                        else
+                        {
+
                             MessageBoxEx.Show("联系单号长度不正确！", "提示");
                             return;
                         }
-                        string Ffonumber = string.Empty;
-                        if (fonumber.Contains("F01") || fonumber.Contains("f01"))
-                        {
-                            Ffonumber = fonumber.Replace("F01", "").Replace("f01", "");
-                        }
-                        else
-                        { Ffonumber = fonumber; }
-                        dr["VendorLotNumber"] = lotnumber.Replace(Ffonumber, "");
-                        dr["FONumber"] = fonumber;
-                        //if (fonumber.Length == 3 || fonumber.Length == 5)
-                        //{
-                        //    dr["VendorLotNumber"] = lotnumber.Replace(fonumber, "");
-                        //    dr["FONumber"] = fonumber;
-                        //}
-                        //else if (fonumber.Length == 7)
-                        //{
-                        //    dr["VendorLotNumber"] = lotnumber.Substring(0, lotnumber.Length - 4);
-                        //    dr["FONumber"] = fonumber;
-                        //}
-                        //else if (fonumber.Length == 8)
-                        //{
-                        //    dr["VendorLotNumber"] = lotnumber.Substring(0, lotnumber.Length - 5); ;
-                        //    dr["FONumber"] = fonumber;
-                        //}
                     }
-
-                    dr["PackageUM"] = "件";
                 }
                 else
                 {
                     dr["VendorLotNumber"] = drTemp["厂家批号"];
-                    dr["PackageUM"] = drTemp["件数单位"];
+                    if (drTemp["研发用物料"].ToString().Trim() == "是")
+                    { dr["FONumber"] = "研发用物料"; }
                 }
+                dr["PackageUM"] = drTemp["件数单位"];
                 dr["InternalLotNumber"] = drTemp["公司批号"];
                 dr["MfgName"] = drTemp["生产商名"];
                 dr["VendorName"] = drTemp["供应商名"];
