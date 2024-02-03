@@ -2452,7 +2452,7 @@ namespace Global.Warehouse
                     if (IsExistSameLotNumber(dgvPOItemDetailView.Rows[m].Cells["物料代码"].Value.ToString(), dgvPOItemDetailView.Rows[m].Cells["厂家批号"].Value.ToString()) > 0)
                     {
                         existLotNumber++;
-                        dgvPOItemDetailView.Rows[m].DefaultCellStyle.BackColor = Color.LightYellow;                           
+                        dgvPOItemDetailView.Rows[m].DefaultCellStyle.BackColor = Color.YellowGreen;                           
                     }
                 }
             }
@@ -2460,7 +2460,7 @@ namespace Global.Warehouse
 
             if (existLotNumber > 0)
             {
-                MessageBox.Show("当前物料存在厂家批号已使用情况，黄色标出，请修改后再次提交。", "提示");
+                MessageBox.Show("当前物料存在厂家批号已使用情况，黄绿色标出，请修改后再次提交。", "提示");
                 return;
             }
             if (chineseBracketCount > 0)
