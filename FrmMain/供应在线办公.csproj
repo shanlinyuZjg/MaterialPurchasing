@@ -581,6 +581,12 @@
     <Compile Include="Purchase\PurchaseOrderClose.Designer.cs">
       <DependentUpon>PurchaseOrderClose.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchase\PurchaseOrderInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\PurchaseOrderInfo.Designer.cs">
+      <DependentUpon>PurchaseOrderInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Purchase\PurchaseVials.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -975,6 +981,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\PurchaseOrderClose.resx">
       <DependentUpon>PurchaseOrderClose.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\PurchaseOrderInfo.resx">
+      <DependentUpon>PurchaseOrderInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\PurchaseVials.resx">
       <DependentUpon>PurchaseVials.cs</DependentUpon>

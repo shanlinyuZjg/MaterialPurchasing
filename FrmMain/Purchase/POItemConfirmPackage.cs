@@ -1015,5 +1015,11 @@ namespace Global.Purchase
                 }
             }
         }
+
+        private void BtPurchaseOrderInfo_Click(object sender, EventArgs e)
+        {
+            PurchaseOrderInfo purchaseOrderInfo = new PurchaseOrderInfo();
+            purchaseOrderInfo.ShowDialog();
+        }
     }
 }

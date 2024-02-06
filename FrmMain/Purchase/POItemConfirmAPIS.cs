@@ -844,8 +844,6 @@ namespace Global.Purchase
                     string PONumber = dgvr.Cells["采购单号"].Value.ToString().Trim().ToUpper();
                     //
                     receivedQuantity = GetReceivedTotalQuantity(PONumber, lineNumber, GlobalSpace.FSDBMRConnstr);
-
-                    receivedQuantity = GetReceivedTotalQuantity(PONumber, lineNumber, GlobalSpace.FSDBMRConnstr);
                     if (receivedQuantity == -1)
                     {
                         MessageBoxEx.Show($@"采购订单{PONumber}行号{lineNumber}未从四班查询到数据！", "提示");
