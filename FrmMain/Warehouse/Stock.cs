@@ -2803,6 +2803,7 @@ namespace Global.Warehouse
             if (!IsNeedToSubmit)
             {
                 Custom.MsgEx("当前状态不允许记录修改！");
+                return;
             }
             List<string> sqlList = new List<string>();
             foreach (DataGridViewRow dgvr in dgvPOItemDetailView.Rows)
@@ -6241,6 +6242,13 @@ namespace Global.Warehouse
                 MessageBox.Show("删除失败");
             }
 
+        }
+
+        private void BtnErpLims_Click(object sender, EventArgs e)
+        {
+            ErpLims erpLims = new ErpLims();
+            erpLims.ShowDialog();
+            btnReceiveRefresh_Click(null,null);
         }
     }
     }

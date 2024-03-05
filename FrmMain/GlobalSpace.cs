@@ -29,7 +29,8 @@ namespace Global
     //    public static  string EBRConnStr = string.Empty;
         public static  string EBRConnStr = "server=192.168.8.49;database=RYStockEBR;uid=stock;pwd=stockEBR2020!";
         public static  string RYData = "server=192.168.8.49;database=RYDATA;uid=xym;pwd=xym-123";
-
+        public static string SqlRJData = "Server=192.168.8.198;DataBase=RJDATA;uid=sa;pwd=rj123abc+;Connect Timeout=30";
+        public static string OledbRJData = "Provider=SQLOLEDB;Data Source=192.168.8.198;Database=RJDATA;User id=sa;PWD=rj123abc+;Connect Timeout=30";
         /*
         public static readonly string FSDBConnstr = "server="+FSDBConn.ip+";database="+FSDBConn.database+";uid="+FSDBConn.userid+";pwd="+FSDBConn.password+"";
         

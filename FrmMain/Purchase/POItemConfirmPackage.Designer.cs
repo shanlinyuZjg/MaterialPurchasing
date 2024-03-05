@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             this.superTabControl1 = new DevComponents.DotNetBar.SuperTabControl();
             this.superTabControlPanel3 = new DevComponents.DotNetBar.SuperTabControlPanel();
             this.btnUpdateReceivedTotalQuantity = new DevComponents.DotNetBar.ButtonX();
@@ -54,6 +54,7 @@
             this.rbtn12Months = new System.Windows.Forms.RadioButton();
             this.btnMakeAllCheckedCanceled = new DevComponents.DotNetBar.ButtonX();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.BtPurchaseOrderInfo = new DevComponents.DotNetBar.ButtonX();
             this.cbbBuyers = new System.Windows.Forms.ComboBox();
             this.tbVendorName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbItemNumberOrDescription = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -72,6 +73,14 @@
             this.btnMakeAllChecked2 = new DevComponents.DotNetBar.ButtonX();
             this.dgvPO = new System.Windows.Forms.DataGridView();
             this.superTabItem3 = new DevComponents.DotNetBar.SuperTabItem();
+            this.superTabControlPanel4 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.tbiVendorName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX13 = new DevComponents.DotNetBar.LabelX();
+            this.tbiFONumber = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX12 = new DevComponents.DotNetBar.LabelX();
+            this.BtnFoSpecialItem = new DevComponents.DotNetBar.ButtonX();
+            this.dgvFOSpecialItem = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.superTabItem4 = new DevComponents.DotNetBar.SuperTabItem();
             this.superTabControlPanel2 = new DevComponents.DotNetBar.SuperTabControlPanel();
             this.btnReverse = new DevComponents.DotNetBar.ButtonX();
             this.dgvConfirmed = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -87,16 +96,9 @@
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
             this.labelX5 = new DevComponents.DotNetBar.LabelX();
             this.superTabItem2 = new DevComponents.DotNetBar.SuperTabItem();
-            this.superTabControlPanel4 = new DevComponents.DotNetBar.SuperTabControlPanel();
-            this.tbiVendorName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.labelX13 = new DevComponents.DotNetBar.LabelX();
-            this.tbiFONumber = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.labelX12 = new DevComponents.DotNetBar.LabelX();
-            this.BtnFoSpecialItem = new DevComponents.DotNetBar.ButtonX();
-            this.dgvFOSpecialItem = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.superTabItem4 = new DevComponents.DotNetBar.SuperTabItem();
             this.superTabItem1 = new DevComponents.DotNetBar.SuperTabItem();
-            this.BtPurchaseOrderInfo = new DevComponents.DotNetBar.ButtonX();
+            this.btnConfirmSeveralTimesLims = new DevComponents.DotNetBar.ButtonX();
+            this.btnConfirmAllLims = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).BeginInit();
             this.superTabControl1.SuspendLayout();
             this.superTabControlPanel3.SuspendLayout();
@@ -105,11 +107,11 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPODetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPO)).BeginInit();
+            this.superTabControlPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFOSpecialItem)).BeginInit();
             this.superTabControlPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConfirmed)).BeginInit();
             this.groupBox3.SuspendLayout();
-            this.superTabControlPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFOSpecialItem)).BeginInit();
             this.SuspendLayout();
             // 
             // superTabControl1
@@ -133,8 +135,8 @@
             this.superTabControl1.ControlBox.MenuBox,
             this.superTabControl1.ControlBox.CloseBox});
             this.superTabControl1.Controls.Add(this.superTabControlPanel3);
-            this.superTabControl1.Controls.Add(this.superTabControlPanel4);
             this.superTabControl1.Controls.Add(this.superTabControlPanel2);
+            this.superTabControl1.Controls.Add(this.superTabControlPanel4);
             this.superTabControl1.Location = new System.Drawing.Point(0, 3);
             this.superTabControl1.Name = "superTabControl1";
             this.superTabControl1.ReorderTabsEnabled = true;
@@ -151,6 +153,8 @@
             // 
             // superTabControlPanel3
             // 
+            this.superTabControlPanel3.Controls.Add(this.btnConfirmSeveralTimesLims);
+            this.superTabControlPanel3.Controls.Add(this.btnConfirmAllLims);
             this.superTabControlPanel3.Controls.Add(this.btnUpdateReceivedTotalQuantity);
             this.superTabControlPanel3.Controls.Add(this.tbQualityStandard);
             this.superTabControlPanel3.Controls.Add(this.labelX14);
@@ -375,6 +379,18 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "订单查找";
             // 
+            // BtPurchaseOrderInfo
+            // 
+            this.BtPurchaseOrderInfo.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.BtPurchaseOrderInfo.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.BtPurchaseOrderInfo.Location = new System.Drawing.Point(362, 47);
+            this.BtPurchaseOrderInfo.Name = "BtPurchaseOrderInfo";
+            this.BtPurchaseOrderInfo.Size = new System.Drawing.Size(110, 23);
+            this.BtPurchaseOrderInfo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.BtPurchaseOrderInfo.TabIndex = 53;
+            this.BtPurchaseOrderInfo.Text = "四班订单信息";
+            this.BtPurchaseOrderInfo.Click += new System.EventHandler(this.BtPurchaseOrderInfo_Click);
+            // 
             // cbbBuyers
             // 
             this.cbbBuyers.FormattingEnabled = true;
@@ -512,41 +528,41 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPODetail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvPODetail.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPODetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPODetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
             this.dgvPODetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPODetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.PORVSeveralTimes});
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPODetail.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(21)))), ((int)(((byte)(110)))));
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPODetail.DefaultCellStyle = dataGridViewCellStyle20;
             this.dgvPODetail.EnableHeadersVisualStyles = false;
             this.dgvPODetail.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvPODetail.Location = new System.Drawing.Point(492, 85);
+            this.dgvPODetail.Location = new System.Drawing.Point(492, 118);
             this.dgvPODetail.Name = "dgvPODetail";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPODetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPODetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
             this.dgvPODetail.RowHeadersVisible = false;
             this.dgvPODetail.RowTemplate.Height = 23;
             this.dgvPODetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvPODetail.Size = new System.Drawing.Size(717, 481);
+            this.dgvPODetail.Size = new System.Drawing.Size(717, 448);
             this.dgvPODetail.TabIndex = 39;
             // 
             // PORVSeveralTimes
@@ -631,6 +647,141 @@
             this.superTabItem3.Name = "superTabItem3";
             this.superTabItem3.Text = "到货确认";
             // 
+            // superTabControlPanel4
+            // 
+            this.superTabControlPanel4.Controls.Add(this.tbiVendorName);
+            this.superTabControlPanel4.Controls.Add(this.labelX13);
+            this.superTabControlPanel4.Controls.Add(this.tbiFONumber);
+            this.superTabControlPanel4.Controls.Add(this.labelX12);
+            this.superTabControlPanel4.Controls.Add(this.BtnFoSpecialItem);
+            this.superTabControlPanel4.Controls.Add(this.dgvFOSpecialItem);
+            this.superTabControlPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.superTabControlPanel4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.superTabControlPanel4.Location = new System.Drawing.Point(0, 28);
+            this.superTabControlPanel4.Name = "superTabControlPanel4";
+            this.superTabControlPanel4.Size = new System.Drawing.Size(1224, 606);
+            this.superTabControlPanel4.TabIndex = 0;
+            this.superTabControlPanel4.TabItem = this.superTabItem4;
+            // 
+            // tbiVendorName
+            // 
+            // 
+            // 
+            // 
+            this.tbiVendorName.Border.Class = "TextBoxBorder";
+            this.tbiVendorName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbiVendorName.DisabledBackColor = System.Drawing.Color.White;
+            this.tbiVendorName.ForeColor = System.Drawing.Color.Black;
+            this.tbiVendorName.Location = new System.Drawing.Point(408, 7);
+            this.tbiVendorName.Name = "tbiVendorName";
+            this.tbiVendorName.PreventEnterBeep = true;
+            this.tbiVendorName.Size = new System.Drawing.Size(216, 26);
+            this.tbiVendorName.TabIndex = 55;
+            this.tbiVendorName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbiVendorName_KeyDown);
+            // 
+            // labelX13
+            // 
+            this.labelX13.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX13.Location = new System.Drawing.Point(328, 8);
+            this.labelX13.Name = "labelX13";
+            this.labelX13.Size = new System.Drawing.Size(77, 25);
+            this.labelX13.TabIndex = 54;
+            this.labelX13.Text = "供应商名";
+            // 
+            // tbiFONumber
+            // 
+            // 
+            // 
+            // 
+            this.tbiFONumber.Border.Class = "TextBoxBorder";
+            this.tbiFONumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbiFONumber.DisabledBackColor = System.Drawing.Color.White;
+            this.tbiFONumber.ForeColor = System.Drawing.Color.Black;
+            this.tbiFONumber.Location = new System.Drawing.Point(181, 8);
+            this.tbiFONumber.Name = "tbiFONumber";
+            this.tbiFONumber.PreventEnterBeep = true;
+            this.tbiFONumber.Size = new System.Drawing.Size(147, 26);
+            this.tbiFONumber.TabIndex = 53;
+            this.tbiFONumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbiFONumber_KeyPress);
+            // 
+            // labelX12
+            // 
+            this.labelX12.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX12.Location = new System.Drawing.Point(101, 9);
+            this.labelX12.Name = "labelX12";
+            this.labelX12.Size = new System.Drawing.Size(77, 25);
+            this.labelX12.TabIndex = 52;
+            this.labelX12.Text = "联系单号";
+            // 
+            // BtnFoSpecialItem
+            // 
+            this.BtnFoSpecialItem.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.BtnFoSpecialItem.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.BtnFoSpecialItem.Location = new System.Drawing.Point(27, 10);
+            this.BtnFoSpecialItem.Name = "BtnFoSpecialItem";
+            this.BtnFoSpecialItem.Size = new System.Drawing.Size(68, 23);
+            this.BtnFoSpecialItem.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.BtnFoSpecialItem.TabIndex = 44;
+            this.BtnFoSpecialItem.Text = "刷新";
+            this.BtnFoSpecialItem.Click += new System.EventHandler(this.BtnFoSpecialItem_Click);
+            // 
+            // dgvFOSpecialItem
+            // 
+            this.dgvFOSpecialItem.AllowUserToAddRows = false;
+            this.dgvFOSpecialItem.AllowUserToDeleteRows = false;
+            this.dgvFOSpecialItem.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvFOSpecialItem.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFOSpecialItem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
+            this.dgvFOSpecialItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(21)))), ((int)(((byte)(110)))));
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFOSpecialItem.DefaultCellStyle = dataGridViewCellStyle26;
+            this.dgvFOSpecialItem.EnableHeadersVisualStyles = false;
+            this.dgvFOSpecialItem.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvFOSpecialItem.Location = new System.Drawing.Point(12, 47);
+            this.dgvFOSpecialItem.Name = "dgvFOSpecialItem";
+            this.dgvFOSpecialItem.ReadOnly = true;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle27.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFOSpecialItem.RowHeadersDefaultCellStyle = dataGridViewCellStyle27;
+            this.dgvFOSpecialItem.RowTemplate.Height = 23;
+            this.dgvFOSpecialItem.Size = new System.Drawing.Size(1190, 524);
+            this.dgvFOSpecialItem.TabIndex = 0;
+            // 
+            // superTabItem4
+            // 
+            this.superTabItem4.AttachedControl = this.superTabControlPanel4;
+            this.superTabItem4.GlobalItem = false;
+            this.superTabItem4.Name = "superTabItem4";
+            this.superTabItem4.Text = "特殊物料";
+            // 
             // superTabControlPanel2
             // 
             this.superTabControlPanel2.Controls.Add(this.btnReverse);
@@ -663,36 +814,36 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvConfirmed.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvConfirmed.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvConfirmed.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.dgvConfirmed.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvConfirmed.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(21)))), ((int)(((byte)(110)))));
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvConfirmed.DefaultCellStyle = dataGridViewCellStyle23;
             this.dgvConfirmed.EnableHeadersVisualStyles = false;
             this.dgvConfirmed.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvConfirmed.Location = new System.Drawing.Point(12, 71);
             this.dgvConfirmed.MultiSelect = false;
             this.dgvConfirmed.Name = "dgvConfirmed";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvConfirmed.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvConfirmed.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
             this.dgvConfirmed.RowTemplate.Height = 23;
             this.dgvConfirmed.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvConfirmed.Size = new System.Drawing.Size(1194, 525);
@@ -862,158 +1013,35 @@
             this.superTabItem2.Name = "superTabItem2";
             this.superTabItem2.Text = "已完成";
             // 
-            // superTabControlPanel4
-            // 
-            this.superTabControlPanel4.Controls.Add(this.tbiVendorName);
-            this.superTabControlPanel4.Controls.Add(this.labelX13);
-            this.superTabControlPanel4.Controls.Add(this.tbiFONumber);
-            this.superTabControlPanel4.Controls.Add(this.labelX12);
-            this.superTabControlPanel4.Controls.Add(this.BtnFoSpecialItem);
-            this.superTabControlPanel4.Controls.Add(this.dgvFOSpecialItem);
-            this.superTabControlPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.superTabControlPanel4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.superTabControlPanel4.Location = new System.Drawing.Point(0, 28);
-            this.superTabControlPanel4.Name = "superTabControlPanel4";
-            this.superTabControlPanel4.Size = new System.Drawing.Size(1224, 606);
-            this.superTabControlPanel4.TabIndex = 0;
-            this.superTabControlPanel4.TabItem = this.superTabItem4;
-            // 
-            // tbiVendorName
-            // 
-            // 
-            // 
-            // 
-            this.tbiVendorName.Border.Class = "TextBoxBorder";
-            this.tbiVendorName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbiVendorName.DisabledBackColor = System.Drawing.Color.White;
-            this.tbiVendorName.ForeColor = System.Drawing.Color.Black;
-            this.tbiVendorName.Location = new System.Drawing.Point(408, 7);
-            this.tbiVendorName.Name = "tbiVendorName";
-            this.tbiVendorName.PreventEnterBeep = true;
-            this.tbiVendorName.Size = new System.Drawing.Size(216, 26);
-            this.tbiVendorName.TabIndex = 55;
-            this.tbiVendorName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbiVendorName_KeyDown);
-            // 
-            // labelX13
-            // 
-            this.labelX13.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX13.Location = new System.Drawing.Point(328, 8);
-            this.labelX13.Name = "labelX13";
-            this.labelX13.Size = new System.Drawing.Size(77, 25);
-            this.labelX13.TabIndex = 54;
-            this.labelX13.Text = "供应商名";
-            // 
-            // tbiFONumber
-            // 
-            // 
-            // 
-            // 
-            this.tbiFONumber.Border.Class = "TextBoxBorder";
-            this.tbiFONumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbiFONumber.DisabledBackColor = System.Drawing.Color.White;
-            this.tbiFONumber.ForeColor = System.Drawing.Color.Black;
-            this.tbiFONumber.Location = new System.Drawing.Point(181, 8);
-            this.tbiFONumber.Name = "tbiFONumber";
-            this.tbiFONumber.PreventEnterBeep = true;
-            this.tbiFONumber.Size = new System.Drawing.Size(147, 26);
-            this.tbiFONumber.TabIndex = 53;
-            this.tbiFONumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbiFONumber_KeyPress);
-            // 
-            // labelX12
-            // 
-            this.labelX12.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX12.Location = new System.Drawing.Point(101, 9);
-            this.labelX12.Name = "labelX12";
-            this.labelX12.Size = new System.Drawing.Size(77, 25);
-            this.labelX12.TabIndex = 52;
-            this.labelX12.Text = "联系单号";
-            // 
-            // BtnFoSpecialItem
-            // 
-            this.BtnFoSpecialItem.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.BtnFoSpecialItem.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.BtnFoSpecialItem.Location = new System.Drawing.Point(27, 10);
-            this.BtnFoSpecialItem.Name = "BtnFoSpecialItem";
-            this.BtnFoSpecialItem.Size = new System.Drawing.Size(68, 23);
-            this.BtnFoSpecialItem.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.BtnFoSpecialItem.TabIndex = 44;
-            this.BtnFoSpecialItem.Text = "刷新";
-            this.BtnFoSpecialItem.Click += new System.EventHandler(this.BtnFoSpecialItem_Click);
-            // 
-            // dgvFOSpecialItem
-            // 
-            this.dgvFOSpecialItem.AllowUserToAddRows = false;
-            this.dgvFOSpecialItem.AllowUserToDeleteRows = false;
-            this.dgvFOSpecialItem.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvFOSpecialItem.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFOSpecialItem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
-            this.dgvFOSpecialItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFOSpecialItem.DefaultCellStyle = dataGridViewCellStyle14;
-            this.dgvFOSpecialItem.EnableHeadersVisualStyles = false;
-            this.dgvFOSpecialItem.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvFOSpecialItem.Location = new System.Drawing.Point(12, 47);
-            this.dgvFOSpecialItem.Name = "dgvFOSpecialItem";
-            this.dgvFOSpecialItem.ReadOnly = true;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFOSpecialItem.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
-            this.dgvFOSpecialItem.RowTemplate.Height = 23;
-            this.dgvFOSpecialItem.Size = new System.Drawing.Size(1190, 524);
-            this.dgvFOSpecialItem.TabIndex = 0;
-            // 
-            // superTabItem4
-            // 
-            this.superTabItem4.AttachedControl = this.superTabControlPanel4;
-            this.superTabItem4.GlobalItem = false;
-            this.superTabItem4.Name = "superTabItem4";
-            this.superTabItem4.Text = "特殊物料";
-            // 
             // superTabItem1
             // 
             this.superTabItem1.GlobalItem = false;
             this.superTabItem1.Name = "superTabItem1";
             this.superTabItem1.Text = "多次到货确认";
             // 
-            // BtPurchaseOrderInfo
+            // btnConfirmSeveralTimesLims
             // 
-            this.BtPurchaseOrderInfo.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.BtPurchaseOrderInfo.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.BtPurchaseOrderInfo.Location = new System.Drawing.Point(362, 47);
-            this.BtPurchaseOrderInfo.Name = "BtPurchaseOrderInfo";
-            this.BtPurchaseOrderInfo.Size = new System.Drawing.Size(110, 23);
-            this.BtPurchaseOrderInfo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.BtPurchaseOrderInfo.TabIndex = 53;
-            this.BtPurchaseOrderInfo.Text = "四班订单信息";
-            this.BtPurchaseOrderInfo.Click += new System.EventHandler(this.BtPurchaseOrderInfo_Click);
+            this.btnConfirmSeveralTimesLims.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnConfirmSeveralTimesLims.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnConfirmSeveralTimesLims.Location = new System.Drawing.Point(617, 89);
+            this.btnConfirmSeveralTimesLims.Name = "btnConfirmSeveralTimesLims";
+            this.btnConfirmSeveralTimesLims.Size = new System.Drawing.Size(108, 23);
+            this.btnConfirmSeveralTimesLims.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnConfirmSeveralTimesLims.TabIndex = 53;
+            this.btnConfirmSeveralTimesLims.Text = "LIMS多次到货";
+            this.btnConfirmSeveralTimesLims.Click += new System.EventHandler(this.btnConfirmSeveralTimesLims_Click);
+            // 
+            // btnConfirmAllLims
+            // 
+            this.btnConfirmAllLims.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnConfirmAllLims.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnConfirmAllLims.Location = new System.Drawing.Point(506, 89);
+            this.btnConfirmAllLims.Name = "btnConfirmAllLims";
+            this.btnConfirmAllLims.Size = new System.Drawing.Size(105, 23);
+            this.btnConfirmAllLims.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnConfirmAllLims.TabIndex = 54;
+            this.btnConfirmAllLims.Text = "LIMS确认到货";
+            this.btnConfirmAllLims.Click += new System.EventHandler(this.btnConfirmAllLims_Click);
             // 
             // POItemConfirmPackage
             // 
@@ -1035,11 +1063,11 @@
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPODetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPO)).EndInit();
+            this.superTabControlPanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFOSpecialItem)).EndInit();
             this.superTabControlPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvConfirmed)).EndInit();
             this.groupBox3.ResumeLayout(false);
-            this.superTabControlPanel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFOSpecialItem)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1106,5 +1134,7 @@
         private DevComponents.DotNetBar.Controls.TextBoxX tbiVendorName;
         private DevComponents.DotNetBar.LabelX labelX13;
         private DevComponents.DotNetBar.ButtonX BtPurchaseOrderInfo;
+        private DevComponents.DotNetBar.ButtonX btnConfirmSeveralTimesLims;
+        private DevComponents.DotNetBar.ButtonX btnConfirmAllLims;
     }
 }

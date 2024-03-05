@@ -38,6 +38,10 @@ namespace Global
 
         private void FrmWarehouseDeptStockKeeper_Load(object sender, EventArgs e)
         {
+            Version ver = new Version(Application.ProductVersion);
+            tssl.Text = "登录账号：" + StockUser.UserID + " 姓名：" + StockUser.UserName + " IP地址：" + GetHostInfo.GetIPAddress() + "  主机：" + GetHostInfo.strHostName + " 当前版本：" + ver.Major.ToString() + "." + ver.Minor.ToString() + "." + ver.Build.ToString();
+            CommonOperate.SyncServerTime();
+
             string sqlCheckGMP = @"Select IsGMP From PurchaseOrderGMP";
             int gmpStatus = Convert.ToInt32(SQLHelper.ExecuteScalar(GlobalSpace.FSDBConnstr, sqlCheckGMP));
 
@@ -120,9 +124,10 @@ namespace Global
                StockUser.UserID = "S74";
                StockUser.Number = "50";
                */
-            Version ver = new Version(Application.ProductVersion);
+            //Version ver = new Version(Application.ProductVersion);
             // tsslStock.Text = "登录账号：" + StockUser.UserID + " 姓名：" + StockUser.UserName + " IP地址：" + GetHostInfo.GetIPAddress() + "  主机：" + GetHostInfo.strHostName + " 当前版本：" + ver.Major.ToString() + "." + ver.Minor.ToString() + "." + ver.Build.ToString();
-            this.Text += "  版本：0.1";// + ver.Major.ToString() + "." + ver.Minor.ToString() + "." + ver.Build.ToString();
+            //this.Text += "  版本：0.1";
+            // + ver.Major.ToString() + "." + ver.Minor.ToString() + "." + ver.Build.ToString();
             CommonOperate.SyncServerTime();
         }
 

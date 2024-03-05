@@ -653,6 +653,12 @@
     <Compile Include="Warehouse\EBatchRecordConfirm.Designer.cs">
       <DependentUpon>EBatchRecordConfirm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\ErpLims.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\ErpLims.Designer.cs">
+      <DependentUpon>ErpLims.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\FDAPackage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1020,6 +1026,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\EBatchRecordConfirm.resx">
       <DependentUpon>EBatchRecordConfirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\ErpLims.resx">
+      <DependentUpon>ErpLims.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\FDAPackage.resx">
       <DependentUpon>FDAPackage.cs</DependentUpon>

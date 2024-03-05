@@ -1130,7 +1130,7 @@
             this.EnableGlass = false;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmMain";
-            this.Text = "瑞阳制药股份有限公司供应处无纸化办公系统";
+            this.Text = "供应无纸化办公系统(供应处)";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain_Load);

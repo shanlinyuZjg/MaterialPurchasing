@@ -30,10 +30,44 @@ namespace Global.Purchase
         private void GetPurchaseOrderInfo()
         {
             string VendorNumber = TbVendorNumber.Text.Trim().ToUpper();
-            string sqlSelect = $@"SELECT D.VendorID 供应商码, D.VendorName 供应商名, A.PONumber 采购单号,B.POLineNumberString 行号,C.ItemNumber 物料编码,C.ItemDescription 物料描述,C.ItemUM 物料单位, B.ReceiptQuantity 入库数量,B.LineItemOrderedQuantity 订单数量,B.POLineStatus 四班状态,A.POCreatedDate 订单下达日期 FROM [dbo].[_NoLock_FS_POLine] as B INNER JOIN [dbo].[_NoLock_FS_POHeader] as A on A.POHeaderKey=B.POHeaderKey INNER JOIN [dbo].[_NoLock_FS_Item] AS C on C.ItemKey = B.ItemKey INNER JOIN [dbo].[_NoLock_FS_Vendor] AS D on D.VendorID=A.VendorID  where A.VendorID ='{VendorNumber}' and  A.POCreatedDate >= '{DtpStart.Value.ToString("yyyy-MM-dd")}' and A.POCreatedDate < '{DtpEnd.Value.AddDays(1).ToString("yyyy-MM-dd")}' ";
+            string sqlSelect = $@"SELECT D.VendorID 供应商码, D.VendorName 供应商名,A.Buyer 采购员, A.PONumber 采购单号,B.POLineNumberString 行号,C.ItemNumber 物料编码,C.ItemDescription 物料描述,C.ItemUM 物料单位, B.ReceiptQuantity 入库数量,B.LineItemOrderedQuantity 订单数量,B.POLineStatus 四班状态,A.POCreatedDate 订单下达日期 FROM [dbo].[_NoLock_FS_POLine] as B INNER JOIN [dbo].[_NoLock_FS_POHeader] as A on A.POHeaderKey=B.POHeaderKey INNER JOIN [dbo].[_NoLock_FS_Item] AS C on C.ItemKey = B.ItemKey INNER JOIN [dbo].[_NoLock_FS_Vendor] AS D on D.VendorID=A.VendorID  where A.VendorID ='{VendorNumber}' and  A.POCreatedDate >= '{DtpStart.Value.ToString("yyyy-MM-dd")}' and A.POCreatedDate < '{DtpEnd.Value.AddDays(1).ToString("yyyy-MM-dd")}' ";
             //
-            DGV1.DataSource = SQLHelper.GetDataTableOleDb(GlobalSpace.oledbconnstrFSDBMR, sqlSelect);
-            MessageBox.Show("查询完成");
+            if (!string.IsNullOrWhiteSpace(TbBuyer.Text))
+                sqlSelect += $@" and A.Buyer='{TbBuyer.Text.Trim()}'";
+            
+            if(!CbQuantity.Checked)
+                sqlSelect += $@" and B.ReceiptQuantity<B.LineItemOrderedQuantity";
+            DataTable dt = SQLHelper.GetDataTableOleDb(GlobalSpace.oledbconnstrFSDBMR, sqlSelect);
+            if (!dt.Columns.Contains("外贸单号"))
+            {
+                dt.Columns.Add("外贸单号");
+            }
+            if (!dt.Columns.Contains("需求部门"))
+            {
+                dt.Columns.Add("需求部门");
+            }
+            foreach (DataRow dr in dt.Rows)
+            {
+                string Ponumber = dr["采购单号"].ToString();
+                string Linenumber = dr["行号"].ToString().PadLeft(3, '0');
+                DataTable dt0 = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, $@"SELECT ForeignNumber,RequireDept FROM [dbo].[PurchaseOrderRecordByCMF] where PONumber='{Ponumber}' and LineNumber='{Linenumber}'");
+                if (dt0.Rows.Count > 0)
+                {
+                    dr["外贸单号"] = dt0.Rows[0]["ForeignNumber"].ToString();
+                    dr["需求部门"] = dt0.Rows[0]["RequireDept"].ToString();
+                }
+                else
+                {
+                    DataTable dt00 = SQLHelper.GetDataTable(GlobalSpace.SqlRJData, $@"SELECT ForeignNumber,RequireDept FROM [dbo].[D_PurchaseOrderRecord] where PONumber='{Ponumber}' and LineNumber='{Linenumber}'");
+                    if (dt00.Rows.Count > 0)
+                    {
+                        dr["外贸单号"] = dt00.Rows[0]["ForeignNumber"].ToString();
+                        dr["需求部门"] = dt00.Rows[0]["RequireDept"].ToString();
+                    }
+                }
+            }
+            DGV1.DataSource = dt;
+                MessageBox.Show("查询完成");
         }
 
         private void BtExportExcel_Click(object sender, EventArgs e)
@@ -138,7 +172,7 @@ namespace Global.Purchase
             }
             else
             {
-                MessageBox.Show("未查询到，或者有多个！");
+                MessageBox.Show("有零个或多个，请重新输入供应商名！");
                 return;
             }
         }

@@ -41,10 +41,12 @@
             this.ribbonTabItem1 = new DevComponents.DotNetBar.RibbonTabItem();
             this.styleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);
             this.tabCtrlForm = new DevComponents.DotNetBar.TabControl();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tssl = new System.Windows.Forms.ToolStripStatusLabel();
             this.ribbonControl1.SuspendLayout();
             this.ribbonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabCtrlForm)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ribbonControl1
@@ -62,7 +64,7 @@
             this.ribbonControl1.Location = new System.Drawing.Point(5, 1);
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
-            this.ribbonControl1.Size = new System.Drawing.Size(883, 128);
+            this.ribbonControl1.Size = new System.Drawing.Size(981, 128);
             this.ribbonControl1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonControl1.SystemText.MaximizeRibbonText = "&Maximize the Ribbon";
             this.ribbonControl1.SystemText.MinimizeRibbonText = "Mi&nimize the Ribbon";
@@ -94,7 +96,7 @@
             this.ribbonPanel1.Location = new System.Drawing.Point(0, 56);
             this.ribbonPanel1.Name = "ribbonPanel1";
             this.ribbonPanel1.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanel1.Size = new System.Drawing.Size(883, 69);
+            this.ribbonPanel1.Size = new System.Drawing.Size(981, 69);
             // 
             // 
             // 
@@ -253,16 +255,26 @@
             this.tabCtrlForm.Name = "tabCtrlForm";
             this.tabCtrlForm.SelectedTabFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
             this.tabCtrlForm.SelectedTabIndex = -1;
-            this.tabCtrlForm.Size = new System.Drawing.Size(883, 449);
+            this.tabCtrlForm.Size = new System.Drawing.Size(981, 389);
             this.tabCtrlForm.TabIndex = 5;
             this.tabCtrlForm.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabCtrlForm.Text = "tabControl1";
             this.tabCtrlForm.Click += new System.EventHandler(this.tabCtrlForm_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tssl});
+            this.statusStrip1.Location = new System.Drawing.Point(5, 518);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(981, 22);
+            this.statusStrip1.TabIndex = 6;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
             // tssl
             // 
             this.tssl.Name = "tssl";
-            this.tssl.Size = new System.Drawing.Size(1003, 17);
+            this.tssl.Size = new System.Drawing.Size(935, 17);
             this.tssl.Spring = true;
             this.tssl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -270,12 +282,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(893, 580);
+            this.ClientSize = new System.Drawing.Size(991, 542);
             this.Controls.Add(this.tabCtrlForm);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.ribbonControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmWarehouseDeptStockKeeper";
-            this.Text = "仓库验收请验管理系统";
+            this.Text = "供应无纸化办公系统(物管处)";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmWarehouseDeptStockKeeper_FormClosing);
             this.Load += new System.EventHandler(this.FrmWarehouseDeptStockKeeper_Load);
@@ -283,7 +296,10 @@
             this.ribbonControl1.PerformLayout();
             this.ribbonPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabCtrlForm)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -298,8 +314,9 @@
         private DevComponents.DotNetBar.RibbonBar ribbonBar1;
         private DevComponents.DotNetBar.ButtonItem btniItemReturned;
         private DevComponents.DotNetBar.TabControl tabCtrlForm;
-        private System.Windows.Forms.ToolStripStatusLabel tssl;
         private DevComponents.DotNetBar.RibbonBar rbnSpecialItem;
         private DevComponents.DotNetBar.ButtonItem btniSpecialItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel tssl;
     }
 }

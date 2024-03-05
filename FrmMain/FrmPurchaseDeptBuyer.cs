@@ -226,7 +226,7 @@ namespace Global
                 POItemConfirmPackage pic = new POItemConfirmPackage(fsUserID, fsPassword);
                 CommonOperate.BindFormToTabControl(tabCtrlForm, pic, btnPOItemConfirm.Name, btnPOItemConfirm.Text);
             }
-            else if(PurchaseUser.ConfirmGroup == "M" || PurchaseUser.ConfirmGroup == "A")
+            else if(PurchaseUser.ConfirmGroup == "M" || PurchaseUser.ConfirmGroup == "A" || PurchaseUser.ConfirmGroup == "ALL")
             {
                 POItemConfirmAPIS picA = new POItemConfirmAPIS(fsUserID, fsPassword);
                 CommonOperate.BindFormToTabControl(tabCtrlForm, picA, btnPOItemConfirm.Name, btnPOItemConfirm.Text);

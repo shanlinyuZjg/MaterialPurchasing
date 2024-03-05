@@ -443,7 +443,133 @@ namespace Global.Purchase
             return false;
         }
 
+        private bool CreatePOItemReceiveHistoryLIMS(List<string> guidList)
+        {        
+            List<string> sqlList = new List<string>();
+            for (int i = 0; i < guidList.Count; i++)
+            {
+                string guid = Guid.NewGuid().ToString("N");
+                string sqlInsert1 = @"INSERT INTO PurchaseOrderRecordHistoryByCMF (
+	                                                        	[PONumber],
+	                                                            [VendorNumber],
+	                                                            [VendorName],
+	                                                            [ManufacturerNumber],
+	                                                            [ManufacturerName],
+	                                                            [LineNumber],
+	                                                            [ItemNumber],
+	                                                            [ItemDescription],
+	                                                            [LineUM],
+	                                                            [DemandDeliveryDate],
+	                                                            [InspectionPeriod],
+	                                                            [ParentGuid],
+	                                                            [StockKeeper],
+	                                                            [LotNumberAssign],
+	                                                            [OrderQuantity],
+	                                                            [ItemReceiveType],
+	                                                            [Supervisor],
+	                                                            [ForeignNumber],
+	                                                            [BuyerID],Stock,Bin,ReceiveDate,Guid,UnitPrice,QualityCheckStandard,GSID,IsInvestigation
+                                                        ) SELECT
+	                                                       	[PONumber],
+	                                                        [VendorNumber],
+	                                                        [VendorName],
+	                                                        [ManufacturerNumber],
+	                                                        [ManufacturerName],
+	                                                        [LineNumber],
+	                                                        [ItemNumber],
+	                                                        [ItemDescription],
+	                                                        [LineUM],
+	                                                        [DemandDeliveryDate],
+	                                                        [InspectionPeriod],                                                        
+	                                                        [Guid],
+	                                                        [StockKeeper],LotNumberAssign,
+	                                                        [POItemQuantity],
+	                                                        [ItemReceiveType],
+	                                                        [Superior],
+	                                                        [ForeignNumber],Buyer,Stock,Bin,Left(ActualDeliveryDate,10),Replace(NEWID(),'-',''),[UnitPrice],'" + tbQualityStandard.Text + "',GSID,IsInvestigation  FROM   PurchaseOrderRecordByCMF  WHERE Guid = '" + guidList[i] + "'";
+                string StrSelect = $@"SELECT
+	                                                       	[PONumber],
+	                                                        [VendorNumber],
+	                                                        [VendorName],
+	                                                        [ManufacturerNumber],
+	                                                        [ManufacturerName],
+	                                                        [LineNumber],
+	                                                        [ItemNumber],
+	                                                        [ItemDescription],
+	                                                        [LineUM],
+	                                                        [DemandDeliveryDate],
+	                                                        [InspectionPeriod],                                                        
+	                                                        [Guid],
+	                                                        [StockKeeper],
+                                                            [LotNumberAssign],
+	                                                        [POItemQuantity],
+	                                                        [ItemReceiveType],
+	                                                        [Superior],
+	                                                        [ForeignNumber],Buyer,Stock,Bin,Left(ActualDeliveryDate,10),Replace(NEWID(),'-',''),IsFOItem,[UnitPrice],'{ tbQualityStandard.Text.Trim() }' as QualityCheckStandard,GSID,IsInvestigation  FROM   PurchaseOrderRecordByCMF  WHERE Guid = '{guidList[i] }'";
+                DataTable DtTemp= SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, StrSelect);
+                if (DtTemp.Rows.Count == 0)
+                {
+                    MessageBox.Show("未查询到源数据！");
+                    return false;
+                }
+                string sqlInsert = $@"INSERT INTO [dbo].[ERP_LIMS_Intermediate] (
+	                                                        	[PONumber],
+	                                                            [VendorNumber],
+	                                                            [VendorName],
+	                                                            [ManufacturerNumber],
+	                                                            [ManufacturerName],
+	                                                            [LineNumber],
+	                                                            [ItemNumber],
+	                                                            [ItemDescription],
+	                                                            [LineUM],
+	                                                            [DemandDeliveryDate],
+	                                                            [InspectionPeriod],
+	                                                            [ParentGuid],
+	                                                            [StockKeeper],
+	                                                            [LotNumberAssign],
+	                                                            [OrderQuantity],
+	                                                            [ItemReceiveType],
+	                                                            [Supervisor],
+	                                                            [ForeignNumber],
+[BuyerID],Stock,Bin,IsFOItem,UnitPrice,QualityCheckStandard,GSID,IsInvestigation
+                                                        ) values (
+                                                                '{DtTemp.Rows[0]["PONumber"]}',
+                                                                '{DtTemp.Rows[0]["VendorNumber"]}',
+                                                                '{DtTemp.Rows[0]["VendorName"]}',
+                                                                '{DtTemp.Rows[0]["ManufacturerNumber"]}',
+                                                                '{DtTemp.Rows[0]["ManufacturerName"]}',
+                                                                '{DtTemp.Rows[0]["LineNumber"]}',
+                                                                '{DtTemp.Rows[0]["ItemNumber"]}',
+                                                                '{DtTemp.Rows[0]["ItemDescription"]}',
+                                                                '{DtTemp.Rows[0]["LineUM"]}',
+                                                                '{DtTemp.Rows[0]["DemandDeliveryDate"]}',
+                                                                '{DtTemp.Rows[0]["InspectionPeriod"]}',
+                                                                '{DtTemp.Rows[0]["Guid"]}',
+                                                                '{DtTemp.Rows[0]["StockKeeper"]}',
+                                                                '{DtTemp.Rows[0]["LotNumberAssign"]}',
+                                                                '{DtTemp.Rows[0]["POItemQuantity"]}',
+                                                                '{DtTemp.Rows[0]["ItemReceiveType"]}',
+                                                                '{DtTemp.Rows[0]["Superior"]}',
+                                                                '{DtTemp.Rows[0]["ForeignNumber"]}',
+'{DtTemp.Rows[0]["Buyer"]}',
+'{DtTemp.Rows[0]["Stock"]}',
+'{DtTemp.Rows[0]["Bin"]}',
+'{DtTemp.Rows[0]["IsFOItem"]}',
+'{DtTemp.Rows[0]["UnitPrice"]}',
+'{DtTemp.Rows[0]["QualityCheckStandard"]}',
+'{DtTemp.Rows[0]["GSID"]}',
+'{DtTemp.Rows[0]["IsInvestigation"]}'
+)";
+                //较之前到货数据写入的字段，减少ReceiveDate,Guid
+                sqlList.Add(sqlInsert);
+            }
 
+            if (SQLHelper.BatchExecuteNonQuery(GlobalSpace.SqlRJData, sqlList))
+            {
+                return true;
+            }
+            return false;
+        }
         private void btnMakeAllChecked2_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < dgvPODetail.Rows.Count; i++)
@@ -923,6 +1049,148 @@ namespace Global.Purchase
 	                                        PurchaseOrderRecordByCMF T1
                                         WHERE  T1.Guid = '"+guid+"' AND (T1.POStatus = 3 OR T1.POStatus = 66 )";
             return SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, strSql);
+        }
+
+        private void btnConfirmDeliveryLIMS_Click(object sender, EventArgs e)
+        {
+
+            if (string.IsNullOrWhiteSpace(tbQualityStandard.Text.Trim()))
+            {
+                Custom.MsgEx("检验标准不能为空！");
+                return;
+            }
+
+            List<string> guidList = new List<string>();
+            int i = 0;
+            foreach (DataGridViewRow dgvr in dgvPODetail.Rows)
+            {
+                if (Convert.ToBoolean(dgvr.Cells["Check"].Value))
+                {
+                    guidList.Add(dgvr.Cells["Guid"].Value.ToString());
+                }
+                if (dgvr.Cells["物料代码"].Value.ToString().Substring(0, 2) == "MF" || dgvr.Cells["物料代码"].Value.ToString().Substring(0, 2) == "MJ" || dgvr.Cells["物料代码"].Value.ToString().Substring(0, 2) == "MY")
+                {
+                    i++;
+                }
+            }
+            if (i > 1)
+            {
+                if (MessageBoxEx.Show("当前需要填写请验质量标准的物料有多个，是否确认使用同一个质量标准？", "提示", MessageBoxButtons.YesNo) == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
+
+            if (Convert.ToInt32(tbReceiveRecordQuantity.Text) != guidList.Count)
+            {
+                Custom.MsgEx("到货批次数量与选中的记录条数不一致，请重新选择！");
+                return;
+            }
+            //#region 测试erplims中间表写入
+            //if (CreatePOItemReceiveHistoryLIMS(guidList))
+            //{
+            //    Custom.MsgEx("更新状态和LIMS确认到货成功！");
+            //    DataTable dt = (DataTable)dgvPODetail.DataSource;
+            //    dt.Clear();
+            //    dgvPODetail.DataSource = dt;
+            //}
+            //else
+            //{
+            //    Custom.MsgEx("更新状态成功，LIMS确认到货失败！请核查反馈！");
+            //}
+            //return;
+            //#endregion
+            if (CommonOperate.BatchUpdatePOItemStatusByGuid(guidList, 4))
+            {
+
+                if (CreatePOItemReceiveHistoryLIMS(guidList))
+                {
+                    Custom.MsgEx("更新状态和LIMS确认到货成功！");
+                    DataTable dt = (DataTable)dgvPODetail.DataSource;
+                    dt.Clear();
+                    dgvPODetail.DataSource = dt;
+                }
+                else
+                {
+                    Custom.MsgEx("更新状态成功，LIMS确认到货失败！请注意！");
+                }
+            }
+            else
+            {
+                Custom.MsgEx("更新状态失败！");
+            }
+        }
+
+        private void btnConfirmDeliverySeveralTimesLIMS_Click(object sender, EventArgs e)
+        {
+
+            if (string.IsNullOrWhiteSpace(tbQualityStandard.Text.Trim()))
+            {
+                Custom.MsgEx("检验标准不能为空！");
+                return;
+            }
+
+            List<string> guidList = new List<string>();
+            int i = 0;
+            foreach (DataGridViewRow dgvr in dgvPODetail.Rows)
+            {
+                if (Convert.ToBoolean(dgvr.Cells["Check"].Value))
+                {
+                    guidList.Add(dgvr.Cells["Guid"].Value.ToString());
+                }
+                if (dgvr.Cells["物料代码"].Value.ToString().Substring(0, 2) == "MF" || dgvr.Cells["物料代码"].Value.ToString().Substring(0, 2) == "MJ" || dgvr.Cells["物料代码"].Value.ToString().Substring(0, 2) == "MY")
+                {
+                    i++;
+                }
+            }
+            if (i > 1)
+            {
+                if (MessageBoxEx.Show("当前需要填写请验质量标准的物料有多个，是否确认使用同一个质量标准？", "提示", MessageBoxButtons.YesNo) == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
+
+            if (Convert.ToInt32(tbReceiveRecordQuantity.Text) != guidList.Count)
+            {
+                Custom.MsgEx("到货批次数量与选中的记录条数不一致，请重新选择！");
+                return;
+            }
+            //#region 测试erplims中间表写入
+            //if (CreatePOItemReceiveHistoryLIMS(guidList))
+            //{
+            //    Custom.MsgEx("更新状态和LIMS确认到货成功！");
+            //    DataTable dt = (DataTable)dgvPODetail.DataSource;
+            //    dt.Clear();
+            //    dgvPODetail.DataSource = dt;
+            //}
+            //else
+            //{
+            //    Custom.MsgEx("更新状态成功，LIMS确认到货失败！请核查反馈！");
+            //}
+            //return;
+            //#endregion
+            if (CommonOperate.BatchUpdatePOItemStatusByGuid(guidList, 66))
+            {
+
+                if (CreatePOItemReceiveHistoryLIMS(guidList))
+                {
+                    Custom.MsgEx("更新状态和LIMS确认到货成功！");
+                    DataTable dt = (DataTable)dgvPODetail.DataSource;
+                    dt.Clear();
+                    dgvPODetail.DataSource = dt;
+                }
+                else
+                {
+                    Custom.MsgEx("更新状态成功，LIMS确认到货失败！请注意！");
+                }
+            }
+            else
+            {
+                Custom.MsgEx("更新状态失败！");
+            }
         }
     }
 }

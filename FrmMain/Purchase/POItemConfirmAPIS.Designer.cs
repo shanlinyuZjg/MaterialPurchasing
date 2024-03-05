@@ -78,6 +78,8 @@
             this.tabItem4 = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabItem3 = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabItem2 = new DevComponents.DotNetBar.TabItem(this.components);
+            this.btnConfirmDeliverySeveralTimesLIMS = new DevComponents.DotNetBar.ButtonX();
+            this.btnConfirmDeliveryLIMS = new DevComponents.DotNetBar.ButtonX();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -317,6 +319,8 @@
             this.tabControlPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControlPanel1.Controls.Add(this.btnConfirmDeliverySeveralTimesLIMS);
+            this.tabControlPanel1.Controls.Add(this.btnConfirmDeliveryLIMS);
             this.tabControlPanel1.Controls.Add(this.btnUpdateReceivedTotalQuantity);
             this.tabControlPanel1.Controls.Add(this.tbQualityStandard);
             this.tabControlPanel1.Controls.Add(this.tbReceiveRecordQuantity);
@@ -760,6 +764,30 @@
             this.tabItem2.Text = "分批到货确认";
             this.tabItem2.Visible = false;
             // 
+            // btnConfirmDeliverySeveralTimesLIMS
+            // 
+            this.btnConfirmDeliverySeveralTimesLIMS.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnConfirmDeliverySeveralTimesLIMS.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnConfirmDeliverySeveralTimesLIMS.Location = new System.Drawing.Point(657, 47);
+            this.btnConfirmDeliverySeveralTimesLIMS.Name = "btnConfirmDeliverySeveralTimesLIMS";
+            this.btnConfirmDeliverySeveralTimesLIMS.Size = new System.Drawing.Size(90, 23);
+            this.btnConfirmDeliverySeveralTimesLIMS.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnConfirmDeliverySeveralTimesLIMS.TabIndex = 55;
+            this.btnConfirmDeliverySeveralTimesLIMS.Text = "LIMS多次到货";
+            this.btnConfirmDeliverySeveralTimesLIMS.Click += new System.EventHandler(this.btnConfirmDeliverySeveralTimesLIMS_Click);
+            // 
+            // btnConfirmDeliveryLIMS
+            // 
+            this.btnConfirmDeliveryLIMS.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnConfirmDeliveryLIMS.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnConfirmDeliveryLIMS.Location = new System.Drawing.Point(558, 47);
+            this.btnConfirmDeliveryLIMS.Name = "btnConfirmDeliveryLIMS";
+            this.btnConfirmDeliveryLIMS.Size = new System.Drawing.Size(90, 23);
+            this.btnConfirmDeliveryLIMS.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnConfirmDeliveryLIMS.TabIndex = 54;
+            this.btnConfirmDeliveryLIMS.Text = "LIMS确认到货";
+            this.btnConfirmDeliveryLIMS.Click += new System.EventHandler(this.btnConfirmDeliveryLIMS_Click);
+            // 
             // POItemConfirmAPIS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -833,5 +861,7 @@
         private DevComponents.DotNetBar.ButtonX btnMakeAllChecked;
         private DevComponents.DotNetBar.ButtonX btnClosePOItem;
         private DevComponents.DotNetBar.ButtonX btnUpdateReceivedTotalQuantity;
+        private DevComponents.DotNetBar.ButtonX btnConfirmDeliverySeveralTimesLIMS;
+        private DevComponents.DotNetBar.ButtonX btnConfirmDeliveryLIMS;
     }
 }
