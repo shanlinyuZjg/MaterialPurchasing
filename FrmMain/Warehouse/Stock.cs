@@ -2101,7 +2101,7 @@ namespace Global.Warehouse
             dgvPOItemDetailView.Columns["Guid"].Visible = false;
             dgvPOItemDetailView.Columns["Status"].Visible = false;
             dgvPOItemDetailView.Columns["BuyerID"].Visible = false;
-            dgvPOItemDetailView.Columns["FDAFlag"].Visible = false;
+            dgvPOItemDetailView.Columns["FDAFlag"].ReadOnly = true ;
             dgvPOItemDetailView.Columns["ItemReceiveType"].Visible = false;
             dgvPOItemDetailView.Columns["StockKeeper"].Visible = false;
             dgvPOItemDetailView.Columns["LotNumberAssign"].Visible = false;
@@ -2974,6 +2974,11 @@ namespace Global.Warehouse
                     dr = (dgvr.DataBoundItem as DataRowView).Row;
                     dtTemp.Rows.Add(dr.ItemArray);
                 }
+                if (Convert.ToBoolean(dgvr.Cells["Check"].Value) && Convert.ToInt32(dgvr.Cells["FDAFlag"].Value) == 1)
+                {
+                    MessageBox.Show("请选择FDAFlag为0的行！未写入！");
+                    return;
+                }
             }
 
             if (dtTemp.Rows.Count == 0)
@@ -3078,8 +3083,8 @@ namespace Global.Warehouse
 	                                                                [CompanyLotNumber],
 	                                                                [Buyer],
 	                                                                [ExpireDate],
-	                                                                [StockKeeper],[ManufacturedDate],PackModel)
-                                                                VALUES  ( '" + dr4["供应商码"].ToString() + "',  '" + dr4["供应商名"].ToString() + "', '" + dr4["生产商码"].ToString() + "','" + dr4["生产商名"].ToString() + "','" + dr4["采购单号"].ToString() + "', '" + dr4["行号"].ToString() + "', '" + dr4["物料代码"].ToString() + "',  '" + dr4["描述"].ToString() + "','" + dr4["单位"].ToString() + "', " + Convert.ToDouble(dr4["采购数量"]) + "," + Convert.ToDouble(dr4["入库数量"]) + ",'" + dr4["厂家批号"].ToString().ToUpper().Replace(".", "") + "','" + dr4["公司批号"].ToString().ToUpper() + "','" + dr4["BuyerID"].ToString() + "','" + dr4["到期日期"].ToString() + "', '" + StockUser.UserID + "','" + dr4["生产日期"].ToString().Replace(".", "") + "','" + dr4["包装规格"].ToString() + "')";
+	                                                                [StockKeeper],[ManufacturedDate],PackModel,ParentGuid)
+                                                                VALUES  ( '" + dr4["供应商码"].ToString() + "',  '" + dr4["供应商名"].ToString() + "', '" + dr4["生产商码"].ToString() + "','" + dr4["生产商名"].ToString() + "','" + dr4["采购单号"].ToString() + "', '" + dr4["行号"].ToString() + "', '" + dr4["物料代码"].ToString() + "',  '" + dr4["描述"].ToString() + "','" + dr4["单位"].ToString() + "', " + Convert.ToDouble(dr4["采购数量"]) + "," + Convert.ToDouble(dr4["入库数量"]) + ",'" + dr4["厂家批号"].ToString().ToUpper().Replace(".", "") + "','" + dr4["公司批号"].ToString().ToUpper() + "','" + dr4["BuyerID"].ToString() + "','" + dr4["到期日期"].ToString() + "', '" + StockUser.UserID + "','" + dr4["生产日期"].ToString().Replace(".", "") + "','" + dr4["包装规格"].ToString() + "','" + dr4["Guid"].ToString() + "')";
                     sqlList.Add(sqlInsert);
                     guidList.Add(dr4["Guid"].ToString());
                 }
@@ -3095,6 +3100,7 @@ namespace Global.Warehouse
                     if (SQLHelper.BatchExecuteNonQuery(GlobalSpace.FSDBConnstr, sqlUpdateList))
                     {
                         MessageBoxEx.Show("写入成功！", "提示");
+                        btnReceiveRefresh_Click(null, null);
                     }
                     else
                     {
@@ -3251,7 +3257,7 @@ namespace Global.Warehouse
             dgvPOItemDetailView.Columns["Guid"].Visible = false;
             dgvPOItemDetailView.Columns["Status"].Visible = false;
             dgvPOItemDetailView.Columns["BuyerID"].Visible = false;
-            dgvPOItemDetailView.Columns["FDAFlag"].Visible = false;
+            dgvPOItemDetailView.Columns["FDAFlag"].ReadOnly = true;
             dgvPOItemDetailView.Columns["ItemReceiveType"].Visible = false;
             dgvPOItemDetailView.Columns["StockKeeper"].Visible = false;
             dgvPOItemDetailView.Columns["LotNumberAssign"].Visible = false;
@@ -6249,6 +6255,160 @@ namespace Global.Warehouse
             ErpLims erpLims = new ErpLims();
             erpLims.ShowDialog();
             btnReceiveRefresh_Click(null,null);
+        }
+
+        private void btnFDAWriteAgain_Click(object sender, EventArgs e)
+        {
+            btnFDAWriteAgain.Enabled = false;
+            //string sqlSelect = @"SELECT
+	           //                                 ItemNumber,
+	           //                                 Specification
+            //                                FROM
+	           //                                 dbo.PurchaseDepartmentStockFDAItemSpecification";
+            //List<string> fdaList = SQLHelper.GetDataTable(GlobalSpace.FSDBConnstr, sqlSelect).AsEnumerable().Select(r => r.Field<string>("ItemNumber")).ToList();
+            DataTable dtOriginal = (DataTable)dgvPOItemDetailView.DataSource;
+            DataTable dtTemp = dtOriginal.Clone();
+            dtTemp.Columns.Add("FDAPackage");
+
+            foreach (DataGridViewRow dgvr in dgvPOItemDetailView.Rows)
+            {
+                if (Convert.ToBoolean(dgvr.Cells["Check"].Value) && Convert.ToInt32(dgvr.Cells["FDAFlag"].Value) == 0)
+                {
+                    MessageBox.Show("请选择FDAFlag为1的行！未再次写入！");
+                    return;
+                    
+                }
+                if (Convert.ToBoolean(dgvr.Cells["Check"].Value) && Convert.ToInt32(dgvr.Cells["FDAFlag"].Value) == 1)
+                {
+                    DataRow dr = dtTemp.NewRow();
+                    dr = (dgvr.DataBoundItem as DataRowView).Row;
+                    dtTemp.Rows.Add(dr.ItemArray);
+                }
+            }
+
+            if (dtTemp.Rows.Count == 0)
+            {
+                MessageBoxEx.Show("当前无可用的信息！", "提示");
+            }
+            else
+            {
+                #region 功能取消
+                /*
+                if (GlobalSpace.dictFDAItem.Count > 0)
+                {
+                    GlobalSpace.dictFDAItem.Clear();
+                }
+                else
+                {
+                    DataTable dtFDA = new DataTable();
+                    dtFDA.Columns.Add("Guid");
+                    dtFDA.Columns.Add("包装规格");
+                    dtFDA.Columns.Add("物料代码");
+                    dtFDA.Columns.Add("物料描述");
+                    dtFDA.Columns.Add("入库数量");
+                    dtFDA.Columns.Add("厂家批号");
+
+                    int m = 0;
+
+                    foreach(DataRow dr in dtTemp.Rows)
+                    {
+                        if(fdaList.Contains(dr["物料代码"].ToString()))
+                        {
+                            DataRow dr2 = dtFDA.NewRow();
+                            dr2["Guid"] = dr["Guid"];
+                            dr2["物料代码"] = dr["物料代码"];
+                            dr2["物料描述"] = dr["描述"];
+                            dr2["入库数量"] = dr["入库数量"];
+                            dr2["厂家批号"] = dr["厂家批号"];
+                            dtFDA.Rows.Add(dr2.ItemArray);
+                            m++;
+                        }
+                    }
+                    if(m > 0)
+                    {
+                        FDAPackage fda = new FDAPackage(dtFDA);
+                        fda.ShowDialog();
+                        if(GlobalSpace.dictFDAItem.Count == 0)
+                        {
+                            Custom.Msg("没有填写包装规格！");
+                            btnFDAWrite.Enabled = true;
+                            return;
+                        }
+                        else
+                        {
+                            foreach(var v in GlobalSpace.dictFDAItem)
+                            {
+                                foreach(DataRow dr3 in dtTemp.Rows)
+                                {
+                                    if(v.Key == dr3["Guid"].ToString())
+                                    {
+                                        dr3.SetField<string>("FDAPackage", v.Value);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+                */
+                #endregion
+                List<string> sqlList = new List<string>();
+                List<string> guidList = new List<string>();
+                sqlList.Add($@"");
+                foreach (DataRow dr4 in dtTemp.Rows)
+                {
+                    if (dr4["生产日期"] == DBNull.Value || string.IsNullOrWhiteSpace(dr4["生产日期"].ToString()))
+                    {
+                        MessageBoxEx.Show("生产日期不能有空项！", "提示");
+                        return;
+                    }
+                    if (dr4["生产日期"].ToString().Length != 7 && dr4["生产日期"].ToString().Length != 10)
+                    {
+                        MessageBoxEx.Show("生产日期不是7位或10位", "提示");
+                        return;
+                    }
+                    if (dr4["到期日期"].ToString().Length != 7 && dr4["到期日期"].ToString().Length != 10)
+                    {
+                        MessageBoxEx.Show("到期日期不是7位或10位", "提示");
+                        return;
+                    }
+                    string sqlInsert = @"INSERT INTO [RYZY_YJM].[dbo].[FL_plan_IN] (
+	                                                                [VendorId],
+	                                                                [Vendor],
+	                                                                [ManufactureID],
+	                                                                [Manufacture],
+	                                                                [PurchaseOrder],
+	                                                                [LineNumber],
+	                                                                [ItemNumber],
+	                                                                [ItemDescription],
+	                                                                [UM],
+	                                                                [OrderQuantity],
+	                                                                [ReceiveQuantity],
+	                                                                [ManufactureLotNumbcer],
+	                                                                [CompanyLotNumber],
+	                                                                [Buyer],
+	                                                                [ExpireDate],
+	                                                                [StockKeeper],[ManufacturedDate],PackModel,ParentGuid)
+                                                                VALUES  ( '" + dr4["供应商码"].ToString() + "',  '" + dr4["供应商名"].ToString() + "', '" + dr4["生产商码"].ToString() + "','" + dr4["生产商名"].ToString() + "','" + dr4["采购单号"].ToString() + "', '" + dr4["行号"].ToString() + "', '" + dr4["物料代码"].ToString() + "',  '" + dr4["描述"].ToString() + "','" + dr4["单位"].ToString() + "', " + Convert.ToDouble(dr4["采购数量"]) + "," + Convert.ToDouble(dr4["入库数量"]) + ",'" + dr4["厂家批号"].ToString().ToUpper().Replace(".", "") + "','" + dr4["公司批号"].ToString().ToUpper() + "','" + dr4["BuyerID"].ToString() + "','" + dr4["到期日期"].ToString() + "', '" + StockUser.UserID + "','" + dr4["生产日期"].ToString().Replace(".", "") + "','" + dr4["包装规格"].ToString() + "','" + dr4["Guid"].ToString() + "')";
+                    sqlList.Add(sqlInsert);
+                    guidList.Add(dr4["Guid"].ToString());
+                }
+                sqlList.Insert(0,$@"update [dbo].[FL_plan_IN] set Flag=-1 where ParentGuid in ('{string.Join("','", guidList)}') and Flag =0");
+                if (SQLHelper.GetDataTable(GlobalSpace.FDAConnstr, $@"select * from [dbo].[FL_plan_IN]   where ParentGuid in ('{string.Join("','", guidList)}') and Flag >0").Rows.Count>0)
+                {
+                    MessageBox.Show("本次选中的需再次提交的数据列，在FDA数据表中已提取并处理，不能再次写入！");
+                    return;
+                }
+                if (SQLHelper.BatchExecuteNonQuery(GlobalSpace.FDAConnstr, sqlList))
+                { 
+                        MessageBoxEx.Show("再次写入成功！", "提示"); 
+                }
+                else
+                {
+                    MessageBoxEx.Show("再次写入失败，请联系管理员！", "提示");
+                }
+            }
+            btnFDAWriteAgain.Enabled = true;
         }
     }
     }
