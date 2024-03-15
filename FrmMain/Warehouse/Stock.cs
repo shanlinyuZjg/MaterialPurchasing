@@ -6354,7 +6354,6 @@ namespace Global.Warehouse
                 #endregion
                 List<string> sqlList = new List<string>();
                 List<string> guidList = new List<string>();
-                sqlList.Add($@"");
                 foreach (DataRow dr4 in dtTemp.Rows)
                 {
                     if (dr4["生产日期"] == DBNull.Value || string.IsNullOrWhiteSpace(dr4["生产日期"].ToString()))
@@ -6393,8 +6392,8 @@ namespace Global.Warehouse
                     sqlList.Add(sqlInsert);
                     guidList.Add(dr4["Guid"].ToString());
                 }
-                sqlList.Insert(0,$@"update [dbo].[FL_plan_IN] set Flag=-1 where ParentGuid in ('{string.Join("','", guidList)}') and Flag =0");
-                if (SQLHelper.GetDataTable(GlobalSpace.FDAConnstr, $@"select * from [dbo].[FL_plan_IN]   where ParentGuid in ('{string.Join("','", guidList)}') and Flag >0").Rows.Count>0)
+                sqlList.Insert(0, $@"update [dbo].[FL_plan_IN] set Flag=-1 where ParentGuid in ('{string.Join("','", guidList)}') and Flag in (0,1)");
+                if (SQLHelper.GetDataTable(GlobalSpace.FDAConnstr, $@"select * from [dbo].[FL_plan_IN]   where ParentGuid in ('{string.Join("','", guidList)}') and Flag >1").Rows.Count>0)
                 {
                     MessageBox.Show("本次选中的需再次提交的数据列，在FDA数据表中已提取并处理，不能再次写入！");
                     return;

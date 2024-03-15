@@ -116,6 +116,7 @@ namespace Global
             //Application.Run(new FrmWarehouseDeptStockKeeper("S88", "Qn123456", "王国栋", "SO"));
             //Application.Run(new FrmWarehouseDeptStockKeeper("S69", "Qn123456", "吴蒙", "SO"));
             //Application.Run(new FrmWarehouseDeptStockKeeper("S67", "Cm555555", "崔民", "SO"));
+            //Application.Run(new FrmWarehouseDeptStockKeeper("S65", "Cm555555", "王维英", "SO"));
             //Application.Run(new FrmWarehouseDeptStockKeeper("S74", "Cm555555", "杜滨慧", "SO"));
             //            Application.Run(new Purchase.ForeignOrderItemAutomaticPlaceOrder("P11", "张霞"));
             //Application.Run(new FrmPurchaseDeptSupervisor("DJB", "丁计宝"));
